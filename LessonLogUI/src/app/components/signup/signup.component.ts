@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, isFormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import ValidateForm from "../../helpers/validateform";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +12,7 @@ export class SignupComponent implements OnInit {
 
   signupForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
@@ -27,6 +28,7 @@ export class SignupComponent implements OnInit {
       console.log(this.signupForm.value)
     } else {
       ValidateForm.validateAllFormFields(this.signupForm);
+      this.toastr.error("Your form is invalid")
     }
   }
 
