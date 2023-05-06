@@ -1,1 +1,29 @@
-<p>signup works!</p>
+<section class="register">
+  <div class="container">
+    <form class="register__form">
+      <h2 class="register__form-title">Sign up</h2>
+      <hr class="register__form-paginator">
+      <div class="form-group register__form-group">
+        <label>First name <span>*</span></label>
+        <input type="text" class="form-control">
+        <!--      <small class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+      </div>
+      <div class="form-group register__form-group">
+        <label>Last name <span>*</span></label>
+        <input type="text" class="form-control">
+        <!--      <small class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+      </div>
+      <div class="form-group register__form-group">
+        <label>Email <span>*</span></label>
+        <input type="email" class="form-control">
+        <!--      <small class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+      </div>
+      <div class="form-group register__form-group">
+        <label>Password <span>*</span></label>
+        <input type="password" class="form-control">
+        <!--      <small class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+      </div>
+      <button type="submit" class="btn btn-primary register__form-button">Continue</button>
+      <p class="register__form-information">You have an account? <span class="text-primary" routerLink="/login">Sign in</span></p>
+    </form>
+  </div>
