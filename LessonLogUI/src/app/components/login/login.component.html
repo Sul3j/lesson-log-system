@@ -1,19 +1,19 @@
 <section class="login">
   <div class="container">
-    <form class="login__form">
+    <form class="login__form" [formGroup]="loginForm">
       <h2 class="login__form-title">Sign in</h2>
       <hr class="login__form-paginator">
       <div class="form-group login__form-group">
         <label>Email <span>*</span></label>
-        <input type="email" class="form-control">
-        <!--      <small class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+        <input [class.error]="loginForm.controls['email'].dirty && loginForm.hasError('required', 'email')" formControlName="email" type="email" class="form-control">
+        <small *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required', 'email')" class="form-text text-danger">email is required</small>
       </div>
       <div class="form-group login__form-group">
         <label>Password <span>*</span></label>
-        <input type="password" class="form-control">
-        <!--      <small class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+        <input [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')" formControlName="password" type="password" class="form-control">
+        <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')" class="form-text text-danger">password is required</small>
       </div>
-      <button type="submit" class="btn btn-primary login__form-button">Continue</button>
+      <button (click)="onSubmit()" type="submit" class="btn btn-primary login__form-button">Continue</button>
       <p class="login__form-information">Don't have an account? <span class="text-primary" routerLink="/signup">Sign up</span></p>
     </form>
   </div>

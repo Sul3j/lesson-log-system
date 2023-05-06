@@ -38,6 +38,10 @@
   }
 }
 
+.error {
+  border-color: red;
+}
+
 @media (min-width: 768px) {
   .login {
     &__form {
