@@ -23,7 +23,7 @@
         <input [class.error]="signupForm.controls['password'].dirty && signupForm.hasError('required', 'password')" formControlName="password" type="password" class="form-control">
         <small *ngIf="signupForm.controls['password'].dirty && signupForm.hasError('required', 'password')" class="form-text text-danger">password is required</small>
       </div>
-      <button type="submit" class="btn btn-primary register__form-button" (click)="onSignup()">Continue</button>
+      <button type="submit" class="btn btn-primary register__form-button" (click)="register()">Continue</button>
       <p class="register__form-information">You have an account? <span class="text-primary" routerLink="/login">Sign in</span></p>
     </form>
   </div>
