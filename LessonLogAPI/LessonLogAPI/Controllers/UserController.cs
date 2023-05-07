@@ -1,4 +1,5 @@
 ﻿using LessonLogAPI.Context;
+using LessonLogAPI.Helpers;
 using LessonLogAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -45,7 +46,10 @@ namespace LessonLogAPI.Controllers
             {
                 return BadRequest();
             }
-
+            
+            userObj.Password = PasswordHasher.HashPassword(userObj.Password);
+            userObj.Role = "User";
+            userObj.Token = "";
             await _dbContext.Users.AddAsync(userObj);
             await _dbContext.SaveChangesAsync();
             return Ok(new
