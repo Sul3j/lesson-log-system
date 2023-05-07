@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import ValidateForm from "../../helpers/validateform";
 import {ToastrService} from "ngx-toastr";
 import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,7 @@ export class SignupComponent implements OnInit {
 
   signupForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private auth: AuthService) {}
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
@@ -26,11 +27,12 @@ export class SignupComponent implements OnInit {
 
   register() {
     if(this.signupForm.valid) {
-      console.log(this.signupForm.value)
       this.auth.register(this.signupForm.value)
         .subscribe({
           next: () => {
             this.toastr.success("registered user!");
+            this.signupForm.reset();
+            this.router.navigate(['login']);
           },
           error: () => {
             this.toastr.error("something went wrong!");
