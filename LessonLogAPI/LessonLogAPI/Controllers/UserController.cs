@@ -42,9 +42,14 @@ namespace LessonLogAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] User userObj)
         {
-            if (userObj== null)
+            if (userObj == null)
             {
                 return BadRequest();
+            }
+
+            if (await CheckEmailExistAsync(userObj.Email))
+            {
+                return BadRequest(new { Message = "Email Already Exist!"});
             }
             
             userObj.Password = PasswordHasher.HashPassword(userObj.Password);
@@ -57,5 +62,9 @@ namespace LessonLogAPI.Controllers
                 Message = "User Registered!"
             });
         }
+
+        private Task<bool> CheckEmailExistAsync(string email)
+            => _dbContext.Users.AnyAsync(x => x.Email == email);
+        
     }
 }

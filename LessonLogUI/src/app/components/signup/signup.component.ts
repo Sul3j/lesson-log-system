@@ -34,8 +34,8 @@ export class SignupComponent implements OnInit {
             this.signupForm.reset();
             this.router.navigate(['login']);
           },
-          error: () => {
-            this.toastr.error("something went wrong!");
+          error: (err) => {
+            this.toastr.error(err.error.message);
           }
         })
     } else {
@@ -43,5 +43,4 @@ export class SignupComponent implements OnInit {
       this.toastr.error("Your form is invalid");
     }
   }
-
 }
