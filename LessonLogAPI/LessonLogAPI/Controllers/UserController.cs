@@ -3,6 +3,8 @@ using LessonLogAPI.Helpers;
 using LessonLogAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace LessonLogAPI.Controllers
 {
@@ -51,6 +53,12 @@ namespace LessonLogAPI.Controllers
             {
                 return BadRequest(new { Message = "Email Already Exist!"});
             }
+
+            var pass = CheckPasswordStrength(userObj.Password);
+            if (!string.IsNullOrEmpty(pass)) 
+            {
+                return BadRequest(new { Message = pass.ToString() });
+            }
             
             userObj.Password = PasswordHasher.HashPassword(userObj.Password);
             userObj.Role = "User";
@@ -65,6 +73,29 @@ namespace LessonLogAPI.Controllers
 
         private Task<bool> CheckEmailExistAsync(string email)
             => _dbContext.Users.AnyAsync(x => x.Email == email);
+
+        private string CheckPasswordStrength(string password)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if(password.Length < 8)
+            {
+                sb.Append("Minimum password length should be 8" + Environment.NewLine);
+            }
+
+            if(!(Regex.IsMatch(password, "[a-z]") && Regex.IsMatch(password, "[A-Z]")
+                && Regex.IsMatch(password, "[0-9]")))
+            {
+                sb.Append("Password should be Alphanumeric" + Environment.NewLine);
+            }
+
+            if (!Regex.IsMatch(password, "[<,>,@,!,#,$,%,^,&,*,(,),_,+,\\[,\\],{,},?,:,;,|,',\\,.,/,~,`,-,=]"))
+            {
+                sb.Append("Password should contain special chars" + Environment.NewLine);
+            }
+
+            return sb.ToString();
+        }
         
     }
 }
