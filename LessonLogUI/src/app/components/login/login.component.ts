@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         })
     } else {
       ValidateForm.validateAllFormFields(this.loginForm)
-      this.toastr.error("Your form is invalid");
+      this.toastr.error("Your form is invalid", "Error");
     }
   }
 }

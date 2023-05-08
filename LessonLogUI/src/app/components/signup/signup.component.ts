@@ -35,12 +35,12 @@ export class SignupComponent implements OnInit {
             this.router.navigate(['login']);
           },
           error: (err) => {
-            this.toastr.error(err.error.message);
+            this.toastr.error(err.error.message, "Error");
           }
         })
     } else {
       ValidateForm.validateAllFormFields(this.signupForm);
-      this.toastr.error("Your form is invalid");
+      this.toastr.error("Your form is invalid", "Error");
     }
   }
 }
