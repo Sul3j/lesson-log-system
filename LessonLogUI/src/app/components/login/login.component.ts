@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
             this.loginForm.reset();
             this.router.navigate(['dashboard']);
           },
-          error: () => {
-            this.toastr.error("bad login details!");
+          error: (err) => {
+            this.toastr.error(err.error.message, "Error");
           }
         })
     } else {

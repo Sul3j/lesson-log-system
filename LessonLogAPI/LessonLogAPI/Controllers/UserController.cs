@@ -28,11 +28,11 @@ namespace LessonLogAPI.Controllers
             }
 
             var user = await _dbContext.Users
-                .FirstOrDefaultAsync(x => x.Email == userObj.Email && x.Password == userObj.Password);
+                .FirstOrDefaultAsync(x => x.Email == userObj.Email);
 
-            if(user == null)
+            if(!PasswordHasher.VerifyPassword(userObj.Password, user.Password))
             {
-                return NotFound(new {Message = "User Not Found!"});
+                return BadRequest(new { Message = "Password is incorrect!" });
             }
 
             return Ok(new
