@@ -28,9 +28,10 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.auth.login(this.loginForm.value)
         .subscribe({
-          next: () => {
-            this.toastr.success("successfully login!");
+          next: (res) => {
+            this.toastr.success(res.message);
             this.loginForm.reset();
+            this.auth.storeToken(res.token)
             this.router.navigate(['dashboard']);
           },
           error: (err) => {
