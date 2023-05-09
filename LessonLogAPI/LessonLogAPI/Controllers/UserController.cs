@@ -78,6 +78,12 @@ namespace LessonLogAPI.Controllers
             });
         }
 
+        [HttpGet]
+        public async Task<ActionResult<User>> GetAllUsers()
+        {
+            return Ok(await _dbContext.Users.ToListAsync());
+        }
+
         private Task<bool> CheckEmailExistAsync(string email)
             => _dbContext.Users.AnyAsync(x => x.Email == email);
 
@@ -128,6 +134,8 @@ namespace LessonLogAPI.Controllers
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
             return jwtTokenHandler.WriteToken(token);
         }
+
+        
         
     }
 }
