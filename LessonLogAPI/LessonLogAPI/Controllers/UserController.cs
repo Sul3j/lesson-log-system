@@ -9,6 +9,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LessonLogAPI.Controllers
 {
@@ -78,6 +79,7 @@ namespace LessonLogAPI.Controllers
             });
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<User>> GetAllUsers()
         {
@@ -128,14 +130,11 @@ namespace LessonLogAPI.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = identity,
-                Expires = DateTime.Now.AddDays(1),
+                Expires = DateTime.Now.AddSeconds(10),
                 SigningCredentials = credentials,
             };
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
             return jwtTokenHandler.WriteToken(token);
-        }
-
-        
-        
+        }  
     }
 }
