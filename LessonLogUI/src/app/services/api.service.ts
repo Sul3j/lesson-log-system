@@ -6,11 +6,11 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ApiService {
 
-  private readonly url: string = "https://localhost:7212/api/User/";
+  private readonly _url: string = "https://localhost:7212/api/User/";
 
   constructor(private http: HttpClient) { }
 
   getUsers() {
-    return this.http.get<any>(this.url);
+    return this.http.get<any>(this._url);
   }
 }
