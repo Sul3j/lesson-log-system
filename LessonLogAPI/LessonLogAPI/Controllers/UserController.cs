@@ -10,6 +10,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Cryptography;
+using LessonLogAPI.Models.Dto;
 
 namespace LessonLogAPI.Controllers
 {
@@ -41,11 +43,15 @@ namespace LessonLogAPI.Controllers
             }
 
             user.Token = CreateJwt(user);
+            var newAccessToken = user.Token;
+            var newRefreshToken = CreateRefreshToken();
+            user.RefreshToken = newRefreshToken;
+            await _dbContext.SaveChangesAsync();
 
-            return Ok(new
+            return Ok(new TokenDto()
             {
-                Token = user.Token,
-                Message = "Login Success!"
+                AccessToken = newAccessToken,
+                RefreshToken = newRefreshToken
             });
         }
 
@@ -117,8 +123,6 @@ namespace LessonLogAPI.Controllers
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("vLyR7Jfom78Bq5x5");
 
-
-
             var identity = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Role, user.Role),
@@ -136,5 +140,44 @@ namespace LessonLogAPI.Controllers
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
             return jwtTokenHandler.WriteToken(token);
         }  
+
+        private ClaimsPrincipal CreatePrincipalFromExpiredToken(string token)
+        {
+            var key = Encoding.ASCII.GetBytes("vLyR7Jfom78Bq5x5");
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = false,
+                ValidateIssuer = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateLifetime = false
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
+            var jwtSecurityToken = securityToken as JwtSecurityToken;
+            if (jwtSecurityToken != null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                throw new SecurityTokenException("This is invalid token");
+
+            return principal;
+        }
+
+        private string CreateRefreshToken()
+        {
+            var tokenBytes = RandomNumberGenerator.GetBytes(64);
+            var refreshToken = Convert.ToBase64String(tokenBytes);
+
+            var tokenInUser = _dbContext.Users
+                .Any(a => a.RefreshToken == refreshToken);
+
+            if(tokenInUser)
+            {
+                return CreateRefreshToken();
+            }
+
+            return refreshToken;
+        }
     }
 }
