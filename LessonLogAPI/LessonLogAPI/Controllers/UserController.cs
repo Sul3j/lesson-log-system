@@ -92,6 +92,29 @@ namespace LessonLogAPI.Controllers
             return Ok(await _dbContext.Users.ToListAsync());
         }
 
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh(TokenDto tokenDto)
+        {
+            if(tokenDto is null)
+                return BadRequest("Invalid client request");
+            string accesToken = tokenDto.AccessToken;
+            string refreshToken = tokenDto.RefreshToken;
+            var principal = GetPrincipalFromExpiredToken(accesToken);
+            var email = principal.Identity.Name;
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+                return BadRequest("Invalid request");
+            var newAccessToken = CreateJwt(user);
+            var newRefreshToken = CreateRefreshToken();
+            user.RefreshToken = newRefreshToken;
+            await _dbContext.SaveChangesAsync();
+            return Ok(new TokenDto()
+            {
+                AccessToken = newAccessToken,
+                RefreshToken = newRefreshToken,
+            });
+        }
+
         private Task<bool> CheckEmailExistAsync(string email)
             => _dbContext.Users.AnyAsync(x => x.Email == email);
 
@@ -126,7 +149,7 @@ namespace LessonLogAPI.Controllers
             var identity = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Role, user.Role),
-                new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
+                new Claim(ClaimTypes.Email, $"{user.FirstName} {user.LastName}"),
             });
 
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
@@ -141,7 +164,7 @@ namespace LessonLogAPI.Controllers
             return jwtTokenHandler.WriteToken(token);
         }  
 
-        private ClaimsPrincipal CreatePrincipalFromExpiredToken(string token)
+        private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
         {
             var key = Encoding.ASCII.GetBytes("vLyR7Jfom78Bq5x5");
 
