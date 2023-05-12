@@ -4,6 +4,7 @@ import {RegisterDto} from "../models/registerDto";
 import {LoginDto} from "../models/loginDto";
 import {Router} from "@angular/router";
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {TokenModel} from "../models/token-api.model";
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +26,19 @@ export class AuthService {
     return this.http.post<any>(`${this._url}authenticate`, dto);
   }
 
-  storeToken(token: string) {
+  storeAccessToken(token: string) {
     localStorage.setItem('token', token);
   }
 
-  getToken() {
+  storeRefreshToken(token: string) {
+    localStorage.setItem('refreshToken', token);
+  }
+
+  getRefreshToken() {
+    return localStorage.getItem('refreshToken');
+  }
+
+  getAccessToken() {
     return localStorage.getItem('token');
   }
 
@@ -44,7 +53,7 @@ export class AuthService {
 
   decodeToken() {
     const jwtHelper = new JwtHelperService();
-    const token = this.getToken()!;
+    const token = this.getAccessToken()!;
     console.log(jwtHelper.decodeToken(token));
     return jwtHelper.decodeToken(token);
   }
@@ -57,5 +66,9 @@ export class AuthService {
   getRoleFromToken() {
     if(this._jwtPayload)
       return this._jwtPayload.role;
+  }
+
+  renewToken(token: TokenModel) {
+    return this.http.post<any>(`${this._url}refresh`, token);
   }
 }

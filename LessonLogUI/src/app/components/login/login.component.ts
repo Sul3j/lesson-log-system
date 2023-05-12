@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
           next: (res) => {
             this.toastr.success("Is logged in");
             this.loginForm.reset();
-            this.auth.storeToken(res.accessToken);
+            this.auth.storeAccessToken(res.accessToken);
+            this.auth.storeRefreshToken(res.refreshToken);
             let payload = this.auth.decodeToken();
             this.userData.setFullName(payload.unique_name);
             this.userData.setRole(payload.role);
