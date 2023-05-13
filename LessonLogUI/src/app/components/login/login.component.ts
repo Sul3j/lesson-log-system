@@ -14,6 +14,8 @@ import {UserDataService} from "../../services/user-data.service";
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
+  public resetPasswordEmail!: string;
+  public isValidEmail!: boolean;
 
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private auth: AuthService, private router: Router, private userData: UserDataService) {
   }
@@ -46,6 +48,19 @@ export class LoginComponent implements OnInit {
     } else {
       ValidateForm.validateAllFormFields(this.loginForm)
       this.toastr.error("Your form is invalid", "Error");
+    }
+  }
+
+  checkValidEmail(event: string) {
+    const value = event;
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/;
+    this.isValidEmail = pattern.test(value);
+    return this.isValidEmail;
+  }
+
+  sendResetCode() {
+    if(this.checkValidEmail(this.resetPasswordEmail)){
+
     }
   }
 }

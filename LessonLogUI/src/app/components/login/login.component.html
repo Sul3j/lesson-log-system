@@ -32,11 +32,13 @@
       <div class="modal-body">
         <div class="form-group modal__form-group">
           <label>Email <span>*</span></label>
-          <input formControlName="email" type="email" class="form-control">
+          <input [(ngModel)]="resetPasswordEmail" (ngModelChange)="checkValidEmail($event)" type="email" class="form-control">
+          <small *ngIf="!resetPasswordEmail" class="form-text text-danger">email is required</small>
+          <small *ngIf="!isValidEmail && resetPasswordEmail" class="form-text text-danger">email is invalid</small>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Send</button>
+        <button type="button" class="btn btn-primary" (click)="sendResetCode()" )>Send</button>
       </div>
     </div>
   </div>
