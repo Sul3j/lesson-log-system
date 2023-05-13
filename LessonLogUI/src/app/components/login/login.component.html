@@ -13,8 +13,31 @@
         <input [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')" formControlName="password" type="password" class="form-control">
         <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')" class="form-text text-danger">password is required</small>
       </div>
+      <div class="float-end"><a class="text-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgot password?</a></div>
       <button (click)="onLogin()" type="submit" class="btn btn-primary login__form-button">Continue</button>
       <p class="login__form-information">Don't have an account? <span class="text-primary" routerLink="/signup">Sign up</span></p>
     </form>
   </div>
 </section>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel"><span style="font-size: 22px; font-weight: bold;">Forgot your password?</span><br>
+          <small>Enter your email to get a password reset code</small>
+        </p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group modal__form-group">
+          <label>Email <span>*</span></label>
+          <input formControlName="email" type="email" class="form-control">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
