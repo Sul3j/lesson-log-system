@@ -36,10 +36,13 @@ export class TokenInterceptor implements HttpInterceptor {
       })
     );
   }
+
   handleUnAuthorizedError(req: HttpRequest<any>, next: HttpHandler) {
     let tokenModel = new TokenModel();
     tokenModel.accessToken = this.auth.getAccessToken()!;
-    tokenModel.refreshToken = this.auth.getRefreshToken()!;
+    tokenModel.refreshToken = this.auth.getRefreshToken()!
+    console.log(tokenModel.accessToken);
+    console.log(tokenModel.refreshToken)
     return this.auth.renewToken(tokenModel)
       .pipe(
         switchMap((data: TokenModel) => {

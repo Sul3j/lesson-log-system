@@ -150,7 +150,8 @@ namespace LessonLogAPI.Controllers
             var identity = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Role, user.Role),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim("fullname", $"{user.FirstName} {user.LastName}")
             });
 
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
@@ -182,7 +183,7 @@ namespace LessonLogAPI.Controllers
             SecurityToken securityToken;
             var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
             var jwtSecurityToken = securityToken as JwtSecurityToken;
-            if (jwtSecurityToken != null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
                 throw new SecurityTokenException("This is invalid token");
 
             return principal;
@@ -195,6 +196,7 @@ namespace LessonLogAPI.Controllers
 
             var tokenInUser = _dbContext.Users
                 .Any(a => a.RefreshToken == refreshToken);
+
 
             if(tokenInUser)
             {

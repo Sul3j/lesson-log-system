@@ -60,7 +60,7 @@ export class AuthService {
 
   getFullNameFromToken() {
     if(this._jwtPayload)
-      return this._jwtPayload.unique_name;
+      return this._jwtPayload.fullname;
   }
 
   getRoleFromToken() {
