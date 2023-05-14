@@ -149,6 +149,39 @@ namespace LessonLogAPI.Controllers
             });
         }
 
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            var newToken = resetPasswordDto.EmailToken.Replace(" ", "+");
+            var user = await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(a => a.Email == resetPasswordDto.Email);
+            if (user is null) 
+            {
+                return NotFound(new
+                {
+                    StatusCode = 404,
+                    Message = "User doesn't exist"
+                });
+            }
+            var tokenCode = user.ResetPasswordToken;
+            DateTime emailTokenExpiry = user.ResetPasswordExpiry;
+            if(tokenCode != resetPasswordDto.EmailToken || emailTokenExpiry < DateTime.Now)
+            {
+                return BadRequest(new
+                {
+                    StatusCode = 400,
+                    Message = "Invalid reset link"
+                });
+            }
+            user.Password = PasswordHasher.HashPassword(resetPasswordDto.NewPassword);
+            _dbContext.Entry(user).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+            return Ok(new
+            {
+                StatusCode = 200,
+                Message = "Password reset successfully"
+            });
+        }
+
         private Task<bool> CheckEmailExistAsync(string email)
             => _dbContext.Users.AnyAsync(x => x.Email == email);
 
