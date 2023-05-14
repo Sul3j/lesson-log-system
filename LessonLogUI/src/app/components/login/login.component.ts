@@ -5,6 +5,7 @@ import {ToastrService} from "ngx-toastr";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {UserDataService} from "../../services/user-data.service";
+import {ResetPasswordService} from "../../services/reset-password.service";
 
 @Component({
   selector: 'app-login',
@@ -17,8 +18,14 @@ export class LoginComponent implements OnInit {
   public resetPasswordEmail!: string;
   public isValidEmail!: boolean;
 
-  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private auth: AuthService, private router: Router, private userData: UserDataService) {
-  }
+  constructor(
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService,
+    private auth: AuthService,
+    private router: Router,
+    private userData: UserDataService,
+    private resetPasswordService: ResetPasswordService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -61,7 +68,19 @@ export class LoginComponent implements OnInit {
   sendResetCode() {
     if(this.checkValidEmail(this.resetPasswordEmail)){
       console.log(this.resetPasswordEmail);
-      this.resetPasswordEmail = "";
+
+      this.resetPasswordService.sendResetPasswordLink(this.resetPasswordEmail)
+        .subscribe({
+          next: (res) => {
+            this.toastr.success('Reset success!');
+            this.resetPasswordEmail = "";
+            const button = document.getElementById("close");
+            button?.click();
+          },
+          error: (err) => {
+            this.toastr.error('Something went wrong!');
+          }
+        })
     }
   }
 }
