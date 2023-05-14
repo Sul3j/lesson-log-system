@@ -60,7 +60,8 @@ export class LoginComponent implements OnInit {
 
   sendResetCode() {
     if(this.checkValidEmail(this.resetPasswordEmail)){
-
+      console.log(this.resetPasswordEmail);
+      this.resetPasswordEmail = "";
     }
   }
 }
