@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography;
 using LessonLogAPI.Models.Dto;
+using LessonLogAPI.UtilityService;
 
 namespace LessonLogAPI.Controllers
 {
@@ -20,10 +21,14 @@ namespace LessonLogAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly AppDbContext _dbContext;
+        private readonly IConfiguration _config;
+        private readonly IEmailService _emailService;
 
-        public UserController(AppDbContext dbContext)
+        public UserController(AppDbContext dbContext, IConfiguration config, IEmailService emailService)
         {
             _dbContext = dbContext;
+            _config = config;
+            _emailService = emailService;
         }
 
         [HttpPost("authenticate")]
@@ -113,6 +118,34 @@ namespace LessonLogAPI.Controllers
             {
                 AccessToken = newAccessToken,
                 RefreshToken = newRefreshToken,
+            });
+        }
+
+        [HttpPost("send-reset-email/{email}")]
+        public async Task<IActionResult> SendEmail(string email)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(a => a.Email == email);
+            if (user is null) {
+                return NotFound(new
+                {
+                    StatusCode = 404,
+                    Message = "email doesn't exist"
+                });
+            }
+
+            var tokenBytes = RandomNumberGenerator.GetBytes(64);
+            var emailToken = Convert.ToBase64String(tokenBytes);
+            user.ResetPasswordToken = emailToken;
+            user.ResetPasswordExpiry = DateTime.Now.AddMinutes(15);
+            string from = _config["EmailSettings:From"];
+            var emailModel = new EmailModel(email, "Reset Password", EmailBody.EmailStringBody(email, emailToken));
+            _emailService.SendEmail(emailModel);
+            _dbContext.Entry(user).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+            return Ok(new
+            {
+                StatusCode = 200,
+                Message = "Email has been sent!"
             });
         }
 
