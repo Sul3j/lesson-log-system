@@ -11,13 +11,15 @@ import {ToastrModule} from "ngx-toastr";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
+import { ResetComponent } from './components/reset/reset.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    DashboardComponent
+    DashboardComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,

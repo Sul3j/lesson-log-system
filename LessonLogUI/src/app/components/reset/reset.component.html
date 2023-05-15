@@ -1,0 +1,20 @@
+<section class="reset">
+  <div class="container">
+    <form class="reset__form" [formGroup]="resetPasswordForm">
+      <h2 class="reset__form-title">Reset password</h2>
+      <hr class="reset__form-paginator">
+      <div class="form-group reset__form-group">
+        <label>Password <span>*</span></label>
+        <input [class.error]="resetPasswordForm.controls['password'].dirty && resetPasswordForm.hasError('required', 'password')" formControlName="password" type="password" class="form-control">
+        <small *ngIf="resetPasswordForm.controls['password'].dirty && resetPasswordForm.hasError('required', 'password')" class="form-text text-danger">password is required</small>
+      </div>
+      <div class="form-group reset__form-group">
+        <label>Confirm password <span>*</span></label>
+        <input [class.error]="resetPasswordForm.controls['confirmPassword'].dirty && resetPasswordForm.hasError('required', 'confirmPassword')" formControlName="confirmPassword" type="password" class="form-control">
+        <small *ngIf="resetPasswordForm.controls['confirmPassword'].dirty && resetPasswordForm.hasError('required', 'confirmPassword')" class="form-text text-danger">confirm password is required </small>
+        <small *ngIf="resetPasswordForm.hasError('confirmPasswordValidator', 'confirmPassword')" class="form-text text-danger">password doesn't match</small>
+      </div>
+      <button type="submit" class="btn btn-primary reset__form-button" (click)="submit()">Continue</button>
+    </form>
+  </div>
+</section>
