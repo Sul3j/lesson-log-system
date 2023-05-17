@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       this.auth.login(this.loginForm.value)
         .subscribe({
           next: (res) => {
-            this.toastr.success("Is logged in");
+            this.toastr.success("Is logged in", "Success");
             this.loginForm.reset();
             this.auth.storeAccessToken(res.accessToken);
             this.auth.storeRefreshToken(res.refreshToken);
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['dashboard']);
           },
           error: (err) => {
-            this.toastr.error(err.error.message, "Error");
+            this.toastr.error("Incorrect login details", "Error");
           }
         })
     } else {
@@ -67,18 +67,16 @@ export class LoginComponent implements OnInit {
 
   sendResetCode() {
     if(this.checkValidEmail(this.resetPasswordEmail)){
-      console.log(this.resetPasswordEmail);
-
       this.resetPasswordService.sendResetPasswordLink(this.resetPasswordEmail)
         .subscribe({
           next: (res) => {
-            this.toastr.success('Reset success!');
+            this.toastr.success("Email has been sent!", "Success");
             this.resetPasswordEmail = "";
             const button = document.getElementById("close");
             button?.click();
           },
           error: (err) => {
-            this.toastr.error('Something went wrong!');
+            this.toastr.error("Incorrect email!", "Error");
           }
         })
     }

@@ -1,18 +1,17 @@
 ﻿using LessonLogAPI.Context;
 using LessonLogAPI.Helpers;
 using LessonLogAPI.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Text;
-using System.Text.RegularExpressions;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Cryptography;
 using LessonLogAPI.Models.Dto;
 using LessonLogAPI.UtilityService;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace LessonLogAPI.Controllers
 {
@@ -34,7 +33,7 @@ namespace LessonLogAPI.Controllers
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] User userObj)
         {
-            if(userObj == null)
+            if (userObj == null)
             {
                 return BadRequest();
             }
@@ -42,7 +41,12 @@ namespace LessonLogAPI.Controllers
             var user = await _dbContext.Users
                 .FirstOrDefaultAsync(x => x.Email == userObj.Email);
 
-            if(!PasswordHasher.VerifyPassword(userObj.Password, user.Password))
+            if(user == null)
+            {
+                return BadRequest(new { Message = "This user not exist!" });
+            }
+
+            if (!PasswordHasher.VerifyPassword(userObj.Password, user.Password))
             {
                 return BadRequest(new { Message = "Password is incorrect!" });
             }
@@ -71,15 +75,15 @@ namespace LessonLogAPI.Controllers
 
             if (await CheckEmailExistAsync(userObj.Email))
             {
-                return BadRequest(new { Message = "Email Already Exist!"});
+                return BadRequest(new { Message = "Email Already Exist!" });
             }
 
             var pass = CheckPasswordStrength(userObj.Password);
-            if (!string.IsNullOrEmpty(pass)) 
+            if (!string.IsNullOrEmpty(pass))
             {
                 return BadRequest(new { Message = pass.ToString() });
             }
-            
+
             userObj.Password = PasswordHasher.HashPassword(userObj.Password);
             userObj.Role = "User";
             userObj.Token = "";
@@ -101,7 +105,7 @@ namespace LessonLogAPI.Controllers
         [HttpPost("refresh")]
         public async Task<IActionResult> Refresh(TokenDto tokenDto)
         {
-            if(tokenDto is null)
+            if (tokenDto is null)
                 return BadRequest("Invalid client request");
             string accesToken = tokenDto.AccessToken;
             string refreshToken = tokenDto.RefreshToken;
@@ -125,7 +129,8 @@ namespace LessonLogAPI.Controllers
         public async Task<IActionResult> SendEmail(string email)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(a => a.Email == email);
-            if (user is null) {
+            if (user is null)
+            {
                 return NotFound(new
                 {
                     StatusCode = 404,
@@ -154,7 +159,7 @@ namespace LessonLogAPI.Controllers
         {
             var newToken = resetPasswordDto.EmailToken.Replace(" ", "+");
             var user = await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(a => a.Email == resetPasswordDto.Email);
-            if (user is null) 
+            if (user is null)
             {
                 return NotFound(new
                 {
@@ -164,7 +169,7 @@ namespace LessonLogAPI.Controllers
             }
             var tokenCode = user.ResetPasswordToken;
             DateTime emailTokenExpiry = user.ResetPasswordExpiry;
-            if(tokenCode != resetPasswordDto.EmailToken || emailTokenExpiry < DateTime.Now)
+            if (tokenCode != resetPasswordDto.EmailToken || emailTokenExpiry < DateTime.Now)
             {
                 return BadRequest(new
                 {
@@ -189,12 +194,12 @@ namespace LessonLogAPI.Controllers
         {
             StringBuilder sb = new StringBuilder();
 
-            if(password.Length < 8)
+            if (password.Length < 8)
             {
                 sb.Append("Minimum password length should be 8" + Environment.NewLine);
             }
 
-            if(!(Regex.IsMatch(password, "[a-z]") && Regex.IsMatch(password, "[A-Z]")
+            if (!(Regex.IsMatch(password, "[a-z]") && Regex.IsMatch(password, "[A-Z]")
                 && Regex.IsMatch(password, "[0-9]")))
             {
                 sb.Append("Password should be Alphanumeric" + Environment.NewLine);
@@ -230,7 +235,7 @@ namespace LessonLogAPI.Controllers
             };
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
             return jwtTokenHandler.WriteToken(token);
-        }  
+        }
 
         private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
         {
@@ -264,7 +269,7 @@ namespace LessonLogAPI.Controllers
                 .Any(a => a.RefreshToken == refreshToken);
 
 
-            if(tokenInUser)
+            if (tokenInUser)
             {
                 return CreateRefreshToken();
             }
