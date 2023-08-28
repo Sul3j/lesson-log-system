@@ -5,5 +5,6 @@
         public int Id { get; set; }
         public string Pesel { get; set; }
         public List<Attendance> Attendances { get; set; } = new List<Attendance>();
+        public List<Grade> Grades { get; set; } = new List<Grade>();
     }
 }

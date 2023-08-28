@@ -102,10 +102,15 @@ namespace LessonLogAPI.Migrations
                     b.Property<int>("Percent")
                         .HasColumnType("int");
 
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("SubjectId");
 
@@ -295,11 +300,19 @@ namespace LessonLogAPI.Migrations
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Grade", b =>
                 {
+                    b.HasOne("LessonLogAPI.Models.Entities.Student", "Student")
+                        .WithMany("Grades")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithMany("Grades")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Student");
 
                     b.Navigation("Subject");
                 });
@@ -371,6 +384,8 @@ namespace LessonLogAPI.Migrations
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Student", b =>
                 {
                     b.Navigation("Attendances");
+
+                    b.Navigation("Grades");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Subject", b =>

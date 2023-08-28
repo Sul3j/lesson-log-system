@@ -73,6 +73,10 @@ namespace LessonLogAPI.Context
                 eb.HasMany(s => s.Attendances)
                 .WithOne(a => a.Student)
                 .HasForeignKey(a => a.StudentId);
+
+                eb.HasMany(s => s.Grades)
+                .WithOne(g => g.Student)
+                .HasForeignKey(g => g.StudentId);
             });
         }
     }
