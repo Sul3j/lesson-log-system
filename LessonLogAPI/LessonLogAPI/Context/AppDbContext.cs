@@ -13,6 +13,13 @@ namespace LessonLogAPI.Context
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<Grade> Grades { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,6 +48,10 @@ namespace LessonLogAPI.Context
                 eb.HasMany(s => s.Lessons)
                 .WithOne(l => l.Subject)
                 .HasForeignKey(l => l.SubjectId);
+
+                eb.HasMany(s => s.Grades)
+                .WithOne(g => g.Subject)
+                .HasForeignKey(g => g.SubjectId);
             });
 
             modelBuilder.Entity<Class>(eb =>

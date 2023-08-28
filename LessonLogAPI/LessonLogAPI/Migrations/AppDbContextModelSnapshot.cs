@@ -60,7 +60,7 @@ namespace LessonLogAPI.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Attendance");
+                    b.ToTable("Attendances");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Class", b =>
@@ -76,7 +76,40 @@ namespace LessonLogAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Class");
+                    b.ToTable("Classes");
+                });
+
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.Grade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("GetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GradeValue")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GradeWeight")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Percent")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Grades");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Lesson", b =>
@@ -107,7 +140,7 @@ namespace LessonLogAPI.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Lesson");
+                    b.ToTable("Lessons");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Role", b =>
@@ -139,7 +172,7 @@ namespace LessonLogAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Student");
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Subject", b =>
@@ -155,7 +188,7 @@ namespace LessonLogAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subject");
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Teacher", b =>
@@ -174,7 +207,7 @@ namespace LessonLogAPI.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Teacher");
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.User", b =>
@@ -260,6 +293,17 @@ namespace LessonLogAPI.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.Grade", b =>
+                {
+                    b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
+                        .WithMany("Grades")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subject");
+                });
+
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Lesson", b =>
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
@@ -331,6 +375,8 @@ namespace LessonLogAPI.Migrations
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Subject", b =>
                 {
+                    b.Navigation("Grades");
+
                     b.Navigation("Lessons");
                 });
 
