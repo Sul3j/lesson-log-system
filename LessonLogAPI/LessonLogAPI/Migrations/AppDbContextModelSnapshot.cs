@@ -51,9 +51,14 @@ namespace LessonLogAPI.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("LessonId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Attendance");
                 });
@@ -119,6 +124,22 @@ namespace LessonLogAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Pesel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Student");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Subject", b =>
@@ -228,7 +249,15 @@ namespace LessonLogAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LessonLogAPI.Models.Entities.Student", "Student")
+                        .WithMany("Attendances")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Lesson");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Lesson", b =>
@@ -293,6 +322,11 @@ namespace LessonLogAPI.Migrations
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Role", b =>
                 {
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.Student", b =>
+                {
+                    b.Navigation("Attendances");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Subject", b =>

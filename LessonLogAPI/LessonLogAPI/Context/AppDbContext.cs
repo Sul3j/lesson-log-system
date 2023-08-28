@@ -57,6 +57,12 @@ namespace LessonLogAPI.Context
                 .HasForeignKey(a => a.LessonId);
             });
 
+            modelBuilder.Entity<Student>(eb =>
+            {
+                eb.HasMany(s => s.Attendances)
+                .WithOne(a => a.Student)
+                .HasForeignKey(a => a.StudentId);
+            });
         }
     }
 }
