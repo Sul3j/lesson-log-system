@@ -1,0 +1,40 @@
+.navigation {
+  width: 100vw;
+  z-index: 3;
+  &__logo {
+    padding: 5px 10px;
+    font-size: 20px;
+  }
+}
+
+.logout {
+  margin: 0px 50px 0px 5px;
+}
+
+.nav-item:hover {
+  background-color: #328efe;
+}
+
+.navbar-toggler {
+  border-color: #fff;
+  margin: 0px 10px 0px 5px;
+  &-icon {
+    border-color: #fff;
+  }
+}
+
+.menu {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #52afff;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  transform: translateX(-100%);
+  transition: .5s;
+}
+
+.menu-active {
+  transform: translateX(0%);
+}

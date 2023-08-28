@@ -2,6 +2,7 @@
 using LessonLogAPI.Helpers;
 using LessonLogAPI.Models;
 using LessonLogAPI.Models.Dto;
+using LessonLogAPI.Models.Entities;
 using LessonLogAPI.UtilityService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -85,7 +86,6 @@ namespace LessonLogAPI.Controllers
             }
 
             userObj.Password = PasswordHasher.HashPassword(userObj.Password);
-            userObj.Role = "User";
             userObj.Token = "";
             await _dbContext.Users.AddAsync(userObj);
             await _dbContext.SaveChangesAsync();
@@ -220,7 +220,6 @@ namespace LessonLogAPI.Controllers
 
             var identity = new ClaimsIdentity(new Claim[]
             {
-                new Claim(ClaimTypes.Role, user.Role),
                 new Claim(ClaimTypes.Name, user.Email),
                 new Claim("fullname", $"{user.FirstName} {user.LastName}")
             });

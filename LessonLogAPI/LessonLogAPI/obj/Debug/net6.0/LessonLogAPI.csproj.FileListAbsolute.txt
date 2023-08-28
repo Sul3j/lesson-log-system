@@ -7,13 +7,11 @@ C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\De
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\LessonLogAPI.pdb
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Azure.Core.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Azure.Identity.dll
-C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Humanizer.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
@@ -21,7 +19,6 @@ C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\De
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
@@ -37,11 +34,9 @@ C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\De
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Mono.TextTemplating.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.CodeDom.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Drawing.Common.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
@@ -49,8 +44,6 @@ C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\De
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Runtime.Caching.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Security.Permissions.dll
-C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Text.Encodings.Web.dll
-C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Text.Json.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Windows.Extensions.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
@@ -63,7 +56,6 @@ C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\De
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\obj\Debug\net6.0\LessonLogAPI.csproj.AssemblyReference.cache
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\obj\Debug\net6.0\LessonLogAPI.GeneratedMSBuildEditorConfig.editorconfig
@@ -90,3 +82,11 @@ C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\De
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\MimeKit.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\NETCore.MailKit.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Humanizer.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll

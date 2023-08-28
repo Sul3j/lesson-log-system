@@ -31,4 +31,9 @@ export class DashboardComponent implements OnInit {
         this.fullName = val || tokenFullName;
       })
   }
+
+  toggleMenu() {
+    const menu = document.querySelector(".menu");
+    menu?.classList.toggle("menu-active");
+  }
 }
