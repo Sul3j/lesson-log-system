@@ -20,6 +20,17 @@ namespace LessonLogAPI.Context
                 .HasOne(r => r.User)
                 .WithOne(u => u.Role)
                 .HasForeignKey<User>(r => r.RoleId);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Teacher)
+                .WithOne(t => t.User)
+                .HasForeignKey<Teacher>(t => t.UserId);
+
+            modelBuilder.Entity<Teacher>(eb =>
+            {
+                eb.HasMany(t => t.Classes)
+                .WithMany(c => c.Teachers);
+            });
         }
     }
 }
