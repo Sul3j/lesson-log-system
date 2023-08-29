@@ -21,5 +21,6 @@ namespace LessonLogAPI.Models.Entities
         public Teacher Teacher { get; set; }
         public Student Student { get; set; }
         public Tutor Tutor { get; set; }
+        public Admin Admin { get; set; }
     }
 }

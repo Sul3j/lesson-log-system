@@ -21,6 +21,7 @@ namespace LessonLogAPI.Context
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Tutor> Tutors { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,6 +43,10 @@ namespace LessonLogAPI.Context
                 eb.HasOne(u => u.Tutor)
                 .WithOne(t => t.User)
                 .HasForeignKey<Tutor>(t => t.UserId);
+
+                eb.HasOne(u => u.Admin)
+                .WithOne(a => a.User)
+                .HasForeignKey<Admin>(a => a.UserId);
             });
                 
             modelBuilder.Entity<Teacher>(eb =>

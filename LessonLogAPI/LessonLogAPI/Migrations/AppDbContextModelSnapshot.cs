@@ -37,6 +37,28 @@ namespace LessonLogAPI.Migrations
                     b.ToTable("ClassTeacher");
                 });
 
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Admins");
+                });
+
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Attendance", b =>
                 {
                     b.Property<int>("Id")
@@ -315,6 +337,17 @@ namespace LessonLogAPI.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.Admin", b =>
+                {
+                    b.HasOne("LessonLogAPI.Models.Entities.User", "User")
+                        .WithOne("Admin")
+                        .HasForeignKey("LessonLogAPI.Models.Entities.Admin", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Attendance", b =>
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Lesson", "Lesson")
@@ -477,6 +510,8 @@ namespace LessonLogAPI.Migrations
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.User", b =>
                 {
+                    b.Navigation("Admin");
+
                     b.Navigation("Student");
 
                     b.Navigation("Teacher");
