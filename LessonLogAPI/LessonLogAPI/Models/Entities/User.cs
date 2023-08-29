@@ -17,7 +17,7 @@ namespace LessonLogAPI.Models.Entities
         public string ResetPasswordToken { get; set; }
         public DateTime ResetPasswordExpiry { get; set; }
         public Role Role { get; set; }
-        public int RoleId { get; set; }
+        public int RoleId { get; set; } = 1;
         public Teacher Teacher { get; set; }
         public Student Student { get; set; }
         public Tutor Tutor { get; set; }

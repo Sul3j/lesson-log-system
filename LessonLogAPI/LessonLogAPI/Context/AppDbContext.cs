@@ -1,5 +1,7 @@
-﻿using LessonLogAPI.Models.Entities;
+﻿using LessonLogAPI.Models;
+using LessonLogAPI.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Extensions;
 
 namespace LessonLogAPI.Context
 {
@@ -25,10 +27,22 @@ namespace LessonLogAPI.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Role>()
-                .HasOne(r => r.User)
+            modelBuilder.Entity<Role>(eb =>
+            {   
+                eb.HasOne(r => r.User)
                 .WithOne(u => u.Role)
                 .HasForeignKey<User>(r => r.RoleId);
+
+                eb.HasData(
+                    new Role() { Id = 1, Name = RolesNames.USER.GetDisplayName() },
+                    new Role() { Id = 2, Name = RolesNames.TEACHER.GetDisplayName() },
+                    new Role() { Id = 3, Name = RolesNames.ADMIN.GetDisplayName() },
+                    new Role() { Id = 4, Name = RolesNames.STUDENT.GetDisplayName() },
+                    new Role() { Id = 5, Name = RolesNames.TUTOR.GetDisplayName() },
+                    new Role() { Id = 6, Name = RolesNames.EDUCATOR.GetDisplayName() }
+                );
+            });
+                
 
             modelBuilder.Entity<User>(eb =>
             {   

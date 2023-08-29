@@ -176,6 +176,38 @@ namespace LessonLogAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "USER"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "TEACHER"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "STUDENT"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "TUTOR"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "EDUCATOR"
+                        });
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Student", b =>
