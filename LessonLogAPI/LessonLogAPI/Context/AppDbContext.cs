@@ -51,8 +51,9 @@ namespace LessonLogAPI.Context
                 
             modelBuilder.Entity<Teacher>(eb =>
             {
-                eb.HasMany(t => t.Classes)
-                .WithMany(c => c.Teachers);
+                eb.HasOne(t => t.Class)
+                .WithOne(c => c.Teacher)
+                .HasForeignKey<Class>(c => c.EducatorId);
 
                 eb.HasMany(t => t.Lessons)
                 .WithOne(l => l.Teacher)

@@ -8,7 +8,7 @@ namespace LessonLogAPI.Models.Entities
         public int Id { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }
-        public List<Class> Classes { get; set; }
+        public Class Class { get; set; }
         public List<Lesson> Lessons { get; set; } = new List<Lesson>();
     }
 }

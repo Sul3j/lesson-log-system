@@ -22,21 +22,6 @@ namespace LessonLogAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ClassTeacher", b =>
-                {
-                    b.Property<int>("ClassesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeachersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ClassesId", "TeachersId");
-
-                    b.HasIndex("TeachersId");
-
-                    b.ToTable("ClassTeacher");
-                });
-
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Admin", b =>
                 {
                     b.Property<int>("Id")
@@ -93,10 +78,17 @@ namespace LessonLogAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("EducatorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EducatorId")
+                        .IsUnique()
+                        .HasFilter("[EducatorId] IS NOT NULL");
 
                     b.ToTable("Classes");
                 });
@@ -322,21 +314,6 @@ namespace LessonLogAPI.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ClassTeacher", b =>
-                {
-                    b.HasOne("LessonLogAPI.Models.Entities.Class", null)
-                        .WithMany()
-                        .HasForeignKey("ClassesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LessonLogAPI.Models.Entities.Teacher", null)
-                        .WithMany()
-                        .HasForeignKey("TeachersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Admin", b =>
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.User", "User")
@@ -363,6 +340,15 @@ namespace LessonLogAPI.Migrations
                     b.Navigation("Lesson");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.Class", b =>
+                {
+                    b.HasOne("LessonLogAPI.Models.Entities.Teacher", "Teacher")
+                        .WithOne("Class")
+                        .HasForeignKey("LessonLogAPI.Models.Entities.Class", "EducatorId");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Grade", b =>
@@ -500,6 +486,8 @@ namespace LessonLogAPI.Migrations
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Teacher", b =>
                 {
+                    b.Navigation("Class");
+
                     b.Navigation("Lessons");
                 });
 
