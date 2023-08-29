@@ -11,5 +11,9 @@ namespace LessonLogAPI.Models.Entities
         public List<Grade> Grades { get; set; } = new List<Grade>();
         public Class Class { get; set; }
         public int ClassId { get; set; }
+        public User User { get; set; }
+        public int UserId { get; set; }
+        public Tutor Tutor { get; set; }
+        public int TutorId { get; set; }
     }
 }

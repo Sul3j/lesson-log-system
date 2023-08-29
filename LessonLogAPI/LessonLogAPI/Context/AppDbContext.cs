@@ -20,6 +20,7 @@ namespace LessonLogAPI.Context
         public DbSet<Class> Classes { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Grade> Grades { get; set; }
+        public DbSet<Tutor> Tutors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,11 +29,21 @@ namespace LessonLogAPI.Context
                 .WithOne(u => u.Role)
                 .HasForeignKey<User>(r => r.RoleId);
 
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Teacher)
+            modelBuilder.Entity<User>(eb =>
+            {   
+                eb.HasOne(u => u.Teacher)
                 .WithOne(t => t.User)
                 .HasForeignKey<Teacher>(t => t.UserId);
 
+                eb.HasOne(u => u.Student)
+                .WithOne(s => s.User)
+                .HasForeignKey<Student>(s => s.UserId);
+
+                eb.HasOne(u => u.Tutor)
+                .WithOne(t => t.User)
+                .HasForeignKey<Tutor>(t => t.UserId);
+            });
+                
             modelBuilder.Entity<Teacher>(eb =>
             {
                 eb.HasMany(t => t.Classes)
@@ -81,7 +92,13 @@ namespace LessonLogAPI.Context
                 eb.HasMany(s => s.Grades)
                 .WithOne(g => g.Student)
                 .HasForeignKey(g => g.StudentId);
+            });
 
+            modelBuilder.Entity<Tutor>(eb =>
+            {
+                eb.HasMany(t => t.Students)
+                .WithOne(s => s.Tutor)
+                .HasForeignKey(s => s.TutorId);
             });
         }
     }

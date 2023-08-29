@@ -19,5 +19,7 @@ namespace LessonLogAPI.Models.Entities
         public Role Role { get; set; }
         public int RoleId { get; set; }
         public Teacher Teacher { get; set; }
+        public Student Student { get; set; }
+        public Tutor Tutor { get; set; }
     }
 }
