@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "BQFUK+ETqhd5FxE8Evj/jy518igenYUHE7eh5VQJJz8FbGt4Ma3RKfbGgeqAKzDqATEsy5tUl1VE0E+ymOnfGw==",
+  "dgSpecHash": "mRSMwNqWwha7LzkqcvBbJFIHxU8f4NVpQxlk2XKKCiwwFaquutgL8uZKh38+CTP3gw44sJ+D6a2bu/PhdmzbXA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Szymo\\Desktop\\github\\lesson-log-system\\LessonLogAPI\\LessonLogAPI\\LessonLogAPI.csproj",
   "expectedPackageFiles": [
@@ -19,6 +19,7 @@
     "C:\\Users\\Szymo\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.10\\microsoft.entityframeworkcore.design.7.0.10.nupkg.sha512",
     "C:\\Users\\Szymo\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.10\\microsoft.entityframeworkcore.relational.7.0.10.nupkg.sha512",
     "C:\\Users\\Szymo\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.10\\microsoft.entityframeworkcore.sqlserver.7.0.10.nupkg.sha512",
+    "C:\\Users\\Szymo\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.10\\microsoft.entityframeworkcore.tools.7.0.10.nupkg.sha512",
     "C:\\Users\\Szymo\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\Szymo\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Szymo\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",

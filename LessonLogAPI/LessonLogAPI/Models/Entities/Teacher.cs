@@ -1,7 +1,10 @@
-﻿namespace LessonLogAPI.Models.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LessonLogAPI.Models.Entities
 {
     public class Teacher
     {
+        [Key]
         public int Id { get; set; }
         public User User { get; set; }
         public int UserId { get; set; }

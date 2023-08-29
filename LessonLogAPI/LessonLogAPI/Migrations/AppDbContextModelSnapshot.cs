@@ -51,7 +51,7 @@ namespace LessonLogAPI.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -102,7 +102,7 @@ namespace LessonLogAPI.Migrations
                     b.Property<int>("Percent")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectId")
@@ -172,10 +172,15 @@ namespace LessonLogAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Pesel")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
 
                     b.ToTable("Students");
                 });
@@ -289,9 +294,7 @@ namespace LessonLogAPI.Migrations
 
                     b.HasOne("LessonLogAPI.Models.Entities.Student", "Student")
                         .WithMany("Attendances")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("Lesson");
 
@@ -302,9 +305,7 @@ namespace LessonLogAPI.Migrations
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Student", "Student")
                         .WithMany("Grades")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithMany("Grades")
@@ -344,6 +345,17 @@ namespace LessonLogAPI.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.Student", b =>
+                {
+                    b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
+                        .WithMany("Students")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+                });
+
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Teacher", b =>
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.User", "User")
@@ -369,6 +381,8 @@ namespace LessonLogAPI.Migrations
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Class", b =>
                 {
                     b.Navigation("Lessons");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Lesson", b =>

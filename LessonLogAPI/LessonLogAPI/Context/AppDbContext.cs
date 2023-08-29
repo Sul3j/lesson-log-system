@@ -59,6 +59,10 @@ namespace LessonLogAPI.Context
                 eb.HasMany(c => c.Lessons)
                 .WithOne(l => l.Class)
                 .HasForeignKey(l => l.ClassId);
+
+                eb.HasMany(c => c.Students)
+                .WithOne(s => s.Class)
+                .HasForeignKey(s => s.ClassId);
             });
 
             modelBuilder.Entity<Lesson>(eb =>
@@ -77,6 +81,7 @@ namespace LessonLogAPI.Context
                 eb.HasMany(s => s.Grades)
                 .WithOne(g => g.Student)
                 .HasForeignKey(g => g.StudentId);
+
             });
         }
     }
