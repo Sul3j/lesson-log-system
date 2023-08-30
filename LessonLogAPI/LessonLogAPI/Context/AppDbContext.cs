@@ -26,7 +26,7 @@ namespace LessonLogAPI.Context
         public DbSet<Admin> Admins { get; set; }
         public DbSet<TimetableLesson> TimetableLessons { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
-        public DbSet<LessonBreakHour> LessonBreakHours { get; set; }
+        public DbSet<LessonHour> LessonHours { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -146,11 +146,23 @@ namespace LessonLogAPI.Context
                 .HasForeignKey<TimetableLesson>(t => t.ClassroomId);
             });
 
-            modelBuilder.Entity<LessonBreakHour>(eb =>
+            modelBuilder.Entity<LessonHour>(eb =>
             {
                 eb.HasOne(l => l.TimetableLesson)
-                .WithOne(t => t.LessonBreakHour)
-                .HasForeignKey<TimetableLesson>(t => t.LessonBreakHourId);
+                .WithOne(t => t.LessonHour)
+                .HasForeignKey<TimetableLesson>(t => t.LessonHourId);
+
+                eb.HasData(
+                    new LessonHour() { Id = 1, From = "8:00", To = "8:45" },
+                    new LessonHour() { Id = 2, From = "8:50", To = "9:35" },
+                    new LessonHour() { Id = 3, From = "9:45", To = "10:30" },
+                    new LessonHour() { Id = 4, From = "10:40", To = "11:25" },
+                    new LessonHour() { Id = 5, From = "11:35", To = "12:20" },
+                    new LessonHour() { Id = 6, From = "12:40", To = "13:25" },
+                    new LessonHour() { Id = 7, From = "13:35", To = "14:20" },
+                    new LessonHour() { Id = 8, From = "14:30", To = "15:15" },
+                    new LessonHour() { Id = 9, From = "15:25", To = "16:10" }
+                 );
             });
         }
     }

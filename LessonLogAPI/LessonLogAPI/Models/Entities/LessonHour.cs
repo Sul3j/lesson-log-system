@@ -2,7 +2,7 @@
 
 namespace LessonLogAPI.Models.Entities
 {
-    public class LessonBreakHour
+    public class LessonHour
     {
         [Key]
         public int Id { get; set; }

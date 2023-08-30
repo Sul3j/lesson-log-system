@@ -184,7 +184,7 @@ namespace LessonLogAPI.Migrations
                     b.ToTable("Lessons");
                 });
 
-            modelBuilder.Entity("LessonLogAPI.Models.Entities.LessonBreakHour", b =>
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.LessonHour", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -200,7 +200,63 @@ namespace LessonLogAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LessonBreakHours");
+                    b.ToTable("LessonHours");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            From = "8:00",
+                            To = "8:45"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            From = "8:50",
+                            To = "9:35"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            From = "9:45",
+                            To = "10:30"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            From = "10:40",
+                            To = "11:25"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            From = "11:35",
+                            To = "12:20"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            From = "12:40",
+                            To = "13:25"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            From = "13:35",
+                            To = "14:20"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            From = "14:30",
+                            To = "15:15"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            From = "15:25",
+                            To = "16:10"
+                        });
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Role", b =>
@@ -332,7 +388,7 @@ namespace LessonLogAPI.Migrations
                     b.Property<int>("ClassroomId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LessonBreakHourId")
+                    b.Property<int>("LessonHourId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectId")
@@ -352,7 +408,7 @@ namespace LessonLogAPI.Migrations
                     b.HasIndex("ClassroomId")
                         .IsUnique();
 
-                    b.HasIndex("LessonBreakHourId")
+                    b.HasIndex("LessonHourId")
                         .IsUnique();
 
                     b.HasIndex("SubjectId")
@@ -581,9 +637,9 @@ namespace LessonLogAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LessonLogAPI.Models.Entities.LessonBreakHour", "LessonBreakHour")
+                    b.HasOne("LessonLogAPI.Models.Entities.LessonHour", "LessonHour")
                         .WithOne("TimetableLesson")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "LessonBreakHourId")
+                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "LessonHourId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -603,7 +659,7 @@ namespace LessonLogAPI.Migrations
 
                     b.Navigation("Classroom");
 
-                    b.Navigation("LessonBreakHour");
+                    b.Navigation("LessonHour");
 
                     b.Navigation("Subject");
 
@@ -664,7 +720,7 @@ namespace LessonLogAPI.Migrations
                     b.Navigation("Attendances");
                 });
 
-            modelBuilder.Entity("LessonLogAPI.Models.Entities.LessonBreakHour", b =>
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.LessonHour", b =>
                 {
                     b.Navigation("TimetableLesson");
                 });
