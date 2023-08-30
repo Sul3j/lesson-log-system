@@ -25,6 +25,8 @@ namespace LessonLogAPI.Context
         public DbSet<Tutor> Tutors { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<TimetableLesson> TimetableLessons { get; set; }
+        public DbSet<Classroom> Classrooms { get; set; }
+        public DbSet<LessonBreakHour> LessonBreakHours { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -135,6 +137,13 @@ namespace LessonLogAPI.Context
                 eb.HasOne(c => c.TimetableLesson)
                 .WithOne(t => t.Classroom)
                 .HasForeignKey<TimetableLesson>(t => t.ClassroomId);
+            });
+
+            modelBuilder.Entity<LessonBreakHour>(eb =>
+            {
+                eb.HasOne(l => l.TimetableLesson)
+                .WithOne(t => t.LessonBreakHour)
+                .HasForeignKey<TimetableLesson>(t => t.LessonBreakHourId);
             });
         }
     }
