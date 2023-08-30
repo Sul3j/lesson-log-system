@@ -93,6 +93,28 @@ namespace LessonLogAPI.Migrations
                     b.ToTable("Classes");
                 });
 
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.Classroom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Floor")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Classroom");
+                });
+
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Grade", b =>
                 {
                     b.Property<int>("Id")
@@ -285,6 +307,9 @@ namespace LessonLogAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ClassroomId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
@@ -295,6 +320,9 @@ namespace LessonLogAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassroomId")
+                        .IsUnique();
 
                     b.HasIndex("SubjectId")
                         .IsUnique();
@@ -495,6 +523,12 @@ namespace LessonLogAPI.Migrations
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.TimetableLesson", b =>
                 {
+                    b.HasOne("LessonLogAPI.Models.Entities.Classroom", "Classroom")
+                        .WithOne("TimetableLesson")
+                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "ClassroomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithOne("TimetableLesson")
                         .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "SubjectId")
@@ -506,6 +540,8 @@ namespace LessonLogAPI.Migrations
                         .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Classroom");
 
                     b.Navigation("Subject");
 
@@ -537,6 +573,11 @@ namespace LessonLogAPI.Migrations
                     b.Navigation("Lessons");
 
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.Classroom", b =>
+                {
+                    b.Navigation("TimetableLesson");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Lesson", b =>
