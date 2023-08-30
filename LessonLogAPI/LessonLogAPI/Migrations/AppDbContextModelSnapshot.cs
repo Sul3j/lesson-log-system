@@ -326,6 +326,9 @@ namespace LessonLogAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ClassroomId")
                         .HasColumnType("int");
 
@@ -342,6 +345,9 @@ namespace LessonLogAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassId")
+                        .IsUnique();
 
                     b.HasIndex("ClassroomId")
                         .IsUnique();
@@ -548,6 +554,12 @@ namespace LessonLogAPI.Migrations
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.TimetableLesson", b =>
                 {
+                    b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
+                        .WithOne("TimetableLesson")
+                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LessonLogAPI.Models.Entities.Classroom", "Classroom")
                         .WithOne("TimetableLesson")
                         .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "ClassroomId")
@@ -571,6 +583,8 @@ namespace LessonLogAPI.Migrations
                         .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Class");
 
                     b.Navigation("Classroom");
 
@@ -606,6 +620,8 @@ namespace LessonLogAPI.Migrations
                     b.Navigation("Lessons");
 
                     b.Navigation("Students");
+
+                    b.Navigation("TimetableLesson");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Classroom", b =>

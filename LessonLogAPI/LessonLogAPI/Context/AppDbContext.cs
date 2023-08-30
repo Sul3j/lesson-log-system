@@ -105,6 +105,10 @@ namespace LessonLogAPI.Context
                 eb.HasMany(c => c.Students)
                 .WithOne(s => s.Class)
                 .HasForeignKey(s => s.ClassId);
+
+                eb.HasOne(c => c.TimetableLesson)
+                .WithOne(t => t.Class)
+                .HasForeignKey<TimetableLesson>(t => t.ClassId);
             });
 
             modelBuilder.Entity<Lesson>(eb =>

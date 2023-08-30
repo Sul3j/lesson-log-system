@@ -15,5 +15,7 @@ namespace LessonLogAPI.Models.Entities
         public int ClassroomId { get; set; }
         public LessonBreakHour LessonBreakHour { get; set; }
         public int LessonBreakHourId { get; set; }
+        public Class Class { get; set; }
+        public int ClassId { get; set; }
     }
 }
