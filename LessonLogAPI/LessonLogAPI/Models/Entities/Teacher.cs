@@ -10,5 +10,6 @@ namespace LessonLogAPI.Models.Entities
         public int UserId { get; set; }
         public Class Class { get; set; }
         public List<Lesson> Lessons { get; set; } = new List<Lesson>();
+        public TimetableLesson TimetableLesson { get; set; }
     }
 }

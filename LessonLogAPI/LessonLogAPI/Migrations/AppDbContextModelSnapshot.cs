@@ -277,6 +277,34 @@ namespace LessonLogAPI.Migrations
                     b.ToTable("Teachers");
                 });
 
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.TimetableLesson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeekDay")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId")
+                        .IsUnique();
+
+                    b.HasIndex("TeacherId")
+                        .IsUnique();
+
+                    b.ToTable("TimetableLessons");
+                });
+
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Tutor", b =>
                 {
                     b.Property<int>("Id")
@@ -465,6 +493,25 @@ namespace LessonLogAPI.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.TimetableLesson", b =>
+                {
+                    b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
+                        .WithOne("TimetableLesson")
+                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LessonLogAPI.Models.Entities.Teacher", "Teacher")
+                        .WithOne("TimetableLesson")
+                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subject");
+
+                    b.Navigation("Teacher");
+                });
+
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Tutor", b =>
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.User", "User")
@@ -514,6 +561,8 @@ namespace LessonLogAPI.Migrations
                     b.Navigation("Grades");
 
                     b.Navigation("Lessons");
+
+                    b.Navigation("TimetableLesson");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Teacher", b =>
@@ -521,6 +570,8 @@ namespace LessonLogAPI.Migrations
                     b.Navigation("Class");
 
                     b.Navigation("Lessons");
+
+                    b.Navigation("TimetableLesson");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Tutor", b =>
