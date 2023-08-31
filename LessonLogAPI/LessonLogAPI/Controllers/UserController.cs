@@ -42,7 +42,7 @@ namespace LessonLogAPI.Controllers
             var user = await _dbContext.Users
                 .FirstOrDefaultAsync(x => x.Email == userObj.Email);
 
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest(new { Message = "This user not exist!" });
             }
@@ -95,7 +95,7 @@ namespace LessonLogAPI.Controllers
             });
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<ActionResult<User>> GetAllUsers()
         {
@@ -186,6 +186,25 @@ namespace LessonLogAPI.Controllers
                 Message = "Password reset successfully"
             });
         }
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateRole([FromBody] int role, [FromRoute] int id)
+        {
+            var user = _dbContext
+                .Users
+                .FirstOrDefault(a => a.Id == id);
+
+            if (user is null)
+                return NotFound();
+
+            user.RoleId = role;
+
+            _dbContext.SaveChanges();
+
+            return Ok();
+        }
+
+
 
         private Task<bool> CheckEmailExistAsync(string email)
             => _dbContext.Users.AnyAsync(x => x.Email == email);
