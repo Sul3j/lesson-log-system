@@ -90,3 +90,8 @@ C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\De
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Text.Json.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Newtonsoft.dll

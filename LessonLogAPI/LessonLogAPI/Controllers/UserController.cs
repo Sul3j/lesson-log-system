@@ -12,6 +12,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace LessonLogAPI.Controllers
@@ -97,9 +99,13 @@ namespace LessonLogAPI.Controllers
 
         //[Authorize]
         [HttpGet]
-        public async Task<ActionResult<User>> GetAllUsers()
+        public IActionResult GetAllUsers()
         {
-            return Ok(await _dbContext.Users.ToListAsync());
+            var users = _dbContext.Users
+            .Include(u => u.Role) // Załączenie powiązanej roli
+            .ToList();
+
+            return Ok(users);
         }
 
         [HttpPost("refresh")]
