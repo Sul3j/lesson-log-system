@@ -18,7 +18,7 @@ namespace LessonLogAPI.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<ActionResult> AddTeacher([FromBody] Teacher teacher) 
+        public async Task<ActionResult> CreateTeacher([FromBody] Teacher teacher) 
         {
             await _teacherService.AddTeacher(teacher);
 
@@ -27,6 +27,12 @@ namespace LessonLogAPI.Controllers
                 StatusCode = 201,
                 Message = "New Teacher Created"
             });
+        }
+
+        [HttpGet]
+        public ActionResult GetAllTeachers()
+        {
+            return Ok(_teacherService.GetTeachers());
         }
     }
 }

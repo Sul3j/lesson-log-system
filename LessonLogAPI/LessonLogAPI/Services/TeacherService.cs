@@ -1,6 +1,7 @@
 ﻿using LessonLogAPI.Context;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace LessonLogAPI.Services
 {
@@ -19,6 +20,15 @@ namespace LessonLogAPI.Services
             await _dbContext.SaveChangesAsync();
 
             return teacher;
+        }
+
+        public List<Teacher> GetTeachers()
+        {
+            var teachers = _dbContext.Teachers
+                .Include(t => t.User)
+                .ToList();
+
+            return teachers;
         }
     }
 }
