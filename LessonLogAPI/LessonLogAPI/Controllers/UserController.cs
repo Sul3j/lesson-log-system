@@ -1,20 +1,8 @@
-﻿using LessonLogAPI.Context;
-using LessonLogAPI.Helpers;
-using LessonLogAPI.Models;
+﻿using LessonLogAPI.Helpers;
 using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
-using LessonLogAPI.UtilityService;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using System.Text.RegularExpressions;
+using LessonLogAPI.Models.Interfaces;
 
 namespace LessonLogAPI.Controllers
 {
@@ -22,15 +10,11 @@ namespace LessonLogAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly AppDbContext _dbContext;
-        private readonly IConfiguration _config;
-        private readonly IEmailService _emailService;
+        private readonly IUserService _userService;
 
-        public UserController(AppDbContext dbContext, IConfiguration config, IEmailService emailService)
+        public UserController(IUserService userService)
         {
-            _dbContext = dbContext;
-            _config = config;
-            _emailService = emailService;
+            _userService = userService;
         }
 
         [HttpPost("authenticate")]
@@ -41,8 +25,7 @@ namespace LessonLogAPI.Controllers
                 return BadRequest();
             }
 
-            var user = await _dbContext.Users
-                .FirstOrDefaultAsync(x => x.Email == userObj.Email);
+            var user = await _userService.GetUser(userObj);
 
             if (user == null)
             {
@@ -54,18 +37,9 @@ namespace LessonLogAPI.Controllers
                 return BadRequest(new { Message = "Password is incorrect!" });
             }
 
-            user.Token = CreateJwt(user);
-            var newAccessToken = user.Token;
-            var newRefreshToken = CreateRefreshToken();
-            user.RefreshToken = newRefreshToken;
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
-            await _dbContext.SaveChangesAsync();
+            var tokens = await _userService.Authenticate(userObj);
 
-            return Ok(new TokenDto()
-            {
-                AccessToken = newAccessToken,
-                RefreshToken = newRefreshToken
-            });
+            return Ok(tokens);
         }
 
         [HttpPost("register")]
@@ -76,36 +50,25 @@ namespace LessonLogAPI.Controllers
                 return BadRequest();
             }
 
-            if (await CheckEmailExistAsync(userObj.Email))
+            if (await _userService.CheckEmailExistAsync(userObj.Email))
             {
                 return BadRequest(new { Message = "Email Already Exist!" });
             }
 
-            var pass = CheckPasswordStrength(userObj.Password);
+            var pass = _userService.CheckPasswordStrength(userObj.Password);
             if (!string.IsNullOrEmpty(pass))
             {
                 return BadRequest(new { Message = pass.ToString() });
             }
-
-            userObj.Password = PasswordHasher.HashPassword(userObj.Password);
-            userObj.Token = "";
-            await _dbContext.Users.AddAsync(userObj);
-            await _dbContext.SaveChangesAsync();
-            return Ok(new
-            {
-                Message = "User Registered!"
-            });
+            
+            return Ok(_userService.RegisterUser(userObj));
         }
 
         //[Authorize]
         [HttpGet]
         public IActionResult GetAllUsers()
         {
-            var users = _dbContext.Users
-            .Include(u => u.Role) // Załączenie powiązanej roli
-            .ToList();
-
-            return Ok(users);
+            return Ok(_userService.GetUsers());
         }
 
         [HttpPost("refresh")]
@@ -115,15 +78,15 @@ namespace LessonLogAPI.Controllers
                 return BadRequest("Invalid client request");
             string accesToken = tokenDto.AccessToken;
             string refreshToken = tokenDto.RefreshToken;
-            var principal = GetPrincipalFromExpiredToken(accesToken);
+            var principal = _userService.GetPrincipalFromExpiredToken(accesToken);
             var email = principal.Identity.Name;
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var user = await _userService.GetUserData(email);
             if (user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
                 return BadRequest("Invalid request");
-            var newAccessToken = CreateJwt(user);
-            var newRefreshToken = CreateRefreshToken();
+            var newAccessToken = _userService.CreateJwt(user);
+            var newRefreshToken = _userService.CreateRefreshToken();
             user.RefreshToken = newRefreshToken;
-            await _dbContext.SaveChangesAsync();
+            _userService.SaveChanges();
             return Ok(new TokenDto()
             {
                 AccessToken = newAccessToken,
@@ -134,7 +97,8 @@ namespace LessonLogAPI.Controllers
         [HttpPost("send-reset-email/{email}")]
         public async Task<IActionResult> SendEmail(string email)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(a => a.Email == email);
+            var user = await _userService.GetUserData(email);
+
             if (user is null)
             {
                 return NotFound(new
@@ -143,28 +107,15 @@ namespace LessonLogAPI.Controllers
                     Message = "email doesn't exist"
                 });
             }
-
-            var tokenBytes = RandomNumberGenerator.GetBytes(64);
-            var emailToken = Convert.ToBase64String(tokenBytes);
-            user.ResetPasswordToken = emailToken;
-            user.ResetPasswordExpiry = DateTime.Now.AddMinutes(15);
-            string from = _config["EmailSettings:From"];
-            var emailModel = new EmailModel(email, "Reset Password", EmailBody.EmailStringBody(email, emailToken));
-            _emailService.SendEmail(emailModel);
-            _dbContext.Entry(user).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
-            return Ok(new
-            {
-                StatusCode = 200,
-                Message = "Email has been sent!"
-            });
+          
+            return Ok(_userService.SendEmail(email));
         }
 
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
         {
             var newToken = resetPasswordDto.EmailToken.Replace(" ", "+");
-            var user = await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(a => a.Email == resetPasswordDto.Email);
+            var user = await _userService.ResetPasswordUser(resetPasswordDto);
             if (user is null)
             {
                 return NotFound(new
@@ -183,9 +134,9 @@ namespace LessonLogAPI.Controllers
                     Message = "Invalid reset link"
                 });
             }
-            user.Password = PasswordHasher.HashPassword(resetPasswordDto.NewPassword);
-            _dbContext.Entry(user).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+            _userService.ResetPassword(user, resetPasswordDto);
+            _userService.SaveChanges();
+
             return Ok(new
             {
                 StatusCode = 200,
@@ -196,109 +147,16 @@ namespace LessonLogAPI.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateRole([FromBody] int role, [FromRoute] int id)
         {
-            var user = _dbContext
-                .Users
-                .FirstOrDefault(a => a.Id == id);
+            var user = _userService.GetUserById(id);
 
             if (user is null)
                 return NotFound();
 
             user.RoleId = role;
 
-            _dbContext.SaveChanges();
+            _userService.SaveChanges();
 
             return Ok();
-        }
-
-
-
-        private Task<bool> CheckEmailExistAsync(string email)
-            => _dbContext.Users.AnyAsync(x => x.Email == email);
-
-        private string CheckPasswordStrength(string password)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            if (password.Length < 8)
-            {
-                sb.Append("Minimum password length should be 8" + Environment.NewLine);
-            }
-
-            if (!(Regex.IsMatch(password, "[a-z]") && Regex.IsMatch(password, "[A-Z]")
-                && Regex.IsMatch(password, "[0-9]")))
-            {
-                sb.Append("Password should be Alphanumeric" + Environment.NewLine);
-            }
-
-            if (!Regex.IsMatch(password, "[<,>,@,!,#,$,%,^,&,*,(,),_,+,\\[,\\],{,},?,:,;,|,',\\,.,/,~,`,-,=]"))
-            {
-                sb.Append("Password should contain special chars" + Environment.NewLine);
-            }
-
-            return sb.ToString();
-        }
-
-        private string CreateJwt(User user)
-        {
-            var jwtTokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("vLyR7Jfom78Bq5x5");
-
-            var identity = new ClaimsIdentity(new Claim[]
-            {
-                new Claim(ClaimTypes.Name, user.Email),
-                new Claim("fullname", $"{user.FirstName} {user.LastName}")
-            });
-
-            var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = identity,
-                Expires = DateTime.Now.AddSeconds(10),
-                SigningCredentials = credentials,
-            };
-            var token = jwtTokenHandler.CreateToken(tokenDescriptor);
-            return jwtTokenHandler.WriteToken(token);
-        }
-
-        private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
-        {
-            var key = Encoding.ASCII.GetBytes("vLyR7Jfom78Bq5x5");
-
-            var tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateAudience = false,
-                ValidateIssuer = false,
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateLifetime = false
-            };
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            SecurityToken securityToken;
-            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
-            var jwtSecurityToken = securityToken as JwtSecurityToken;
-            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-                throw new SecurityTokenException("This is invalid token");
-
-            return principal;
-        }
-
-        private string CreateRefreshToken()
-        {
-            var tokenBytes = RandomNumberGenerator.GetBytes(64);
-            var refreshToken = Convert.ToBase64String(tokenBytes);
-
-            var tokenInUser = _dbContext.Users
-                .Any(a => a.RefreshToken == refreshToken);
-
-
-            if (tokenInUser)
-            {
-                return CreateRefreshToken();
-            }
-
-            return refreshToken;
         }
     }
 }
