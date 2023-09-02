@@ -20,6 +20,16 @@ namespace LessonLogAPI.Controllers
         [HttpPost("add")]
         public async Task<ActionResult> CreateTeacher([FromBody] Teacher teacher) 
         {
+            var teachers = _teacherService.GetTeachers();
+
+            foreach (Teacher t in teachers)
+            {
+                if (t.UserId == teacher.UserId)
+                {
+                    return BadRequest(new { Message = "This teacher is exist" });
+                }
+            }
+
             await _teacherService.AddTeacher(teacher);
 
             return Ok(new
