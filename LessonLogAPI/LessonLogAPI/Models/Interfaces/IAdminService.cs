@@ -8,5 +8,6 @@ namespace LessonLogAPI.Models.Interfaces
 
         List<Admin> GetAdmins();
 
+        object DeleteAdmin(int id);
     }
 }

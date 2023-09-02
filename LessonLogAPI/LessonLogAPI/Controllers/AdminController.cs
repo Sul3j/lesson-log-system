@@ -16,7 +16,7 @@ namespace LessonLogAPI.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<ActionResult> CreateAdmin([FromBody] Admin admin)
+        public ActionResult CreateAdmin([FromBody] Admin admin)
         {
             var admins = _adminService.GetAdmins();
 
@@ -28,7 +28,7 @@ namespace LessonLogAPI.Controllers
                 }
             }
 
-            await _adminService.AddAdmin(admin);
+            _adminService.AddAdmin(admin);
 
             return Ok(new
             {
@@ -40,7 +40,17 @@ namespace LessonLogAPI.Controllers
         [HttpGet]
         public ActionResult GetAllAdmins()
         {
-            return Ok(_adminService.GetAdmins());
+            var admins = _adminService.GetAdmins();
+
+            return Ok(admins);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteAdmin([FromRoute] int id)
+        {
+            var admin = _adminService.DeleteAdmin(id);
+
+            return Ok(admin);
         }
     }
 }

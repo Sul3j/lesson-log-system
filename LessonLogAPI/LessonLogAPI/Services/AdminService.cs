@@ -32,5 +32,21 @@ namespace LessonLogAPI.Services
 
             return admins;
         }
+
+        public object DeleteAdmin(int id)
+        {
+            var admin = _dbContext.Admins.FirstOrDefault(a => a.Id == id);
+
+            var test = admin;
+
+            if (admin != null)
+            {
+                _dbContext.Admins.Remove(admin);
+            }
+
+            _dbContext.SaveChanges();
+
+            return new { Message = test };
+        }
     }
 }
