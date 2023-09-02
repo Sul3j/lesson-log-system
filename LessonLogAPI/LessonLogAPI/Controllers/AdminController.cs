@@ -36,5 +36,11 @@ namespace LessonLogAPI.Controllers
                 Message = "New Admin Created"
             });
         }
+
+        [HttpGet]
+        public ActionResult GetAllAdmins()
+        {
+            return Ok(_adminService.GetAdmins());
+        }
     }
 }
