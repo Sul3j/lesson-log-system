@@ -15,7 +15,7 @@ namespace LessonLogAPI.Services
         }
 
         public async Task<Teacher> AddTeacher(Teacher teacher)
-        {
+        { 
             await _dbContext.Teachers.AddAsync(teacher);
             await _dbContext.SaveChangesAsync();
 

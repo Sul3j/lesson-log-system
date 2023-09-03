@@ -1,7 +1,7 @@
-﻿using LessonLogAPI.Models.Dto;
+﻿using LessonLogAPI.Models;
+using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LessonLogAPI.Controllers
@@ -11,14 +11,16 @@ namespace LessonLogAPI.Controllers
     public class TeacherController : ControllerBase
     {
         private readonly ITeacherService _teacherService;
+        private readonly IUserService _userService;
 
-        public TeacherController(ITeacherService teacherService) 
+        public TeacherController(ITeacherService teacherService, IUserService userService) 
         {
             _teacherService = teacherService;
+            _userService = userService;
         }
 
         [HttpPost("add")]
-        public async Task<ActionResult> CreateTeacher([FromBody] Teacher teacher) 
+        public ActionResult CreateTeacher([FromBody] Teacher teacher) 
         {
             var teachers = _teacherService.GetTeachers();
 
@@ -30,19 +32,24 @@ namespace LessonLogAPI.Controllers
                 }
             }
 
-            await _teacherService.AddTeacher(teacher);
+            _userService.ChangeRole(teacher.UserId, ((int)RolesNames.TEACHER) + 1);
 
-            return Ok(new
-            {
-                StatusCode = 201,
-                Message = "New Teacher Created"
-            });
+            _teacherService.AddTeacher(teacher);
+
+            return Ok(new { Message = "Teacher has been created" });
         }
 
         [HttpGet]
         public ActionResult GetAllTeachers()
         {
-            return Ok(_teacherService.GetTeachers());
+            var teachers = _teacherService.GetTeachers();
+
+            if (teachers.Count() == 0)
+            {
+                return Ok(new { Message = "No teachers to display" });
+            }
+
+            return Ok(teachers);
         }
     }
 }
