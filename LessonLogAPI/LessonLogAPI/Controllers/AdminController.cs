@@ -1,4 +1,5 @@
-﻿using LessonLogAPI.Models.Entities;
+﻿using LessonLogAPI.Models;
+using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,12 @@ namespace LessonLogAPI.Controllers
     public class AdminController : ControllerBase
     {
         private readonly IAdminService _adminService;
+        private readonly IUserService _userService;
 
-        public AdminController(IAdminService adminService)
+        public AdminController(IAdminService adminService, IUserService userService)
         {
             _adminService = adminService;
+            _userService = userService;
         }
 
         [HttpPost("add")]
@@ -28,19 +31,22 @@ namespace LessonLogAPI.Controllers
                 }
             }
 
+            _userService.ChangeRole(admin.UserId, ((int)RolesNames.ADMIN) + 1);
+
             _adminService.AddAdmin(admin);
 
-            return Ok(new
-            {
-                StatusCode = 201,
-                Message = "New Admin Created"
-            });
+            return Ok(new { Message = "Admin has been created" });
         }
 
         [HttpGet]
         public ActionResult GetAllAdmins()
         {
             var admins = _adminService.GetAdmins();
+
+            if (admins.Count() == 0)
+            {
+                return Ok(new { Message = "No admins to display" });
+            }
 
             return Ok(admins);
         }
@@ -50,7 +56,14 @@ namespace LessonLogAPI.Controllers
         {
             var admin = _adminService.DeleteAdmin(id);
 
-            return Ok(admin);
+            if (admin == null)
+            {
+                return BadRequest(new { Message = "This Admin is not exist" });
+            } 
+
+            _userService.ChangeRole(admin.UserId, ((int)RolesNames.USER) + 1);
+
+            return Ok(new { Message = "Admin has been deleted" });
         }
     }
 }

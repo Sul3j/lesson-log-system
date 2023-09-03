@@ -4,10 +4,10 @@ namespace LessonLogAPI.Models.Interfaces
 {
     public interface IAdminService
     {
-        Task<Admin> AddAdmin(Admin admin);
+        Admin AddAdmin(Admin admin);
 
         List<Admin> GetAdmins();
 
-        object DeleteAdmin(int id);
+        Admin DeleteAdmin(int id);
     }
 }

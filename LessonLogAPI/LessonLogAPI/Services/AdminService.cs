@@ -14,12 +14,12 @@ namespace LessonLogAPI.Services
             _dbContext = dbContext; 
         }
 
-        public async Task<Admin> AddAdmin(Admin admin)
+        public Admin AddAdmin(Admin admin)
         {
             admin.CreatedAt = DateTime.Now;
 
-            await _dbContext.Admins.AddAsync(admin);
-            await _dbContext.SaveChangesAsync();
+            _dbContext.Admins.AddAsync(admin);
+            _dbContext.SaveChanges();
 
             return admin;
         }
@@ -33,11 +33,9 @@ namespace LessonLogAPI.Services
             return admins;
         }
 
-        public object DeleteAdmin(int id)
+        public Admin DeleteAdmin(int id)
         {
             var admin = _dbContext.Admins.FirstOrDefault(a => a.Id == id);
-
-            var test = admin;
 
             if (admin != null)
             {
@@ -46,7 +44,7 @@ namespace LessonLogAPI.Services
 
             _dbContext.SaveChanges();
 
-            return new { Message = test };
+            return admin;
         }
     }
 }

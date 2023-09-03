@@ -12,6 +12,7 @@ using LessonLogAPI.UtilityService;
 using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Helpers;
 using LessonLogAPI.Models;
+using Org.BouncyCastle.Crypto.Tls;
 
 namespace LessonLogAPI.Services
 {
@@ -213,6 +214,15 @@ namespace LessonLogAPI.Services
                 .FirstOrDefault(a => a.Id == id);
 
             return user;
+        }
+
+        public async Task<bool> ChangeRole(int id, int roleId)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.Id == id);
+            user.RoleId = roleId;
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
     }
 }
