@@ -9,5 +9,7 @@ namespace LessonLogAPI.Models.Interfaces
         List<Admin> GetAdmins();
 
         Admin DeleteAdmin(int id);
+
+        Admin GetAdmin(int id);
     }
 }

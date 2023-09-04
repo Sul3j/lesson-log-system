@@ -3,6 +3,7 @@ using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Extensions;
 
 namespace LessonLogAPI.Controllers
 {
@@ -32,7 +33,7 @@ namespace LessonLogAPI.Controllers
                 }
             }
 
-            _userService.ChangeRole(teacher.UserId, ((int)RolesNames.TEACHER) + 1);
+            _userService.ChangeRole(teacher.UserId, Roles.TEACHER.GetDisplayName());
 
             _teacherService.AddTeacher(teacher);
 
@@ -50,6 +51,21 @@ namespace LessonLogAPI.Controllers
             }
 
             return Ok(teachers);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteTeacher([FromRoute] int id)
+        {
+            var teacher = _teacherService.DeleteTeacher(id);
+
+            if (teacher == null)
+            {
+                return BadRequest(new { Message = "This Teacher is not exist" });
+            }
+
+            _userService.ChangeRole(teacher.UserId, Roles.USER.GetDisplayName());
+
+            return Ok(new { Message = "Teacher has been deleted" });
         }
     }
 }

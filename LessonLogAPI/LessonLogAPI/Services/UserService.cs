@@ -216,10 +216,10 @@ namespace LessonLogAPI.Services
             return user;
         }
 
-        public async Task<bool> ChangeRole(int id, int roleId)
+        public async Task<bool> ChangeRole(int id, string role)
         {
             var user = _dbContext.Users.FirstOrDefault(u => u.Id == id);
-            user.RoleId = roleId;
+            user.Role = role;
             await _dbContext.SaveChangesAsync();
 
             return true;

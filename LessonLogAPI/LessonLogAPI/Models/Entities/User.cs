@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.OpenApi.Extensions;
+using System.ComponentModel.DataAnnotations;
 
 namespace LessonLogAPI.Models.Entities
 {
@@ -16,8 +17,7 @@ namespace LessonLogAPI.Models.Entities
         public DateTime RefreshTokenExpiryTime { get; set; }
         public string ResetPasswordToken { get; set; }
         public DateTime ResetPasswordExpiry { get; set; }
-        public Role Role { get; set; }
-        public int RoleId { get; set; } = 1;
+        public string Role { get; set; } = Roles.USER.GetDisplayName();
         public Teacher Teacher { get; set; }
         public Student Student { get; set; }
         public Tutor Tutor { get; set; }

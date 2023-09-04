@@ -14,7 +14,6 @@ namespace LessonLogAPI.Context
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Student> Students { get; set; }
@@ -30,25 +29,8 @@ namespace LessonLogAPI.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Role>(eb =>
-            {   
-                eb.HasOne(r => r.User)
-                .WithOne(u => u.Role)
-                .HasForeignKey<User>(r => r.RoleId);
-
-                eb.HasData(
-                    new Role() { Id = 1, Name = RolesNames.USER.GetDisplayName() },
-                    new Role() { Id = 2, Name = RolesNames.TEACHER.GetDisplayName() },
-                    new Role() { Id = 3, Name = RolesNames.ADMIN.GetDisplayName() },
-                    new Role() { Id = 4, Name = RolesNames.STUDENT.GetDisplayName() },
-                    new Role() { Id = 5, Name = RolesNames.TUTOR.GetDisplayName() },
-                    new Role() { Id = 6, Name = RolesNames.EDUCATOR.GetDisplayName() }
-                );
-            });
-                
-
             modelBuilder.Entity<User>(eb =>
-            {   
+            {
                 eb.HasOne(u => u.Teacher)
                 .WithOne(t => t.User)
                 .HasForeignKey<Teacher>(t => t.UserId);

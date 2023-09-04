@@ -19,7 +19,7 @@ namespace LessonLogAPI.Services
             admin.CreatedAt = DateTime.Now;
 
             _dbContext.Admins.AddAsync(admin);
-            _dbContext.SaveChanges();
+            _dbContext.SaveChangesAsync();
 
             return admin;
         }
@@ -35,14 +35,21 @@ namespace LessonLogAPI.Services
 
         public Admin DeleteAdmin(int id)
         {
-            var admin = _dbContext.Admins.FirstOrDefault(a => a.Id == id);
+            var admin = GetAdmin(id);
 
             if (admin != null)
             {
                 _dbContext.Admins.Remove(admin);
             }
 
-            _dbContext.SaveChanges();
+            _dbContext.SaveChangesAsync();
+
+            return admin;
+        }
+
+        public Admin GetAdmin(int id)
+        {
+            var admin = _dbContext.Admins.FirstOrDefault(a => a.Id == id);
 
             return admin;
         }

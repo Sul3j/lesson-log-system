@@ -259,54 +259,6 @@ namespace LessonLogAPI.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LessonLogAPI.Models.Entities.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "USER"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "TEACHER"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "STUDENT"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "TUTOR"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "EDUCATOR"
-                        });
-                });
-
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -475,16 +427,13 @@ namespace LessonLogAPI.Migrations
                     b.Property<string>("ResetPasswordToken")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RoleId")
-                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -675,17 +624,6 @@ namespace LessonLogAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("LessonLogAPI.Models.Entities.User", b =>
-                {
-                    b.HasOne("LessonLogAPI.Models.Entities.Role", "Role")
-                        .WithOne("User")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.User", "RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("SubjectTeacher", b =>
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", null)
@@ -723,11 +661,6 @@ namespace LessonLogAPI.Migrations
             modelBuilder.Entity("LessonLogAPI.Models.Entities.LessonHour", b =>
                 {
                     b.Navigation("TimetableLesson");
-                });
-
-            modelBuilder.Entity("LessonLogAPI.Models.Entities.Role", b =>
-                {
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Student", b =>

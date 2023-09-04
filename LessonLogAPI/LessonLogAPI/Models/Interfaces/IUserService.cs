@@ -36,6 +36,6 @@ namespace LessonLogAPI.Models.Interfaces
 
         User GetUserById(int id);
 
-        Task<bool> ChangeRole(int id, int roleId);
+        Task<bool> ChangeRole(int id, string role);
     }
 }

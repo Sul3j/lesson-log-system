@@ -2,6 +2,7 @@
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Extensions;
 
 namespace LessonLogAPI.Controllers
 {
@@ -31,7 +32,7 @@ namespace LessonLogAPI.Controllers
                 }
             }
 
-            _userService.ChangeRole(admin.UserId, ((int)RolesNames.ADMIN) + 1);
+            _userService.ChangeRole(admin.UserId, Roles.ADMIN.GetDisplayName());
 
             _adminService.AddAdmin(admin);
 
@@ -54,14 +55,16 @@ namespace LessonLogAPI.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteAdmin([FromRoute] int id)
         {
-            var admin = _adminService.DeleteAdmin(id);
+            var admin = _adminService.GetAdmin(id);
 
             if (admin == null)
             {
                 return BadRequest(new { Message = "This Admin is not exist" });
             } 
 
-            _userService.ChangeRole(admin.UserId, ((int)RolesNames.USER) + 1);
+            _userService.ChangeRole(admin.UserId, Roles.USER.GetDisplayName());
+
+            _adminService.DeleteAdmin(id);
 
             return Ok(new { Message = "Admin has been deleted" });
         }

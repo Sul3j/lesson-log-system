@@ -2,7 +2,7 @@
 
 namespace LessonLogAPI.Models
 {
-    public enum RolesNames
+    public enum Roles
     {
         [Description("USER")]
         USER,

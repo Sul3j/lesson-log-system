@@ -7,5 +7,7 @@ namespace LessonLogAPI.Models.Interfaces
         Task<Teacher> AddTeacher(Teacher teacher);
 
         List<Teacher> GetTeachers();
+
+        Teacher DeleteTeacher(int id);
     }
 }

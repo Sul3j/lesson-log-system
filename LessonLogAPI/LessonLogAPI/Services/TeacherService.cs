@@ -30,5 +30,19 @@ namespace LessonLogAPI.Services
 
             return teachers;
         }
+
+        public Teacher DeleteTeacher(int id)
+        {
+            var teacher = _dbContext.Teachers.FirstOrDefault(t => t.Id == id);
+
+            if (teacher != null)
+            {
+                _dbContext.Teachers.Remove(teacher);
+            }
+
+            _dbContext.SaveChangesAsync();
+
+            return teacher;
+        }
     }
 }

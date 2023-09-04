@@ -145,14 +145,14 @@ namespace LessonLogAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateRole([FromBody] int role, [FromRoute] int id)
+        public ActionResult UpdateRole([FromBody] string role, [FromRoute] int id)
         {
             var user = _userService.GetUserById(id);
 
             if (user is null)
                 return NotFound();
 
-            user.RoleId = role;
+            user.Role = role;
 
             _userService.SaveChanges();
 
