@@ -93,7 +93,6 @@ namespace LessonLogAPI.Services
         public List<User> GetUsers()
         {
             var users = _dbContext.Users
-            .Include(u => u.Role)
             .ToList();
 
             return users;
@@ -202,7 +201,7 @@ namespace LessonLogAPI.Services
             _dbContext.Entry(user).State = EntityState.Modified;
         }
         
-        public void SaveChanges()
+        public void SaveChangesAsync()
         {
             _dbContext.SaveChanges();
         }
@@ -216,11 +215,11 @@ namespace LessonLogAPI.Services
             return user;
         }
 
-        public async Task<bool> ChangeRole(int id, string role)
+        public bool ChangeRole(int id, string role)
         {
             var user = _dbContext.Users.FirstOrDefault(u => u.Id == id);
             user.Role = role;
-            await _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
 
             return true;
         }

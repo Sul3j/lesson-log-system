@@ -32,10 +32,10 @@ namespace LessonLogAPI.Models.Interfaces
 
         void ResetPassword(User user, ResetPasswordDto resetPasswordDto);
 
-        void SaveChanges();
+        void SaveChangesAsync();
 
         User GetUserById(int id);
 
-        Task<bool> ChangeRole(int id, string role);
+        bool ChangeRole(int id, string role);
     }
 }

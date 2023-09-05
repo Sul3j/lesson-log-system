@@ -4,10 +4,12 @@ namespace LessonLogAPI.Models.Interfaces
 {
     public interface ITeacherService
     {
-        Task<Teacher> AddTeacher(Teacher teacher);
+        Teacher AddTeacher(Teacher teacher);
 
         List<Teacher> GetTeachers();
 
         Teacher DeleteTeacher(int id);
+
+        Teacher GetTeacher(int id);
     }
 }

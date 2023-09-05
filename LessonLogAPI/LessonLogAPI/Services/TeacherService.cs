@@ -14,10 +14,10 @@ namespace LessonLogAPI.Services
             _dbContext = dbContext;
         }
 
-        public async Task<Teacher> AddTeacher(Teacher teacher)
+        public Teacher AddTeacher(Teacher teacher)
         { 
-            await _dbContext.Teachers.AddAsync(teacher);
-            await _dbContext.SaveChangesAsync();
+            _dbContext.Teachers.Add(teacher);
+            _dbContext.SaveChanges();
 
             return teacher;
         }
@@ -40,7 +40,14 @@ namespace LessonLogAPI.Services
                 _dbContext.Teachers.Remove(teacher);
             }
 
-            _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
+
+            return teacher;
+        }
+
+        public Teacher GetTeacher(int id)
+        {
+            var teacher = _dbContext.Teachers.FirstOrDefault(a => a.Id == id);
 
             return teacher;
         }

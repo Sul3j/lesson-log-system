@@ -18,8 +18,8 @@ namespace LessonLogAPI.Services
         {
             admin.CreatedAt = DateTime.Now;
 
-            _dbContext.Admins.AddAsync(admin);
-            _dbContext.SaveChangesAsync();
+            _dbContext.Admins.Add(admin);
+            _dbContext.SaveChanges();
 
             return admin;
         }
@@ -42,7 +42,7 @@ namespace LessonLogAPI.Services
                 _dbContext.Admins.Remove(admin);
             }
 
-            _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
 
             return admin;
         }

@@ -56,7 +56,7 @@ namespace LessonLogAPI.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteTeacher([FromRoute] int id)
         {
-            var teacher = _teacherService.DeleteTeacher(id);
+            var teacher = _teacherService.GetTeacher(id);
 
             if (teacher == null)
             {
@@ -64,6 +64,8 @@ namespace LessonLogAPI.Controllers
             }
 
             _userService.ChangeRole(teacher.UserId, Roles.USER.GetDisplayName());
+
+            _teacherService.DeleteTeacher(id);
 
             return Ok(new { Message = "Teacher has been deleted" });
         }

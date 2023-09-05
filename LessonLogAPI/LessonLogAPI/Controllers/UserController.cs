@@ -86,7 +86,7 @@ namespace LessonLogAPI.Controllers
             var newAccessToken = _userService.CreateJwt(user);
             var newRefreshToken = _userService.CreateRefreshToken();
             user.RefreshToken = newRefreshToken;
-            _userService.SaveChanges();
+            _userService.SaveChangesAsync();
             return Ok(new TokenDto()
             {
                 AccessToken = newAccessToken,
@@ -135,7 +135,7 @@ namespace LessonLogAPI.Controllers
                 });
             }
             _userService.ResetPassword(user, resetPasswordDto);
-            _userService.SaveChanges();
+            _userService.SaveChangesAsync();
 
             return Ok(new
             {
@@ -154,7 +154,7 @@ namespace LessonLogAPI.Controllers
 
             user.Role = role;
 
-            _userService.SaveChanges();
+            _userService.SaveChangesAsync();
 
             return Ok();
         }
