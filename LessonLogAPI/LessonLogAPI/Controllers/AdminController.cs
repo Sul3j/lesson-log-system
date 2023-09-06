@@ -20,7 +20,7 @@ namespace LessonLogAPI.Controllers
         }
 
         [HttpPost("add")]
-        public ActionResult CreateAdmin([FromBody] Admin admin)
+        public ActionResult AddAdmin([FromBody] Admin admin)
         {
             var admins = _adminService.GetAdmins();
 
