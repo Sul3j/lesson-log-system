@@ -22,7 +22,7 @@ namespace LessonLogAPI.Services
             return student;
         }
 
-        public List<Student> GetStudents() 
+        public List<Student> GetStudents()
         {
             var students = _dbContext.Students
                 .Include(s => s.User)
