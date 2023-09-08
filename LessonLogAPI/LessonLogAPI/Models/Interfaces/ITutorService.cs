@@ -7,5 +7,9 @@ namespace LessonLogAPI.Models.Interfaces
         List<Tutor> GetTutors();
 
         Tutor AddTutor(Tutor tutor);
+
+        Tutor DeleteTutor(int id);
+
+        Tutor GetTutor(int id);
     }
 }

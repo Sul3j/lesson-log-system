@@ -46,10 +46,27 @@ namespace LessonLogAPI.Controllers
 
             if (tutors.Count() == 0)
             {
-                return Ok(new { Message = "No tutors to display " });
+                return Ok(new { Message = "No tutors to display" });
             }
 
             return Ok(tutors);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteTutor([FromRoute] int id) 
+        {
+            Tutor tutor = _tutorService.GetTutor(id);
+
+            if (tutor == null)
+            {
+                return BadRequest(new { Message = "This Tutor is not exist" });
+            }
+
+            _userService.ChangeRole((int)tutor.UserId, Roles.USER.GetDisplayName());
+
+            _tutorService.DeleteTutor(id);
+
+            return Ok(new { Message = "Tutor has been deleted" });
         }
     }
 }

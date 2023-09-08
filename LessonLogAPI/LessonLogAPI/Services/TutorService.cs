@@ -30,5 +30,26 @@ namespace LessonLogAPI.Services
 
             return tutor;
         }
+
+        public Tutor DeleteTutor(int id)
+        {
+            var tutor = GetTutor(id);
+
+            if (tutor != null)
+            {
+                _dbContext.Tutors.Remove(tutor);
+            }
+
+            _dbContext.SaveChanges();
+
+            return tutor;
+        }
+
+        public Tutor GetTutor(int id)
+        {
+            var tutor = _dbContext.Tutors.FirstOrDefault(t => t.Id == id);
+
+            return tutor;
+        }
     }
 }
