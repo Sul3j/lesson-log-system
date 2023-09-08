@@ -38,5 +38,18 @@ namespace LessonLogAPI.Controllers
 
             return Ok(new { Message = "Tutor has been created" });
         }
+
+        [HttpGet]
+        public ActionResult GetAllTutors()
+        {
+            var tutors = _tutorService.GetTutors();
+
+            if (tutors.Count() == 0)
+            {
+                return Ok(new { Message = "No tutors to display " });
+            }
+
+            return Ok(tutors);
+        }
     }
 }
