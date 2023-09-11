@@ -3,6 +3,8 @@ using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using LessonLogAPI.Models.Interfaces;
+using LessonLogAPI.Models;
+using Microsoft.OpenApi.Extensions;
 
 namespace LessonLogAPI.Controllers
 {
@@ -157,6 +159,28 @@ namespace LessonLogAPI.Controllers
             _userService.SaveChangesAsync();
 
             return Ok();
+        }
+
+        [HttpGet("role/{role}")]
+        public ActionResult GetUserByRole([FromRoute] string role)
+        {
+            switch (role)
+            {
+                case "USER":
+                    return Ok(_userService.GetUsersByRole(Roles.USER));
+                case "TEACHER":
+                    return Ok(_userService.GetUsersByRole(Roles.TEACHER));
+                case "ADMIN":
+                    return Ok(_userService.GetUsersByRole(Roles.ADMIN));
+                case "STUDENT":
+                    return Ok(_userService.GetUsersByRole(Roles.STUDENT));
+                case "TUTOR":
+                    return Ok(_userService.GetUsersByRole(Roles.TUTOR));
+                case "EDUCATOR":
+                    return Ok(_userService.GetUsersByRole(Roles.EDUCATOR));
+                default:
+                    return BadRequest();
+            }
         }
     }
 }

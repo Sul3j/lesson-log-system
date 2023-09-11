@@ -13,6 +13,7 @@ using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Helpers;
 using LessonLogAPI.Models;
 using Org.BouncyCastle.Crypto.Tls;
+using Microsoft.OpenApi.Extensions;
 
 namespace LessonLogAPI.Services
 {
@@ -222,6 +223,13 @@ namespace LessonLogAPI.Services
             _dbContext.SaveChanges();
 
             return true;
+        }
+
+        public IQueryable<User> GetUsersByRole(Roles role)
+        {
+            var users = _dbContext.Users.Where(a => a.Role == role.GetDisplayName());
+
+            return users;
         }
     }
 }
