@@ -1,0 +1,50 @@
+<section class="admins container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">+ add admin</button>
+
+  <table class="table table-striped mt-3" style="border: 1px solid #ccc;">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let admin of admins, let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ admin.user.firstName }}</td>
+      <td>{{ admin.user.lastName }}</td>
+      <td class="d-flex justify-content-end">
+        <button type="button" class="btn btn-danger" (click)="deleteAdmin(admin.id)"><i class="fa-solid fa-x"></i></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal Add -->
+  <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add admin</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <select class="form-control" (change)="changeUser($event)">
+            <option selected>--- select user ---</option>
+            <option *ngFor="let user of users" [value]="user.id"> {{ user.firstName}} {{ user.lastName }} </option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="addAdmin()">add admin</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+

@@ -1,5 +1,6 @@
 ﻿using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
+using System.Linq;
 using System.Security.Claims;
 
 namespace LessonLogAPI.Models.Interfaces
