@@ -7,9 +7,10 @@
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link text-white" href="#">Option1</a>
-      <a class="nav-item nav-link text-white" href="#">Option2</a>
-      <a class="nav-item nav-link text-white" href="#">Option3</a>
+      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.ADMIN);>Admins</a>
+      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.TEACHER);>Teachers</a>
+      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.USER);>Users</a>
+      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.STUDENT);>Students</a>
       <a class="nav-link text-white btn btn-danger logout" (click)="logout()">Logout</a>
     </div>
   </div>
@@ -19,8 +20,10 @@
 
 </div>
 
-<!--&lt;!&ndash;<p>{{ users | json }}</p>&ndash;&gt;-->
-<!--<button class="btn btn-danger" (click)="logout()">logout</button>-->
+<section class="dashboard">
+  <app-admins *ngIf="currentPage == RoutesNames.ADMIN"></app-admins>
+  <app-users *ngIf="currentPage == RoutesNames.USER"></app-users>
+</section>
 
 
 

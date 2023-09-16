@@ -3,6 +3,7 @@ import {AuthService} from "../../services/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {ApiService} from "../../services/api.service";
 import {UserDataService} from "../../services/user-data.service";
+import {RoutesNames} from "../../models/routes-names.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,8 @@ import {UserDataService} from "../../services/user-data.service";
 export class DashboardComponent implements OnInit {
   public users: any = [];
   public fullName: string = "";
+  public currentPage: RoutesNames = RoutesNames.ADMIN;
+  public RoutesNames = RoutesNames;
 
   constructor(private auth: AuthService, private toastr: ToastrService, private api: ApiService, private userData: UserDataService) {}
 
@@ -35,5 +38,9 @@ export class DashboardComponent implements OnInit {
   toggleMenu() {
     const menu = document.querySelector(".menu");
     menu?.classList.toggle("menu-active");
+  }
+
+  changeCurrentPage(current: RoutesNames) {
+    this.currentPage = current;
   }
 }
