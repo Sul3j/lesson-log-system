@@ -62,7 +62,7 @@ namespace LessonLogAPI.Controllers
             return Ok(new { Message = "Admin has been deleted" });
         }
 
-        [HttpGet]
+        [HttpPost("pagination")]
         public async Task<ActionResult> GetAdmins([FromBody] SieveModel query)
         {
             var admins = _adminService.GetAdmins();

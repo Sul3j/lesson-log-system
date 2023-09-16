@@ -15,11 +15,13 @@ namespace LessonLogAPI.Sieve
         {
             mapper.Property<Admin>(a => a.User.FirstName)
                 .CanSort()
-                .CanFilter();
+                .CanFilter()
+                .HasName("userFirstName");
 
             mapper.Property<Admin>(a => a.User.LastName)
                 .CanSort()
-                .CanFilter();
+                .CanFilter()
+                .HasName("userLastName");
 
             mapper.Property<Admin>(a => a.CreatedAt)
                 .CanFilter()

@@ -4,6 +4,7 @@ import {ToastrService} from "ngx-toastr";
 import {ApiService} from "../../services/api.service";
 import {UserDataService} from "../../services/user-data.service";
 import {AdminsService} from "../../services/admins.service";
+import {AdminPagination} from "../../models/admin-pagination.model";
 
 @Component({
   selector: 'app-admins',
@@ -14,6 +15,8 @@ export class AdminsComponent {
   public admins: any = [];
   public users: any = [];
   public selectedUser!: number;
+  public defaultPaginationModel: AdminPagination = new AdminPagination();
+  public search: string = "";
 
   constructor(private adminsService: AdminsService, private toastr: ToastrService) {}
 
@@ -29,21 +32,19 @@ export class AdminsComponent {
   }
 
   private getAllAdmins() {
-    this.adminsService.getAdmins().subscribe(res => {
-      this.admins = res;
+    this.adminsService.getAdmins(this.defaultPaginationModel).subscribe(res => {
+      this.admins = res.items;
     });
+  }
+
+  searchAdmin(e: any) {
+    this.defaultPaginationModel.filters = `(userFirstName|userLastName)@=*${e.target.value}`;
+    this.getAllAdmins();
   }
 
   private getAllUsers() {
     this.adminsService.getUsers().subscribe(res => {
       this.users = res;
-    });
-  }
-
-  getAdmins() {
-    this.adminsService.getAdmins()
-      .subscribe(res => {
-        this.admins = res;
     });
   }
 
