@@ -1,8 +1,12 @@
 ﻿using LessonLogAPI.Models;
+using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace LessonLogAPI.Controllers
 {
@@ -12,11 +16,13 @@ namespace LessonLogAPI.Controllers
     {
         private readonly IAdminService _adminService;
         private readonly IUserService _userService;
+        private readonly ISieveProcessor _sieveProcessor;
 
-        public AdminController(IAdminService adminService, IUserService userService)
+        public AdminController(IAdminService adminService, IUserService userService, ISieveProcessor sieveProcessor)
         {
             _adminService = adminService;
             _userService = userService;
+            _sieveProcessor = sieveProcessor;
         }
 
         [HttpPost("add")]
@@ -39,19 +45,6 @@ namespace LessonLogAPI.Controllers
             return Ok(new { Message = "Admin has been created" });
         }
 
-        [HttpGet]
-        public ActionResult GetAllAdmins()
-        {
-            var admins = _adminService.GetAdmins();
-
-            if (admins.Count() == 0)
-            {
-                return Ok(new { Message = "No admins to display" });
-            }
-
-            return Ok(admins);
-        }
-
         [HttpDelete("{id}")]
         public ActionResult DeleteAdmin([FromRoute] int id)
         {
@@ -67,6 +60,36 @@ namespace LessonLogAPI.Controllers
             _adminService.DeleteAdmin(id);
 
             return Ok(new { Message = "Admin has been deleted" });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAdmins([FromBody] SieveModel query)
+        {
+            var admins = _adminService.GetAdmins();
+
+            if (admins.Count() == 0)
+            {
+                return Ok(new { Message = "No admins to display" });
+            }
+
+            var dtos = await _sieveProcessor
+                .Apply(query, admins)
+                .Select(a => new AdminDto()
+                {
+                    Id = a.Id,
+                    FirstName = a.User.FirstName,
+                    LastName = a.User.LastName,
+                    CreatedAt = a.CreatedAt
+                })
+                .ToListAsync();
+
+            var totalCount = await _sieveProcessor
+                .Apply(query, admins, applyPagination: false, applySorting: false)
+                .CountAsync();
+
+            var result = new PagedResult<AdminDto>(dtos, totalCount, query.Page.Value, query.PageSize.Value);
+
+            return Ok(result);
         }
     }
 }

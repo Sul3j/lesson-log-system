@@ -1,11 +1,13 @@
 using LessonLogAPI.Context;
 using LessonLogAPI.Models.Interfaces;
 using LessonLogAPI.Services;
+using LessonLogAPI.Sieve;
 using LessonLogAPI.UtilityService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Sieve.Services;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -37,6 +39,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection"));
 });
 
+builder.Services.AddScoped<ISieveProcessor, ApplicationSieveProcessor>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();

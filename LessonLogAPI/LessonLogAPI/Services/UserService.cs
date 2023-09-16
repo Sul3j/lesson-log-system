@@ -12,7 +12,6 @@ using LessonLogAPI.UtilityService;
 using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Helpers;
 using LessonLogAPI.Models;
-using Org.BouncyCastle.Crypto.Tls;
 using Microsoft.OpenApi.Extensions;
 
 namespace LessonLogAPI.Services

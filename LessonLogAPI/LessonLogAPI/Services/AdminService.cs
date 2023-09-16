@@ -24,11 +24,11 @@ namespace LessonLogAPI.Services
             return admin;
         }
 
-        public List<Admin> GetAdmins()
+        public IQueryable<Admin> GetAdmins()
         {
             var admins = _dbContext.Admins
                 .Include(a => a.User)
-                .ToList();
+                .AsQueryable();
 
             return admins;
         }

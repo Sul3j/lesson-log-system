@@ -6,7 +6,7 @@ namespace LessonLogAPI.Models.Interfaces
     {
         Admin AddAdmin(Admin admin);
 
-        List<Admin> GetAdmins();
+        IQueryable<Admin> GetAdmins();
 
         Admin DeleteAdmin(int id);
 
