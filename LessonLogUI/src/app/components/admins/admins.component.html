@@ -1,12 +1,12 @@
 <section class="admins container mt-3">
   <div class="d-flex">
-    <form class="d-flex" role="search">
-      <div class="input-group">
-        <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input type="text" placeholder="Search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" (keyup)="searchAdmin($event)">
-      </div>
-    </form>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" style="margin-left: 10px;"><i class="fa-solid fa-plus"></i> Add admin</button>
+    <div class="input-group">
+      <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-magnifying-glass"></i></span>
+      <input type="text" placeholder="Search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" (keyup)="searchAdmin($event)">
+    </div>
+    <div class="input-group">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" style="margin-left: 10px;"><i class="fa-solid fa-plus"></i> Add admin</button>
+    </div>
   </div>
 
   <table class="table table-striped mt-3" style="border: 1px solid #ccc;">
@@ -31,21 +31,31 @@
     </tr>
     </tbody>
   </table>
-  <nav aria-label="...">
-    <ul class="pagination">
-      <li class="page-item disabled">
-        <a class="page-link">Previous</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active" aria-current="page">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
-  </nav>
+  <div class="d-flex">
+    <div aria-label="..." style="height: 38px;">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </div>
+    <div class="input-group">
+      <select class="form-control" (change)="itemsPerPage($event)">
+        <option selected value="5">5</option>
+        <option value="3">10</option>
+        <option value="2">25</option>
+      </select>
+      <span class="input-group-text" id="inputGroup"><i class="fa-solid fa-angle-down"></i></span>
+    </div>
+  </div>
 
   <!-- Modal Add -->
   <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

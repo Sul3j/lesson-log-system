@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {AuthService} from "../../services/auth.service";
 import {ToastrService} from "ngx-toastr";
-import {ApiService} from "../../services/api.service";
-import {UserDataService} from "../../services/user-data.service";
 import {AdminsService} from "../../services/admins.service";
 import {AdminPagination} from "../../models/admin-pagination.model";
 
@@ -17,6 +14,7 @@ export class AdminsComponent {
   public selectedUser!: number;
   public defaultPaginationModel: AdminPagination = new AdminPagination();
   public search: string = "";
+  public items: number = 5;
 
   constructor(private adminsService: AdminsService, private toastr: ToastrService) {}
 
@@ -50,6 +48,12 @@ export class AdminsComponent {
 
   changeUser(e: any) {
     this.selectedUser = e.target.value;
+  }
+
+  itemsPerPage(e: any) {
+    this.items = parseInt(e.target.value);
+    this.defaultPaginationModel.pageSize = this.items;
+    this.getAllAdmins();
   }
 
   addAdmin() {

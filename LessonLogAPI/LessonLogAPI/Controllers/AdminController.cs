@@ -63,14 +63,9 @@ namespace LessonLogAPI.Controllers
         }
 
         [HttpPost("pagination")]
-        public async Task<ActionResult> GetAdmins([FromBody] SieveModel query)
+        public async Task<PagedResult<AdminDto>> GetAdmins([FromBody] SieveModel query)
         {
             var admins = _adminService.GetAdmins();
-
-            if (admins.Count() == 0)
-            {
-                return Ok(new { Message = "No admins to display" });
-            }
 
             var dtos = await _sieveProcessor
                 .Apply(query, admins)
@@ -89,7 +84,7 @@ namespace LessonLogAPI.Controllers
 
             var result = new PagedResult<AdminDto>(dtos, totalCount, query.Page.Value, query.PageSize.Value);
 
-            return Ok(result);
+            return result;
         }
     }
 }
