@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {ToastrService} from "ngx-toastr";
 import {AdminsService} from "../../services/admins.service";
 import {AdminPagination} from "../../models/admin-pagination.model";
+import {AdminResponse} from "../../models/admin-response.model";
 
 @Component({
   selector: 'app-admins',
@@ -15,6 +16,7 @@ export class AdminsComponent {
   public defaultPaginationModel: AdminPagination = new AdminPagination();
   public search: string = "";
   public items: number = 5;
+  public response: AdminResponse = new AdminResponse();
 
   constructor(private adminsService: AdminsService, private toastr: ToastrService) {}
 
@@ -31,8 +33,16 @@ export class AdminsComponent {
 
   private getAllAdmins() {
     this.adminsService.getAdmins(this.defaultPaginationModel).subscribe(res => {
-      this.admins = res.items;
-    });
+        this.admins = res.items;
+        this.response = {
+          items: res.items,
+          totalPages: res.totalPages,
+          itemsFrom: res.itemsFrom,
+          itemsTo: res.itemsTo,
+          totalItemsCount: res.totalItemsCount
+        };
+      }
+    );
   }
 
   searchAdmin(e: any) {
@@ -74,6 +84,36 @@ export class AdminsComponent {
         this.toastr.error("Something went wrong!", "Error");
       }
     })
+  }
+
+  changePage(e: any) {
+    const pageNumber = parseInt(e.target.value);
+    this.defaultPaginationModel.page = pageNumber;
+    this.getAllAdmins();
+  }
+
+  nextPage(): void {
+    const totalPages = this.response.totalPages;
+    let pageNumber = this.defaultPaginationModel.page;
+    if(totalPages > pageNumber) {
+      pageNumber++;
+    }
+    this.defaultPaginationModel.page = pageNumber;
+    this.getAllAdmins();
+  }
+
+  previousPage(): void {
+    let pageNumber = this.defaultPaginationModel.page;
+    if(pageNumber > 0) {
+      pageNumber--;
+    }
+    this.defaultPaginationModel.page = pageNumber;
+    this.getAllAdmins();
+  }
+
+  createRange(number: number){
+    return new Array(number).fill(0)
+      .map((n, index) => index + 1);
   }
 }
 
