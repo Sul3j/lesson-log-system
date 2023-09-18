@@ -38,6 +38,13 @@ namespace LessonLogAPI.Controllers
                 }
             }
 
+            var isUserExist = _userService.isUserCheck(teacher.UserId);
+
+            if (isUserExist != null)
+            {
+                return BadRequest(isUserExist);
+            }
+
             _userService.ChangeRole(teacher.UserId, Roles.TEACHER.GetDisplayName());
 
             _teacherService.AddTeacher(teacher);

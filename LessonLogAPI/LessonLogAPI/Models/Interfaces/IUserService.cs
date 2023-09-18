@@ -40,5 +40,7 @@ namespace LessonLogAPI.Models.Interfaces
         bool ChangeRole(int id, string role);
 
         IQueryable<User> GetUsersByRole(Roles role);
+
+        object isUserCheck(int id);
     }
 }

@@ -230,5 +230,34 @@ namespace LessonLogAPI.Services
 
             return users;
         }
+
+        public object isUserCheck(int id)
+        {
+            var user = GetUserById(id);
+
+            if (user == null) {
+                return new { Message = "This user does not exist" }; 
+            }
+
+            if (user.Role != Roles.USER.GetDisplayName())
+            {
+                switch (user.Role)
+                {
+                    case "ADMIN":
+                        return new { Message = "This user has been admin" };
+                    case "TEACHER":
+                        return new { Message = "This user has been teacher" };
+                    case "STUDENT":
+                        return new { Message = "This user has been student" };
+                    case "EDUCATOR":
+                        return new { Message = "This user has been educator" };
+                    case "TUTOR":
+                        return new { Message = "This user has been tutor" };
+                    default: break;
+                }
+            }
+
+            return null;
+        }
     }
 }
