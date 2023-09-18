@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {Subject, tap} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 import {UrlService} from "./url.service";
 import {Pagination} from "../models/pagination.model";
 
 @Injectable({
   providedIn: 'root'
 })
-
-
-
-export class AdminsService {
+export class TeachersService {
 
   private _refreshNeeded = new Subject<void>();
 
@@ -20,13 +17,13 @@ export class AdminsService {
     return this._refreshNeeded;
   }
 
-  getAdmins(body: Pagination) {
-    return this.http.post<any>(`${this.urlService.url}/Admin/pagination`, body);
+  getTeachers(body: Pagination) {
+    return this.http.post<any>(`${this.urlService.url}/Teacher/pagination`, body);
   }
 
-  addAdmin(userId: number) {
+  addTeacher(userId: number) {
     return this.http
-      .post(`${this.urlService.url}/Admin/add`, { "userId": userId })
+      .post(`${this.urlService.url}/TEACHER/add`, { "userId": userId })
       .pipe(
         tap(() => {
           this._refreshNeeded.next();
@@ -34,9 +31,9 @@ export class AdminsService {
       );
   }
 
-  deleteAdmin(adminId: number) {
+  deleteTeacher(teacherId: number) {
     return this.http
-      .delete(`${this.urlService.url}/Admin/${adminId}`)
+      .delete(`${this.urlService.url}/TEACHER/${teacherId}`)
       .pipe(
         tap(() => {
           this._refreshNeeded.next();

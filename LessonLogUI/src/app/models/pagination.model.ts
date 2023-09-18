@@ -1,4 +1,4 @@
-export class AdminPagination {
+export class Pagination {
   filters: string = "";
   sorts: string = "";
   page: number = 1;

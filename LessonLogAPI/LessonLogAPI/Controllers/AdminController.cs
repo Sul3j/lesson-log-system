@@ -38,6 +38,13 @@ namespace LessonLogAPI.Controllers
                 }
             }
 
+            var isUserExist = _userService.isUserCheck(admin.UserId);
+
+            if (isUserExist != null)
+            {
+                return BadRequest(isUserExist);
+            }
+
             _userService.ChangeRole(admin.UserId, Roles.ADMIN.GetDisplayName());
 
             _adminService.AddAdmin(admin);

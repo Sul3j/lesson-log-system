@@ -1,8 +1,12 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
 import {AdminsService} from "../../services/admins.service";
-import {AdminPagination} from "../../models/admin-pagination.model";
-import {AdminResponse} from "../../models/admin-response.model";
+import {Pagination} from "../../models/pagination.model";
+import {ResponseModel} from "../../models/response.model";
+import {Admin} from "../../models/admin.model";
+import {UsersService} from "../../services/users.service";
+import {HelperService} from "../../services/helper.service";
+import {User} from "../../models/user.model";
 
 @Component({
   selector: 'app-admins',
@@ -10,15 +14,18 @@ import {AdminResponse} from "../../models/admin-response.model";
   styleUrls: ['./admins.component.scss']
 })
 export class AdminsComponent {
-  public admins: any = [];
-  public users: any = [];
+  public admins: Array<Admin> = new Array<Admin>();
+  public users: Array<User> = new Array<User>();
   public selectedUser!: number;
-  public defaultPaginationModel: AdminPagination = new AdminPagination();
+  public paginationModel: Pagination = new Pagination();
   public search: string = "";
   public items: number = 5;
-  public response: AdminResponse = new AdminResponse();
+  public response: ResponseModel<Admin> = new ResponseModel<Admin>();
 
-  constructor(private adminsService: AdminsService, private toastr: ToastrService) {}
+  constructor(private adminsService: AdminsService,
+              private toastr: ToastrService,
+              private usersService: UsersService,
+              private helperService: HelperService) {}
 
   ngOnInit(): void {
     this.adminsService.refreshNeeded
@@ -32,26 +39,20 @@ export class AdminsComponent {
   }
 
   private getAllAdmins() {
-    this.adminsService.getAdmins(this.defaultPaginationModel).subscribe(res => {
+    this.adminsService.getAdmins(this.paginationModel).subscribe(res => {
         this.admins = res.items;
-        this.response = {
-          items: res.items,
-          totalPages: res.totalPages,
-          itemsFrom: res.itemsFrom,
-          itemsTo: res.itemsTo,
-          totalItemsCount: res.totalItemsCount
-        };
+        this.response = this.helperService.mapResponse<Admin>(res);
       }
     );
   }
 
   searchAdmin(e: any) {
-    this.defaultPaginationModel.filters = `(userFirstName|userLastName)@=*${e.target.value}`;
+    this.helperService.setPaginationFilter(e);
     this.getAllAdmins();
   }
 
   private getAllUsers() {
-    this.adminsService.getUsers().subscribe(res => {
+    this.usersService.getUsers().subscribe(res => {
       this.users = res;
     });
   }
@@ -61,8 +62,7 @@ export class AdminsComponent {
   }
 
   itemsPerPage(e: any) {
-    this.items = parseInt(e.target.value);
-    this.defaultPaginationModel.pageSize = this.items;
+    this.paginationModel.pageSize = parseInt(e.target.value);
     this.getAllAdmins();
   }
 
@@ -70,7 +70,7 @@ export class AdminsComponent {
     this.adminsService.addAdmin(this.selectedUser).subscribe({
       next: (res) => {
         this.toastr.success("Admin has been added!", "Success");
-      }, error: (err) => {
+      }, error: () => {
         this.toastr.error("Something went wrong!", "Error");
       }
     });
@@ -86,39 +86,23 @@ export class AdminsComponent {
     })
   }
 
-  clickSelect(select: any) {
-    select.OnClick;
-    console.log(select);
-  }
-
   changePage(e: any) {
-    const pageNumber = parseInt(e.target.value);
-    this.defaultPaginationModel.page = pageNumber;
+    this.paginationModel.page = parseInt(e.target.value);
     this.getAllAdmins();
   }
 
   nextPage(): void {
-    const totalPages = this.response.totalPages;
-    let pageNumber = this.defaultPaginationModel.page;
-    if(totalPages > pageNumber) {
-      pageNumber++;
-    }
-    this.defaultPaginationModel.page = pageNumber;
+    this.paginationModel.page = this.helperService.nextPage(this.response.totalPages, this.paginationModel.page);
     this.getAllAdmins();
   }
 
   previousPage(): void {
-    let pageNumber = this.defaultPaginationModel.page;
-    if(pageNumber > 0) {
-      pageNumber--;
-    }
-    this.defaultPaginationModel.page = pageNumber;
+    this.paginationModel.page = this.helperService.previousPage(this.paginationModel.page);
     this.getAllAdmins();
   }
 
   createRange(number: number){
-    return new Array(number).fill(0)
-      .map((n, index) => index + 1);
+    return this.helperService.createRange(number);
   }
 }
 

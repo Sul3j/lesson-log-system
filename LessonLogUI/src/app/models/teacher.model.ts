@@ -1,6 +1,5 @@
-export class Admin {
+export class Teacher {
   id!: number;
   firstName!: string;
   lastName!: string;
-  createdAt!: Date;
 }

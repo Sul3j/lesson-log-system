@@ -235,9 +235,8 @@ namespace LessonLogAPI.Services
         {
             var user = GetUserById(id);
 
-            if (user == null) {
+            if (user == null) 
                 return new { Message = "This user does not exist" }; 
-            }
 
             if (user.Role != Roles.USER.GetDisplayName())
             {

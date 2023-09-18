@@ -43,13 +43,13 @@
     <div aria-label="..." style="height: 38px;" class="input-group">
       <ul class="pagination">
         <li class="page-item">
-          <button class="page-link" (click)="previousPage()" [class.disabled]="defaultPaginationModel.page == 1">Previous</button>
+          <button class="page-link" (click)="previousPage()" [class.disabled]="paginationModel.page == 1">Previous</button>
         </li>
         <li class="page-item" *ngFor="let item of createRange(response.totalPages); let i = index">
-          <button class="page-link" [value]="i + 1" (click)="changePage($event)" [class.active]="(i + 1) == defaultPaginationModel.page">{{ i + 1 }}</button>
+          <button class="page-link" [value]="i + 1" (click)="changePage($event)" [class.active]="(i + 1) == paginationModel.page">{{ i + 1 }}</button>
         </li>
         <li class="page-item">
-          <button class="page-link" href="#" (click)="nextPage()" [class.disabled]="defaultPaginationModel.page == response.totalPages">Next</button>
+          <button class="page-link" href="#" (click)="nextPage()" [class.disabled]="paginationModel.page == response.totalPages">Next</button>
         </li>
       </ul>
     </div>

@@ -13,6 +13,7 @@ import {TokenInterceptor} from "./interceptors/token.interceptor";
 import { ResetComponent } from './components/reset/reset.component';
 import { AdminsComponent } from './components/admins/admins.component';
 import { UsersComponent } from './components/users/users.component';
+import { TeachersComponent } from './components/teachers/teachers.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UsersComponent } from './components/users/users.component';
     DashboardComponent,
     ResetComponent,
     AdminsComponent,
-    UsersComponent
+    UsersComponent,
+    TeachersComponent
   ],
   imports: [
     BrowserModule,
