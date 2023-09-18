@@ -22,11 +22,11 @@ namespace LessonLogAPI.Services
             return teacher;
         }
 
-        public List<Teacher> GetTeachers()
+        public IQueryable<Teacher> GetTeachers()
         {
             var teachers = _dbContext.Teachers
                 .Include(t => t.User)
-                .ToList();
+                .AsQueryable();
 
             return teachers;
         }

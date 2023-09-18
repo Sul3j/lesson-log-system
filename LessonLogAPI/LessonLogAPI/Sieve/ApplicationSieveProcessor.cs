@@ -27,6 +27,16 @@ namespace LessonLogAPI.Sieve
                 .CanFilter()
                 .CanSort();
 
+            mapper.Property<Teacher>(t => t.User.FirstName)
+                .CanSort()
+                .CanFilter()
+                .HasName("userFirstName");
+
+            mapper.Property<Teacher>(t => t.User.LastName)
+                .CanSort()
+                .CanFilter()
+                .HasName("userLastName");
+
             return mapper;
         }
     }

@@ -3,7 +3,10 @@ using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace LessonLogAPI.Controllers
 {
@@ -13,11 +16,13 @@ namespace LessonLogAPI.Controllers
     {
         private readonly ITeacherService _teacherService;
         private readonly IUserService _userService;
+        private readonly ISieveProcessor _sieveProcessor;
 
-        public TeacherController(ITeacherService teacherService, IUserService userService) 
+        public TeacherController(ITeacherService teacherService, IUserService userService, ISieveProcessor sieveProcessor) 
         {
             _teacherService = teacherService;
             _userService = userService;
+            _sieveProcessor = sieveProcessor;
         }
 
         [HttpPost("add")]
@@ -68,6 +73,30 @@ namespace LessonLogAPI.Controllers
             _teacherService.DeleteTeacher(id);
 
             return Ok(new { Message = "Teacher has been deleted" });
+        }
+
+        [HttpPost("pagination")]
+        public async Task<PagedResult<TeacherDto>> GetTeachers([FromBody] SieveModel query)
+        {
+            var teachers = _teacherService.GetTeachers();
+
+            var dtos = await _sieveProcessor
+                .Apply(query, teachers)
+                .Select(t => new TeacherDto()
+                {
+                    Id = t.Id,
+                    FirstName = t.User.FirstName,
+                    LastName = t.User.LastName
+                })
+                .ToListAsync();
+
+            var totalCount = await _sieveProcessor
+                .Apply(query, teachers, applyPagination: false, applySorting: false)
+                .CountAsync();
+
+            var result = new PagedResult<TeacherDto>(dtos, totalCount, query.Page.Value, query.PageSize.Value);
+
+            return result;
         }
     }
 }

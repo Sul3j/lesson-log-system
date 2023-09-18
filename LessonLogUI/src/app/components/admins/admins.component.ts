@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
 import {AdminsService} from "../../services/admins.service";
 import {AdminPagination} from "../../models/admin-pagination.model";
@@ -84,6 +84,11 @@ export class AdminsComponent {
         this.toastr.error("Something went wrong!", "Error");
       }
     })
+  }
+
+  clickSelect(select: any) {
+    select.OnClick;
+    console.log(select);
   }
 
   changePage(e: any) {

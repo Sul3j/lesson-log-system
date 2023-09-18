@@ -6,7 +6,7 @@ namespace LessonLogAPI.Models.Interfaces
     {
         Teacher AddTeacher(Teacher teacher);
 
-        List<Teacher> GetTeachers();
+        IQueryable<Teacher> GetTeachers();
 
         Teacher DeleteTeacher(int id);
 

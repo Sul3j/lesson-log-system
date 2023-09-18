@@ -1,4 +1,6 @@
 .admins {
   width: 100vw;
   height: 100vh;
+  overflow-x: scroll;
+  min-width: max-content;
 }

@@ -7,6 +7,14 @@
     <div class="input-group">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" style="margin-left: 10px;"><i class="fa-solid fa-plus"></i> Add admin</button>
     </div>
+    <div class="input-group">
+      <select class="form-control" (change)="itemsPerPage($event)" id="select">
+        <option selected value="5">5</option>
+        <option value="10">10</option>
+        <option value="25">25</option>
+      </select>
+      <label class="input-group-text" id="inputGroup" for="select"><i for="select" class="fa-solid fa-angle-down"></i></label>
+    </div>
   </div>
 
   <table class="table table-striped mt-3" style="border: 1px solid #ccc;">
@@ -32,7 +40,7 @@
     </tbody>
   </table>
   <div class="d-flex">
-    <div aria-label="..." style="height: 38px;">
+    <div aria-label="..." style="height: 38px;" class="input-group">
       <ul class="pagination">
         <li class="page-item">
           <button class="page-link" (click)="previousPage()" [class.disabled]="defaultPaginationModel.page == 1">Previous</button>
@@ -45,14 +53,7 @@
         </li>
       </ul>
     </div>
-    <div class="input-group">
-      <select class="form-control" (change)="itemsPerPage($event)">
-        <option selected value="5">5</option>
-        <option value="10">10</option>
-        <option value="25">25</option>
-      </select>
-      <span class="input-group-text" id="inputGroup"><i class="fa-solid fa-angle-down"></i></span>
-    </div>
+    <div></div>
   </div>
 
   <!-- Modal Add -->
