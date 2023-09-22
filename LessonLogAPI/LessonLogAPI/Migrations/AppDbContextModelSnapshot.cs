@@ -81,6 +81,9 @@ namespace LessonLogAPI.Migrations
                     b.Property<int?>("EducatorId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Year")
                         .HasColumnType("int");
 

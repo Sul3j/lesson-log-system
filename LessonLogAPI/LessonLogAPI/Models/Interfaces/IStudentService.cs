@@ -4,8 +4,10 @@ namespace LessonLogAPI.Models.Interfaces
 {
     public interface IStudentService
     {
-        List<Student> GetStudents();
+        IQueryable<Student> GetStudents();
 
         Student AddStudent(Student student);
+
+        Student GetStudent(int id);
     }
 }

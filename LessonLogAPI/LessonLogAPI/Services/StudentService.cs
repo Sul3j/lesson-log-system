@@ -22,13 +22,20 @@ namespace LessonLogAPI.Services
             return student;
         }
 
-        public List<Student> GetStudents()
+        public IQueryable<Student> GetStudents()
         {
             var students = _dbContext.Students
                 .Include(s => s.User)
-                .ToList();
+                .AsQueryable();
 
             return students;
+        }
+
+        public Student GetStudent(int id)
+        {
+            var student = _dbContext.Students.FirstOrDefault(s => s.Id == id);
+
+            return student;
         }
     }
 }
