@@ -1,8 +1,12 @@
 ﻿using LessonLogAPI.Models;
+using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace LessonLogAPI.Controllers
 {
@@ -12,11 +16,13 @@ namespace LessonLogAPI.Controllers
     {
         private readonly ITutorService _tutorService;
         private readonly IUserService _userService;
+        private readonly ISieveProcessor _sieveProcessor;
 
-        public TutorController(ITutorService tutorService, IUserService userService)
+        public TutorController(ITutorService tutorService, IUserService userService, ISieveProcessor sieveProcessor)
         {
             _tutorService = tutorService;
             _userService = userService;
+            _sieveProcessor = sieveProcessor;
         }
 
         [HttpPost("add")]
@@ -67,6 +73,32 @@ namespace LessonLogAPI.Controllers
             _tutorService.DeleteTutor(id);
 
             return Ok(new { Message = "Tutor has been deleted" });
+        }
+
+        [HttpPost("pagination")]
+        public async Task<Models.Dto.PagedResult<TutorDto>> GetTutors([FromBody] SieveModel query)
+        {
+            var tutors = _tutorService.GetTutors();
+
+            var dtos = await _sieveProcessor
+                .Apply(query, tutors)
+                .Select(t => new TutorDto()
+                {
+                    Id = t.Id,
+                    FirstName = t.User.FirstName,
+                    LastName = t.User.LastName,
+                    PhoneNumber = t.User.PhoneNumber,
+                    Email = t.User.Email
+                })
+                .ToListAsync();
+
+            var totalCount = await _sieveProcessor
+                .Apply(query, tutors, applyPagination: false, applySorting: false)
+                .CountAsync();
+
+            var result = new PagedResult<TutorDto>(dtos, totalCount, query.Page.Value, query.PageSize.Value);
+
+            return result;
         }
     }
 }

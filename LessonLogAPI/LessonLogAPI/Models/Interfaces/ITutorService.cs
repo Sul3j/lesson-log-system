@@ -4,7 +4,7 @@ namespace LessonLogAPI.Models.Interfaces
 {
     public interface ITutorService
     {
-        List<Tutor> GetTutors();
+        IQueryable<Tutor> GetTutors();
 
         Tutor AddTutor(Tutor tutor);
 

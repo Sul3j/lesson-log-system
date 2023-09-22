@@ -14,11 +14,11 @@ namespace LessonLogAPI.Services
             _dbContext = dbContext;
         }
 
-        public List<Tutor> GetTutors()
+        public IQueryable<Tutor> GetTutors()
         {
             var tutors = _dbContext.Tutors
                 .Include(t => t.User)
-                .ToList();
+                .AsQueryable();
 
             return tutors;
         }
