@@ -24,8 +24,8 @@ export class TeachersComponent implements OnInit {
   constructor(private teachersService: TeachersService,
               public helperService: HelperService,
               private usersService: UsersService,
-              private toastr: ToastrService) {
-  }
+              private toastr: ToastrService) {}
+
 
   ngOnInit(): void {
     this.teachersService.refreshNeeded
@@ -48,7 +48,6 @@ export class TeachersComponent implements OnInit {
   private getAllUsers() {
     this.usersService.getUsers().subscribe(res => {
       this.users = res;
-      console.log(this.users);
     });
   }
 

@@ -76,7 +76,7 @@ namespace LessonLogAPI.Controllers
         }
 
         [HttpPost("pagination")]
-        public async Task<Models.Dto.PagedResult<TutorDto>> GetTutors([FromBody] SieveModel query)
+        public async Task<PagedResult<TutorDto>> GetTutors([FromBody] SieveModel query)
         {
             var tutors = _tutorService.GetTutors();
 

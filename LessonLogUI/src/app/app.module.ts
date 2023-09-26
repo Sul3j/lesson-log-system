@@ -14,6 +14,7 @@ import { ResetComponent } from './components/reset/reset.component';
 import { AdminsComponent } from './components/admins/admins.component';
 import { UsersComponent } from './components/users/users.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
+import { StudentsComponent } from './components/students/students.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TeachersComponent } from './components/teachers/teachers.component';
     ResetComponent,
     AdminsComponent,
     UsersComponent,
-    TeachersComponent
+    TeachersComponent,
+    StudentsComponent
   ],
   imports: [
     BrowserModule,
