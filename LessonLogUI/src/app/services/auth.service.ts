@@ -13,6 +13,7 @@ export class AuthService {
 
   private readonly _url: string = "https://localhost:7212/api/User/";
   private _jwtPayload: any;
+  user: any;
 
   constructor(private http: HttpClient, private router: Router) {
     this._jwtPayload = this.decodeToken();
@@ -27,6 +28,7 @@ export class AuthService {
   }
 
   storeAccessToken(token: string) {
+    this.user = this.getUser(token);
     localStorage.setItem('token', token);
   }
 
@@ -69,5 +71,9 @@ export class AuthService {
 
   renewToken(token: TokenModel) {
     return this.http.post<any>(`${this._url}refresh`, token);
+  }
+
+  private getUser(token: string) {
+    return JSON.parse(atob(token.split('.')[1]));
   }
 }

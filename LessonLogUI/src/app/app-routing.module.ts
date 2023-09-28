@@ -5,13 +5,14 @@ import {SignupComponent} from "./components/signup/signup.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {AuthGuard} from "./guards/auth.guard";
 import {ResetComponent} from "./components/reset/reset.component";
-import {AdminsComponent} from "./components/admins/admins.component";
+import {HasRoleGuard} from "./guards/has-role.guard";
+;
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, HasRoleGuard], data: { role: 'TEACHER' }},
   { path: 'reset', component: ResetComponent}
 ];
 
