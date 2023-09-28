@@ -106,7 +106,8 @@ namespace LessonLogAPI.Services
             var identity = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Name, user.Email),
-                new Claim("fullname", $"{user.FirstName} {user.LastName}")
+                new Claim("fullname", $"{user.FirstName} {user.LastName}"),
+                new Claim(ClaimTypes.Role, user.Role)
             });
 
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);

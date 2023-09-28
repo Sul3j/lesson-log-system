@@ -4,6 +4,7 @@ using LessonLogAPI.Models;
 using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
@@ -60,6 +61,7 @@ namespace LessonLogAPI.Controllers
             return Ok(students);
         }
 
+        [Authorize(Roles = "TEACHER")]
         [HttpPost("pagination")]
         public async Task<PagedResult<StudentDto>> GetStudents([FromBody] SieveModel query)
         {
