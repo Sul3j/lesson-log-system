@@ -1,7 +1,10 @@
-﻿using LessonLogAPI.Models.Entities;
+﻿using LessonLogAPI.Models.Dto;
+using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Sieve.Models;
 using Sieve.Services;
 
 namespace LessonLogAPI.Controllers
@@ -25,6 +28,31 @@ namespace LessonLogAPI.Controllers
             _classService.AddClass(classValue);
 
             return Ok(new { Message = "Class has been created " });
+        }
+
+        [HttpPost("pagination")]
+        public async Task<PagedResult<ClassDto>> GetClasses([FromBody] SieveModel query)
+        {
+            var classes = _classService.GetClasses();
+
+            var dtos = await _sieveProcessor
+                .Apply(query, classes)
+                .Select(c => new ClassDto()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Year = c.Year,
+                    EducatorFullName = c.Teacher.User.FirstName + " " + c.Teacher.User.LastName,
+                })
+                .ToListAsync();
+
+            var totalCount = await _sieveProcessor
+                .Apply(query, classes, applyPagination: false, applySorting: false)
+                .CountAsync();
+
+            var result = new PagedResult<ClassDto>(dtos, totalCount, query.Page.Value, query.PageSize.Value);
+
+            return result;
         }
     }
 }
