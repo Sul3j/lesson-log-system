@@ -54,5 +54,20 @@ namespace LessonLogAPI.Controllers
 
             return result;
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteClass([FromRoute] int id)
+        {
+            var classValue = _classService.GetClass(id);
+
+            if (classValue == null)
+            {
+                return BadRequest(new { Message = "This Class is not exist" });
+            }
+
+            _classService.DeleteClass(id);
+
+            return Ok(new { Message = "Class has been deleted"});
+        }
     }
 }
