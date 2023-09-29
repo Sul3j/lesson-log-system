@@ -15,6 +15,13 @@ import { AdminsComponent } from './components/admins/admins.component';
 import { UsersComponent } from './components/users/users.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
 import { StudentsComponent } from './components/students/students.component';
+import { MainNavComponent } from './components/main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -26,7 +33,8 @@ import { StudentsComponent } from './components/students/students.component';
     AdminsComponent,
     UsersComponent,
     TeachersComponent,
-    StudentsComponent
+    StudentsComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +43,13 @@ import { StudentsComponent } from './components/students/students.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -12,9 +12,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, HasRoleGuard], data: { role: 'TEACHER' }},
+  { path: 'dashboard', component: DashboardComponent},
   { path: 'reset', component: ResetComponent}
 ];
+
+// canActivate: [AuthGuard, HasRoleGuard], data: { role: 'TEACHER' }
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

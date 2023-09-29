@@ -1,31 +1,33 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-primary navigation d-flex">
-  <a class="navbar-brand navigation__logo text-white" href="#">EDictionary</a>
-  <button class="navbar-toggler" (click)="toggleMenu()" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span>
-      <i class="fa fa-navicon" style="color:#fff; font-size:24px;"></i>
-    </span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.ADMIN);>Admins</a>
-      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.TEACHER);>Teachers</a>
-      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.USER);>Users</a>
-      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.STUDENT);>Students</a>
-      <a class="nav-link text-white btn btn-danger logout" (click)="logout()">Logout</a>
-    </div>
-  </div>
-</nav>
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-primary navigation d-flex">-->
+<!--  <a class="navbar-brand navigation__logo text-white" href="#">EDictionary</a>-->
+<!--  <button class="navbar-toggler" (click)="toggleMenu()" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--    <span>-->
+<!--      <i class="fa fa-navicon" style="color:#fff; font-size:24px;"></i>-->
+<!--    </span>-->
+<!--  </button>-->
+<!--  <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">-->
+<!--    <div class="navbar-nav">-->
+<!--      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.ADMIN);>Admins</a>-->
+<!--      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.TEACHER);>Teachers</a>-->
+<!--      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.USER);>Users</a>-->
+<!--      <a class="nav-item nav-link text-white" (click)=changeCurrentPage(RoutesNames.STUDENT);>Students</a>-->
+<!--      <a class="nav-link text-white btn btn-danger logout" (click)="logout()">Logout</a>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
 
-<div class="menu">
+<!--<div class="menu">-->
 
-</div>
+<!--</div>-->
 
-<section class="dashboard">
-  <app-admins *ngIf="currentPage == RoutesNames.ADMIN"></app-admins>
-  <app-users *ngIf="currentPage == RoutesNames.USER"></app-users>
-  <app-teachers *ngIf="currentPage == RoutesNames.TEACHER"></app-teachers>
-  <app-students *ngIf="currentPage == RoutesNames.STUDENT"></app-students>
-</section>
+<app-main-nav></app-main-nav>
+
+<!--<section class="dashboard">-->
+<!--  <app-admins *ngIf="currentPage == RoutesNames.ADMIN"></app-admins>-->
+<!--  <app-users *ngIf="currentPage == RoutesNames.USER"></app-users>-->
+<!--  <app-teachers *ngIf="currentPage == RoutesNames.TEACHER"></app-teachers>-->
+<!--  <app-students *ngIf="currentPage == RoutesNames.STUDENT"></app-students>-->
+<!--</section>-->
 
 
 
