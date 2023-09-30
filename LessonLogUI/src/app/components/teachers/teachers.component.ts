@@ -52,7 +52,7 @@ export class TeachersComponent implements OnInit {
   }
 
   searchTeacher(e: any) {
-    this.helperService.setPaginationFilter(e);
+    this.paginationModel = this.helperService.setPaginationFilter(e);
     this.getAllTeachers();
   }
 

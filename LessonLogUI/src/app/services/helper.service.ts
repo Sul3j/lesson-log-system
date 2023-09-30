@@ -22,6 +22,7 @@ export class HelperService {
 
   setPaginationFilter(e: any) {
     this.paginationModel.filters = `(userFirstName|userLastName)@=*${e.target.value}`;
+    return this.paginationModel;
   }
 
   nextPage(totalPages: number, pageNumber: number): number {
