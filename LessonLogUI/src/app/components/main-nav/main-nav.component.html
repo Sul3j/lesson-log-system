@@ -6,8 +6,8 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Teachers</a>
-      <a mat-list-item href="#">Admins</a>
+      <a mat-list-item [routerLink]="['/teachers']">Teachers</a>
+      <a mat-list-item [routerLink]="['/admins']">Admins</a>
       <a mat-list-item href="#">Students</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -24,7 +24,7 @@
       <span>LessonLogApp</span>
       <span class="spacer"></span>
       <a [routerLink]="['/teachers']">Teachers</a>
-      <a href="#">Admins</a>
+      <a [routerLink]="['/admins']">Admins</a>
       <a href="#">Students</a>
       <button class="logout-button" mat-raised-button color="warn" (click)="logout()">Logout</button>
     </mat-toolbar>

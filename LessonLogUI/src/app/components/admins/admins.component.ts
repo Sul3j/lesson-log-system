@@ -47,7 +47,7 @@ export class AdminsComponent {
   }
 
   searchAdmin(e: any) {
-    this.helperService.setPaginationFilter(e);
+    this.paginationModel = this.helperService.setPaginationFilter(e);
     this.getAllAdmins();
   }
 
