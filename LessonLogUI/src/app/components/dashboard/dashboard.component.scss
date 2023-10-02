@@ -22,3 +22,31 @@
 .container {
   padding-top: 20px;
 }
+
+mat-icon {
+  font-size: 64px;
+  height: 64px;
+  width: 64px;
+}
+
+.card {
+  border: none;
+}
+
+#users {
+  background-color: #f4cfdf;
+}
+#admins {
+  background-color: #f7f6cf;
+}
+#teachers {
+  background-color: #b6d8f2;
+}
+#students {
+  background-color: #CCD4BF;
+}
+#tutors {
+  background-color: #EEBAB2;
+}
+
+

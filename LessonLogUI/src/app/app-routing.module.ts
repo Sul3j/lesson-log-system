@@ -8,6 +8,7 @@ import {ResetComponent} from "./components/reset/reset.component";
 import {HasRoleGuard} from "./guards/has-role.guard";
 import {TeachersComponent} from "./components/teachers/teachers.component";
 import {AdminsComponent} from "./components/admins/admins.component";
+import {StudentsComponent} from "./components/students/students.component";
 ;
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'reset', component: ResetComponent},
   { path: 'teachers', component: TeachersComponent },
-  { path: 'admins', component: AdminsComponent }
+  { path: 'admins', component: AdminsComponent },
+  { path: 'students', component: StudentsComponent }
 ];
 
 // canActivate: [AuthGuard, HasRoleGuard], data: { role: 'TEACHER' }

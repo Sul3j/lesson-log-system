@@ -4,6 +4,8 @@ import {ToastrService} from "ngx-toastr";
 import {ApiService} from "../../services/api.service";
 import {UserDataService} from "../../services/user-data.service";
 import {RoutesNames} from "../../models/routes-names.model";
+import {UsersService} from "../../services/users.service";
+import {DashboardCount} from "../../models/users-count.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,10 +15,9 @@ import {RoutesNames} from "../../models/routes-names.model";
 export class DashboardComponent implements OnInit {
   public users: any = [];
   public fullName: string = "";
-  public currentPage: RoutesNames = RoutesNames.ADMIN;
-  public RoutesNames = RoutesNames;
+  public count: DashboardCount = new DashboardCount();
 
-  constructor(private auth: AuthService, private toastr: ToastrService, private api: ApiService, private userData: UserDataService) {}
+  constructor(private auth: AuthService, private toastr: ToastrService, private usersService: UsersService) {}
 
   logout() {
     this.auth.logout();
@@ -24,23 +25,36 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.api.getUsers().subscribe(res => {
+    this.usersService.getUsers().subscribe(res => {
       this.users = res;
-    });
 
-    this.userData.getFullName()
-      .subscribe(val => {
-        let tokenFullName = this.auth.getFullNameFromToken();
-        this.fullName = val || tokenFullName;
+      res.forEach((e: any) => {
+        this.count.users++;
+        switch (e.role) {
+          case 'TEACHER':
+          {
+            this.count.teachers++;
+            break;
+          }
+          case 'ADMIN':
+          {
+            this.count.admins++;
+            break;
+          }
+          case 'STUDENT':
+          {
+            this.count.students++;
+            break;
+          }
+          case 'TUTOR':
+          {
+            this.count.tutors++;
+            break;
+          }
+          default:
+            break;
+        }
       })
-  }
-
-  toggleMenu() {
-    const menu = document.querySelector(".menu");
-    menu?.classList.toggle("menu-active");
-  }
-
-  changeCurrentPage(current: RoutesNames) {
-    this.currentPage = current;
+    });
   }
 }
