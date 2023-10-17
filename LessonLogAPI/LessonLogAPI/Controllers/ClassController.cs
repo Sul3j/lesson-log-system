@@ -55,6 +55,14 @@ namespace LessonLogAPI.Controllers
             return result;
         }
 
+        [HttpGet("all")]
+        public ActionResult AllCLasses() 
+        {
+            var classes = _classService.GetClasses();
+
+            return Ok(classes);
+        }
+
         [HttpDelete("{id}")]
         public ActionResult DeleteClass([FromRoute] int id)
         {

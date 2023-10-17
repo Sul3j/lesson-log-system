@@ -3,6 +3,7 @@ import {Subject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UrlService} from "./url.service";
 import {Pagination} from "../models/pagination.model";
+import {AddStudentDto} from "../models/add-student.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,9 @@ export class StudentsService {
     return this.http.post<any>(`${this.urlService.url}/Student/pagination`, body);
   }
 
-  addStudent(userId: number) {
+  addStudent(student: AddStudentDto) {
     return this.http
-      .post(`${this.urlService.url}/STUDENT/add`, { "userId": userId })
+      .post(`${this.urlService.url}/STUDENT/add`, student)
       .pipe(
         tap(() => {
           this._refreshNedeed.next();

@@ -45,7 +45,7 @@ namespace LessonLogAPI.Controllers
             return Ok(new { Message = "Tutor has been created" });
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public ActionResult GetAllTutors()
         {
             var tutors = _tutorService.GetTutors();

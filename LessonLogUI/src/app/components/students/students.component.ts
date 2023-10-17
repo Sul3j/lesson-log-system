@@ -7,6 +7,11 @@ import {StudentsService} from "../../services/students.service";
 import {HelperService} from "../../services/helper.service";
 import {UsersService} from "../../services/users.service";
 import {ToastrService} from "ngx-toastr";
+import {Class} from "../../models/class.model";
+import {Tutor} from "../../models/tutor.model";
+import {TutorsService} from "../../services/tutors.service";
+import {ClassesService} from "../../services/classes.service";
+import {AddStudentDto} from "../../models/add-student.dto";
 
 @Component({
   selector: 'app-students',
@@ -16,24 +21,35 @@ import {ToastrService} from "ngx-toastr";
 export class StudentsComponent implements OnInit {
   public students: Array<Student> = new Array<Student>();
   public users: Array<User> = new Array<User>();
+  public classes: Array<Class> = new Array<Class>();
+  public tutors: Array<Tutor> = new Array<Tutor>();
   public paginationModel: Pagination = new Pagination();
   public response: ResponseModel<Student> = new ResponseModel<Student>();
   public items: number = 5;
   public selectedUser!: number;
+  public selectedTutor!: number;
+  public selectedClass!: number;
+  public selectedStudentData: AddStudentDto = new AddStudentDto();
 
   constructor(private studentsService: StudentsService,
               private helperService: HelperService,
               private usersService: UsersService,
-              private toastr: ToastrService) {}
+              private toastr: ToastrService,
+              private tutorsService: TutorsService,
+              private classesService: ClassesService) {}
 
   ngOnInit(): void {
     this.studentsService.refreshNeeded
       .subscribe(() => {
         this.getAllStudents();
         this.getAllUsers();
+        this.getAllClasses();
+        this.getAllTutors();
       })
     this.getAllStudents();
     this.getAllUsers();
+    this.getAllClasses();
+    this.getAllTutors();
   }
 
   private getAllStudents() {
@@ -49,13 +65,75 @@ export class StudentsComponent implements OnInit {
     })
   }
 
+  private getAllClasses() {
+    this.classesService.getAllClasses().subscribe(res => {
+      this.classes = res as Array<Class>;
+    })
+  }
+
+  private getAllTutors() {
+    this.tutorsService.getAllTutors().subscribe(res => {
+      console.log(res)
+
+      this.tutors = res as Array<Tutor>
+
+      console.log(this.tutors)
+    })
+  }
+
+  addStudent() {
+    console.log(this.selectedStudentData)
+    this.studentsService.addStudent(this.selectedStudentData).subscribe({
+      next: () => {
+        this.toastr.success("Student has been added!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error");
+      }
+    })
+    this.clearSlectedStudentData();
+  }
+
+  deleteStudent(id: number) {
+    this.studentsService.deleteStudent(id).subscribe({
+      next: () => {
+        this.toastr.success("Student has been deleted!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error");
+      }
+    })
+  }
+
+  clearSlectedStudentData() {
+    this.selectedStudentData.userId = 0;
+    this.selectedStudentData.classId = 0;
+    this.selectedStudentData.tutorId = 0;
+  }
+
+  isSelected() {
+    if (this.selectedStudentData.userId != null && this.selectedStudentData.userId > 0 && this.selectedStudentData.tutorId != null && this.selectedStudentData.tutorId > 0 && this.selectedStudentData.classId != null && this.selectedStudentData.classId > 0) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
   searchStudent(e: any) {
     this.helperService.setPaginationFilter(e);
     this.getAllStudents();
   }
 
   changeUser(e: any) {
-    this.selectedUser = e.target.value;
+    console.log(Number(e.target.value))
+    this.selectedStudentData.userId = parseInt(e.target.value);
+  }
+
+  changeClass(e: any) {
+    this.selectedStudentData.classId = parseInt(e.target.value);
+  }
+
+  changeTutor(e: any) {
+    this.selectedStudentData.tutorId = parseInt(e.target.value);
   }
 
   itemsPerPage(e: any) {

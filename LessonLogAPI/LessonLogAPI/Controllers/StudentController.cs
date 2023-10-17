@@ -61,7 +61,7 @@ namespace LessonLogAPI.Controllers
             return Ok(students);
         }
 
-        [Authorize(Roles = "TEACHER")]
+        //[Authorize(Roles = "TEACHER")]
         [HttpPost("pagination")]
         public async Task<PagedResult<StudentDto>> GetStudents([FromBody] SieveModel query)
         {
