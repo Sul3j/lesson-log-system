@@ -79,15 +79,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <select class="form-control" (change)="changeUser($event)">
+        <select class="form-control mt-3" (change)="changeUser($event)">
           <option selected>--- select user ---</option>
           <option *ngFor="let user of users" [value]="user.id"> {{ user.firstName}} {{ user.lastName }} </option>
         </select>
-        <select class="form-control" (change)="changeClass($event)">
+        <select class="form-control mt-3" (change)="changeClass($event)">
           <option selected>--- select class ---</option>
           <option *ngFor="let class of classes" [value]="class.id"> {{ class.year}} {{ class.name }}</option>
         </select>
-        <select class="form-control" (change)="changeTutor($event)">
+        <select class="form-control mt-3" (change)="changeTutor($event)">
           <option selected>--- select tutor ---</option>
           <option *ngFor="let tutor of tutors" [value]="tutor.id"> {{ tutor.user.firstName }} {{ tutor.user.lastName }}</option>
         </select>

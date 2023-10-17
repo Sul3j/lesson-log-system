@@ -119,7 +119,7 @@ export class StudentsComponent implements OnInit {
   }
 
   searchStudent(e: any) {
-    this.helperService.setPaginationFilter(e);
+    this.paginationModel = this.helperService.setPaginationFilter(e);
     this.getAllStudents();
   }
 
