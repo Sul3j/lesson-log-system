@@ -104,7 +104,3 @@ export class TeachersComponent implements OnInit {
     return this.helperService.createRange(number);
   }
 }
-
-
-
-

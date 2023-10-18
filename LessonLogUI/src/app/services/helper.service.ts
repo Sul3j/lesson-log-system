@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ResponseModel} from "../models/response.model";
 import {Pagination} from "../models/pagination.model";
+import {StudentFilterDto} from "../models/student-filter.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,13 @@ export class HelperService {
 
   setPaginationFilter(e: any) {
     this.paginationModel.filters = `(userFirstName|userLastName)@=*${e.target.value}`;
+    return this.paginationModel;
+  }
+
+  setStudentPaginationFilter(filters: StudentFilterDto) {
+    console.log(filters)
+    this.paginationModel.filters = `className@=*${filters.name}|classYear@=*${filters.year}`;
+    console.log(this.paginationModel.filters)
     return this.paginationModel;
   }
 

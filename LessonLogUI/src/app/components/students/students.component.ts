@@ -12,6 +12,7 @@ import {Tutor} from "../../models/tutor.model";
 import {TutorsService} from "../../services/tutors.service";
 import {ClassesService} from "../../services/classes.service";
 import {AddStudentDto} from "../../models/add-student.dto";
+import {StudentFilterDto} from "../../models/student-filter.dto";
 
 @Component({
   selector: 'app-students',
@@ -30,6 +31,7 @@ export class StudentsComponent implements OnInit {
   public selectedTutor!: number;
   public selectedClass!: number;
   public selectedStudentData: AddStudentDto = new AddStudentDto();
+  public studentFilterDto: StudentFilterDto = new StudentFilterDto();
 
   constructor(private studentsService: StudentsService,
               private helperService: HelperService,
@@ -81,6 +83,11 @@ export class StudentsComponent implements OnInit {
     })
   }
 
+  filterStudents(filterOptions: StudentFilterDto) {
+    this.paginationModel = this.helperService.setStudentPaginationFilter(filterOptions);
+    this.getAllStudents();
+  }
+
   addStudent() {
     console.log(this.selectedStudentData)
     this.studentsService.addStudent(this.selectedStudentData).subscribe({
@@ -110,17 +117,34 @@ export class StudentsComponent implements OnInit {
   }
 
   isSelected() {
-    if (this.selectedStudentData.userId != null && this.selectedStudentData.userId > 0 && this.selectedStudentData.tutorId != null && this.selectedStudentData.tutorId > 0 && this.selectedStudentData.classId != null && this.selectedStudentData.classId > 0) {
+    if (this.selectedStudentData.userId != null && this.selectedStudentData.userId > 0 && this.selectedStudentData.tutorId != null && this.selectedStudentData.tutorId > 0 && this.selectedStudentData.classId != null && this.selectedStudentData.classId > 0)
       return false;
-    }
-    else {
+    else
       return true;
-    }
   }
 
   searchStudent(e: any) {
     this.paginationModel = this.helperService.setPaginationFilter(e);
     this.getAllStudents();
+  }
+
+  classYearFilterOptions(e: any) {
+    const year: number = parseInt(e.target.value);
+    this.studentFilterDto.year = year;
+  }
+
+  classNameFilterOptions(e: any) {
+    const studentName: string = e.target.value;
+    this.studentFilterDto.name = studentName;
+  }
+
+  isStudentFilterSelected() {
+    console.log(this.studentFilterDto)
+
+    if((this.studentFilterDto.name == null || this.studentFilterDto.name == 'null') && this.studentFilterDto.year == 0)
+      return true;
+    else
+      return false;
   }
 
   changeUser(e: any) {
@@ -159,6 +183,4 @@ export class StudentsComponent implements OnInit {
   createRange(number: number) {
     return this.helperService.createRange(number);
   }
-
-
 }

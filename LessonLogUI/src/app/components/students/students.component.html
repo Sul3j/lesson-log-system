@@ -6,9 +6,16 @@
         <input type="text" placeholder="Search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" (keyup)="searchStudent($event)">
       </div>
       <div class="input-group">
-        <button mat-mini-fab aria-label="Example icon button with a filter list icon" data-bs-toggle="modal" data-bs-target="#addModal" style="margin-left: 10px;" color="primary">
-          <mat-icon>add</mat-icon>
-        </button>
+        <div>
+          <button mat-mini-fab aria-label="Example icon button with a filter list icon" data-bs-toggle="modal" data-bs-target="#addModal" style="margin-left: 10px;" color="primary">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-mini-fab aria-label="Example icon button with a filter list icon" data-bs-toggle="modal" data-bs-target="#editModal" style="margin-left: 10px;" color="primary">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
       </div>
       <div class="input-group" style="width: 200px">
         <select class="form-control" (change)="itemsPerPage($event)" id="select">
@@ -95,6 +102,32 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary btn-add" (click)="addStudent()" [disabled]="isSelected()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelEdit">Filter students</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <select class="form-control mt-3" (change)="classYearFilterOptions($event)">
+          <option selected [value]="0">--- select class year ---</option>
+          <option *ngFor="let class of classes" [value]="class.year"> {{ class.year }} </option>
+        </select>
+        <select class="form-control mt-3" (change)="classNameFilterOptions($event)">
+          <option selected [value]="null">--- select class name ---</option>
+          <option *ngFor="let class of classes" [value]="class.name"> {{ class.name }}</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="filterStudents(studentFilterDto)" [disabled]="isStudentFilterSelected()">Filter</button>
       </div>
     </div>
   </div>
