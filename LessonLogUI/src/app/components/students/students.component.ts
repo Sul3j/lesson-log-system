@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Student} from "../../models/student.model";
 import {User} from "../../models/user.model";
 import {Pagination} from "../../models/pagination.model";
@@ -32,6 +32,8 @@ export class StudentsComponent implements OnInit {
   public selectedClass!: number;
   public selectedStudentData: AddStudentDto = new AddStudentDto();
   public studentFilterDto: StudentFilterDto = new StudentFilterDto();
+
+  @ViewChild('searchInput') searchInput!: ElementRef;
 
   constructor(private studentsService: StudentsService,
               private helperService: HelperService,
@@ -139,16 +141,20 @@ export class StudentsComponent implements OnInit {
   }
 
   isStudentFilterSelected() {
-    console.log(this.studentFilterDto)
-
     if((this.studentFilterDto.name == null || this.studentFilterDto.name == 'null') && this.studentFilterDto.year == 0)
       return true;
     else
       return false;
   }
 
+  clearFilters() {
+    this.helperService.clearFilters();
+    this.searchInput.nativeElement.value = '';
+    this.getAllStudents();
+    this.toastr.success("Filters has been clear!", "SUCCESS")
+  }
+
   changeUser(e: any) {
-    console.log(Number(e.target.value))
     this.selectedStudentData.userId = parseInt(e.target.value);
   }
 

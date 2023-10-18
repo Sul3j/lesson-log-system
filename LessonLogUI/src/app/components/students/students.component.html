@@ -3,7 +3,7 @@
     <div class="d-flex">
       <div class="input-group">
         <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input type="text" placeholder="Search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" (keyup)="searchStudent($event)">
+        <input type="text" placeholder="Search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" #searchInput (keyup)="searchStudent($event)">
       </div>
       <div class="input-group">
         <div>
@@ -14,6 +14,11 @@
         <div>
           <button mat-mini-fab aria-label="Example icon button with a filter list icon" data-bs-toggle="modal" data-bs-target="#editModal" style="margin-left: 10px;" color="primary">
             <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-mini-fab style="margin-left: 10px;" color="primary" (click)="clearFilters()">
+            <mat-icon>clear</mat-icon>
           </button>
         </div>
       </div>

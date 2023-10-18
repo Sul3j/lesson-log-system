@@ -33,6 +33,10 @@ export class HelperService {
     return this.paginationModel;
   }
 
+  clearFilters() {
+    this.paginationModel.filters = "";
+  }
+
   nextPage(totalPages: number, pageNumber: number): number {
     if(totalPages > pageNumber)
       pageNumber++;
