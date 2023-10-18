@@ -32,6 +32,7 @@ export class StudentsComponent implements OnInit {
   public selectedClass!: number;
   public selectedStudentData: AddStudentDto = new AddStudentDto();
   public studentFilterDto: StudentFilterDto = new StudentFilterDto();
+  public currentStudent: Student = new Student();
 
   @ViewChild('searchInput') searchInput!: ElementRef;
 
@@ -88,6 +89,10 @@ export class StudentsComponent implements OnInit {
   filterStudents(filterOptions: StudentFilterDto) {
     this.paginationModel = this.helperService.setStudentPaginationFilter(filterOptions);
     this.getAllStudents();
+  }
+
+  getCurrentStudent(student: Student) {
+    this.currentStudent = student;
   }
 
   addStudent() {

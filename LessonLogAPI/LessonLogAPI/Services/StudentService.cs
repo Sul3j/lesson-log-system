@@ -37,5 +37,25 @@ namespace LessonLogAPI.Services
 
             return student;
         }
+
+        public Student GetStudentById(int studentId)
+        {
+            var student = _dbContext.Students.FirstOrDefault(s => s.Id == studentId);
+            return student;
+        }
+
+        public void UpdateStudent(Student updatedStudent)
+        {
+            var existingStudent = _dbContext.Students.FirstOrDefault(s => s.Id == updatedStudent.Id);
+
+            if (existingStudent == null)
+            {
+                throw new Exception("Student not found");
+            }
+
+            existingStudent.ClassId = updatedStudent.ClassId; 
+
+            _dbContext.SaveChanges();
+        }
     }
 }

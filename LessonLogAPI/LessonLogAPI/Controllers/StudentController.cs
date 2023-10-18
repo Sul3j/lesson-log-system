@@ -1,9 +1,8 @@
-﻿
-
-using LessonLogAPI.Models;
+﻿using LessonLogAPI.Models;
 using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
+using LessonLogAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,12 +19,14 @@ namespace LessonLogAPI.Controllers
         private readonly IStudentService _studentService;
         private readonly IUserService _userService;
         private readonly ISieveProcessor _sieveProcessor;
+        private readonly IClassService _classService;
 
-        public StudentController(IStudentService studentService, IUserService userService, ISieveProcessor sieveProcessor)
+        public StudentController(IStudentService studentService, IUserService userService, ISieveProcessor sieveProcessor, IClassService classService)
         {
             _studentService = studentService;
             _userService = userService;
             _sieveProcessor = sieveProcessor;
+            _classService = classService;
         }
 
         [HttpPost("add")]
@@ -47,6 +48,8 @@ namespace LessonLogAPI.Controllers
 
             return Ok(new { Message = "Admin has been created" });
         }
+
+
 
         [HttpGet]
         public ActionResult GetAllStudents()
@@ -89,6 +92,29 @@ namespace LessonLogAPI.Controllers
             var result = new PagedResult<StudentDto>(dtos, totalCount, query.Page.Value, query.PageSize.Value);
 
             return result;
+        }
+
+        [HttpPut("edit/{studentId}")]
+        public ActionResult EditStudent([FromQuery] int studentId, [FromBody] int newClassId)
+        {
+            var student = _studentService.GetStudentById(studentId);
+
+            if (student == null)
+            {
+                return NotFound(new { Message = "Student not found" });
+            }
+
+            var newClass = _classService.GetClass(newClassId);
+
+            if (newClass == null)
+            {
+                return NotFound(new { Message = "Class not found" });
+            }
+
+            student.ClassId = newClassId;
+            _studentService.UpdateStudent(student);
+
+            return Ok(new { Message = "Student updated successfully" });
         }
 
     }

@@ -9,5 +9,9 @@ namespace LessonLogAPI.Models.Interfaces
         Student AddStudent(Student student);
 
         Student GetStudent(int id);
+
+        void UpdateStudent(Student updatedStudent);
+
+        Student GetStudentById(int studentId);
     }
 }

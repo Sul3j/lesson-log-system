@@ -55,6 +55,8 @@ namespace LessonLogAPI.Controllers
             return result;
         }
 
+
+
         [HttpGet("all")]
         public ActionResult AllCLasses() 
         {
@@ -76,6 +78,19 @@ namespace LessonLogAPI.Controllers
             _classService.DeleteClass(id);
 
             return Ok(new { Message = "Class has been deleted"});
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult GetClassById([FromRoute] int id)
+        {
+            var classValue = _classService.GetClass(id);
+
+            if (classValue == null)
+            {
+                return NotFound(new { Message = "Class not found" });
+            }
+
+            return Ok(classValue);
         }
     }
 }

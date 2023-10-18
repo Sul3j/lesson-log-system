@@ -12,7 +12,7 @@
           </button>
         </div>
         <div>
-          <button mat-mini-fab aria-label="Example icon button with a filter list icon" data-bs-toggle="modal" data-bs-target="#editModal" style="margin-left: 10px;" color="primary">
+          <button mat-mini-fab aria-label="Example icon button with a filter list icon" data-bs-toggle="modal" data-bs-target="#filterModal" style="margin-left: 10px;" color="primary">
             <mat-icon>filter_list</mat-icon>
           </button>
         </div>
@@ -56,7 +56,10 @@
         <td>{{ student.className }}</td>
         <td>{{ student.classYear }}</td>
         <td class="d-flex justify-content-end">
-          <button mat-mini-fab color="warn">
+          <button mat-mini-fab color="primary" data-bs-target="#editModal" data-bs-toggle="modal" (click)="getCurrentStudent(student)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="warn" style="margin-left: 5px;">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -112,12 +115,12 @@
   </div>
 </div>
 
-<!-- Modal Edit -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Filter -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabelEdit">Filter students</h5>
+        <h5 class="modal-title" id="exampleModalLabelFilter">Filter students</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -128,6 +131,29 @@
         <select class="form-control mt-3" (change)="classNameFilterOptions($event)">
           <option selected [value]="null">--- select class name ---</option>
           <option *ngFor="let class of classes" [value]="class.name"> {{ class.name }}</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="filterStudents(studentFilterDto)" [disabled]="isStudentFilterSelected()">Filter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelEdit">Edit student</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>Select class: </label>
+        <select class="form-control" (change)="changeClass($event)">
+          <option selected [value]="currentStudent.id">{{ currentStudent.classYear }} {{ currentStudent.className }}</option>
+          <option *ngFor="let class of classes" [style.display]="class.id == currentStudent.classYear ? 'none' : 'inherit'" [value]="class.id"> {{ class.year}} {{ class.name }}</option>
         </select>
       </div>
       <div class="modal-footer">
