@@ -95,7 +95,7 @@ namespace LessonLogAPI.Controllers
         }
 
         [HttpPut("edit/{studentId}")]
-        public ActionResult EditStudent([FromQuery] int studentId, [FromBody] int newClassId)
+        public ActionResult EditStudent([FromRoute] int studentId, [FromBody] int newClassId)
         {
             var student = _studentService.GetStudentById(studentId);
 

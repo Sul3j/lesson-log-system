@@ -24,7 +24,17 @@ export class StudentsService {
 
   addStudent(student: AddStudentDto) {
     return this.http
-      .post(`${this.urlService.url}/STUDENT/add`, student)
+      .post(`${this.urlService.url}/Student/add`, student)
+      .pipe(
+        tap(() => {
+          this._refreshNedeed.next();
+        })
+      );
+  }
+
+  editStudent(classId: number, studentId: number) {
+    return this.http
+      .put(`${this.urlService.url}/Student/edit/${studentId}`, classId)
       .pipe(
         tap(() => {
           this._refreshNedeed.next();

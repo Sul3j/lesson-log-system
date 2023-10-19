@@ -7,4 +7,5 @@ export class Student {
   email!: string;
   className!: string;
   classYear!: number;
+  classId!: number;
 }

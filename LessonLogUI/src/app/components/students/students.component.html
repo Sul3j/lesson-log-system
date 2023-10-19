@@ -150,15 +150,13 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <label>Select class: </label>
-        <select class="form-control" (change)="changeClass($event)">
-          <option selected [value]="currentStudent.id">{{ currentStudent.classYear }} {{ currentStudent.className }}</option>
-          <option *ngFor="let class of classes" [style.display]="class.id == currentStudent.classYear ? 'none' : 'inherit'" [value]="class.id"> {{ class.year}} {{ class.name }}</option>
+        <select class="form-control" (change)="changeEditUserValue($event)">
+          <option *ngFor="let class of classes" [value]="class.id">{{ class.year}} {{ class.name }}</option>
         </select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="filterStudents(studentFilterDto)" [disabled]="isStudentFilterSelected()">Filter</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="editStudent(selectedStudentData.classId, currentStudent.id)" [disabled]="isEditButtonDisabled">Edit</button>
       </div>
     </div>
   </div>

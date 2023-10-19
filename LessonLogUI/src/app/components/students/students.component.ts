@@ -33,6 +33,7 @@ export class StudentsComponent implements OnInit {
   public selectedStudentData: AddStudentDto = new AddStudentDto();
   public studentFilterDto: StudentFilterDto = new StudentFilterDto();
   public currentStudent: Student = new Student();
+  public isEditButtonDisabled = false;
 
   @ViewChild('searchInput') searchInput!: ElementRef;
 
@@ -92,11 +93,11 @@ export class StudentsComponent implements OnInit {
   }
 
   getCurrentStudent(student: Student) {
-    this.currentStudent = student;
+    console.log(student)
+    this.currentStudent.classId = student.classId;
   }
 
   addStudent() {
-    console.log(this.selectedStudentData)
     this.studentsService.addStudent(this.selectedStudentData).subscribe({
       next: () => {
         this.toastr.success("Student has been added!", "Success");
@@ -105,6 +106,17 @@ export class StudentsComponent implements OnInit {
       }
     })
     this.clearSlectedStudentData();
+  }
+
+  editStudent(classId: number, studentId: number) {
+    console.log(classId, studentId)
+    this.studentsService.editStudent(classId, studentId).subscribe({
+      next: () => {
+        this.toastr.success("Student has been edit!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error")
+      }
+    })
   }
 
   deleteStudent(id: number) {
@@ -156,14 +168,25 @@ export class StudentsComponent implements OnInit {
     this.helperService.clearFilters();
     this.searchInput.nativeElement.value = '';
     this.getAllStudents();
-    this.toastr.success("Filters has been clear!", "SUCCESS")
+    this.toastr.success("Filters has been clear!", "Success")
   }
 
   changeUser(e: any) {
     this.selectedStudentData.userId = parseInt(e.target.value);
   }
 
+  changeEditUserValue(e: any) {
+    console.log(e.target.value)
+    this.selectedStudentData.classId = parseInt(e.target.value);
+    if (e.target.value == 'null') {
+      this.isEditButtonDisabled = true;
+    } else {
+      this.isEditButtonDisabled = false;
+    }
+  }
+
   changeClass(e: any) {
+    console.log(e.target.value)
     this.selectedStudentData.classId = parseInt(e.target.value);
   }
 
