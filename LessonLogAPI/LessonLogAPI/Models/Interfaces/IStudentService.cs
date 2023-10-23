@@ -13,5 +13,7 @@ namespace LessonLogAPI.Models.Interfaces
         void UpdateStudent(Student updatedStudent);
 
         Student GetStudentById(int studentId);
+
+        Student DeleteStudent(int id);
     }
 }

@@ -59,7 +59,7 @@
           <button mat-mini-fab color="primary" data-bs-target="#editModal" data-bs-toggle="modal" (click)="getCurrentStudent(student)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-mini-fab color="warn" style="margin-left: 5px;">
+          <button mat-mini-fab color="warn" style="margin-left: 5px;" (click)="deleteStudent(student.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

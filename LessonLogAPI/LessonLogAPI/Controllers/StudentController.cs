@@ -94,6 +94,23 @@ namespace LessonLogAPI.Controllers
             return result;
         }
 
+        [HttpDelete("{id}")]
+        public ActionResult DeleteStudent([FromRoute] int id)
+        {
+            var student = _studentService.GetStudent(id);
+
+            if (student == null)
+            {
+                return BadRequest(new { Message = "This Student is not exist" });
+            }
+
+            _userService.ChangeRole(student.UserId, Roles.USER.GetDisplayName());
+
+            _studentService.DeleteStudent(id);
+
+            return Ok(new { Message = "Student has been deleted" });
+        }
+
         [HttpPut("edit/{studentId}")]
         public ActionResult EditStudent([FromRoute] int studentId, [FromBody] int newClassId)
         {

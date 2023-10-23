@@ -52,15 +52,18 @@ namespace LessonLogAPI.Context
             {
                 eb.HasOne(t => t.Class)
                 .WithOne(c => c.Teacher)
-                .HasForeignKey<Class>(c => c.EducatorId);
+                .HasForeignKey<Class>(c => c.EducatorId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasMany(t => t.Lessons)
                 .WithOne(l => l.Teacher)
-                .HasForeignKey(l => l.TeacherId);
+                .HasForeignKey(l => l.TeacherId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasOne(t => t.TimetableLesson)
                 .WithOne(t => t.Teacher)
-                .HasForeignKey<TimetableLesson>(t => t.TeacherId);
+                .HasForeignKey<TimetableLesson>(t => t.TeacherId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasMany(t => t.Subjects)
                 .WithMany(s => s.Teachers);

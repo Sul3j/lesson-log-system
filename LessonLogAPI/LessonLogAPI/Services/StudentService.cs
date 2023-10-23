@@ -57,5 +57,19 @@ namespace LessonLogAPI.Services
 
             _dbContext.SaveChanges();
         }
+
+        public Student DeleteStudent(int id)
+        {
+            var student = _dbContext.Students.FirstOrDefault(s => s.Id == id);
+
+            if (student != null)
+            {
+                _dbContext.Students.Remove(student);
+            }
+
+            _dbContext.SaveChanges();
+
+            return student;
+        }
     }
 }
