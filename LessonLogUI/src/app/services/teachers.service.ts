@@ -18,7 +18,7 @@ export class TeachersService {
   }
 
   getTeachers(body: Pagination) {
-    return this.http.post<any>(`${this.urlService.url}/Teacher/pagination`, body);
+    return this.http.post<any>(`${this.urlService.url}/TEACHER/pagination`, body);
   }
 
   addTeacher(userId: number) {

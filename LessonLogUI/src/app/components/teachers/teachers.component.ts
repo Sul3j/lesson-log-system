@@ -22,7 +22,7 @@ export class TeachersComponent implements OnInit {
   public selectedUser!: number;
 
   constructor(private teachersService: TeachersService,
-              public helperService: HelperService,
+              private helperService: HelperService,
               private usersService: UsersService,
               private toastr: ToastrService) {}
 
