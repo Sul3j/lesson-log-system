@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
+import { TutorsComponent } from './components/tutors/tutors.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatTableModule} from "@angular/material/table";
     UsersComponent,
     TeachersComponent,
     StudentsComponent,
-    MainNavComponent
+    MainNavComponent,
+    TutorsComponent
   ],
   imports: [
     BrowserModule,
