@@ -24,10 +24,17 @@
       </button>
       <span [routerLink]="['/dashboard']">LessonLogApp</span>
       <span class="spacer"></span>
-      <a [routerLink]="['/teachers']">Teachers</a>
-      <a [routerLink]="['/admins']">Admins</a>
-      <a [routerLink]="['/students']">Students</a>
-      <a [routerLink]="['/tutors']">Tutors</a>
+      <button mat-button style="background-color: #5F9BF5; margin-right: 10px;" [matMenuTriggerFor]="menu">Users</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/teachers']">Teachers</button>
+        <button mat-menu-item [routerLink]="['/admins']">Admins</button>
+        <button mat-menu-item [routerLink]="['/students']">Students</button>
+        <button mat-menu-item [routerLink]="['/tutors']">Tutors</button>
+      </mat-menu>
+      <button mat-button style="background-color: #5F9BF5; margin-right: 10px;" [matMenuTriggerFor]="menu2">School</button>
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item [routerLink]="['/classes']">Classes</button>
+      </mat-menu>
       <button class="logout-button" mat-raised-button color="warn" (click)="logout()">Logout</button>
     </mat-toolbar>
     <ng-content></ng-content>

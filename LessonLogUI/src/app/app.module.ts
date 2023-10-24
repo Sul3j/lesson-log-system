@@ -25,6 +25,8 @@ import { MatListModule } from '@angular/material/list';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import { TutorsComponent } from './components/tutors/tutors.component';
+import {MatMenuModule} from "@angular/material/menu";
+import { ClassesComponent } from './components/clases/classes.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { TutorsComponent } from './components/tutors/tutors.component';
     TeachersComponent,
     StudentsComponent,
     MainNavComponent,
-    TutorsComponent
+    TutorsComponent,
+    ClassesComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { TutorsComponent } from './components/tutors/tutors.component';
     MatListModule,
     MatPaginatorModule,
     MatTableModule,
+    MatMenuModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
