@@ -47,8 +47,7 @@ builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITutorService, TutorService>();
 builder.Services.AddScoped<IClassService, ClassService>();
-
-
+builder.Services.AddScoped<ISubjectService, SubjectService>();
 
 builder.Services.AddAuthentication(x =>
 {
