@@ -15,11 +15,13 @@ namespace LessonLogAPI.Controllers
     {
         private readonly IClassService _classService;
         private readonly ISieveProcessor _sieveProcessor;
+        private readonly ITeacherService _teacherService;
 
-        public ClassController(IClassService classService, ISieveProcessor sieveProcessor)
+        public ClassController(IClassService classService, ISieveProcessor sieveProcessor, ITeacherService teacherService)
         {
             _classService = classService;
             _sieveProcessor = sieveProcessor;
+            _teacherService = teacherService;
         }
 
         [HttpPost("add")]
@@ -91,6 +93,32 @@ namespace LessonLogAPI.Controllers
             }
 
             return Ok(classValue);
+        }
+
+        [HttpPut("edit/{classId}")]
+        public ActionResult EditClass([FromRoute] int classId, [FromBody] EditClassDto classDto)
+        {
+            var classValue = _classService.GetClass(classId);
+
+            if (classValue == null)
+            {
+                return NotFound(new { Message = "Class not found" });
+            }
+
+            var educator = _teacherService.GetTeacher(classDto.EducatorId);
+
+            if (educator == null)
+            {
+                return NotFound(new { Message = "Educator not found" });
+            }
+
+            classValue.EducatorId = classDto.EducatorId;
+            classValue.Name = classDto.Name;
+            classValue.Year = classDto.Year;
+
+            _classService.UpdateClass(classValue);
+
+            return Ok(new { Message = "Class updated successfully" });
         }
     }
 }

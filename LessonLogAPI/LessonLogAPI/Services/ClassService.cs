@@ -51,5 +51,24 @@ namespace LessonLogAPI.Services
 
             return classValue;
         }
+
+        public void UpdateClass(Class updateClass)
+        {
+            var existingClass = _dbContext.Classes.FirstOrDefault(c => c.Id == updateClass.Id);
+
+            if (existingClass == null)
+            {
+                throw new Exception("Class not found");
+            }
+
+            existingClass = new Class()
+            {
+                Name = updateClass.Name,
+                Year = updateClass.Year,
+                EducatorId = updateClass.EducatorId
+            };
+
+            _dbContext.SaveChanges();
+        }
     }
 }

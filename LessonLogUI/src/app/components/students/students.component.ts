@@ -79,11 +79,7 @@ export class StudentsComponent implements OnInit {
 
   private getAllTutors() {
     this.tutorsService.getAllTutors().subscribe(res => {
-      console.log(res)
-
-      this.tutors = res as Array<Tutor>
-
-      console.log(this.tutors)
+      this.tutors = res as Array<Tutor>;
     })
   }
 
@@ -93,7 +89,6 @@ export class StudentsComponent implements OnInit {
   }
 
   getCurrentStudent(student: Student) {
-    console.log(student)
     this.currentStudent.classId = student.classId;
   }
 
@@ -176,7 +171,6 @@ export class StudentsComponent implements OnInit {
   }
 
   changeEditUserValue(e: any) {
-    console.log(e.target.value)
     this.selectedStudentData.classId = parseInt(e.target.value);
     if (e.target.value == 'null') {
       this.isEditButtonDisabled = true;

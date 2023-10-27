@@ -3,4 +3,5 @@ export class Class {
   year!: number;
   educatorId!: number;
   name!: string;
+  educatorFullName!: string;
 }

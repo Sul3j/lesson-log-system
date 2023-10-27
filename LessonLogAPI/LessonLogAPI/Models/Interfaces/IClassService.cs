@@ -11,5 +11,7 @@ namespace LessonLogAPI.Models.Interfaces
         Class DeleteClass(int id);
 
         Class GetClass(int id);
+
+        void UpdateClass(Class updateClass);
     }
 }

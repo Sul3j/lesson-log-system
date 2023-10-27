@@ -31,6 +31,10 @@ export class TeachersService {
       );
   }
 
+  getAllTeachers() {
+    return this.http.get(`${this.urlService.url}/TEACHER/all`);
+  }
+
   deleteTeacher(teacherId: number) {
     return this.http
       .delete(`${this.urlService.url}/TEACHER/${teacherId}`)

@@ -52,7 +52,7 @@ namespace LessonLogAPI.Controllers
             return Ok(new { Message = "Teacher has been created" });
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public ActionResult GetAllTeachers()
         {
             var teachers = _teacherService.GetTeachers();
