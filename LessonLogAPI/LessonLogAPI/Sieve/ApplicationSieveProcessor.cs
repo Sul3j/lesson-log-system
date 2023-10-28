@@ -91,6 +91,10 @@ namespace LessonLogAPI.Sieve
                 .CanFilter()
                 .HasName("userEmail");
 
+            mapper.Property<Subject>(s => s.Name)
+                .CanSort()
+                .CanFilter();
+
             return mapper;
         }
     }
