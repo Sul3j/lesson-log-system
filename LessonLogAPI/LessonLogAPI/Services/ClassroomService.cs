@@ -1,6 +1,7 @@
 ﻿using LessonLogAPI.Context;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
+using System.Linq.Dynamic.Core;
 
 namespace LessonLogAPI.Services
 {

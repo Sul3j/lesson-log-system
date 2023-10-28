@@ -95,6 +95,14 @@ namespace LessonLogAPI.Sieve
                 .CanSort()
                 .CanFilter();
 
+            mapper.Property<Classroom>(c => c.Name)
+                .CanSort()
+                .CanFilter();
+
+            mapper.Property<Classroom>(c => c.Number)
+                .CanSort()
+                .CanFilter();
+
             return mapper;
         }
     }
