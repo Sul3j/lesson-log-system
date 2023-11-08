@@ -10,6 +10,6 @@ export class UsersService {
   constructor(private http: HttpClient, private urlService: UrlService) { }
 
   getUsers() {
-    return this.http.get<any>(`${this.urlService.url}/User/role/USER`);
+    return this.http.get<any>(`${this.urlService.url}/USER`);
   }
 }
