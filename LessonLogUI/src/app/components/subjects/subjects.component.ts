@@ -65,4 +65,14 @@ export class SubjectsComponent implements OnInit {
     this.getAllSubjects();
   }
 
+  deleteSubject(id: number) {
+    this.subjectService.deleteSubject(id).subscribe({
+      next: () => {
+        this.toastr.success("Subject has been deleted!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error");
+      }
+    })
+  }
+
 }
