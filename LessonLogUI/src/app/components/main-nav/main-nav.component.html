@@ -10,6 +10,8 @@
       <a mat-list-item [routerLink]="['/admins']">Admins</a>
       <a mat-list-item [routerLink]="['/students']">Students</a>
       <a mat-list-item [routerLink]="['/tutors']">Tutors</a>
+      <a mat-list-item [routerLink]="['/classes']">Classes</a>
+      <a mat-list-item [routerLink]="['/classrooms']">Classrooms</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -34,6 +36,7 @@
       <button mat-button style="background-color: #5F9BF5; margin-right: 10px;" [matMenuTriggerFor]="menu2">School</button>
       <mat-menu #menu2="matMenu">
         <button mat-menu-item [routerLink]="['/classes']">Classes</button>
+        <button mat-menu-item [routerLink]="['/classrooms']">Classrooms</button>
       </mat-menu>
       <button class="logout-button" mat-raised-button color="warn" (click)="logout()">Logout</button>
     </mat-toolbar>

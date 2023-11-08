@@ -27,6 +27,7 @@ import {MatTableModule} from "@angular/material/table";
 import { TutorsComponent } from './components/tutors/tutors.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { ClassesComponent } from './components/clases/classes.component';
+import { ClassroomsComponent } from './components/classrooms/classrooms.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ClassesComponent } from './components/clases/classes.component';
     StudentsComponent,
     MainNavComponent,
     TutorsComponent,
-    ClassesComponent
+    ClassesComponent,
+    ClassroomsComponent
   ],
   imports: [
     BrowserModule,

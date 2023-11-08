@@ -3,15 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
 import {SignupComponent} from "./components/signup/signup.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
-import {AuthGuard} from "./guards/auth.guard";
 import {ResetComponent} from "./components/reset/reset.component";
-import {HasRoleGuard} from "./guards/has-role.guard";
 import {TeachersComponent} from "./components/teachers/teachers.component";
 import {AdminsComponent} from "./components/admins/admins.component";
 import {StudentsComponent} from "./components/students/students.component";
 import {TutorsComponent} from "./components/tutors/tutors.component";
 import {ClassesComponent} from "./components/clases/classes.component";
-;
+import { ClassroomsComponent } from './components/classrooms/classrooms.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -23,7 +21,8 @@ const routes: Routes = [
   { path: 'admins', component: AdminsComponent },
   { path: 'students', component: StudentsComponent },
   { path: 'tutors', component: TutorsComponent },
-  { path: 'classes', component: ClassesComponent }
+  { path: 'classes', component: ClassesComponent },
+  { path: 'classrooms', component: ClassroomsComponent }
 ];
 
 // canActivate: [AuthGuard, HasRoleGuard], data: { role: 'TEACHER' }
