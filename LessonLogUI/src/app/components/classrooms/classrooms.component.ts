@@ -55,7 +55,11 @@ export class ClassroomsComponent implements OnInit{
         this.toastr.error("Something went wrong!", "Error");
       }
     })
+    this.classroomValue.name = "";
+    this.classroomValue.floor = 0;
+    this.classroomValue.number = 0;
   }
+
 
   isAllClassroomValue() {
     if(this.classroomValue.number > 0 && this.classroomValue.floor > 0 && this.classroomValue.name.length >= 2) {
@@ -65,8 +69,8 @@ export class ClassroomsComponent implements OnInit{
     }
   }
 
-  searchClass(e: any) {
-    this.paginationModel = this.helperService.setPaginationFilter(e);
+  searchClassroom(e: any) {
+    this.paginationModel = this.helperService.setClassroomPaginationFilter(e);
     this.getAllClassrooms();
   }
 

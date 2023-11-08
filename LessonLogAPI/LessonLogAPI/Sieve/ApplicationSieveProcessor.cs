@@ -97,7 +97,8 @@ namespace LessonLogAPI.Sieve
 
             mapper.Property<Classroom>(c => c.Name)
                 .CanSort()
-                .CanFilter();
+                .CanFilter()
+                .HasName("classroomName");
 
             mapper.Property<Classroom>(c => c.Number)
                 .CanSort()
