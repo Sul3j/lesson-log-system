@@ -31,7 +31,7 @@ namespace LessonLogAPI.Controllers
             return Ok(new { Message = "Lesson has been created" });
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public ActionResult GetAllLessons()
         {
             var lessons = _lessonService.GetLessons();

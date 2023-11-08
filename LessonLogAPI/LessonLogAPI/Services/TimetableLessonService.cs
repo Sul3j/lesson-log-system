@@ -1,4 +1,5 @@
 ﻿using LessonLogAPI.Context;
+using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -53,6 +54,28 @@ namespace LessonLogAPI.Services
             var lesson = _dbContext.TimetableLessons.FirstOrDefault(t => t.Id == id);
 
             return lesson;
+        }
+
+        public void UpdateLesson(TimetableLesson lesson)
+        {
+            var existingLesson = _dbContext.TimetableLessons.FirstOrDefault(t => t.Id == lesson.Id);
+
+            if (existingLesson == null)
+            {
+                throw new Exception("Lesson not found");
+            }
+
+            existingLesson = new TimetableLesson()
+            {
+                WeekDay = lesson.WeekDay,
+                SubjectId = lesson.SubjectId,
+                TeacherId = lesson.TeacherId,
+                ClassroomId = lesson.ClassroomId,
+                LessonHourId = lesson.LessonHourId,
+                ClassId = lesson.ClassId,
+            };
+
+            _dbContext.SaveChanges();
         }
     }
 }
