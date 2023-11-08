@@ -10,12 +10,12 @@ import {ClassDto} from "../models/class.dto";
 })
 export class ClassesService {
 
-  private _refreshNedeed = new Subject<void>();
+  private _refreshNeeded = new Subject<void>();
 
   constructor(private http: HttpClient, private urlService: UrlService) { }
 
   get refreshNeeded() {
-    return this._refreshNedeed;
+    return this._refreshNeeded;
   }
 
   getClasses(body: Pagination) {
@@ -31,7 +31,7 @@ export class ClassesService {
       .post(`${this.urlService.url}/CLASS/add`, classDto)
       .pipe(
         tap(() => {
-          this._refreshNedeed.next();
+          this._refreshNeeded.next();
         })
       );
   }
@@ -41,7 +41,7 @@ export class ClassesService {
       .delete(`${this.urlService.url}/CLASS/${classId}`)
       .pipe(
         tap(() => {
-          this._refreshNedeed.next();
+          this._refreshNeeded.next();
         })
       );
   }
@@ -51,7 +51,7 @@ export class ClassesService {
       .put(`${this.urlService.url}/CLASS/edit/${classId}`, classDto)
       .pipe(
         tap(() => {
-          this._refreshNedeed.next();
+          this._refreshNeeded.next();
         })
       );
   }
