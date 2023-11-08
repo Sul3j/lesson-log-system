@@ -47,6 +47,24 @@ export class ClassroomsComponent implements OnInit{
     })
   }
 
+  addClassroom() {
+    this.classroomService.addClassroom(this.classroomValue).subscribe({
+      next: () => {
+        this.toastr.success("Classroom has been added!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error");
+      }
+    })
+  }
+
+  isAllClassroomValue() {
+    if(this.classroomValue.number > 0 && this.classroomValue.floor > 0 && this.classroomValue.name.length >= 2) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   searchClass(e: any) {
     this.paginationModel = this.helperService.setPaginationFilter(e);
     this.getAllClassrooms();

@@ -26,8 +26,8 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Class Name</th>
-        <th scope="col">Year</th>
-        <th scope="col">Educator Name</th>
+        <th scope="col">Floor</th>
+        <th scope="col">Number</th>
         <th scope="col"></th>
       </tr>
       </thead>
@@ -63,3 +63,27 @@
     </div>
   </section>
 </app-main-nav>
+
+<!-- Modal Add -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add class</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>Class Name:</label>
+        <input class="form-control" [(ngModel)]="classroomValue.name">
+        <label>Floor:</label>
+        <input class="form-control" [(ngModel)]="classroomValue.floor">
+        <label>Number:</label>
+        <input class="form-control" [(ngModel)]="classroomValue.number">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="addClassroom()" [disabled]="isAllClassroomValue()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
