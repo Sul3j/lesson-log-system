@@ -37,6 +37,16 @@ export class ClassroomsComponent implements OnInit{
     this.getAllClassrooms();
   }
 
+  deleteClassroom(id: number) {
+    this.classroomService.deleteClassroom(id).subscribe({
+      next: () => {
+        this.toastr.success("Classroom has been deleted!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error")
+      }
+    })
+  }
+
   searchClass(e: any) {
     this.paginationModel = this.helperService.setPaginationFilter(e);
     this.getAllClassrooms();
