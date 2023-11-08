@@ -36,5 +36,33 @@ export class SubjectsComponent implements OnInit {
     })
   }
 
+  searchSubject(e: any) {
+    this.paginationModel = this.helperService.setPaginationFilter(e);
+    this.getAllSubjects();
+  }
+
+  itemsPerPage(e: any) {
+    this.paginationModel.pageSize = parseInt(e.target.value);
+    this.getAllSubjects();
+  }
+
+  nextPage(): void {
+    this.paginationModel.page = this.helperService.nextPage(this.response.totalPages, this.paginationModel.page);
+    this.getAllSubjects();
+  }
+
+  previousPage(): void {
+    this.paginationModel.page = this.helperService.previousPage(this.paginationModel.page);
+    this.getAllSubjects();
+  }
+
+  createRange(number: number) {
+    return this.helperService.createRange(number);
+  }
+
+  changePage(e: any) {
+    this.paginationModel.page = parseInt(e.target.value);
+    this.getAllSubjects();
+  }
 
 }
