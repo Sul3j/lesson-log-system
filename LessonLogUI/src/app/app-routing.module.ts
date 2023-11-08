@@ -10,6 +10,7 @@ import {StudentsComponent} from "./components/students/students.component";
 import {TutorsComponent} from "./components/tutors/tutors.component";
 import {ClassesComponent} from "./components/clases/classes.component";
 import { ClassroomsComponent } from './components/classrooms/classrooms.component';
+import {SubjectsComponent} from "./components/subjects/subjects.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'students', component: StudentsComponent },
   { path: 'tutors', component: TutorsComponent },
   { path: 'classes', component: ClassesComponent },
-  { path: 'classrooms', component: ClassroomsComponent }
+  { path: 'classrooms', component: ClassroomsComponent },
+  { path: 'subjects', component: SubjectsComponent }
 ];
 
 // canActivate: [AuthGuard, HasRoleGuard], data: { role: 'TEACHER' }

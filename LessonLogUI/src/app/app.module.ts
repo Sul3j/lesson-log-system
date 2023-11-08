@@ -28,6 +28,7 @@ import { TutorsComponent } from './components/tutors/tutors.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { ClassesComponent } from './components/clases/classes.component';
 import { ClassroomsComponent } from './components/classrooms/classrooms.component';
+import { SubjectsComponent } from './components/subjects/subjects.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ClassroomsComponent } from './components/classrooms/classrooms.componen
     MainNavComponent,
     TutorsComponent,
     ClassesComponent,
-    ClassroomsComponent
+    ClassroomsComponent,
+    SubjectsComponent
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@
       <a mat-list-item [routerLink]="['/tutors']">Tutors</a>
       <a mat-list-item [routerLink]="['/classes']">Classes</a>
       <a mat-list-item [routerLink]="['/classrooms']">Classrooms</a>
+      <a mat-list-item [routerLink]="['/subjects']">Subjects</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -37,6 +38,7 @@
       <mat-menu #menu2="matMenu">
         <button mat-menu-item [routerLink]="['/classes']">Classes</button>
         <button mat-menu-item [routerLink]="['/classrooms']">Classrooms</button>
+        <button mat-menu-item [routerLink]="['/subjects']">Subjects</button>
       </mat-menu>
       <button class="logout-button" mat-raised-button color="warn" (click)="logout()">Logout</button>
     </mat-toolbar>
