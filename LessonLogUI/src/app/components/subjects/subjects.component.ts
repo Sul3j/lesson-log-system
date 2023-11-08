@@ -5,6 +5,7 @@ import {ToastrService} from "ngx-toastr";
 import {Pagination} from "../../models/pagination.model";
 import {ResponseModel} from "../../models/response.model";
 import {Subject} from "../../models/subject.model";
+import {SubjectDto} from "../../models/subject.dto";
 
 @Component({
   selector: 'app-subjects',
@@ -16,6 +17,7 @@ export class SubjectsComponent implements OnInit {
   public paginationModel: Pagination = new Pagination();
   public response: ResponseModel<Subject> = new ResponseModel<Subject>();
   public subjects: Array<Subject> = new Array<Subject>();
+  public subjectValue: SubjectDto = new SubjectDto();
 
   constructor(private subjectService: SubjectsService,
                 private helperService: HelperService,
@@ -73,6 +75,25 @@ export class SubjectsComponent implements OnInit {
         this.toastr.error("Something went wrong!", "Error");
       }
     })
+  }
+
+  addSubject() {
+    this.subjectService.addSubject(this.subjectValue).subscribe({
+      next: () => {
+        this.toastr.success("Subject has been added!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error");
+      }
+    })
+    this.subjectValue.name = "";
+  }
+
+  isAllSubjectValue() {
+    if(this.subjectValue.name != "") {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 }
