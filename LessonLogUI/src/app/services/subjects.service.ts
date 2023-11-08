@@ -10,12 +10,12 @@ import {SubjectDto} from "../models/subject.dto";
 })
 export class SubjectsService {
 
-  private _refreshNedeed = new Subject<void>();
+  private _refreshNeeded = new Subject<void>();
 
   constructor(private http: HttpClient, private urlService: UrlService) { }
 
   get refreshNeeded() {
-    return this._refreshNedeed;
+    return this._refreshNeeded;
   }
 
   getSubjects(body: Pagination) {
@@ -31,7 +31,7 @@ export class SubjectsService {
       .post(`${this.urlService.url}/SUBJECT/add`, subjectDto)
       .pipe(
         tap(() => {
-          this._refreshNedeed.next();
+          this._refreshNeeded.next();
         })
       )
   }
@@ -41,8 +41,8 @@ export class SubjectsService {
       .delete(`${this.urlService.url}/SUBJECT/${subjectId}`)
       .pipe(
         tap(() => {
-          this._refreshNedeed.next();
+          this._refreshNeeded.next();
         })
-      )
+      );
   }
 }

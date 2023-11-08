@@ -39,7 +39,7 @@ export class SubjectsComponent implements OnInit {
   }
 
   searchSubject(e: any) {
-    this.paginationModel = this.helperService.setPaginationFilter(e);
+    this.paginationModel = this.helperService.setSubjectPaginationFilter(e);
     this.getAllSubjects();
   }
 
@@ -72,7 +72,7 @@ export class SubjectsComponent implements OnInit {
       next: () => {
         this.toastr.success("Subject has been deleted!", "Success");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Something went wrong!", "Error")
       }
     })
   }

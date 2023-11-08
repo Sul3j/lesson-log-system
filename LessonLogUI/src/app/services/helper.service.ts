@@ -27,15 +27,17 @@ export class HelperService {
   }
 
   setStudentPaginationFilter(filters: StudentFilterDto) {
-    console.log(filters)
     this.paginationModel.filters = `className@=*${filters.name}|classYear@=*${filters.year}`;
-    console.log(this.paginationModel.filters)
     return this.paginationModel;
   }
 
   setClassroomPaginationFilter(e: any) {
     this.paginationModel.filters = `classroomName@=*${e.target.value}`;
-    console.log(this.paginationModel.filters)
+    return this.paginationModel;
+  }
+
+  setSubjectPaginationFilter(e: any) {
+    this.paginationModel.filters = `subjectName@=*${e.target.value}`;
     return this.paginationModel;
   }
 

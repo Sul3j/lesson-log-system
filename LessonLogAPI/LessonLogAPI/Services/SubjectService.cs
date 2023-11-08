@@ -37,6 +37,7 @@ namespace LessonLogAPI.Services
             if (subject != null)
             {
                 _dbContext.Subjects.Remove(subject);
+                
             }
 
             _dbContext.SaveChanges();
