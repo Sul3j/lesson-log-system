@@ -11,6 +11,7 @@ import {TutorsComponent} from "./components/tutors/tutors.component";
 import {ClassesComponent} from "./components/clases/classes.component";
 import { ClassroomsComponent } from './components/classrooms/classrooms.component';
 import {SubjectsComponent} from "./components/subjects/subjects.component";
+import {TimetableComponent} from "./components/timetable/timetable.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'tutors', component: TutorsComponent },
   { path: 'classes', component: ClassesComponent },
   { path: 'classrooms', component: ClassroomsComponent },
-  { path: 'subjects', component: SubjectsComponent }
+  { path: 'subjects', component: SubjectsComponent },
+  { path: 'timetable', component: TimetableComponent }
 ];
 
 // canActivate: [AuthGuard, HasRoleGuard], data: { role: 'TEACHER' }

@@ -29,6 +29,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import { ClassesComponent } from './components/clases/classes.component';
 import { ClassroomsComponent } from './components/classrooms/classrooms.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
+import { TimetableComponent } from './components/timetable/timetable.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { SubjectsComponent } from './components/subjects/subjects.component';
     TutorsComponent,
     ClassesComponent,
     ClassroomsComponent,
-    SubjectsComponent
+    SubjectsComponent,
+    TimetableComponent
   ],
   imports: [
     BrowserModule,
