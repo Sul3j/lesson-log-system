@@ -98,6 +98,15 @@ namespace LessonLogAPI.Services
             return users;
         }
 
+        public List<User> GetAllUsers()
+        {
+            var users = _dbContext.Users
+            .Where(user => user.Role == Roles.USER.GetDisplayName())
+            .ToList();
+
+            return users;
+        }
+
         public string CreateJwt(User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();

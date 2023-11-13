@@ -68,9 +68,15 @@ namespace LessonLogAPI.Controllers
 
         //[Authorize]
         [HttpGet]
-        public IActionResult GetAllUsers()
+        public IActionResult GetUsers()
         {
             return Ok(_userService.GetUsers());
+        }
+
+        [HttpGet("all")]
+        public IActionResult GetAllUsers() 
+        {
+            return Ok(_userService.GetAllUsers());
         }
 
         [HttpPost("refresh")]

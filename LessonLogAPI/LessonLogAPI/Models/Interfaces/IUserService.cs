@@ -19,6 +19,8 @@ namespace LessonLogAPI.Models.Interfaces
 
         List<User> GetUsers();
 
+        List<User> GetAllUsers();
+
         string CreateJwt(User user);
 
         ClaimsPrincipal GetPrincipalFromExpiredToken(string token);

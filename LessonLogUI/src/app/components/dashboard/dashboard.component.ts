@@ -1,9 +1,6 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {ToastrService} from "ngx-toastr";
-import {ApiService} from "../../services/api.service";
-import {UserDataService} from "../../services/user-data.service";
-import {RoutesNames} from "../../models/routes-names.model";
 import {UsersService} from "../../services/users.service";
 import {DashboardCount} from "../../models/users-count.model";
 
@@ -25,7 +22,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usersService.getUsers().subscribe(res => {
+    this.usersService.getAllExistingUsers().subscribe(res => {
       this.users = res;
 
       res.forEach((e: any) => {

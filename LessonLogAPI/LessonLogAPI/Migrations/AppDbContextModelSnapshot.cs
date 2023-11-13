@@ -349,7 +349,7 @@ namespace LessonLogAPI.Migrations
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeacherId")
+                    b.Property<int?>("TeacherId")
                         .HasColumnType("int");
 
                     b.Property<int>("WeekDay")
@@ -370,7 +370,8 @@ namespace LessonLogAPI.Migrations
                         .IsUnique();
 
                     b.HasIndex("TeacherId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[TeacherId] IS NOT NULL");
 
                     b.ToTable("TimetableLessons");
                 });
@@ -527,7 +528,6 @@ namespace LessonLogAPI.Migrations
                     b.HasOne("LessonLogAPI.Models.Entities.Teacher", "Teacher")
                         .WithMany("Lessons")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Class");
@@ -603,9 +603,7 @@ namespace LessonLogAPI.Migrations
 
                     b.HasOne("LessonLogAPI.Models.Entities.Teacher", "Teacher")
                         .WithOne("TimetableLesson")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "TeacherId");
 
                     b.Navigation("Class");
 
