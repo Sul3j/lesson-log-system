@@ -35,6 +35,13 @@ namespace LessonLogAPI.Services
         {
             var tutor = GetTutor(id);
 
+            var student = _dbContext.Students.FirstOrDefault(student => student.TutorId == tutor.Id);
+
+            if (student != null)
+            {
+                student.TutorId = null;
+            }
+
             if (tutor != null)
             {
                 _dbContext.Tutors.Remove(tutor);

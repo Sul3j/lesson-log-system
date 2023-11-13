@@ -33,13 +33,14 @@ namespace LessonLogAPI.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Admins");
                 });
@@ -52,7 +53,7 @@ namespace LessonLogAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("LessonId")
+                    b.Property<int?>("LessonId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -144,7 +145,7 @@ namespace LessonLogAPI.Migrations
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubjectId")
+                    b.Property<int?>("SubjectId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -164,10 +165,10 @@ namespace LessonLogAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ClassId")
+                    b.Property<int?>("ClassId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubjectId")
+                    b.Property<int?>("SubjectId")
                         .HasColumnType("int");
 
                     b.Property<int>("TeacherId")
@@ -270,16 +271,16 @@ namespace LessonLogAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ClassId")
+                    b.Property<int?>("ClassId")
                         .HasColumnType("int");
 
                     b.Property<string>("Pesel")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TutorId")
+                    b.Property<int?>("TutorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -289,7 +290,8 @@ namespace LessonLogAPI.Migrations
                     b.HasIndex("TutorId");
 
                     b.HasIndex("UserId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Students");
                 });
@@ -318,13 +320,14 @@ namespace LessonLogAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Teachers");
                 });
@@ -337,13 +340,13 @@ namespace LessonLogAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ClassId")
+                    b.Property<int?>("ClassId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClassroomId")
+                    b.Property<int?>("ClassroomId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LessonHourId")
+                    b.Property<int?>("LessonHourId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectId")
@@ -358,13 +361,16 @@ namespace LessonLogAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClassId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ClassId] IS NOT NULL");
 
                     b.HasIndex("ClassroomId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ClassroomId] IS NOT NULL");
 
                     b.HasIndex("LessonHourId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[LessonHourId] IS NOT NULL");
 
                     b.HasIndex("SubjectId")
                         .IsUnique();
@@ -461,8 +467,7 @@ namespace LessonLogAPI.Migrations
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.User", "User")
                         .WithOne("Admin")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.Admin", "UserId")
-                        .IsRequired();
+                        .HasForeignKey("LessonLogAPI.Models.Entities.Admin", "UserId");
 
                     b.Navigation("User");
                 });
@@ -471,8 +476,7 @@ namespace LessonLogAPI.Migrations
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Lesson", "Lesson")
                         .WithMany("Attendances")
-                        .HasForeignKey("LessonId")
-                        .IsRequired();
+                        .HasForeignKey("LessonId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.Student", "Student")
                         .WithMany("Attendances")
@@ -500,8 +504,7 @@ namespace LessonLogAPI.Migrations
 
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithMany("Grades")
-                        .HasForeignKey("SubjectId")
-                        .IsRequired();
+                        .HasForeignKey("SubjectId");
 
                     b.Navigation("Student");
 
@@ -512,13 +515,11 @@ namespace LessonLogAPI.Migrations
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
                         .WithMany("Lessons")
-                        .HasForeignKey("ClassId")
-                        .IsRequired();
+                        .HasForeignKey("ClassId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithMany("Lessons")
-                        .HasForeignKey("SubjectId")
-                        .IsRequired();
+                        .HasForeignKey("SubjectId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.Teacher", "Teacher")
                         .WithMany("Lessons")
@@ -536,18 +537,15 @@ namespace LessonLogAPI.Migrations
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
                         .WithMany("Students")
-                        .HasForeignKey("ClassId")
-                        .IsRequired();
+                        .HasForeignKey("ClassId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.Tutor", "Tutor")
                         .WithMany("Students")
-                        .HasForeignKey("TutorId")
-                        .IsRequired();
+                        .HasForeignKey("TutorId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.User", "User")
                         .WithOne("Student")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.Student", "UserId")
-                        .IsRequired();
+                        .HasForeignKey("LessonLogAPI.Models.Entities.Student", "UserId");
 
                     b.Navigation("Class");
 
@@ -560,8 +558,7 @@ namespace LessonLogAPI.Migrations
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.User", "User")
                         .WithOne("Teacher")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.Teacher", "UserId")
-                        .IsRequired();
+                        .HasForeignKey("LessonLogAPI.Models.Entities.Teacher", "UserId");
 
                     b.Navigation("User");
                 });
@@ -570,18 +567,15 @@ namespace LessonLogAPI.Migrations
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
                         .WithOne("TimetableLesson")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "ClassId")
-                        .IsRequired();
+                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "ClassId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.Classroom", "Classroom")
                         .WithOne("TimetableLesson")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "ClassroomId")
-                        .IsRequired();
+                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "ClassroomId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.LessonHour", "LessonHour")
                         .WithOne("TimetableLesson")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "LessonHourId")
-                        .IsRequired();
+                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "LessonHourId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithOne("TimetableLesson")

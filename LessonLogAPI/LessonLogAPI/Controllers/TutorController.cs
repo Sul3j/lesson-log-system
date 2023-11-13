@@ -68,9 +68,9 @@ namespace LessonLogAPI.Controllers
                 return BadRequest(new { Message = "This Tutor is not exist" });
             }
 
-            _userService.ChangeRole((int)tutor.UserId, Roles.USER.GetDisplayName());
-
             _tutorService.DeleteTutor(id);
+
+            _userService.ChangeRole((int)tutor.UserId, Roles.USER.GetDisplayName());
 
             return Ok(new { Message = "Tutor has been deleted" });
         }
