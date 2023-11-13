@@ -40,7 +40,7 @@ namespace LessonLogAPI.Controllers
                 }
             }
 
-            _userService.ChangeRole(student.UserId, Roles.STUDENT.GetDisplayName());
+            _userService.ChangeRole((int)student.UserId, Roles.STUDENT.GetDisplayName());
 
             _studentService.AddStudent(student);
 
@@ -102,7 +102,7 @@ namespace LessonLogAPI.Controllers
                 return BadRequest(new { Message = "This Student is not exist" });
             }
 
-            _userService.ChangeRole(student.UserId, Roles.USER.GetDisplayName());
+            _userService.ChangeRole((int)student.UserId, Roles.USER.GetDisplayName());
 
             _studentService.DeleteStudent(id);
 

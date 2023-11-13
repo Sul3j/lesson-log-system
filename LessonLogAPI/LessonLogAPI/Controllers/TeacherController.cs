@@ -38,14 +38,14 @@ namespace LessonLogAPI.Controllers
                 }
             }
 
-            var isUserExist = _userService.isUserCheck(teacher.UserId);
+            var isUserExist = _userService.isUserCheck((int)teacher.UserId);
 
             if (isUserExist != null)
             {
                 return BadRequest(isUserExist);
             }
 
-            _userService.ChangeRole(teacher.UserId, Roles.TEACHER.GetDisplayName());
+            _userService.ChangeRole((int)teacher.UserId, Roles.TEACHER.GetDisplayName());
 
             _teacherService.AddTeacher(teacher);
 
@@ -75,7 +75,7 @@ namespace LessonLogAPI.Controllers
                 return BadRequest(new { Message = "This Teacher is not exist" });
             }
 
-            _userService.ChangeRole(teacher.UserId, Roles.USER.GetDisplayName());
+            _userService.ChangeRole((int)teacher.UserId, Roles.USER.GetDisplayName());
 
             _teacherService.DeleteTeacher(id);
 

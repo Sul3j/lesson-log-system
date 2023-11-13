@@ -38,14 +38,14 @@ namespace LessonLogAPI.Controllers
                 }
             }
 
-            var isUserExist = _userService.isUserCheck(admin.UserId);
+            var isUserExist = _userService.isUserCheck((int)admin.UserId);
 
             if (isUserExist != null)
             {
                 return BadRequest(isUserExist);
             }
 
-            _userService.ChangeRole(admin.UserId, Roles.ADMIN.GetDisplayName());
+            _userService.ChangeRole((int)admin.UserId, Roles.ADMIN.GetDisplayName());
 
             _adminService.AddAdmin(admin);
 
@@ -62,7 +62,7 @@ namespace LessonLogAPI.Controllers
                 return BadRequest(new { Message = "This Admin is not exist" });
             } 
 
-            _userService.ChangeRole(admin.UserId, Roles.USER.GetDisplayName());
+            _userService.ChangeRole((int)admin.UserId, Roles.USER.GetDisplayName());
 
             _adminService.DeleteAdmin(id);
 
