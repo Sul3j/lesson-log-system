@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
             this.router.navigate(['login']);
           },
           error: (err) => {
-            this.toastr.error("Form data is invalid!", "Error");
+            this.toastr.error("The user with this email exists or the password is incorrect!", "Error");
           }
         })
     } else {
