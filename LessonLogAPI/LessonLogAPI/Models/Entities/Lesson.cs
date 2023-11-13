@@ -10,9 +10,9 @@ namespace LessonLogAPI.Models.Entities
         public Teacher Teacher { get; set; }
         public int TeacherId { get; set; }
         public Subject Subject { get; set; }
-        public int SubjectId { get; set; }
+        public int? SubjectId { get; set; }
         public Class Class { get; set; }
-        public int ClassId { get; set; }
+        public int? ClassId { get; set; }
         public List<Attendance> Attendances { get; set; } = new List<Attendance>();
     }
 }

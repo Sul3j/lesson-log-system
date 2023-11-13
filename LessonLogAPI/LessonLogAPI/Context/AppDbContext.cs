@@ -33,19 +33,23 @@ namespace LessonLogAPI.Context
             {
                 eb.HasOne(u => u.Teacher)
                 .WithOne(t => t.User)
-                .HasForeignKey<Teacher>(t => t.UserId);
+                .HasForeignKey<Teacher>(t => t.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasOne(u => u.Student)
                 .WithOne(s => s.User)
-                .HasForeignKey<Student>(s => s.UserId);
+                .HasForeignKey<Student>(s => s.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasOne(u => u.Tutor)
                 .WithOne(t => t.User)
-                .HasForeignKey<Tutor>(t => t.UserId);
+                .HasForeignKey<Tutor>(t => t.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasOne(u => u.Admin)
                 .WithOne(a => a.User)
-                .HasForeignKey<Admin>(a => a.UserId);
+                .HasForeignKey<Admin>(a => a.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
             });
                 
             modelBuilder.Entity<Teacher>(eb =>
@@ -73,69 +77,81 @@ namespace LessonLogAPI.Context
             {
                 eb.HasMany(s => s.Lessons)
                 .WithOne(l => l.Subject)
-                .HasForeignKey(l => l.SubjectId);
+                .HasForeignKey(l => l.SubjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasMany(s => s.Grades)
                 .WithOne(g => g.Subject)
-                .HasForeignKey(g => g.SubjectId);
+                .HasForeignKey(g => g.SubjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasOne(s => s.TimetableLesson)
                 .WithOne(t => t.Subject)
-                .HasForeignKey<TimetableLesson>(t => t.SubjectId);
+                .HasForeignKey<TimetableLesson>(t => t.SubjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Class>(eb =>
             {
                 eb.HasMany(c => c.Lessons)
                 .WithOne(l => l.Class)
-                .HasForeignKey(l => l.ClassId);
+                .HasForeignKey(l => l.ClassId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasMany(c => c.Students)
                 .WithOne(s => s.Class)
-                .HasForeignKey(s => s.ClassId);
+                .HasForeignKey(s => s.ClassId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasOne(c => c.TimetableLesson)
                 .WithOne(t => t.Class)
-                .HasForeignKey<TimetableLesson>(t => t.ClassId);
+                .HasForeignKey<TimetableLesson>(t => t.ClassId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Lesson>(eb =>
             {
                 eb.HasMany(l => l.Attendances)
                 .WithOne(a => a.Lesson)
-                .HasForeignKey(a => a.LessonId);
+                .HasForeignKey(a => a.LessonId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Student>(eb =>
             {
                 eb.HasMany(s => s.Attendances)
                 .WithOne(a => a.Student)
-                .HasForeignKey(a => a.StudentId);
+                .HasForeignKey(a => a.StudentId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasMany(s => s.Grades)
                 .WithOne(g => g.Student)
-                .HasForeignKey(g => g.StudentId);
+                .HasForeignKey(g => g.StudentId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Tutor>(eb =>
             {
                 eb.HasMany(t => t.Students)
                 .WithOne(s => s.Tutor)
-                .HasForeignKey(s => s.TutorId);
+                .HasForeignKey(s => s.TutorId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<Classroom>(eb =>
             {
                 eb.HasOne(c => c.TimetableLesson)
                 .WithOne(t => t.Classroom)
-                .HasForeignKey<TimetableLesson>(t => t.ClassroomId);
+                .HasForeignKey<TimetableLesson>(t => t.ClassroomId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<LessonHour>(eb =>
             {
                 eb.HasOne(l => l.TimetableLesson)
                 .WithOne(t => t.LessonHour)
-                .HasForeignKey<TimetableLesson>(t => t.LessonHourId);
+                .HasForeignKey<TimetableLesson>(t => t.LessonHourId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasData(
                     new LessonHour() { Id = 1, From = "8:00", To = "8:45" },

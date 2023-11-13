@@ -462,7 +462,6 @@ namespace LessonLogAPI.Migrations
                     b.HasOne("LessonLogAPI.Models.Entities.User", "User")
                         .WithOne("Admin")
                         .HasForeignKey("LessonLogAPI.Models.Entities.Admin", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -473,7 +472,6 @@ namespace LessonLogAPI.Migrations
                     b.HasOne("LessonLogAPI.Models.Entities.Lesson", "Lesson")
                         .WithMany("Attendances")
                         .HasForeignKey("LessonId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LessonLogAPI.Models.Entities.Student", "Student")
@@ -503,7 +501,6 @@ namespace LessonLogAPI.Migrations
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithMany("Grades")
                         .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Student");
@@ -516,13 +513,11 @@ namespace LessonLogAPI.Migrations
                     b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
                         .WithMany("Lessons")
                         .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithMany("Lessons")
                         .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LessonLogAPI.Models.Entities.Teacher", "Teacher")
@@ -542,19 +537,16 @@ namespace LessonLogAPI.Migrations
                     b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
                         .WithMany("Students")
                         .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LessonLogAPI.Models.Entities.Tutor", "Tutor")
                         .WithMany("Students")
                         .HasForeignKey("TutorId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LessonLogAPI.Models.Entities.User", "User")
                         .WithOne("Student")
                         .HasForeignKey("LessonLogAPI.Models.Entities.Student", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Class");
@@ -569,7 +561,6 @@ namespace LessonLogAPI.Migrations
                     b.HasOne("LessonLogAPI.Models.Entities.User", "User")
                         .WithOne("Teacher")
                         .HasForeignKey("LessonLogAPI.Models.Entities.Teacher", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -580,25 +571,21 @@ namespace LessonLogAPI.Migrations
                     b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
                         .WithOne("TimetableLesson")
                         .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LessonLogAPI.Models.Entities.Classroom", "Classroom")
                         .WithOne("TimetableLesson")
                         .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "ClassroomId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LessonLogAPI.Models.Entities.LessonHour", "LessonHour")
                         .WithOne("TimetableLesson")
                         .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "LessonHourId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithOne("TimetableLesson")
                         .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LessonLogAPI.Models.Entities.Teacher", "Teacher")

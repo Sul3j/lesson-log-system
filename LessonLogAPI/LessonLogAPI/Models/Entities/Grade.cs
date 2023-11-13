@@ -12,7 +12,7 @@ namespace LessonLogAPI.Models.Entities
         public int GradeWeight { get; set; }
         public DateTime GetDate { get; set; }
         public Subject Subject { get; set; }
-        public int SubjectId { get; set; }
+        public int? SubjectId { get; set; }
         public Student Student { get; set; }
         public int? StudentId { get; set; }
     }
