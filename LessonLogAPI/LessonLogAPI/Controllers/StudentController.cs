@@ -54,11 +54,6 @@ namespace LessonLogAPI.Controllers
         { 
             var students = _studentService.GetStudents();
 
-            if (students.Count() == 0)
-            {
-                return Ok(new { Message = "No students to display" });
-            }
-
             return Ok(students);
         }
 

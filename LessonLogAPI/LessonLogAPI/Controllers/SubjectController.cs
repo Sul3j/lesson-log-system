@@ -100,11 +100,6 @@ namespace LessonLogAPI.Controllers
         {
             var subjects = _subjectService.GetSubjects();
 
-            if (subjects.Count() == 0)
-            {
-                return Ok(new { Message = "No subjects to display" });
-            }
-
             return Ok(subjects);
         }
     }

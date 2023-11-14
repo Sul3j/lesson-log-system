@@ -57,11 +57,6 @@ namespace LessonLogAPI.Controllers
         {
             var teachers = _teacherService.GetTeachers();
 
-            if (teachers.Count() == 0)
-            {
-                return Ok(new { Message = "No teachers to display" });
-            }
-
             return Ok(teachers);
         }
 

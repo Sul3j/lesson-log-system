@@ -44,11 +44,6 @@ namespace LessonLogAPI.Controllers
         {
             var classrooms = _classroomService.GetAllClassrooms();
 
-            if (classrooms.Count() == 0)
-            {
-                return Ok(new { Message = "No classrooms to display" });
-            }
-
             return Ok(classrooms);
         }
 

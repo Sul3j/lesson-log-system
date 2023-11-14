@@ -96,7 +96,7 @@
       <div class="modal-body">
         <select class="form-control mt-3" (change)="changeUser($event)">
           <option selected>--- select user ---</option>
-          <option *ngFor="let user of users" [value]="user.id"> {{ user.firstName}} {{ user.lastName }} </option>
+          <option *ngFor="let user of users" [value]="user.id"> {{ user.firstName }} {{ user.lastName }} </option>
         </select>
         <select class="form-control mt-3" (change)="changeClass($event)">
           <option selected>--- select class ---</option>

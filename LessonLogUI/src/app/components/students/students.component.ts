@@ -35,6 +35,8 @@ export class StudentsComponent implements OnInit {
   public currentStudent: Student = new Student();
   public isEditButtonDisabled = false;
 
+  public array = [];
+
   @ViewChild('searchInput') searchInput!: ElementRef;
 
   constructor(private studentsService: StudentsService,

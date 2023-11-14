@@ -36,11 +36,6 @@ namespace LessonLogAPI.Controllers
         {
             var lessons = _lessonService.GetLessons();
 
-            if (lessons.Count() == 0)
-            {
-                return Ok(new { Message = "No lessons to display" });
-            }
-
             return Ok(lessons);
         }
 
