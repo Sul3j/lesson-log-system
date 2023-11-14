@@ -1,7 +1,9 @@
 ﻿using LessonLogAPI.Context;
+using LessonLogAPI.Models;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Extensions;
 
 namespace LessonLogAPI.Services
 {
@@ -34,6 +36,14 @@ namespace LessonLogAPI.Services
         public Class DeleteClass(int id)
         {
             var classValue = _dbContext.Classes.FirstOrDefault(c => c.Id == id);
+            var student = _dbContext.Students.FirstOrDefault(s => s.ClassId == id);
+            var user = _dbContext.Users.FirstOrDefault(u => u.Id == student.UserId);
+
+            if (student != null)
+            {
+                student.ClassId = null;
+                user.Role = Roles.USER.GetDisplayName();
+            }
 
             if (classValue != null)
             {

@@ -13,3 +13,20 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.breadcrumb {
+  border: 1px solid #ddd;
+  background-color: #eee;
+  padding: 8px;
+  border-radius: 5px;
+  .breadcrumb-item {
+    li {
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+}
+
+.breadcrumb-active {
+  color: #C96E6E;
+  cursor: auto;
+}

@@ -1,5 +1,11 @@
 <app-main-nav>
   <section class="classes container mt-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" [routerLink]="['/dashboard']"><a>Dashboard</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Classrooms</a></li>
+      </ol>
+    </nav>
     <div class="d-flex">
       <div class="input-group">
         <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-magnifying-glass"></i></span>
