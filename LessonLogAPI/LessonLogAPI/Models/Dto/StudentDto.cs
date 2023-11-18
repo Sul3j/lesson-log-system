@@ -9,6 +9,8 @@
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public int ClassYear { get; set; }
-        public string ClassName { get; set; } 
+        public string ClassName { get; set; }
+        public string TutorFirstName { get; set; }
+        public string TutorLastName { get; set; }
     }
 }

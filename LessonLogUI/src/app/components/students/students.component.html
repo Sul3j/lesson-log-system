@@ -44,10 +44,10 @@
         <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Pesel</th>
-        <th scope="col">Phone Number</th>
+        <th scope="col">Phone</th>
         <th scope="col">Email</th>
-        <th scope="col">Class Name</th>
-        <th scope="col">Class Year</th>
+        <th scope="col">Class</th>
+        <th scope="col">Tutor</th>
         <th scope="col"></th>
       </tr>
       </thead>
@@ -59,8 +59,8 @@
         <td>{{ student.pesel }}</td>
         <td>{{ student.phoneNumber }}</td>
         <td>{{ student.email }}</td>
-        <td>{{ student.className }}</td>
-        <td>{{ student.classYear }}</td>
+        <td>{{ student.classYear }} {{ student.className }}</td>
+        <td>{{ student.tutorFirstName }} {{ student.tutorLastName }}</td>
         <td class="d-flex justify-content-end">
           <button mat-mini-fab color="primary" data-bs-target="#editModal" data-bs-toggle="modal" (click)="getCurrentStudent(student)">
             <mat-icon>edit</mat-icon>

@@ -74,7 +74,9 @@ namespace LessonLogAPI.Controllers
                     PhoneNumber = s.User.PhoneNumber,
                     Email = s.User.Email,
                     ClassName = s.Class.Name,
-                    ClassYear = s.Class.Year
+                    ClassYear = s.Class.Year,
+                    TutorFirstName = s.Tutor.User.FirstName,
+                    TutorLastName = s.Tutor.User.LastName
                 })
                 .ToListAsync();
 

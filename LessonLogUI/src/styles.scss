@@ -18,15 +18,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: #eee;
   padding: 8px;
   border-radius: 5px;
+  cursor: pointer;
   .breadcrumb-item {
     li {
       color: #fff;
-      cursor: pointer;
     }
   }
 }
 
 .breadcrumb-active {
   color: #C96E6E;
-  cursor: auto;
 }

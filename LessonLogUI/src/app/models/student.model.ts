@@ -8,4 +8,6 @@ export class Student {
   className!: string;
   classYear!: number;
   classId!: number;
+  tutorFirstName!: string;
+  tutorLastName!: string;
 }

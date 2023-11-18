@@ -33,17 +33,21 @@ namespace LessonLogAPI.Services
             return classes;
         }
 
+        private void RemoveRoles(IQueryable<Student> students)
+        {
+            students.ForEachAsync(student =>
+            {
+                var user = _dbContext.Users.FirstOrDefault(u => u.Id == student.UserId);
+                user.Role = Roles.USER.GetDisplayName();
+                _dbContext.SaveChanges();
+            });
+        }
+
         public Class DeleteClass(int id)
         {
             var classValue = _dbContext.Classes.FirstOrDefault(c => c.Id == id);
-            var student = _dbContext.Students.FirstOrDefault(s => s.ClassId == id);
-            var user = _dbContext.Users.FirstOrDefault(u => u.Id == student.UserId);
-
-            if (student != null)
-            {
-                student.ClassId = null;
-                user.Role = Roles.USER.GetDisplayName();
-            }
+            var students = _dbContext.Students.Where(s => s.ClassId == id).AsQueryable();
+            RemoveRoles(students);
 
             if (classValue != null)
             {
