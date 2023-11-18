@@ -45,6 +45,7 @@ namespace LessonLogAPI.Controllers
                     Name = c.Name,
                     Year = c.Year,
                     EducatorFullName = c.Teacher.User.FirstName + " " + c.Teacher.User.LastName,
+                    EducatorId = c.EducatorId
                 })
                 .ToListAsync();
 

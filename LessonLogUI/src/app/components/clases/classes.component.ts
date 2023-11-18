@@ -23,7 +23,6 @@ export class ClassesComponent implements OnInit {
   public years: Array<number> = [1,2,3,4,5,6,7,8];
   public currentClass: Class = new Class();
   public name: string = "";
-  public editName: string = "";
   public classValue: ClassDto = new ClassDto();
   public classEditValue: ClassDto = new ClassDto();
 
@@ -79,7 +78,7 @@ export class ClassesComponent implements OnInit {
   }
 
   isAllEditClassValue() {
-    if ((this.classEditValue.educatorId == null || this.classEditValue.educatorId == undefined) || (this.classEditValue.year == null || this.classEditValue.year == undefined) || this.editName == "") {
+    if ((this.classEditValue.educatorId == null || this.classEditValue.educatorId == undefined) || (this.classEditValue.year == null || this.classEditValue.year == undefined) || this.classEditValue.name == "") {
       return true;
     } else {
       return false;
@@ -97,12 +96,9 @@ export class ClassesComponent implements OnInit {
   }
 
   editClass(id: number) {
-    this.classEditValue.name = this.editName;
     this.classService.updateClass(id, this.classEditValue).subscribe({
       next: () => {
         this.toastr.success("Class has been updated!", "Success");
-        this.classEditValue = new ClassDto();
-        this.editName = "";
       }, error: () => {
         this.toastr.error("Something went wrong!", "Error");
       }
@@ -121,8 +117,19 @@ export class ClassesComponent implements OnInit {
   }
 
   getCurrentClass(classValue: Class) {
-    this.editName = classValue.name;
-    this.currentClass.id = classValue.id;
+    this.classEditValue = {
+      year: classValue.year,
+      educatorId: classValue.educatorId,
+      name: classValue.name
+    };
+
+    this.currentClass = {
+      name: classValue.name,
+      id: classValue.id,
+      educatorId: classValue.educatorId,
+      year: classValue.year,
+      educatorFullName: ""
+    }
   }
 
   changeTeacher(e: any) {

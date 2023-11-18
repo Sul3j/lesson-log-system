@@ -84,14 +84,14 @@
       <div class="modal-body">
         <label>Educator:</label>
         <select class="form-control" (change)="changeTeacher($event)">
-          <option selected [value]="null"></option>
+          <option selected [value]="null">--- select educator ---</option>
           <option *ngFor="let teacher of teachers" [value]="teacher.id"> {{ teacher.user.firstName}} {{ teacher.user.lastName }} </option>
         </select>
         <label>Class Name:</label>
         <input class="form-control" [(ngModel)]="name">
         <label>Class Year:</label>
         <select class="form-control" (change)="changeYear($event)">
-          <option selected [value]="null"></option>
+          <option selected [value]="null">--- select year ---</option>
           <option *ngFor="let year of years" [value]="year">{{ year }}</option>
         </select>
       </div>
@@ -114,15 +114,13 @@
       <div class="modal-body">
         <label>Educator:</label>
         <select class="form-control" (change)="changeEditTeacherValue($event)">
-          <option selected [value]="null"></option>
-          <option *ngFor="let teacher of teachers" [value]="teacher.id"> {{ teacher.user.firstName}} {{ teacher.user.lastName }} </option>
+          <option *ngFor="let teacher of teachers" [selected]="teacher.id == currentClass.educatorId" [value]="teacher.id"> {{ teacher.user.firstName}} {{ teacher.user.lastName }} </option>
         </select>
         <label>Class Name:</label>
-        <input class="form-control" [(ngModel)]="editName">
+        <input class="form-control" [(ngModel)]="classEditValue.name">
         <label>Class Year:</label>
         <select class="form-control" (change)="changeEditYearValue($event)">
-          <option selected [value]="null"></option>
-          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          <option *ngFor="let year of years" [selected]="year == currentClass.year" [value]="year">{{ year }}</option>
         </select>
       </div>
       <div class="modal-footer">
