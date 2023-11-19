@@ -38,11 +38,11 @@ namespace LessonLogAPI.Services
         public IQueryable<TimetableLesson> GetLessonsByClass(int classId)
         {
             var lessons = _dbContext.TimetableLessons
+                .Where(l => l.ClassId == classId)
                 .Include(l => l.Subject)
                 .Include(l => l.Teacher)
                 .Include(l => l.Classroom)
                 .Include(l => l.LessonHour)
-                .Where(l => l.ClassId == classId)
                 .AsQueryable();
 
             return lessons;

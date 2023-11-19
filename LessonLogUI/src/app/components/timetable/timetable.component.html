@@ -33,7 +33,7 @@
                 </div>
               </div>
             </div>
-            <button class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
+            <button data-bs-toggle="modal" (click)="setWeekDay('Monday')" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
       </div>
@@ -42,6 +42,7 @@
           <div class="card-header">Tuesday</div>
           <div class="card-body">
             This is some text within a card body.
+            <button data-bs-toggle="modal" (click)="setWeekDay('Tuesday')" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
       </div>
@@ -50,6 +51,7 @@
           <div class="card-header">Wednesday</div>
           <div class="card-body">
             This is some text within a card body.
+            <button data-bs-toggle="modal" (click)="setWeekDay('Wednesday')" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
       </div>
@@ -58,6 +60,7 @@
           <div class="card-header">Thursday</div>
           <div class="card-body">
             This is some text within a card body.
+            <button data-bs-toggle="modal" (click)="setWeekDay('Thursday')" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
       </div>
@@ -66,9 +69,40 @@
           <div class="card-header">Friday</div>
           <div class="card-body">
             This is some text within a card body.
+            <button data-bs-toggle="modal" (click)="setWeekDay('Friday')" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
       </div>
     </div>
   </section>
 </app-main-nav>
+
+<!-- Modal Add -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add lesson</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>Educator:</label>
+<!--        <select class="form-control" (change)="changeTeacher($event)">-->
+<!--          <option selected [value]="null">-&#45;&#45; select educator -&#45;&#45;</option>-->
+<!--          <option *ngFor="let teacher of teachers" [value]="teacher.id"> {{ teacher.user.firstName}} {{ teacher.user.lastName }} </option>-->
+<!--        </select>-->
+<!--        <label>Class Name:</label>-->
+<!--        <input class="form-control" [(ngModel)]="name">-->
+<!--        <label>Class Year:</label>-->
+<!--        <select class="form-control" (change)="changeYear($event)">-->
+<!--          <option selected [value]="null">-&#45;&#45; select year -&#45;&#45;</option>-->
+<!--          <option *ngFor="let year of years" [value]="year">{{ year }}</option>-->
+<!--        </select>-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<!--        <button type="button" class="btn btn-primary btn-add" (click)="addClass()" [disabled]="isAllClassValue()">Add</button>-->
+      </div>
+    </div>
+  </div>
+</div>
