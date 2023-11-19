@@ -35,6 +35,19 @@ namespace LessonLogAPI.Services
             return lessons;
         }
 
+        public IQueryable<TimetableLesson> GetLessonsByClass(int classId)
+        {
+            var lessons = _dbContext.TimetableLessons
+                .Include(l => l.Subject)
+                .Include(l => l.Teacher)
+                .Include(l => l.Classroom)
+                .Include(l => l.LessonHour)
+                .Where(l => l.ClassId == classId)
+                .AsQueryable();
+
+            return lessons;
+        }
+
         public TimetableLesson DeleteLesson(int id)
         {
             var lesson = _dbContext.TimetableLessons.FirstOrDefault(t => t.Id == id);
