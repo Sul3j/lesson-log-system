@@ -1,1 +1,77 @@
-<p>timetable works!</p>
+<app-main-nav>
+  <section class="timetable container mt-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" [routerLink]="['/dashboard']"><a>Dashboard</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Timetable</a></li>
+      </ol>
+    </nav>
+    <select class="form-control" placeholder="select class">
+      <option selected value="">--- select class ---</option>
+      <option></option>
+      <option></option>
+      <option></option>
+      <option></option>
+    </select>
+    <div class="row">
+      <div class="card-wrapper col-12 col-md-6 col-lg-4">
+        <div class="card">
+          <div class="card-header">Monday</div>
+          <div class="card-body">
+            <div class="card w-100 inside-card">
+              <div class="card-body">
+                <div class="card-lessons w-100 d-flex flex-wrap">
+                  <h6 class="subject">Sience</h6>
+                  <p class="hours">8.00-8.45</p>
+                  <p class="teachers">Tomasz Kowalski</p>
+                </div>
+              </div>
+            </div>
+            <div class="card w-100 inside-card">
+              <div class="card-body">
+                <div class="card-lessons w-100 d-flex flex-wrap">
+                  <h6 class="subject">Sience</h6>
+                  <p class="hours">8.00-8.45</p>
+                  <p class="teachers">Tomasz Kowalski</p>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="card-wrapper col-12 col-md-6 col-lg-4">
+        <div class="card">
+          <div class="card-header">Tuesday</div>
+          <div class="card-body">
+            This is some text within a card body.
+          </div>
+        </div>
+      </div>
+      <div class="card-wrapper col-12 col-md-6 col-lg-4">
+        <div class="card">
+          <div class="card-header">Wednesday</div>
+          <div class="card-body">
+            This is some text within a card body.
+          </div>
+        </div>
+      </div>
+      <div class="card-wrapper col-12 col-md-6 col-lg-4">
+        <div class="card">
+          <div class="card-header">Thursday</div>
+          <div class="card-body">
+            This is some text within a card body.
+          </div>
+        </div>
+      </div>
+      <div class="card-wrapper col-12 col-md-6 col-lg-4">
+        <div class="card">
+          <div class="card-header">Friday</div>
+          <div class="card-body">
+            This is some text within a card body.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</app-main-nav>

@@ -97,3 +97,4 @@ C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\De
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Newtonsoft.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\Sieve.dll
 C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\bin\Debug\net6.0\System.Linq.Dynamic.Core.dll
+C:\Users\Szymo\Desktop\github\lesson-log-system\LessonLogAPI\LessonLogAPI\obj\Debug\net6.0\LessonLogAPI.sourcelink.json
