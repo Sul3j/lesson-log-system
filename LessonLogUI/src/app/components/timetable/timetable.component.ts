@@ -12,6 +12,7 @@ import {ClassesService} from "../../services/classes.service";
 export class TimetableComponent implements OnInit {
 
   public classes: Array<Class> = new Array<Class>();
+  public selectedClass: number = 0;
 
   constructor(private timetableService: TimetableService,
               private toastr: ToastrService,
@@ -29,6 +30,11 @@ export class TimetableComponent implements OnInit {
     this.classesService.getAllClasses().subscribe(res => {
       this.classes = res as Array<Class>;
     });
+  }
+
+  changeClass(e: any) {
+    this.selectedClass = e.target.value;
+    console.log(e.target.value)
   }
 
 }

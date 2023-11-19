@@ -6,11 +6,11 @@
         <li class="breadcrumb-item breadcrumb-active"><a>Timetable</a></li>
       </ol>
     </nav>
-    <select class="form-control" placeholder="select class">
-      <option selected value="">--- select class ---</option>
+    <select class="form-control" (change)="changeClass($event)">
+      <option selected value=0>--- select class ---</option>
       <option *ngFor="let class of classes" [value]="class.id">{{ class.year }} {{ class.name }}</option>
     </select>
-    <div class="row">
+    <div class="row" *ngIf="selectedClass != 0">
       <div class="card-wrapper col-12 col-md-6 col-lg-4">
         <div class="card">
           <div class="card-header">Monday</div>
