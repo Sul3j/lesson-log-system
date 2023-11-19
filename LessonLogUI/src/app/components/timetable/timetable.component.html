@@ -8,10 +8,7 @@
     </nav>
     <select class="form-control" placeholder="select class">
       <option selected value="">--- select class ---</option>
-      <option></option>
-      <option></option>
-      <option></option>
-      <option></option>
+      <option *ngFor="let class of classes" [value]="class.id">{{ class.year }} {{ class.name }}</option>
     </select>
     <div class="row">
       <div class="card-wrapper col-12 col-md-6 col-lg-4">
