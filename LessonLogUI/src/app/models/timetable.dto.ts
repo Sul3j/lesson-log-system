@@ -1,6 +1,6 @@
 export class TimetableDto {
   id!: number;
-  weekDay!: string;
+  weekDay!: number;
   subjectId!: number;
   teacherId!: number;
   classroomId!: number;

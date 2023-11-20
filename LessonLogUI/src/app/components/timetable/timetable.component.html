@@ -33,7 +33,7 @@
                 </div>
               </div>
             </div>
-            <button data-bs-toggle="modal" (click)="setWeekDay('Monday')" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
+            <button data-bs-toggle="modal" (click)="setWeekDay(1)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@
           <div class="card-header">Tuesday</div>
           <div class="card-body">
             This is some text within a card body.
-            <button data-bs-toggle="modal" (click)="setWeekDay('Tuesday')" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
+            <button data-bs-toggle="modal" (click)="setWeekDay(2)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
           <div class="card-header">Wednesday</div>
           <div class="card-body">
             This is some text within a card body.
-            <button data-bs-toggle="modal" (click)="setWeekDay('Wednesday')" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
+            <button data-bs-toggle="modal" (click)="setWeekDay(3)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@
           <div class="card-header">Thursday</div>
           <div class="card-body">
             This is some text within a card body.
-            <button data-bs-toggle="modal" (click)="setWeekDay('Thursday')" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
+            <button data-bs-toggle="modal" (click)="setWeekDay(4)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
           <div class="card-header">Friday</div>
           <div class="card-body">
             This is some text within a card body.
-            <button data-bs-toggle="modal" (click)="setWeekDay('Friday')" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
+            <button data-bs-toggle="modal" (click)="setWeekDay(5)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
       </div>
@@ -86,22 +86,26 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <label>Educator:</label>
-<!--        <select class="form-control" (change)="changeTeacher($event)">-->
-<!--          <option selected [value]="null">-&#45;&#45; select educator -&#45;&#45;</option>-->
-<!--          <option *ngFor="let teacher of teachers" [value]="teacher.id"> {{ teacher.user.firstName}} {{ teacher.user.lastName }} </option>-->
-<!--        </select>-->
-<!--        <label>Class Name:</label>-->
-<!--        <input class="form-control" [(ngModel)]="name">-->
-<!--        <label>Class Year:</label>-->
-<!--        <select class="form-control" (change)="changeYear($event)">-->
-<!--          <option selected [value]="null">-&#45;&#45; select year -&#45;&#45;</option>-->
-<!--          <option *ngFor="let year of years" [value]="year">{{ year }}</option>-->
-<!--        </select>-->
+        <select class="form-control" (change)="changeSubject($event)">
+          <option selected value=0>--- select subject ---</option>
+          <option *ngFor="let subject of subjects" [value]="subject.id"> {{ subject.name }} </option>
+        </select>
+        <select class="form-control" (change)="changeTeacher($event)">
+          <option selected value=0>--- select teacher ---</option>
+          <option *ngFor="let teacher of teachers" [value]="teacher.id"> {{ teacher.user.firstName }} {{ teacher.user.lastName }}</option>
+        </select>
+        <select class="form-control" (change)="changeClassroom($event)">
+          <option selected value=0>--- select  classroom ---</option>
+          <option *ngFor="let classroom of classrooms" [value]="classroom.id"> {{ classroom.floor }} / {{ classroom.number }}</option>
+        </select>
+        <select class="form-control" (change)="changeLessonHour($event)">
+          <option selected value=0>--- select lesson hours ---</option>
+          <option *ngFor="let lessonHour of lessonHours" [value]="lessonHour.id"> {{ lessonHour.from }} - {{ lessonHour.to }}</option>
+        </select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-<!--        <button type="button" class="btn btn-primary btn-add" (click)="addClass()" [disabled]="isAllClassValue()">Add</button>-->
+        <button type="button" class="btn btn-primary btn-add" (click)="addTimetable()" [disabled]="isAllTimetableValues()">Add</button>
       </div>
     </div>
   </div>

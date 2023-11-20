@@ -10,6 +10,8 @@ import {ClassroomsService} from "../../services/classrooms.service";
 import {Subject} from "../../models/subject.model";
 import {Teacher} from "../../models/teacher.model";
 import {Classroom} from "../../models/classroom.model";
+import {LessonhoursService} from "../../services/lessonhours.service";
+import {LessonHours} from "../../models/lessonhours.model";
 
 @Component({
   selector: 'app-timetable',
@@ -24,20 +26,30 @@ export class TimetableComponent implements OnInit {
   public subjects: Array<Subject> = new Array<Subject>();
   public teachers: Array<Teacher> = new Array<Teacher>();
   public classrooms: Array<Classroom> = new Array<Classroom>();
+  public lessonHours: Array<LessonHours> = new Array<LessonHours>();
 
   constructor(private timetableService: TimetableService,
               private toastr: ToastrService,
               private classesService: ClassesService,
               private subjectsService: SubjectsService,
               private teachersService: TeachersService,
-              private classroomsService: ClassroomsService) {}
+              private classroomsService: ClassroomsService,
+              private lessonHoursService: LessonhoursService) {}
 
   ngOnInit(): void {
     this.timetableService.refreshNeeded
       .subscribe(() => {
         this.getAllClasses();
+        this.getAllSubjects();
+        this.getAllTeachers();
+        this.getAllClassrooms();
+        this.getAllLessonHours();
       })
     this.getAllClasses();
+    this.getAllSubjects();
+    this.getAllTeachers();
+    this.getAllClassrooms();
+    this.getAllLessonHours();
   }
 
   private getAllClasses() {
@@ -47,8 +59,8 @@ export class TimetableComponent implements OnInit {
   }
 
   changeClass(e: any) {
-    this.selectedClass = e.target.value;
-    this.timetableDto.classId = e.target.value;
+    this.selectedClass = parseInt(e.target.value);
+    this.timetableDto.classId = parseInt(e.target.value);
     this.getTimetableByClass(e.target.value);
   }
 
@@ -60,7 +72,7 @@ export class TimetableComponent implements OnInit {
     }
   }
 
-  setWeekDay(day: string) {
+  setWeekDay(day: number) {
     this.timetableDto.weekDay = day;
   }
 
@@ -82,8 +94,50 @@ export class TimetableComponent implements OnInit {
     })
   }
 
-  addTimetable(timetable: TimetableDto) {
+  private getAllLessonHours() {
+    this.lessonHoursService.getAllLessonHours().subscribe(res => {
+      this.lessonHours = res as Array<LessonHours>;
+    })
+  }
 
+  changeSubject(e: any) {
+    this.timetableDto.subjectId = parseInt(e.target.value);
+  }
+
+  changeTeacher(e: any) {
+    this.timetableDto.teacherId = parseInt(e.target.value);
+  }
+
+  changeClassroom(e: any) {
+    this.timetableDto.classroomId = parseInt(e.target.value);
+  }
+
+  changeLessonHour(e: any) {
+    this.timetableDto.lessonHourId = parseInt(e.target.value);
+  }
+
+  addTimetable() {
+    console.log(this.timetableDto)
+    this.timetableService.addTimetable(this.timetableDto).subscribe({
+      next: (res) => {
+        this.toastr.success("Lesson has been added!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error")
+      }
+    })
+  }
+
+  isAllTimetableValues() {
+    if(this.timetableDto.weekDay != undefined &&
+    this.timetableDto.subjectId != undefined &&
+    this.timetableDto.teacherId != undefined &&
+    this.timetableDto.classroomId != undefined &&
+    this.timetableDto.lessonHourId != undefined &&
+    this.timetableDto.classId != undefined) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 }

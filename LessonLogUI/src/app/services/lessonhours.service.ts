@@ -17,6 +17,6 @@ export class LessonhoursService {
   }
 
   getAllLessonHours() {
-    return this.http.get(`${this.urlService.url}`)
+    return this.http.get(`${this.urlService.url}/LESSONHOURS/all`);
   }
 }

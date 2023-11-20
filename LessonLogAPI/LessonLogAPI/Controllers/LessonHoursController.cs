@@ -1,5 +1,4 @@
-﻿using LessonLogAPI.Services;
-using Microsoft.AspNetCore.Http;
+﻿using LessonLogAPI.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LessonLogAPI.Controllers
@@ -8,9 +7,9 @@ namespace LessonLogAPI.Controllers
     [ApiController]
     public class LessonHoursController : ControllerBase
     {
-        private readonly LessonHourService _lessonHourService;
+        private readonly ILessonHourService _lessonHourService;
 
-        public LessonHoursController(LessonHourService lessonHourService) 
+        public LessonHoursController(ILessonHourService lessonHourService) 
         { 
             _lessonHourService = lessonHourService;
         }
