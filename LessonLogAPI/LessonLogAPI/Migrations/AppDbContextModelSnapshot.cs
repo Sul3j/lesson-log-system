@@ -260,6 +260,30 @@ namespace LessonLogAPI.Migrations
                             Id = 9,
                             From = "15:25",
                             To = "16:10"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            From = "16:20",
+                            To = "17:05"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            From = "17:15",
+                            To = "18:00"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            From = "18:10",
+                            To = "18:55"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            From = "19:05",
+                            To = "19:50"
                         });
                 });
 
@@ -360,24 +384,15 @@ namespace LessonLogAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassId")
-                        .IsUnique()
-                        .HasFilter("[ClassId] IS NOT NULL");
+                    b.HasIndex("ClassId");
 
-                    b.HasIndex("ClassroomId")
-                        .IsUnique()
-                        .HasFilter("[ClassroomId] IS NOT NULL");
+                    b.HasIndex("ClassroomId");
 
-                    b.HasIndex("LessonHourId")
-                        .IsUnique()
-                        .HasFilter("[LessonHourId] IS NOT NULL");
+                    b.HasIndex("LessonHourId");
 
-                    b.HasIndex("SubjectId")
-                        .IsUnique();
+                    b.HasIndex("SubjectId");
 
-                    b.HasIndex("TeacherId")
-                        .IsUnique()
-                        .HasFilter("[TeacherId] IS NOT NULL");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("TimetableLessons");
                 });
@@ -566,25 +581,25 @@ namespace LessonLogAPI.Migrations
             modelBuilder.Entity("LessonLogAPI.Models.Entities.TimetableLesson", b =>
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
-                        .WithOne("TimetableLesson")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "ClassId");
+                        .WithMany("TimetableLessons")
+                        .HasForeignKey("ClassId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.Classroom", "Classroom")
-                        .WithOne("TimetableLesson")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "ClassroomId");
+                        .WithMany("TimetableLessons")
+                        .HasForeignKey("ClassroomId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.LessonHour", "LessonHour")
-                        .WithOne("TimetableLesson")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "LessonHourId");
+                        .WithMany("TimetableLessons")
+                        .HasForeignKey("LessonHourId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
-                        .WithOne("TimetableLesson")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "SubjectId")
+                        .WithMany("TimetableLessons")
+                        .HasForeignKey("SubjectId")
                         .IsRequired();
 
                     b.HasOne("LessonLogAPI.Models.Entities.Teacher", "Teacher")
-                        .WithOne("TimetableLesson")
-                        .HasForeignKey("LessonLogAPI.Models.Entities.TimetableLesson", "TeacherId");
+                        .WithMany("TimetableLessons")
+                        .HasForeignKey("TeacherId");
 
                     b.Navigation("Class");
 
@@ -627,12 +642,12 @@ namespace LessonLogAPI.Migrations
 
                     b.Navigation("Students");
 
-                    b.Navigation("TimetableLesson");
+                    b.Navigation("TimetableLessons");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Classroom", b =>
                 {
-                    b.Navigation("TimetableLesson");
+                    b.Navigation("TimetableLessons");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Lesson", b =>
@@ -642,7 +657,7 @@ namespace LessonLogAPI.Migrations
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.LessonHour", b =>
                 {
-                    b.Navigation("TimetableLesson");
+                    b.Navigation("TimetableLessons");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Student", b =>
@@ -658,7 +673,7 @@ namespace LessonLogAPI.Migrations
 
                     b.Navigation("Lessons");
 
-                    b.Navigation("TimetableLesson");
+                    b.Navigation("TimetableLessons");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Teacher", b =>
@@ -667,7 +682,7 @@ namespace LessonLogAPI.Migrations
 
                     b.Navigation("Lessons");
 
-                    b.Navigation("TimetableLesson");
+                    b.Navigation("TimetableLessons");
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Tutor", b =>

@@ -64,9 +64,9 @@ namespace LessonLogAPI.Context
                 .HasForeignKey(l => l.TeacherId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-                eb.HasOne(t => t.TimetableLesson)
+                eb.HasMany(t => t.TimetableLessons)
                 .WithOne(t => t.Teacher)
-                .HasForeignKey<TimetableLesson>(t => t.TeacherId)
+                .HasForeignKey(t => t.TeacherId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasMany(t => t.Subjects)
@@ -85,9 +85,9 @@ namespace LessonLogAPI.Context
                 .HasForeignKey(g => g.SubjectId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-                eb.HasOne(s => s.TimetableLesson)
+                eb.HasMany(s => s.TimetableLessons)
                 .WithOne(t => t.Subject)
-                .HasForeignKey<TimetableLesson>(t => t.SubjectId)
+                .HasForeignKey(t => t.SubjectId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
@@ -103,9 +103,9 @@ namespace LessonLogAPI.Context
                 .HasForeignKey(s => s.ClassId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-                eb.HasOne(c => c.TimetableLesson)
+                eb.HasMany(c => c.TimetableLessons)
                 .WithOne(t => t.Class)
-                .HasForeignKey<TimetableLesson>(t => t.ClassId)
+                .HasForeignKey(t => t.ClassId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
@@ -140,17 +140,17 @@ namespace LessonLogAPI.Context
 
             modelBuilder.Entity<Classroom>(eb =>
             {
-                eb.HasOne(c => c.TimetableLesson)
+                eb.HasMany(c => c.TimetableLessons)
                 .WithOne(t => t.Classroom)
-                .HasForeignKey<TimetableLesson>(t => t.ClassroomId)
+                .HasForeignKey(t => t.ClassroomId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<LessonHour>(eb =>
             {
-                eb.HasOne(l => l.TimetableLesson)
+                eb.HasMany(l => l.TimetableLessons)
                 .WithOne(t => t.LessonHour)
-                .HasForeignKey<TimetableLesson>(t => t.LessonHourId)
+                .HasForeignKey(t => t.LessonHourId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
                 eb.HasData(
@@ -162,7 +162,11 @@ namespace LessonLogAPI.Context
                     new LessonHour() { Id = 6, From = "12:40", To = "13:25" },
                     new LessonHour() { Id = 7, From = "13:35", To = "14:20" },
                     new LessonHour() { Id = 8, From = "14:30", To = "15:15" },
-                    new LessonHour() { Id = 9, From = "15:25", To = "16:10" }
+                    new LessonHour() { Id = 9, From = "15:25", To = "16:10" },
+                    new LessonHour() { Id = 10, From = "16:20", To = "17:05" },
+                    new LessonHour() { Id = 11, From = "17:15", To = "18:00" },
+                    new LessonHour() { Id = 12, From = "18:10", To = "18:55" },
+                    new LessonHour() { Id = 13, From = "19:05", To = "19:50" }
                  );
             });
         }

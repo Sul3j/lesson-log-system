@@ -8,6 +8,6 @@ namespace LessonLogAPI.Models.Entities
         public int Id { get; set; }
         public string From { get; set; }
         public string To { get; set; }
-        public TimetableLesson TimetableLesson { get; set; }
+        public List<TimetableLesson> TimetableLessons { get; set; } = new List<TimetableLesson>();
     }
 }

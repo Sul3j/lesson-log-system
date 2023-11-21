@@ -9,7 +9,7 @@ namespace LessonLogAPI.Models.Entities
         public string Name { get; set; }
         public List<Lesson> Lessons { get; set; } = new List<Lesson>();
         public List<Grade> Grades { get; set; } = new List<Grade>();
-        public TimetableLesson TimetableLesson { get; set; }
+        public List<TimetableLesson> TimetableLessons { get; set; } = new List<TimetableLesson>();
         public List<Teacher> Teachers { get; set; }
     }
 }

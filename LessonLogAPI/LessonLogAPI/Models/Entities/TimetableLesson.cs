@@ -8,7 +8,7 @@ namespace LessonLogAPI.Models.Entities
         public int Id { get; set; }
         public int WeekDay { get; set; }
         public Subject Subject { get; set; }
-        public int SubjectId { get; set; }
+        public int? SubjectId { get; set; }
         public Teacher Teacher { get; set; }
         public int? TeacherId { get; set; }
         public Classroom Classroom { get; set; }

@@ -8,7 +8,7 @@ namespace LessonLogAPI.Models.Interfaces
 
         IQueryable<TimetableLesson> GetLessons();
 
-        IQueryable<TimetableLesson> GetLessonsByClass(int classId);
+        IQueryable GetLessonsByClass(int classId);
 
         TimetableLesson DeleteLesson(int id);
 
