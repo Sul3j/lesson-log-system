@@ -145,4 +145,12 @@ export class TimetableComponent implements OnInit {
       return true;
     }
   }
+
+  showShadow(shadow: HTMLDivElement) {
+    shadow.style.opacity = "1";
+  }
+
+  hideShadow(shadow: HTMLDivElement) {
+    shadow.style.opacity = "0";
+  }
 }

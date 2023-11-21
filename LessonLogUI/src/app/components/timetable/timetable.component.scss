@@ -41,3 +41,26 @@
 select {
   margin-top: 15px;
 }
+
+.shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.btn-delete {
+  margin-left: 10px;
+}
