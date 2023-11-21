@@ -15,24 +15,17 @@
         <div class="card">
           <div class="card-header">Monday</div>
           <div class="card-body">
-            <div class="card w-100 inside-card">
-              <div class="card-body">
-                <div class="card-lessons w-100 d-flex flex-wrap">
-                  <h6 class="subject">Sience</h6>
-                  <p class="hours">8.00-8.45</p>
-                  <p class="teachers">Tomasz Kowalski</p>
+              <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(1) ">
+                <div class="card-body">
+                  <div class="card-lessons w-100 d-flex flex-wrap">
+                    <h6 class="subject"> {{ lesson.subject.name }} </h6>
+                    <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
+                    <p class="number">Number: {{ lesson.classroom.number }}</p>
+                    <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
+                    <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="card w-100 inside-card">
-              <div class="card-body">
-                <div class="card-lessons w-100 d-flex flex-wrap">
-                  <h6 class="subject">Sience</h6>
-                  <p class="hours">8.00-8.45</p>
-                  <p class="teachers">Tomasz Kowalski</p>
-                </div>
-              </div>
-            </div>
             <button data-bs-toggle="modal" (click)="setWeekDay(1)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
@@ -41,7 +34,17 @@
         <div class="card">
           <div class="card-header">Tuesday</div>
           <div class="card-body">
-            This is some text within a card body.
+            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(2) ">
+              <div class="card-body">
+                <div class="card-lessons w-100 d-flex flex-wrap">
+                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
+                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
+                  <p class="number">Number: {{ lesson.classroom.number }}</p>
+                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
+                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
+                </div>
+              </div>
+            </div>
             <button data-bs-toggle="modal" (click)="setWeekDay(2)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
@@ -50,7 +53,17 @@
         <div class="card">
           <div class="card-header">Wednesday</div>
           <div class="card-body">
-            This is some text within a card body.
+            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(3) ">
+              <div class="card-body">
+                <div class="card-lessons w-100 d-flex flex-wrap">
+                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
+                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
+                  <p class="number">Number: {{ lesson.classroom.number }}</p>
+                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
+                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
+                </div>
+              </div>
+            </div>
             <button data-bs-toggle="modal" (click)="setWeekDay(3)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
@@ -59,7 +72,17 @@
         <div class="card">
           <div class="card-header">Thursday</div>
           <div class="card-body">
-            This is some text within a card body.
+            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(4) ">
+              <div class="card-body">
+                <div class="card-lessons w-100 d-flex flex-wrap">
+                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
+                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
+                  <p class="number">Number: {{ lesson.classroom.number }}</p>
+                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
+                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
+                </div>
+              </div>
+            </div>
             <button data-bs-toggle="modal" (click)="setWeekDay(4)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
@@ -68,7 +91,17 @@
         <div class="card">
           <div class="card-header">Friday</div>
           <div class="card-body">
-            This is some text within a card body.
+            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(5) ">
+              <div class="card-body">
+                <div class="card-lessons w-100 d-flex flex-wrap">
+                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
+                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
+                  <p class="number">Number: {{ lesson.classroom.number }}</p>
+                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
+                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
+                </div>
+              </div>
+            </div>
             <button data-bs-toggle="modal" (click)="setWeekDay(5)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>

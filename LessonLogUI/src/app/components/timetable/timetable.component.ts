@@ -23,6 +23,7 @@ export class TimetableComponent implements OnInit {
   public classes: Array<Class> = new Array<Class>();
   public selectedClass: number = 0;
   public timetableDto: TimetableDto = new TimetableDto();
+  public timetable: Array<TimetableDto> = new Array<TimetableDto>();
   public subjects: Array<Subject> = new Array<Subject>();
   public teachers: Array<Teacher> = new Array<Teacher>();
   public classrooms: Array<Classroom> = new Array<Classroom>();
@@ -44,12 +45,14 @@ export class TimetableComponent implements OnInit {
         this.getAllTeachers();
         this.getAllClassrooms();
         this.getAllLessonHours();
+        this.getTimetableByClass(this.selectedClass);
       })
     this.getAllClasses();
     this.getAllSubjects();
     this.getAllTeachers();
     this.getAllClassrooms();
     this.getAllLessonHours();
+    this.getTimetableByClass(this.selectedClass);
   }
 
   private getAllClasses() {
@@ -65,11 +68,10 @@ export class TimetableComponent implements OnInit {
   }
 
   getTimetableByClass(classId: number) {
-    if (classId != 0) {
-      this.timetableService.getTimetable(classId).subscribe(res => {
-        console.log(res);
-      })
-    }
+      this.timetableService.getTimetable(classId).subscribe((res) => {
+        this.timetable = res as Array<TimetableDto>;
+        console.log(res)
+      });
   }
 
   setWeekDay(day: number) {
@@ -117,7 +119,6 @@ export class TimetableComponent implements OnInit {
   }
 
   addTimetable() {
-    console.log(this.timetableDto)
     this.timetableService.addTimetable(this.timetableDto).subscribe({
       next: (res) => {
         this.toastr.success("Lesson has been added!", "Success");
@@ -125,6 +126,11 @@ export class TimetableComponent implements OnInit {
         this.toastr.error("Something went wrong!", "Error")
       }
     })
+    this.timetableDto = new TimetableDto();
+  }
+
+  getItemsByWeekDay(weekDay: number) {
+    return this.timetable.filter((item) => item.weekDay === weekDay);
   }
 
   isAllTimetableValues() {
@@ -139,5 +145,4 @@ export class TimetableComponent implements OnInit {
       return true;
     }
   }
-
 }
