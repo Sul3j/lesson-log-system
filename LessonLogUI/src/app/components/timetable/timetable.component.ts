@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Class} from "../../models/class.model";
 import {TimetableService} from "../../services/timetable.service";
 import {ToastrService} from "ngx-toastr";
@@ -23,6 +23,7 @@ export class TimetableComponent implements OnInit {
   public classes: Array<Class> = new Array<Class>();
   public selectedClass: number = 0;
   public timetableDto: TimetableDto = new TimetableDto();
+  public timetableEditDto: TimetableDto = new TimetableDto();
   public timetable: Array<TimetableDto> = new Array<TimetableDto>();
   public subjects: Array<Subject> = new Array<Subject>();
   public teachers: Array<Teacher> = new Array<Teacher>();
@@ -74,6 +75,16 @@ export class TimetableComponent implements OnInit {
       });
   }
 
+  deleteLesson(id: number) {
+    this.timetableService.deleteLesson(id).subscribe({
+      next: () => {
+        this.toastr.success("Lesson has been deleted!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error");
+      }
+    })
+  }
+
   setWeekDay(day: number) {
     this.timetableDto.weekDay = day;
   }
@@ -123,10 +134,21 @@ export class TimetableComponent implements OnInit {
       next: (res) => {
         this.toastr.success("Lesson has been added!", "Success");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error")
+        this.toastr.error("Something went wrong!", "Error");
       }
     })
     this.timetableDto = new TimetableDto();
+  }
+
+  editTimetable() {
+    console.log()
+    this.timetableService.editLesson(this.timetableEditDto.id, this.timetableEditDto).subscribe({
+      next: (res) => {
+        this.toastr.success("Lesson has been edited!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error");
+      }
+    })
   }
 
   getItemsByWeekDay(weekDay: number) {
@@ -152,5 +174,29 @@ export class TimetableComponent implements OnInit {
 
   hideShadow(shadow: HTMLDivElement) {
     shadow.style.opacity = "0";
+  }
+
+  changeEditSubject(e: any) {
+    this.timetableEditDto.subjectId = parseInt(e.target.value);
+  }
+
+  changeEditTeacher(e: any) {
+    this.timetableEditDto.teacherId = parseInt(e.target.value);
+  }
+
+  changeEditClassroom(e: any) {
+    this.timetableEditDto.classroomId = parseInt(e.target.value);
+  }
+
+  changeEditLessonHour(e: any) {
+    this.timetableEditDto.lessonHourId = parseInt(e.target.value);
+  }
+
+  getCurrentLesson(lesson: TimetableDto) {
+    this.timetableEditDto.id = lesson.id;
+    this.timetableEditDto.subjectId = lesson.subject.id;
+    this.timetableEditDto.classroomId = lesson.classroom.id;
+    this.timetableEditDto.lessonHourId = lesson.lessonHour.id;
+    this.timetableEditDto.teacherId = lesson.teacher.id;
   }
 }

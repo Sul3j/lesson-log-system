@@ -48,6 +48,7 @@ namespace LessonLogAPI.Services
                 .Include(l => l.LessonHour)
                 .Select(l => new TimetableLessonDto()
                 {
+                    Id = l.Id,
                     WeekDay = l.WeekDay,
                     Subject = new SubjectModel()
                     {
@@ -104,14 +105,14 @@ namespace LessonLogAPI.Services
 
         public TimetableLesson GetLesson(int id)
         {
-            var lesson = _dbContext.TimetableLessons.FirstOrDefault(t => t.Id == id);
+             var lesson = _dbContext.TimetableLessons.FirstOrDefault(t => t.Id == id);
 
             return lesson;
         }
 
-        public void UpdateLesson(TimetableLesson lesson)
+        public void UpdateLesson(int lessonId, TimetableLesson lesson)
         {
-            var existingLesson = _dbContext.TimetableLessons.FirstOrDefault(t => t.Id == lesson.Id);
+            var existingLesson = _dbContext.TimetableLessons.FirstOrDefault(t => t.Id == lessonId);
 
             if (existingLesson == null)
             {
@@ -120,12 +121,10 @@ namespace LessonLogAPI.Services
 
             existingLesson = new TimetableLesson()
             {
-                WeekDay = lesson.WeekDay,
                 SubjectId = lesson.SubjectId,
                 TeacherId = lesson.TeacherId,
                 ClassroomId = lesson.ClassroomId,
                 LessonHourId = lesson.LessonHourId,
-                ClassId = lesson.ClassId,
             };
 
             _dbContext.SaveChanges();

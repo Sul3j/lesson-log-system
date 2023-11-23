@@ -20,8 +20,8 @@
                   <div class="card-lessons w-100 d-flex flex-wrap" (mouseover)="showShadow(shadow)" (mouseout)="hideShadow(shadow)">
                     <div class="shadow" #shadow>
                       <div class="buttons">
-                        <div class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></div>
-                        <div class="btn btn-danger btn-delete"><i class="fa-regular fa-trash-can"></i></div>
+                        <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" (click)="getCurrentLesson(lesson)"><i class="fa-regular fa-pen-to-square"></i></div>
+                        <div class="btn btn-danger btn-delete" (click)="deleteLesson(lesson.id)"><i class="fa-regular fa-trash-can"></i></div>
                       </div>
                     </div>
                     <h6 class="subject"> {{ lesson.subject.name }} </h6>
@@ -45,8 +45,8 @@
                 <div class="card-lessons w-100 d-flex flex-wrap" (mouseover)="showShadow(shadow)" (mouseout)="hideShadow(shadow)">
                   <div class="shadow" #shadow>
                     <div class="buttons">
-                      <div class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></div>
-                      <div class="btn btn-danger btn-delete"><i class="fa-regular fa-trash-can"></i></div>
+                      <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" (click)="getCurrentLesson(lesson)"><i class="fa-regular fa-pen-to-square"></i></div>
+                      <div class="btn btn-danger btn-delete" (click)="deleteLesson(lesson.id)"><i class="fa-regular fa-trash-can"></i></div>
                     </div>
                   </div>
                   <h6 class="subject"> {{ lesson.subject.name }} </h6>
@@ -70,8 +70,8 @@
                 <div class="card-lessons w-100 d-flex flex-wrap" (mouseover)="showShadow(shadow)" (mouseout)="hideShadow(shadow)">
                   <div class="shadow" #shadow>
                     <div class="buttons">
-                      <div class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></div>
-                      <div class="btn btn-danger btn-delete"><i class="fa-regular fa-trash-can"></i></div>
+                      <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" (click)="getCurrentLesson(lesson)" #editModal><i class="fa-regular fa-pen-to-square"></i></div>
+                      <div class="btn btn-danger btn-delete" (click)="deleteLesson(lesson.id)"><i class="fa-regular fa-trash-can"></i></div>
                     </div>
                   </div>
                   <h6 class="subject"> {{ lesson.subject.name }} </h6>
@@ -95,8 +95,8 @@
                 <div class="card-lessons w-100 d-flex flex-wrap" (mouseover)="showShadow(shadow)" (mouseout)="hideShadow(shadow)">
                   <div class="shadow" #shadow>
                     <div class="buttons">
-                      <div class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></div>
-                      <div class="btn btn-danger btn-delete"><i class="fa-regular fa-trash-can"></i></div>
+                      <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" (click)="getCurrentLesson(lesson)"><i class="fa-regular fa-pen-to-square"></i></div>
+                      <div class="btn btn-danger btn-delete" (click)="deleteLesson(lesson.id)"><i class="fa-regular fa-trash-can"></i></div>
                     </div>
                   </div>
                   <h6 class="subject"> {{ lesson.subject.name }} </h6>
@@ -120,8 +120,8 @@
                 <div class="card-lessons w-100 d-flex flex-wrap" (mouseover)="showShadow(shadow)" (mouseout)="hideShadow(shadow)">
                   <div class="shadow" #shadow>
                     <div class="buttons">
-                      <div class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></div>
-                      <div class="btn btn-danger btn-delete"><i class="fa-regular fa-trash-can"></i></div>
+                      <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" (click)="getCurrentLesson(lesson)"><i class="fa-regular fa-pen-to-square"></i></div>
+                      <div class="btn btn-danger btn-delete" (click)="deleteLesson(lesson.id)"><i class="fa-regular fa-trash-can"></i></div>
                     </div>
                   </div>
                   <h6 class="subject"> {{ lesson.subject.name }} </h6>
@@ -169,6 +169,36 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary btn-add" (click)="addTimetable()" [disabled]="isAllTimetableValues()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleEditModalLabel">Edit lesson</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <select class="form-control" (change)="changeEditSubject($event)">
+          <option *ngFor="let subject of subjects" [value]="subject.id" [selected]="timetableEditDto.subjectId == subject.id"> {{ subject.name }} </option>
+        </select>
+        <select class="form-control" (change)="changeEditTeacher($event)">
+          <option *ngFor="let teacher of teachers" [value]="teacher.id" [selected]="timetableEditDto.teacherId == teacher.id"> {{ teacher.user.firstName }} {{ teacher.user.lastName }}</option>
+        </select>
+        <select class="form-control" (change)="changeEditClassroom($event)">
+          <option *ngFor="let classroom of classrooms" [value]="classroom.id" [selected]="timetableEditDto.classroomId == classroom.id"> {{ classroom.floor }} / {{ classroom.number }}</option>
+        </select>
+        <select class="form-control" (change)="changeEditLessonHour($event)">
+          <option *ngFor="let lessonHour of lessonHours" [value]="lessonHour.id" [selected]="timetableEditDto.lessonHourId == lessonHour.id"> {{ lessonHour.from }} - {{ lessonHour.to }}</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="editTimetable()">Add</button>
       </div>
     </div>
   </div>

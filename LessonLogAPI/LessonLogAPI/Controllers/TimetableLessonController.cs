@@ -45,7 +45,7 @@ namespace LessonLogAPI.Controllers
         {
             var lesson = _timetableLessonService.GetLesson(id);
 
-            if (lesson != null)
+            if (lesson == null)
             {
                 return BadRequest(new { Message = "This lesson is not exist" });
             }
@@ -67,15 +67,13 @@ namespace LessonLogAPI.Controllers
 
             lesson = new TimetableLesson()
             {
-                WeekDay = lessonData.WeekDay,
                 SubjectId = lessonData.SubjectId,
                 TeacherId = lessonData.TeacherId,
                 ClassroomId = lessonData.ClassroomId,
                 LessonHourId = lessonData.LessonHourId,
-                ClassId = lessonData.ClassId,
             };
 
-            _timetableLessonService.UpdateLesson(lesson);
+            _timetableLessonService.UpdateLesson(lessonId, lesson);
 
             return Ok(new { Message = "Lesson updated successfully" });
         }

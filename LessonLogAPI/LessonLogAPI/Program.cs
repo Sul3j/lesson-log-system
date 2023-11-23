@@ -6,6 +6,7 @@ using LessonLogAPI.UtilityService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Sieve.Services;
 using System.Text;
@@ -36,7 +37,10 @@ builder.Services.AddCors(option =>
 
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection"));
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection"), options =>
+    {
+        options.EnableRetryOnFailure();
+    });
 });
 
 builder.Services.AddScoped<ISieveProcessor, ApplicationSieveProcessor>();

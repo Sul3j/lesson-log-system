@@ -31,4 +31,24 @@ export class TimetableService {
         })
       );
   }
+
+  deleteLesson(id: number) {
+    return this.http.delete(`${this.urlService.url}/TIMETABLELESSON/${id}`)
+      .pipe(
+        tap(() => {
+          this._refreshNeeded.next();
+        })
+      );
+  }
+
+  editLesson(id: number, lesson: TimetableDto) {
+    console.log("id: " + id)
+    console.log(lesson)
+    return this.http.put(`${this.urlService.url}/TIMETABLELESSON/edit/${id}`, lesson)
+      .pipe(
+        tap(() => {
+          this._refreshNeeded.next();
+        })
+      );
+  }
 }
