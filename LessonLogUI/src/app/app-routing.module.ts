@@ -12,21 +12,41 @@ import {ClassesComponent} from "./components/clases/classes.component";
 import { ClassroomsComponent } from './components/classrooms/classrooms.component';
 import {SubjectsComponent} from "./components/subjects/subjects.component";
 import {TimetableComponent} from "./components/timetable/timetable.component";
+import {AuthGuard} from "./guards/auth.guard";
+import {HasRoleGuard} from "./guards/has-role.guard";
+import {TeacherDashboardComponent} from "./components/teacher-dashboard/teacher-dashboard.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent},
   { path: 'reset', component: ResetComponent},
-  { path: 'teachers', component: TeachersComponent },
-  { path: 'admins', component: AdminsComponent },
-  { path: 'students', component: StudentsComponent },
-  { path: 'tutors', component: TutorsComponent },
-  { path: 'classes', component: ClassesComponent },
-  { path: 'classrooms', component: ClassroomsComponent },
-  { path: 'subjects', component: SubjectsComponent },
-  { path: 'timetable', component: TimetableComponent }
+  {
+    path: 'admin',
+    canActivate: [AuthGuard, HasRoleGuard],
+    data: { role: 'ADMIN'},
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'teachers', component: TeachersComponent },
+      { path: 'admins', component: AdminsComponent },
+      { path: 'students', component: StudentsComponent },
+      { path: 'tutors', component: TutorsComponent },
+      { path: 'classes', component: ClassesComponent },
+      { path: 'classrooms', component: ClassroomsComponent },
+      { path: 'subjects', component: SubjectsComponent },
+      { path: 'timetable', component: TimetableComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+    ]
+  },
+  {
+    path: 'teacher',
+    canActivate: [AuthGuard, HasRoleGuard],
+    data: { role: 'TEACHER' },
+    children: [
+      { path: 'dashboard', component: TeacherDashboardComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+    ]
+  }
 ];
 
 // canActivate: [AuthGuard, HasRoleGuard], data: { role: 'TEACHER' }

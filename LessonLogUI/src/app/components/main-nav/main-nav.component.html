@@ -26,21 +26,21 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span [routerLink]="['/dashboard']"><img src="./assets/logo.svg" alt="logo" style="width: 175px;"></span>
+      <span [routerLink]="['/admin/dashboard']"><img src="./assets/logo.svg" alt="logo" style="width: 175px;"></span>
       <span class="spacer"></span>
       <button mat-button style="background-color: #5F9BF5; margin-right: 10px;" [matMenuTriggerFor]="menu">Users</button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item [routerLink]="['/teachers']">Teachers</button>
-        <button mat-menu-item [routerLink]="['/admins']">Admins</button>
-        <button mat-menu-item [routerLink]="['/students']">Students</button>
-        <button mat-menu-item [routerLink]="['/tutors']">Tutors</button>
+        <button mat-menu-item [routerLink]="['/admin/teachers']">Teachers</button>
+        <button mat-menu-item [routerLink]="['/admin/admins']">Admins</button>
+        <button mat-menu-item [routerLink]="['/admin/students']">Students</button>
+        <button mat-menu-item [routerLink]="['/admin/tutors']">Tutors</button>
       </mat-menu>
       <button mat-button style="background-color: #5F9BF5; margin-right: 10px;" [matMenuTriggerFor]="menu2">School</button>
       <mat-menu #menu2="matMenu">
-        <button mat-menu-item [routerLink]="['/classes']">Classes</button>
-        <button mat-menu-item [routerLink]="['/classrooms']">Classrooms</button>
-        <button mat-menu-item [routerLink]="['/subjects']">Subjects</button>
-        <button mat-menu-item [routerLink]="['/timetable']">Timetable</button>
+        <button mat-menu-item [routerLink]="['/admin/classes']">Classes</button>
+        <button mat-menu-item [routerLink]="['/admin/classrooms']">Classrooms</button>
+        <button mat-menu-item [routerLink]="['/admin/subjects']">Subjects</button>
+        <button mat-menu-item [routerLink]="['/admin/timetable']">Timetable</button>
       </mat-menu>
       <button class="logout-button" mat-raised-button style="background-color: #C96E6E" color="warn" (click)="logout()">Logout</button>
     </mat-toolbar>

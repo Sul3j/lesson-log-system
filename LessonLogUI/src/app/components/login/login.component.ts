@@ -46,7 +46,12 @@ export class LoginComponent implements OnInit {
             let payload = this.auth.decodeToken();
             this.userData.setFullName(payload.unique_name);
             this.userData.setRole(payload.role);
-            this.router.navigate(['dashboard']);
+            if (payload.role == 'ADMIN') {
+              this.router.navigate(['admin']);
+            }
+            if (payload.role == 'TEACHER') {
+              this.router.navigate(['teacher']);
+            }
           },
           error: (err) => {
             this.toastr.error("Incorrect login details", "Error");

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using LessonLogAPI.Models.Interfaces;
 using LessonLogAPI.Models;
 using Microsoft.OpenApi.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LessonLogAPI.Controllers
 {
@@ -66,13 +67,14 @@ namespace LessonLogAPI.Controllers
             return Ok(_userService.RegisterUser(userObj));
         }
 
-        //[Authorize]
+        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult GetUsers()
         {
             return Ok(_userService.GetUsers());
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpGet("all")]
         public IActionResult GetAllUsers() 
         {

@@ -30,6 +30,7 @@ import { ClassesComponent } from './components/clases/classes.component';
 import { ClassroomsComponent } from './components/classrooms/classrooms.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 import { TimetableComponent } from './components/timetable/timetable.component';
+import { TeacherDashboardComponent } from './components/teacher-dashboard/teacher-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { TimetableComponent } from './components/timetable/timetable.component';
     ClassesComponent,
     ClassroomsComponent,
     SubjectsComponent,
-    TimetableComponent
+    TimetableComponent,
+    TeacherDashboardComponent
   ],
   imports: [
     BrowserModule,
