@@ -32,6 +32,7 @@ import { SubjectsComponent } from './components/subjects/subjects.component';
 import { TimetableComponent } from './components/timetable/timetable.component';
 import { TeacherDashboardComponent } from './components/teacher-dashboard/teacher-dashboard.component';
 import { TeacherMainNavComponent } from './components/teacher-main-nav/teacher-main-nav.component';
+import { TeacherLessonsComponent } from './components/teacher-lessons/teacher-lessons.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { TeacherMainNavComponent } from './components/teacher-main-nav/teacher-m
     TimetableComponent,
     TeacherDashboardComponent,
     TeacherMainNavComponent,
+    TeacherLessonsComponent,
   ],
   imports: [
     BrowserModule,

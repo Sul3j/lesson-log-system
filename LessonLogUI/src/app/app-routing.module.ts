@@ -15,6 +15,7 @@ import {TimetableComponent} from "./components/timetable/timetable.component";
 import {AuthGuard} from "./guards/auth.guard";
 import {HasRoleGuard} from "./guards/has-role.guard";
 import {TeacherDashboardComponent} from "./components/teacher-dashboard/teacher-dashboard.component";
+import {TeacherLessonsComponent} from "./components/teacher-lessons/teacher-lessons.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -40,16 +41,15 @@ const routes: Routes = [
   },
   {
     path: 'teacher',
-    canActivate: [AuthGuard, HasRoleGuard],
-    data: { role: 'TEACHER' },
+    //canActivate: [AuthGuard, HasRoleGuard],
+    //data: { role: 'TEACHER' },
     children: [
       { path: 'dashboard', component: TeacherDashboardComponent },
+      { path: 'lessons', component: TeacherLessonsComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }
 ];
-
-// canActivate: [AuthGuard, HasRoleGuard], data: { role: 'TEACHER' }
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
