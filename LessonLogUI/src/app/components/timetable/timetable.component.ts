@@ -141,7 +141,7 @@ export class TimetableComponent implements OnInit {
   }
 
   editTimetable() {
-    console.log()
+    console.log(this.timetableEditDto.id, this.timetableEditDto)
     this.timetableService.editLesson(this.timetableEditDto.id, this.timetableEditDto).subscribe({
       next: (res) => {
         this.toastr.success("Lesson has been edited!", "Success");

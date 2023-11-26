@@ -119,13 +119,13 @@ namespace LessonLogAPI.Services
                 throw new Exception("Lesson not found");
             }
 
-            existingLesson = new TimetableLesson()
-            {
-                SubjectId = lesson.SubjectId,
-                TeacherId = lesson.TeacherId,
-                ClassroomId = lesson.ClassroomId,
-                LessonHourId = lesson.LessonHourId,
-            };
+
+
+            existingLesson.SubjectId = lesson.SubjectId;
+            existingLesson.TeacherId = lesson.TeacherId;
+            existingLesson.ClassroomId = lesson.ClassroomId;
+            existingLesson.LessonHourId = lesson.LessonHourId;
+            
 
             _dbContext.SaveChanges();
         }

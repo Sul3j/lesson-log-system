@@ -42,8 +42,6 @@ export class TimetableService {
   }
 
   editLesson(id: number, lesson: TimetableDto) {
-    console.log("id: " + id)
-    console.log(lesson)
     return this.http.put(`${this.urlService.url}/TIMETABLELESSON/edit/${id}`, lesson)
       .pipe(
         tap(() => {

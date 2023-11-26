@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: 'reset', component: ResetComponent},
   {
     path: 'admin',
-    canActivate: [AuthGuard, HasRoleGuard],
-    data: { role: 'ADMIN'},
+    //canActivate: [AuthGuard, HasRoleGuard],
+    //data: { role: 'ADMIN'},
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'teachers', component: TeachersComponent },

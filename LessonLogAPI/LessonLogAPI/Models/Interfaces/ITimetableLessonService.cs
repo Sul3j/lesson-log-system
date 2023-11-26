@@ -14,6 +14,6 @@ namespace LessonLogAPI.Models.Interfaces
 
         TimetableLesson GetLesson(int id);
 
-        void UpdateLesson(int lessonId, TimetableLesson lesson);
+        void UpdateLesson(TimetableLesson lesson);
     }
 }
