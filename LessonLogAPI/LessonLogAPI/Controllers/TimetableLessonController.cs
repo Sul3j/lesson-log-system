@@ -67,13 +67,14 @@ namespace LessonLogAPI.Controllers
 
             lesson = new TimetableLesson()
             {
+                Id = lessonId,
                 SubjectId = lessonData.SubjectId,
                 TeacherId = lessonData.TeacherId,
                 ClassroomId = lessonData.ClassroomId,
                 LessonHourId = lessonData.LessonHourId,
             };
 
-            _timetableLessonService.UpdateLesson(lessonId, lesson);
+            _timetableLessonService.UpdateLesson(lesson);
 
             return Ok(new { Message = "Lesson updated successfully" });
         }

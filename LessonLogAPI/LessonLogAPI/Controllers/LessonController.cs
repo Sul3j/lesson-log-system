@@ -93,6 +93,7 @@ namespace LessonLogAPI.Controllers
 
             lesson = new Lesson()
             {
+                Id = lessonId,
                 Topic = lessonData.Topic,
                 SubjectId = lessonData.SubjectId,
                 TeacherId = lessonData.TeacherId,

@@ -52,9 +52,9 @@ namespace LessonLogAPI.Services
             return grade;
         }
 
-        public void UpdateGrade(int gradeId, Grade grade)
+        public void UpdateGrade(Grade grade)
         {
-            var existingGrade = _dbContext.Grades.FirstOrDefault(g => g.Id == gradeId);
+            var existingGrade = _dbContext.Grades.FirstOrDefault(g => g.Id == grade.Id);
 
             if (existingGrade != null)
             {

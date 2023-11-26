@@ -110,9 +110,9 @@ namespace LessonLogAPI.Services
             return lesson;
         }
 
-        public void UpdateLesson(int lessonId, TimetableLesson lesson)
+        public void UpdateLesson(TimetableLesson lesson)
         {
-            var existingLesson = _dbContext.TimetableLessons.FirstOrDefault(t => t.Id == lessonId);
+            var existingLesson = _dbContext.TimetableLessons.FirstOrDefault(t => t.Id == lesson.Id);
 
             if (existingLesson == null)
             {
