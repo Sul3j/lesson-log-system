@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs";
+import {Subject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UrlService} from "./url.service";
 import {Pagination} from "../models/pagination.model";
+import {AddLessonDto} from "../models/add-lesson.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,25 @@ export class TeacherLessonsService {
   }
 
   getLessons(body: Pagination, teacherId: number, classId: number, subjectId: number) {
-    return this.http.post<any>(`${this.urlService.url}/LESSON/${teacherId}/${classId}/${subjectId}`, body);
+    return this.http.post<any>(`${this.urlService.url}/LESSON/pagination/${teacherId}/${classId}/${subjectId}`, body);
+  }
+
+  addLesson(lesson: AddLessonDto) {
+    return this.http.post(`${this.urlService.url}/LESSON/add`, lesson)
+      .pipe(
+        tap(() => {
+          this._refreshNeeded.next();
+        })
+      );
+  }
+
+  deleteLesson(lessonId: number) {
+    return this.http
+      .delete(`${this.urlService.url}/LESSON/${lessonId}`)
+      .pipe(
+        tap(() => {
+          this._refreshNeeded.next();
+        })
+      );
   }
 }

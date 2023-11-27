@@ -16,6 +16,8 @@ namespace LessonLogAPI.Services
 
         public Lesson AddLesson(Lesson lesson)
         {
+            lesson.Date = DateTime.Now;
+
             _dbContext.Add(lesson);
             _dbContext.SaveChanges();
 

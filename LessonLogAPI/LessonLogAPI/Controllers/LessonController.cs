@@ -53,6 +53,9 @@ namespace LessonLogAPI.Controllers
                     SubjectName = l.Subject.Name,
                     ClassYear = l.Class.Year,
                     ClassName = l.Class.Name,
+                    Date = l.Date,
+                    From = l.LessonHour.From,
+                    To = l.LessonHour.To
                 })
                 .ToListAsync();
 
