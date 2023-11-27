@@ -168,6 +168,12 @@ namespace LessonLogAPI.Migrations
                     b.Property<int?>("ClassId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("LessonHourId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("SubjectId")
                         .HasColumnType("int");
 
@@ -180,6 +186,8 @@ namespace LessonLogAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClassId");
+
+                    b.HasIndex("LessonHourId");
 
                     b.HasIndex("SubjectId");
 
@@ -373,7 +381,7 @@ namespace LessonLogAPI.Migrations
                     b.Property<int?>("LessonHourId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubjectId")
+                    b.Property<int?>("SubjectId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TeacherId")
@@ -532,6 +540,10 @@ namespace LessonLogAPI.Migrations
                         .WithMany("Lessons")
                         .HasForeignKey("ClassId");
 
+                    b.HasOne("LessonLogAPI.Models.Entities.LessonHour", "LessonHour")
+                        .WithMany("Lessons")
+                        .HasForeignKey("LessonHourId");
+
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithMany("Lessons")
                         .HasForeignKey("SubjectId");
@@ -542,6 +554,8 @@ namespace LessonLogAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Class");
+
+                    b.Navigation("LessonHour");
 
                     b.Navigation("Subject");
 
@@ -594,8 +608,7 @@ namespace LessonLogAPI.Migrations
 
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithMany("TimetableLessons")
-                        .HasForeignKey("SubjectId")
-                        .IsRequired();
+                        .HasForeignKey("SubjectId");
 
                     b.HasOne("LessonLogAPI.Models.Entities.Teacher", "Teacher")
                         .WithMany("TimetableLessons")
@@ -657,6 +670,8 @@ namespace LessonLogAPI.Migrations
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.LessonHour", b =>
                 {
+                    b.Navigation("Lessons");
+
                     b.Navigation("TimetableLessons");
                 });
 

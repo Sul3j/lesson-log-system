@@ -125,7 +125,13 @@ export class TeacherLessonsComponent implements OnInit {
   }
 
   deleteLesson(id: number) {
-
+    this.lessonsService.deleteLesson(id).subscribe({
+      next: () => {
+        this.toastr.success("Lesson has been deleted!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error");
+      }
+    })
   }
 
   getCurrentLesson(lesson: Lesson) {

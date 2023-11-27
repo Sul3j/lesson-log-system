@@ -7,6 +7,8 @@
         public string SubjectName { get; set; }
         public int ClassYear { get; set; }
         public string ClassName { get; set; }
-        public string TeacherName { get; set; }
+        public DateTime Date { get; set; }
+        public string To { get; set; }
+        public string From { get; set; }
     }
 }

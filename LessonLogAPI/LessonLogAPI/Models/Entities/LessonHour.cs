@@ -9,5 +9,6 @@ namespace LessonLogAPI.Models.Entities
         public string From { get; set; }
         public string To { get; set; }
         public List<TimetableLesson> TimetableLessons { get; set; } = new List<TimetableLesson>();
+        public List<Lesson> Lessons { get; set; } = new List<Lesson>();
     }
 }

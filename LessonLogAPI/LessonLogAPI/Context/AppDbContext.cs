@@ -153,6 +153,11 @@ namespace LessonLogAPI.Context
                 .HasForeignKey(t => t.LessonHourId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+                eb.HasMany(l => l.Lessons)
+                .WithOne(l => l.LessonHour)
+                .HasForeignKey(l => l.LessonHourId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
                 eb.HasData(
                     new LessonHour() { Id = 1, From = "8:00", To = "8:45" },
                     new LessonHour() { Id = 2, From = "8:50", To = "9:35" },
