@@ -13,5 +13,7 @@ namespace LessonLogAPI.Models.Interfaces
         Lesson GetLesson(int id);
 
         void UpdateLesson(Lesson lesson);
+
+        IQueryable<Lesson> GetLessonsWithParametrs(int teacherId, int classId, int subjectId);
     }
 }

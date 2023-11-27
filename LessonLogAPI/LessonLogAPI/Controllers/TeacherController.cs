@@ -100,5 +100,13 @@ namespace LessonLogAPI.Controllers
 
             return result;
         }
+
+        [HttpGet("email/{email}")]
+        public Teacher GetTeacherByEmail([FromRoute] string email)
+        {
+            var teacher = _teacherService.GetTeacherByEmail(email);
+
+            return teacher;
+        }
     }
 }

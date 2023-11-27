@@ -1,5 +1,51 @@
 <app-teacher-main-nav>
-  <div class="container">
-
+  <div class="container mt-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" [routerLink]="['/teacher/dashboard']"><a>Dashboard</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Lessons</a></li>
+      </ol>
+    </nav>
+    <select class="form-control mb-2" (change)="changeClass($event)">
+      <option selected value=0>--- select class ---</option>
+      <option *ngFor="let class of classes" [value]="class.id">{{ class.year }} {{ class.name }}</option>
+    </select>
+    <select class="form-control mb-2" (change)="changeSubject($event)">
+      <option selected value=0>--- select subject ---</option>
+      <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
+    </select>
+    <div *ngIf="isSelected">
+      <div class="d-flex">
+        <div class="input-group">
+          <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" placeholder="Search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" #searchInput>
+        </div>
+        <div class="input-group">
+          <div>
+            <button mat-mini-fab aria-label="Example icon button with a filter list icon" data-bs-toggle="modal" data-bs-target="#addModal" style="margin-left: 10px;" color="primary">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div>
+            <button mat-mini-fab aria-label="Example icon button with a filter list icon" data-bs-toggle="modal" data-bs-target="#filterModal" style="margin-left: 10px;" color="primary">
+              <mat-icon>filter_list</mat-icon>
+            </button>
+          </div>
+          <div>
+            <button mat-mini-fab style="margin-left: 10px;" color="primary">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="input-group" style="width: 200px">
+          <select class="form-control" id="select">
+            <option selected value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+          </select>
+          <label class="input-group-text" id="inputGroup" for="select"><i for="select" class="fa-solid fa-angle-down"></i></label>
+        </div>
+      </div>
+    </div>
   </div>
 </app-teacher-main-nav>

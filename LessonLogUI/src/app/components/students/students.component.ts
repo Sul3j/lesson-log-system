@@ -27,9 +27,6 @@ export class StudentsComponent implements OnInit {
   public paginationModel: Pagination = new Pagination();
   public response: ResponseModel<Student> = new ResponseModel<Student>();
   public items: number = 5;
-  public selectedUser!: number;
-  public selectedTutor!: number;
-  public selectedClass!: number;
   public selectedStudentData: AddStudentDto = new AddStudentDto();
   public studentFilterDto: StudentFilterDto = new StudentFilterDto();
   public currentStudent: Student = new Student();

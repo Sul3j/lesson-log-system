@@ -70,5 +70,12 @@ namespace LessonLogAPI.Services
 
             return teacher;
         }
+
+        public Teacher GetTeacherByEmail(string email)
+        {
+            var teacher = _dbContext.Teachers.FirstOrDefault(t => t.User.Email == email);
+
+            return teacher;
+        }
     }
 }

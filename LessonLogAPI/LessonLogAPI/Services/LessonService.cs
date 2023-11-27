@@ -33,6 +33,18 @@ namespace LessonLogAPI.Services
             return lessons;
         }
 
+        public IQueryable<Lesson> GetLessonsWithParametrs(int teacherId, int classId, int subjectId)
+        {
+           var lessons = _dbContext.Lessons
+               .Where(l => l.TeacherId == teacherId && l.ClassId == classId && l.SubjectId == subjectId)
+               .Include(l => l.Class)
+               .Include(l => l.Subject)
+               .Include(l => l.Teacher)
+               .AsQueryable();
+
+           return lessons;
+        }
+
         public Lesson DeleteLesson(int id)
         {
             var lesson = _dbContext.Lessons.FirstOrDefault(l => l.Id == id);

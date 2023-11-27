@@ -39,10 +39,10 @@ namespace LessonLogAPI.Controllers
             return Ok(lessons);
         }
 
-        [HttpPost("pagination")]
-        public async Task<PagedResult<LessonDto>> GetLessons([FromBody] SieveModel query)
+        [HttpPost("pagination/{teacherId}/{classId}/{subjectId}")]
+        public async Task<PagedResult<LessonDto>> GetLessons([FromBody] SieveModel query, [FromRoute] int teacherId, [FromRoute] int classId, [FromRoute] int subjectId)
         {
-            var lessons = _lessonService.GetLessons();
+            var lessons = _lessonService.GetLessonsWithParametrs(teacherId, classId, subjectId);
 
             var dtos = await _sieveProcessor
                 .Apply(query, lessons)
@@ -53,7 +53,6 @@ namespace LessonLogAPI.Controllers
                     SubjectName = l.Subject.Name,
                     ClassYear = l.Class.Year,
                     ClassName = l.Class.Name,
-                    TeacherName = l.Teacher.User.FirstName + l.Teacher.User.LastName
                 })
                 .ToListAsync();
 
