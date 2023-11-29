@@ -55,7 +55,8 @@ namespace LessonLogAPI.Controllers
                     ClassName = l.Class.Name,
                     Date = l.Date,
                     From = l.LessonHour.From,
-                    To = l.LessonHour.To
+                    To = l.LessonHour.To,
+                    LessonHourId = (int)l.LessonHourId
                 })
                 .ToListAsync();
 
@@ -97,9 +98,7 @@ namespace LessonLogAPI.Controllers
             {
                 Id = lessonId,
                 Topic = lessonData.Topic,
-                SubjectId = lessonData.SubjectId,
-                TeacherId = lessonData.TeacherId,
-                ClassId = lessonData.ClassId
+                LessonHour = lessonData.LessonHour,
             };
 
             _lessonService.UpdateLesson(lesson);

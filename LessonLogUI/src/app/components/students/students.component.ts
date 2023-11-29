@@ -103,7 +103,6 @@ export class StudentsComponent implements OnInit {
   }
 
   editStudent(classId: number, studentId: number) {
-    console.log(classId, studentId)
     this.studentsService.editStudent(classId, studentId).subscribe({
       next: () => {
         this.toastr.success("Student has been edit!", "Success");

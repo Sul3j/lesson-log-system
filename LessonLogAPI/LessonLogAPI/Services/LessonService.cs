@@ -77,13 +77,8 @@ namespace LessonLogAPI.Services
                 throw new Exception("Lesson not found");
             }
 
-            existingLesson = new Lesson()
-            {
-                Topic = lesson.Topic,
-                TeacherId = lesson.TeacherId,
-                SubjectId = lesson.SubjectId,
-                ClassId = lesson.ClassId
-            };
+            existingLesson.LessonHour = lesson.LessonHour;
+            existingLesson.Topic = lesson.Topic;
 
             _dbContext.SaveChanges();
         }

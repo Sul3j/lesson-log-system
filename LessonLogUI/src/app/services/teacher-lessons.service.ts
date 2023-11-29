@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {UrlService} from "./url.service";
 import {Pagination} from "../models/pagination.model";
 import {AddLessonDto} from "../models/add-lesson.dto";
+import {EditLessonDto} from "../models/edit-lesson.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,16 @@ export class TeacherLessonsService {
 
   addLesson(lesson: AddLessonDto) {
     return this.http.post(`${this.urlService.url}/LESSON/add`, lesson)
+      .pipe(
+        tap(() => {
+          this._refreshNeeded.next();
+        })
+      );
+  }
+
+  editLesson(lessonId: number, lessonData: EditLessonDto) {
+    return this.http
+      .put(`${this.urlService.url}/LESSON/edit/${lessonId}`, lessonData)
       .pipe(
         tap(() => {
           this._refreshNeeded.next();

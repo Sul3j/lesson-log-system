@@ -13,6 +13,7 @@ import {HelperService} from "../../services/helper.service";
 import {AddLessonDto} from "../../models/add-lesson.dto";
 import {LessonHours} from "../../models/lessonhours.model";
 import {LessonhoursService} from "../../services/lessonhours.service";
+import {EditLessonDto} from "../../models/edit-lesson.dto";
 
 @Component({
   selector: 'app-teacher-lessons',
@@ -27,10 +28,13 @@ export class TeacherLessonsComponent implements OnInit {
   public selectedClass: number = 0;
   public selectedSubject: number = 0;
   public selectedLessonData: AddLessonDto = new AddLessonDto();
+  public editLessonData: EditLessonDto = new EditLessonDto();
   public teacher: number = 0;
   public selected = false;
   public paginationModel: Pagination = new Pagination();
   public response: ResponseModel<Lesson> = new ResponseModel<Lesson>();
+  public currentEditLesson!: number;
+  public currentLessonHourId!: number;
 
   constructor(private lessonsService: TeacherLessonsService,
               private toastr: ToastrService,
@@ -56,7 +60,6 @@ export class TeacherLessonsComponent implements OnInit {
     this.lessonsService.getLessons(this.paginationModel, this.teacher, this.selectedClass, this.selectedSubject).subscribe(res => {
       this.lessons = res.items;
       this.response = this.helperService.mapResponse<Lesson>(res);
-      console.log(this.response);
     })
   }
 
@@ -88,6 +91,10 @@ export class TeacherLessonsComponent implements OnInit {
     this.selectedLessonData.subjectId = parseInt(e.target.value);
     this.selectedSubject = parseInt(e.target.value);
     this.isSelectedData();
+  }
+
+  changeEditLessonHour(e: any) {
+    this.editLessonData.lessonHourId = parseInt(e.target.value);
   }
 
   changeLessonHour(e: any) {
@@ -134,8 +141,20 @@ export class TeacherLessonsComponent implements OnInit {
     })
   }
 
-  getCurrentLesson(lesson: Lesson) {
+  editLesson() {
+    this.lessonsService.editLesson(this.currentEditLesson, this.editLessonData).subscribe({
+      next: () => {
+        this.toastr.success("Lesson has been edited!", "Success");
+      }, error: () => {
+        this.toastr.error("Something went wrong!", "Error");
+      }
+    })
+  }
 
+  getCurrentLesson(lesson: Lesson) {
+    this.currentEditLesson = lesson.id;
+    this.currentLessonHourId = lesson.lessonHourId;
+    this.editLessonData.topic = lesson.topic;
   }
 
   clearSelectedLessonData() {
@@ -168,7 +187,15 @@ export class TeacherLessonsComponent implements OnInit {
   }
 
   isSelected() {
-    if (this.selectedLessonData.topic == "" && this.selectedLessonData.subjectId == 0 && this.selectedLessonData.lessonHourId == 0) {
+    if (this.selectedLessonData.topic == "" || this.selectedLessonData.lessonHourId == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isEditSelected() {
+    if (this.editLessonData.topic == "" || this.editLessonData.lessonHourId == 0) {
       return true;
     } else {
       return false;

@@ -7,4 +7,5 @@ export class Lesson {
   date!: string;
   from!: string;
   to!: string;
+  lessonHourId!: number;
 }
