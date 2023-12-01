@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TeacherLessonsService} from "../../services/teacher-lessons.service";
 import {ToastrService} from "ngx-toastr";
 import {ClassesService} from "../../services/classes.service";
@@ -14,6 +14,8 @@ import {AddLessonDto} from "../../models/add-lesson.dto";
 import {LessonHours} from "../../models/lessonhours.model";
 import {LessonhoursService} from "../../services/lessonhours.service";
 import {EditLessonDto} from "../../models/edit-lesson.dto";
+import {StudentsService} from "../../services/students.service";
+import {Student} from "../../models/student.model";
 
 @Component({
   selector: 'app-teacher-lessons',
@@ -35,13 +37,17 @@ export class TeacherLessonsComponent implements OnInit {
   public response: ResponseModel<Lesson> = new ResponseModel<Lesson>();
   public currentEditLesson!: number;
   public currentLessonHourId!: number;
+  public students: any;
+
+  @ViewChild('attendanceSelect') attendanceSelect!: ElementRef;
 
   constructor(private lessonsService: TeacherLessonsService,
               private toastr: ToastrService,
               private classesService: ClassesService,
               private helperService: HelperService,
               private subjectsService: SubjectsService,
-              private lessonHoursService: LessonhoursService) {}
+              private lessonHoursService: LessonhoursService,
+              private studentsService: StudentsService) {}
 
   ngOnInit(): void {
     this.lessonsService.refreshNeeded
@@ -81,9 +87,17 @@ export class TeacherLessonsComponent implements OnInit {
     })
   }
 
+  private getStudents(classId: number) {
+    this.studentsService.getStudentsByClass(classId).subscribe(res => {
+      console.log(res)
+      this.students = res;
+    })
+  }
+
   changeClass(e: any) {
     this.selectedLessonData.classId = parseInt(e.target.value);
     this.selectedClass = parseInt(e.target.value);
+    this.getStudents(parseInt(e.target.value));
     this.isSelectedData();
   }
 
@@ -99,6 +113,29 @@ export class TeacherLessonsComponent implements OnInit {
 
   changeLessonHour(e: any) {
     this.selectedLessonData.lessonHourId = parseInt(e.target.value);
+  }
+
+  changeAttendance(e: any, student: Student) {
+    if (e.target.value == "absent") {
+      this.attendanceSelect.nativeElement.classList.add('bg-danger')
+      this.attendanceSelect.nativeElement.classList.remove('bg-success')
+      this.attendanceSelect.nativeElement.classList.remove('bg-warning')
+    }
+
+    if (e.target.value == "present") {
+      this.attendanceSelect.nativeElement.classList.add('bg-success')
+      this.attendanceSelect.nativeElement.classList.remove('bg-danger')
+      this.attendanceSelect.nativeElement.classList.remove('bg-warning')
+    }
+
+    if (e.target.value == "excused") {
+      this.attendanceSelect.nativeElement.classList.add('bg-warning')
+      this.attendanceSelect.nativeElement.classList.remove('bg-danger')
+      this.attendanceSelect.nativeElement.classList.remove('bg-success')
+    }
+
+    console.log(e.target.value)
+    console.log(student)
   }
 
   getTeacher() {

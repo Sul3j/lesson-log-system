@@ -32,6 +32,16 @@ namespace LessonLogAPI.Services
             return students;
         }
 
+        public IQueryable<Student> GetStudentsByClass(int classId)
+        {
+            var students = _dbContext.Students
+                .Where(s => s.ClassId == classId)
+                .Include(s => s.User)
+                .AsQueryable();
+
+            return students;
+        }
+
         public Student GetStudent(int id)
         {
             var student = _dbContext.Students.FirstOrDefault(s => s.Id == id);

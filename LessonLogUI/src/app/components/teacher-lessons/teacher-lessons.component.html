@@ -73,6 +73,9 @@
             <button mat-mini-fab color="warn" style="margin-left: 5px;" (click)="deleteLesson(lesson.id)">
               <mat-icon>delete</mat-icon>
             </button>
+            <button mat-mini-fab color="success" data-bs-target="#attendanceModal" data-bs-toggle="modal" style="margin-left: 5px;">
+              <mat-icon>assignment</mat-icon>
+            </button>
           </td>
         </tr>
         </tbody>
@@ -143,3 +146,32 @@
     </div>
   </div>
 </div>
+
+<!-- Modal Attendance -->
+<div class="modal fade" id="attendanceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelAttendance">Edit attendance</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card" *ngFor="let student of students">
+          <div class="form-group d-flex flex-wrap">
+            <span class="form-control w-50 name"> {{ student.user.firstName }} {{ student.attendances }}</span>
+            <select class="form-control w-50 text-white text-center attendance" #attendanceSelect (change)="changeAttendance($event, student)">
+              <option class="bg-danger text-white" value="absent">absent</option>
+              <option class="bg-success text-white" value="present">present</option>
+              <option class="bg-warning text-white" value="excused">excused</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="editLesson()" [disabled]="isEditSelected()">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+

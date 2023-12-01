@@ -51,4 +51,14 @@ export class StudentsService {
         })
       );
   }
+
+  getStudentsByClass(classId: number) {
+    return this.http
+      .get(`${this.urlService.url}/STUDENT/${classId}`)
+      .pipe(
+        tap(() => {
+          this._refreshNedeed.next();
+        })
+      )
+  }
 }

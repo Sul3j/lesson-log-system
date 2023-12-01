@@ -51,8 +51,16 @@ namespace LessonLogAPI.Controllers
 
         [HttpGet]
         public ActionResult GetAllStudents()
-        { 
+        {
             var students = _studentService.GetStudents();
+
+            return Ok(students);
+        }
+
+        [HttpGet("{classId}")]
+        public ActionResult GetStudentcByClass([FromRoute] int classId) 
+        {
+            var students = _studentService.GetStudentsByClass(classId);
 
             return Ok(students);
         }
