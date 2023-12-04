@@ -28,7 +28,7 @@ namespace LessonLogAPI.Controllers
         { 
             _lessonService.AddLesson(lesson);
 
-            return Ok(new { Message = "Lesson has been created" });
+            return Ok(new { LessonId = lesson.Id });
         }
 
         [HttpGet("all")]

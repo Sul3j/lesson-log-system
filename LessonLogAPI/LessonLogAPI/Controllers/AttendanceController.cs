@@ -1,6 +1,6 @@
-﻿using LessonLogAPI.Models.Entities;
+﻿using LessonLogAPI.Models.Dto;
+using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LessonLogAPI.Controllers
@@ -24,12 +24,33 @@ namespace LessonLogAPI.Controllers
             return Ok(new { Message = "Attendance has been created" });
         }
 
-        [HttpGet]
-        public ActionResult GetAllAttendances()
+        [HttpGet("{lessonId}")]
+        public ActionResult GetAllAttendancesByLessonId([FromRoute] int lessonId)
         {
-            var attendances = _attendanceService.GetAttendances();
+            var attendances = _attendanceService.GetAttendancesByLessonId(lessonId);
 
             return Ok(attendances);
+        }
+
+        [HttpPut("edit/{attendanceId}")]
+        public ActionResult EditAttendance([FromRoute] int attendanceId, [FromBody] AttendanceDto dto )
+        {
+
+            Console.WriteLine(dto.Status);
+
+            Console.WriteLine(dto.Status);
+
+            var attendance = _attendanceService.GetAttendanceById(attendanceId);
+
+            if (attendance == null)
+            {
+                return NotFound(new { Message = "Attendance not found" });
+            }
+
+            attendance.Status = dto.Status;
+            _attendanceService.UpdateAttendance(attendance);
+
+            return Ok(new { Message = "Attendance updated successfully" });
         }
     }
 }

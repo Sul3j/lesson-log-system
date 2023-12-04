@@ -1,10 +1,12 @@
 ﻿using LessonLogAPI.Context;
+using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
+using LessonLogAPI.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LessonLogAPI.Services
 {
-    public class AttendaceService
+    public class AttendaceService: IAttendanceService
     {
 
         private readonly AppDbContext _dbContext;
@@ -22,26 +24,34 @@ namespace LessonLogAPI.Services
             return attendance;
         }
 
-        public IQueryable<Attendance> GetAttendances() 
+        public IQueryable<Attendance> GetAttendancesByLessonId(int lessonId) 
         {
             var attendances = _dbContext.Attendances
+                .Where(a => a.LessonId == lessonId)
                 .Include(a => a.Student)
+                .ThenInclude(a => a.User)
                 .Include(a => a.Lesson)
                 .AsQueryable();
 
             return attendances;
         }
 
-        public void UpdateAttendance(Attendance updateAttendance)
+        public Attendance GetAttendanceById(int attendanceId)
         {
-            var existingAttendance = _dbContext.Attendances.FirstOrDefault(a => a.Id == updateAttendance.Id);
+            var attendance = _dbContext.Attendances.FirstOrDefault(a => a.Id == attendanceId);
+            return attendance;
+        }
+
+        public void UpdateAttendance(Attendance attendance)
+        {
+            var existingAttendance = _dbContext.Attendances.FirstOrDefault(a => a.Id == attendance.Id);
 
             if (existingAttendance == null) 
             {
                 throw new Exception("Attendance not found");
             }
 
-            existingAttendance.Status = updateAttendance.Status;
+            existingAttendance.Status = attendance.Status;
 
             _dbContext.SaveChanges();
         }

@@ -1,4 +1,5 @@
-﻿using LessonLogAPI.Models.Entities;
+﻿using LessonLogAPI.Models.Dto;
+using LessonLogAPI.Models.Entities;
 
 namespace LessonLogAPI.Models.Interfaces
 {
@@ -6,8 +7,10 @@ namespace LessonLogAPI.Models.Interfaces
     {
         Attendance AddAttendance(Attendance attendance);
 
-        IQueryable<Attendance> GetAttendances();
+        IQueryable<Attendance> GetAttendancesByLessonId(int lessonId);
 
-        void UpdateAttendance(Attendance updateAttendance);
+        void UpdateAttendance(Attendance attendance);
+
+        Attendance GetAttendanceById(int attendanceId);
     }
 }

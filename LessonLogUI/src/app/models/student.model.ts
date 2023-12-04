@@ -1,3 +1,5 @@
+import {User} from "./user.model";
+
 export class Student {
   id!: number;
   firstName!: string;
@@ -10,4 +12,5 @@ export class Student {
   classId!: number;
   tutorFirstName!: string;
   tutorLastName!: string;
+  user!: User;
 }

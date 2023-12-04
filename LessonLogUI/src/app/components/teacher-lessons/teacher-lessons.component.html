@@ -73,7 +73,7 @@
             <button mat-mini-fab color="warn" style="margin-left: 5px;" (click)="deleteLesson(lesson.id)">
               <mat-icon>delete</mat-icon>
             </button>
-            <button mat-mini-fab color="success" data-bs-target="#attendanceModal" data-bs-toggle="modal" style="margin-left: 5px;">
+            <button mat-mini-fab color="success" data-bs-target="#attendanceModal" data-bs-toggle="modal" style="margin-left: 5px;" (click)="getCurrentLesson(lesson)">
               <mat-icon>assignment</mat-icon>
             </button>
           </td>
@@ -156,22 +156,19 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="card" *ngFor="let student of students">
+        <div class="card" *ngFor="let attendance of attendances">
           <div class="form-group d-flex flex-wrap">
-            <span class="form-control w-50 name"> {{ student.user.firstName }} {{ student.attendances }}</span>
-            <select class="form-control w-50 text-white text-center attendance" #attendanceSelect (change)="changeAttendance($event, student)">
-              <option class="bg-danger text-white" value="absent">absent</option>
-              <option class="bg-success text-white" value="present">present</option>
-              <option class="bg-warning text-white" value="excused">excused</option>
+            <span class="form-control w-50 name"> {{ attendance.student.user.firstName }} {{ attendance.student.user.lastName }}</span>
+            <select class="form-control w-50 text-center text-white attendance" [style.background-color]="selectColor(attendance.status)" #attendanceSelect (change)="changeAttendance($event, attendance)">
+              <option class="bg-danger text-center text-white" value="absent">absent</option>
+              <option class="bg-success text-center text-white" value="present">present</option>
+              <option class="bg-warning text-center text-white" value="excused">excused</option>
             </select>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="editLesson()" [disabled]="isEditSelected()">Edit</button>
-      </div>
     </div>
   </div>
 </div>
+
 

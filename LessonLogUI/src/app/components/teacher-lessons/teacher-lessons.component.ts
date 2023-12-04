@@ -16,6 +16,9 @@ import {LessonhoursService} from "../../services/lessonhours.service";
 import {EditLessonDto} from "../../models/edit-lesson.dto";
 import {StudentsService} from "../../services/students.service";
 import {Student} from "../../models/student.model";
+import {AttendaceDto} from "../../models/attendace.dto";
+import {AttendencesService} from "../../services/attendences.service";
+import {Attendace} from "../../models/attendance.model";
 
 @Component({
   selector: 'app-teacher-lessons',
@@ -38,6 +41,10 @@ export class TeacherLessonsComponent implements OnInit {
   public currentEditLesson!: number;
   public currentLessonHourId!: number;
   public students: any;
+  public attendanceStatus: string = "";
+  public attendanceStudentId: number = 0;
+  public attendance: AttendaceDto = new AttendaceDto();
+  public attendances: Array<Attendace> = new Array<Attendace>();
 
   @ViewChild('attendanceSelect') attendanceSelect!: ElementRef;
 
@@ -47,7 +54,8 @@ export class TeacherLessonsComponent implements OnInit {
               private helperService: HelperService,
               private subjectsService: SubjectsService,
               private lessonHoursService: LessonhoursService,
-              private studentsService: StudentsService) {}
+              private studentsService: StudentsService,
+              private attendanceService: AttendencesService) {}
 
   ngOnInit(): void {
     this.lessonsService.refreshNeeded
@@ -115,7 +123,7 @@ export class TeacherLessonsComponent implements OnInit {
     this.selectedLessonData.lessonHourId = parseInt(e.target.value);
   }
 
-  changeAttendance(e: any, student: Student) {
+  changeAttendance(e: any, attendance: Attendace) {
     if (e.target.value == "absent") {
       this.attendanceSelect.nativeElement.classList.add('bg-danger')
       this.attendanceSelect.nativeElement.classList.remove('bg-success')
@@ -134,8 +142,31 @@ export class TeacherLessonsComponent implements OnInit {
       this.attendanceSelect.nativeElement.classList.remove('bg-success')
     }
 
-    console.log(e.target.value)
-    console.log(student)
+    this.attendanceService.updateAttendance({ id: attendance.id, status: e.target.value }).subscribe();
+  }
+
+  selectColor(value: string) {
+    if (value == 'absent') {
+      return '#e03444';
+    }
+    if (value == 'present') {
+      return '#188755';
+    }
+    if (value == 'excused') {
+      return '#ffc107';
+    }
+    return null;
+  }
+
+  addAttendances(lessonId: number) {
+    this.students.forEach((s: Student) => {
+      this.attendance = {
+        status: "absent",
+        lessonId,
+        studentId: s.id
+      }
+      this.attendanceService.addAttendance(this.attendance).subscribe();
+    })
   }
 
   getTeacher() {
@@ -159,7 +190,8 @@ export class TeacherLessonsComponent implements OnInit {
 
   addLesson() {
     this.lessonsService.addLesson(this.selectedLessonData).subscribe({
-      next: () => {
+      next: (e: any) => {
+        this.addAttendances(parseInt(e.lessonId));
         this.toastr.success("Lesson has been added!", "Success");
       }, error: () => {
         this.toastr.error("Something went wrong!", "Error");
@@ -189,9 +221,9 @@ export class TeacherLessonsComponent implements OnInit {
   }
 
   getCurrentLesson(lesson: Lesson) {
-    this.currentEditLesson = lesson.id;
-    this.currentLessonHourId = lesson.lessonHourId;
-    this.editLessonData.topic = lesson.topic;
+    this.attendanceService.getAttendancesByLessonId(lesson.id).subscribe(res => {
+      this.attendances = res as Array<Attendace>;
+    })
   }
 
   clearSelectedLessonData() {

@@ -56,6 +56,7 @@ builder.Services.AddScoped<IClassroomService, ClassroomService>();
 builder.Services.AddScoped<ILessonService, LessonService>();
 builder.Services.AddScoped<ILessonHourService, LessonHourService>();
 builder.Services.AddScoped<ITimetableLessonService, TimetableLessonService>();
+builder.Services.AddScoped<IAttendanceService, AttendaceService>();
 
 builder.Services.AddAuthentication(x =>
 {
