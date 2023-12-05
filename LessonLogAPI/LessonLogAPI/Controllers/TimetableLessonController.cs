@@ -40,6 +40,14 @@ namespace LessonLogAPI.Controllers
             return Ok(lessons);
         }
 
+        [HttpGet("teacher/{teacherId}")]
+        public ActionResult GetLessonsByTeacherId([FromRoute] int teacherId)
+        {
+            var teachers = _timetableLessonService.GetLessonsByTeacherId(teacherId);
+
+            return Ok(teachers);
+        }
+
         [HttpDelete("{id}")]
         public ActionResult DeleteLesson([FromRoute] int id)
         {

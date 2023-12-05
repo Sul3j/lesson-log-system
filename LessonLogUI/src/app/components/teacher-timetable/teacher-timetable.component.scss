@@ -1,0 +1,70 @@
+.card-wrapper {
+  margin-top: 30px;
+}
+
+.card-lessons {
+  width: 100%;
+}
+
+.card-buttons {
+  width: 100%;
+}
+
+.delete {
+  width: 48%;
+  margin-left: 2%;
+}
+
+.edit {
+  width: 48%;
+  margin-right: 2%;
+}
+
+.subject {
+  width: 100%;
+}
+
+.hours, .floor, .teachers, .number {
+  width: 50%;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.hours {
+  width: 100%;
+}
+
+.inside-card {
+  margin-bottom: 15px;
+}
+
+.breadcrumb {
+  margin-bottom: 0;
+}
+
+select {
+  margin-top: 15px;
+}
+
+.shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.btn-delete {
+  margin-left: 10px;
+}

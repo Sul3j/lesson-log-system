@@ -41,8 +41,6 @@ export class TeacherLessonsComponent implements OnInit {
   public currentEditLesson!: number;
   public currentLessonHourId!: number;
   public students: any;
-  public attendanceStatus: string = "";
-  public attendanceStudentId: number = 0;
   public attendance: AttendaceDto = new AttendaceDto();
   public attendances: Array<Attendace> = new Array<Attendace>();
 
@@ -100,6 +98,11 @@ export class TeacherLessonsComponent implements OnInit {
       console.log(res)
       this.students = res;
     })
+  }
+
+  searchLesson(e: any) {
+    this.paginationModel = this.helperService.setLessonPaginationFilter(e);
+    this.getAllLessons();
   }
 
   changeClass(e: any) {

@@ -26,6 +26,11 @@ export class HelperService {
     return this.paginationModel;
   }
 
+  setLessonPaginationFilter(e: any) {
+    this.paginationModel.filters = `(lessonTopic|lessonSubject)@=*${e.target.value}`;
+    return this.paginationModel;
+  }
+
   setStudentPaginationFilter(filters: StudentFilterDto) {
     this.paginationModel.filters = `className@=*${filters.name}|classYear@=*${filters.year}`;
     return this.paginationModel;
