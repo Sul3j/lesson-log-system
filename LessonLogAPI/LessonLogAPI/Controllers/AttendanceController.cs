@@ -35,11 +35,6 @@ namespace LessonLogAPI.Controllers
         [HttpPut("edit/{attendanceId}")]
         public ActionResult EditAttendance([FromRoute] int attendanceId, [FromBody] AttendanceDto dto )
         {
-
-            Console.WriteLine(dto.Status);
-
-            Console.WriteLine(dto.Status);
-
             var attendance = _attendanceService.GetAttendanceById(attendanceId);
 
             if (attendance == null)
