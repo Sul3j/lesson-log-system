@@ -17,6 +17,7 @@ import {HasRoleGuard} from "./guards/has-role.guard";
 import {TeacherDashboardComponent} from "./components/teacher-dashboard/teacher-dashboard.component";
 import {TeacherLessonsComponent} from "./components/teacher-lessons/teacher-lessons.component";
 import {TeacherTimetableComponent} from "./components/teacher-timetable/teacher-timetable.component";
+import {TeacherGradesComponent} from "./components/teacher-grades/teacher-grades.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -48,6 +49,7 @@ const routes: Routes = [
       { path: 'dashboard', component: TeacherDashboardComponent },
       { path: 'lessons', component: TeacherLessonsComponent },
       { path: 'timetable', component: TeacherTimetableComponent },
+      { path: 'grades', component: TeacherGradesComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }

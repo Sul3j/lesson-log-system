@@ -34,6 +34,7 @@ import { TeacherDashboardComponent } from './components/teacher-dashboard/teache
 import { TeacherMainNavComponent } from './components/teacher-main-nav/teacher-main-nav.component';
 import { TeacherLessonsComponent } from './components/teacher-lessons/teacher-lessons.component';
 import { TeacherTimetableComponent } from './components/teacher-timetable/teacher-timetable.component';
+import { TeacherGradesComponent } from './components/teacher-grades/teacher-grades.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { TeacherTimetableComponent } from './components/teacher-timetable/teache
     TeacherMainNavComponent,
     TeacherLessonsComponent,
     TeacherTimetableComponent,
+    TeacherGradesComponent,
   ],
   imports: [
     BrowserModule,

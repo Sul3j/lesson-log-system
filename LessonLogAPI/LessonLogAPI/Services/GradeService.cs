@@ -1,10 +1,11 @@
 ﻿using LessonLogAPI.Context;
 using LessonLogAPI.Models.Entities;
+using LessonLogAPI.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LessonLogAPI.Services
 {
-    public class GradeService
+    public class GradeService : IGradeService
     {
         private readonly AppDbContext _dbContext;
 
