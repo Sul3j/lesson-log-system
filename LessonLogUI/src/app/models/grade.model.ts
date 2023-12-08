@@ -7,7 +7,7 @@ export class Grade {
   gradeValue!: number;
   percent!: number;
   gradeWeight!: number;
-  date!: Date;
+  getDate!: string;
   subject!: Subject;
   subjectId!: number;
   student!: Student;

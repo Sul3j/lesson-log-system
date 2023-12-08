@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs";
+import {Subject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UrlService} from "./url.service";
+import {GradeDto} from "../models/grade.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -20,4 +21,16 @@ export class TeacherGradesService {
   getGrades() {
     return this.http.get(`${this.urlService.url}/GRADE/all`);
   }
+
+  addGrade(dto: GradeDto) {
+    return this.http
+        .post(`${this.urlService.url}/GRADE/add`, dto)
+        .pipe(
+          tap(() => {
+            this._refreshNeeded.next();
+          })
+        );
+  }
+
+
 }

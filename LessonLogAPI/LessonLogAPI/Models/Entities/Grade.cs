@@ -10,7 +10,7 @@ namespace LessonLogAPI.Models.Entities
         public int GradeValue { get; set; }
         public int? Percent { get; set; }
         public int GradeWeight { get; set; }
-        public DateTime GetDate { get; set; }
+        public DateTime GetDate { get; set; } = DateTime.Now;
         public Subject Subject { get; set; }
         public int? SubjectId { get; set; }
         public Student Student { get; set; }

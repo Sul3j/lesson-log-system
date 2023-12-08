@@ -1,5 +1,5 @@
-export class gradeDto {
-  description!: string;
+export class GradeDto {
+  description: string = '';
   gradeValue!: number;
   percent!: number;
   gradeWeight!: number;

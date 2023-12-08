@@ -7,7 +7,8 @@ import {Grade} from "../../models/grade.model";
 import {TeacherGradesService} from "../../services/teacher-grades.service";
 import {SubjectsService} from "../../services/subjects.service";
 import {Subject} from "../../models/subject.model";
-import {gradeDto} from "../../models/grade.dto";
+import {GradeDto} from "../../models/grade.dto";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-teacher-grades',
@@ -21,7 +22,7 @@ export class TeacherGradesComponent implements OnInit {
   public subjects: Array<Subject> = new Array<Subject>();
   public selectedSubject: number = 0;
   public selectedClass: number = 0;
-  public gradeAddDto!: gradeDto;
+  public gradeAddDto: GradeDto = new GradeDto();
 
   public gradesValue = [1,2,3,4,5,6];
   public gradeWeight = [1,2,3,4,5,6,7,8,9,10];
@@ -29,9 +30,14 @@ export class TeacherGradesComponent implements OnInit {
   constructor(private classesService: ClassesService,
               private studentsService: StudentsService,
               private gradesService: TeacherGradesService,
-              private subjectsService: SubjectsService) {}
+              private subjectsService: SubjectsService,
+              private toastr: ToastrService) {}
 
   ngOnInit(): void {
+    this.gradesService.refreshNeeded
+        .subscribe(() => {
+          this.getGrades();
+        })
     this.getAllClasses();
     this.getGrades();
     this.getAllSubjects();
@@ -69,14 +75,46 @@ export class TeacherGradesComponent implements OnInit {
   }
 
   changeSubject(e: any) {
+    this.selectedSubject = parseInt(e.target.value);
     this.gradeAddDto.subjectId = parseInt(e.target.value);
   }
 
   isSelected() {
-    if(this.gradeAddDto.subjectId != 0 && this.selectedClass != 0) {
+    if(this.selectedSubject != 0 && this.selectedClass != 0) {
       return true;
     }
     return false;
+  }
+
+  changeGradeValue(e: any) {
+    this.gradeAddDto.gradeValue = parseInt(e.target.value);
+  }
+
+  changeGradeWeight(e: any) {
+    this.gradeAddDto.gradeWeight = parseInt(e.target.value);
+  }
+
+  currentStudent(studentId: number) {
+    this.gradeAddDto.studentId = studentId;
+  }
+
+  isSelectedValues() {
+    if(this.gradeAddDto.gradeValue > 0 && this.gradeAddDto.gradeWeight > 0 && this.gradeAddDto.description != '') {
+      return false;
+    }
+    return true;
+  }
+
+  addGrade() {
+    this.gradesService.addGrade(this.gradeAddDto).subscribe({
+        next: (e: any) => {
+          this.toastr.success("Grade has been added!", "Success");
+        }, error: () => {
+          this.toastr.error("Something went wrong!", "Error");
+        }
+    });
+    this.gradeAddDto.percent = 0;
+    this.gradeAddDto.description = "";
   }
 
   getGradesByStudentId(studentId: number) {

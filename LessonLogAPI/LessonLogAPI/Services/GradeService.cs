@@ -69,7 +69,8 @@ namespace LessonLogAPI.Services
                 Percent = grade.Percent,
                 GradeWeight = grade.GradeWeight,
                 SubjectId = grade.SubjectId,
-                StudentId = grade.StudentId
+                StudentId = grade.StudentId,
+                GetDate = DateTime.Now,
             };
 
             _dbContext.SaveChanges();

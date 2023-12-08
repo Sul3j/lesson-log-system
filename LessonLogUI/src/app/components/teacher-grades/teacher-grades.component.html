@@ -23,7 +23,7 @@
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <button mat-raised-button class="add-grade" data-bs-toggle="modal" data-bs-target="#addModal">+ add grade</button>
+            <button mat-raised-button class="add-grade" data-bs-toggle="modal" data-bs-target="#addModal" (click)="currentStudent(student.id)">+ add grade</button>
             <table class="table">
               <thead>
               <tr>
@@ -39,7 +39,7 @@
                 <th>{{ grade.gradeValue }}</th>
                 <td>{{ grade.percent }}</td>
                 <td>{{ grade.gradeWeight }}</td>
-                <td>{{ grade.date }}</td>
+                <td>{{ grade.getDate | date:"MMM dd, yyyy 'at' hh:mm a" }}</td>
                 <td>{{ grade.description }}</td>
               </tr>
               </tbody>
@@ -60,11 +60,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <select class="form-control mb-2">
+        <select class="form-control mb-2" (change)="changeGradeValue($event)">
           <option selected value=0>--- select grade ---</option>
           <option *ngFor="let grade of gradesValue" [value]="grade"> {{ grade }} </option>
         </select>
-        <select class="form-control mb-2">
+        <select class="form-control mb-2" (change)="changeGradeWeight($event)">
           <option selected value=0>--- select grade weight ---</option>
           <option *ngFor="let gradew of gradeWeight" [value]="gradew">{{ gradew }}</option>
         </select>
@@ -73,7 +73,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add">Add</button>
+        <button type="button" class="btn btn-primary btn-add" [disabled]="isSelectedValues()" (click)="addGrade()">Add</button>
       </div>
     </div>
   </div>
