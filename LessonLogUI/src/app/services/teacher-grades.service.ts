@@ -32,5 +32,15 @@ export class TeacherGradesService {
         );
   }
 
+  deleteGrade(gradeId: number) {
+    return this.http
+        .delete(`${this.urlService.url}/GRADE/${gradeId}`)
+        .pipe(
+          tap(() => {
+            this._refreshNeeded.next();
+          })
+        );
+  }
+
 
 }

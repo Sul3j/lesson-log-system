@@ -107,7 +107,7 @@ export class TeacherGradesComponent implements OnInit {
 
   addGrade() {
     this.gradesService.addGrade(this.gradeAddDto).subscribe({
-        next: (e: any) => {
+        next: () => {
           this.toastr.success("Grade has been added!", "Success");
         }, error: () => {
           this.toastr.error("Something went wrong!", "Error");
@@ -117,8 +117,21 @@ export class TeacherGradesComponent implements OnInit {
     this.gradeAddDto.description = "";
   }
 
+  deleteGrade(gradeId: number) {
+    this.gradesService.deleteGrade(gradeId).subscribe({
+        next: () => {
+          this.toastr.success("Grade has been deleted!", "Success");
+        }, error: () => {
+          this.toastr.error("Something went wrong!", "Error");
+        }
+    });
+  }
+
+
   getGradesByStudentId(studentId: number) {
     let filterGrades = this.grades.filter((item) => item.studentId == studentId);
     return filterGrades.filter((grade) => grade.subjectId == this.selectedSubject);
   }
+
+
 }

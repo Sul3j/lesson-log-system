@@ -32,15 +32,21 @@
                 <th scope="col">weight</th>
                 <th scope="col">date</th>
                 <th scope="col">description</th>
+                <th></th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let grade of getGradesByStudentId(student.id)">
-                <th>{{ grade.gradeValue }}</th>
+                <td>{{ grade.gradeValue }}</td>
                 <td>{{ grade.percent }}</td>
                 <td>{{ grade.gradeWeight }}</td>
                 <td>{{ grade.getDate | date:"MMM dd, yyyy 'at' hh:mm a" }}</td>
                 <td>{{ grade.description }}</td>
+                <td class="d-flex justify-content-end">
+                  <button mat-mini-fab color="warn" (click)="deleteGrade(grade.id)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
               </tr>
               </tbody>
             </table>
