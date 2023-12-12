@@ -36,6 +36,7 @@ import { TeacherLessonsComponent } from './components/teacher/teacher-lessons/te
 import { TeacherTimetableComponent } from './components/teacher/teacher-timetable/teacher-timetable.component';
 import { TeacherGradesComponent } from './components/teacher/teacher-grades/teacher-grades.component';
 import { StudentDashboardComponent } from './components/student/student-dashboard/student-dashboard.component';
+import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { StudentDashboardComponent } from './components/student/student-dashboar
     TeacherTimetableComponent,
     TeacherGradesComponent,
     StudentDashboardComponent,
+    TutorDashboardComponent,
   ],
   imports: [
     BrowserModule,
