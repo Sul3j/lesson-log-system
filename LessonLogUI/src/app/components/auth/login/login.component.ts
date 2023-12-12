@@ -52,6 +52,9 @@ export class LoginComponent implements OnInit {
             if (payload.role == 'TEACHER') {
               this.router.navigate(['teacher']);
             }
+            if (payload.role == 'STUDENT') {
+              this.router.navigate(['student']);
+            }
           },
           error: (err) => {
             this.toastr.error("Incorrect login details", "Error");

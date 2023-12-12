@@ -18,6 +18,7 @@ import {TeacherDashboardComponent} from "./components/teacher/teacher-dashboard/
 import {TeacherLessonsComponent} from "./components/teacher/teacher-lessons/teacher-lessons.component";
 import {TeacherTimetableComponent} from "./components/teacher/teacher-timetable/teacher-timetable.component";
 import {TeacherGradesComponent} from "./components/teacher/teacher-grades/teacher-grades.component";
+import {StudentDashboardComponent} from "./components/student/student-dashboard/student-dashboard.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -50,6 +51,15 @@ const routes: Routes = [
       { path: 'lessons', component: TeacherLessonsComponent },
       { path: 'timetable', component: TeacherTimetableComponent },
       { path: 'grades', component: TeacherGradesComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+    ]
+  },
+  {
+    path: 'student',
+    //canActivate: [AuthGuard, HasRoleGuard],
+    //data: { role: 'STUDENT' },
+    children: [
+      { path: 'dashboard', component: StudentDashboardComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }
