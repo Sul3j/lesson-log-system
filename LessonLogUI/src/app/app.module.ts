@@ -38,6 +38,7 @@ import { TeacherGradesComponent } from './components/teacher/teacher-grades/teac
 import { StudentDashboardComponent } from './components/student/student-dashboard/student-dashboard.component';
 import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
 import { TutorMainNavComponent } from './components/tutor/tutor-main-nav/tutor-main-nav.component';
+import { StudentMainNavComponent } from './components/student/student-main-nav/student-main-nav.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { TutorMainNavComponent } from './components/tutor/tutor-main-nav/tutor-m
     StudentDashboardComponent,
     TutorDashboardComponent,
     TutorMainNavComponent,
+    StudentMainNavComponent,
   ],
   imports: [
     BrowserModule,
