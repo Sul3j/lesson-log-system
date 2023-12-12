@@ -3,6 +3,7 @@ import {Subject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UrlService} from "./url.service";
 import {GradeDto} from "../models/grade.dto";
+import {GradeEditDto} from "../models/garde-edit.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,16 @@ export class TeacherGradesService {
   deleteGrade(gradeId: number) {
     return this.http
         .delete(`${this.urlService.url}/GRADE/${gradeId}`)
+        .pipe(
+          tap(() => {
+            this._refreshNeeded.next();
+          })
+        );
+  }
+
+  editGrade(gradeId: number, gradeDto: GradeEditDto) {
+    return this.http
+        .put(`${this.urlService.url}/GRADE/edit/${gradeId}`, gradeDto)
         .pipe(
           tap(() => {
             this._refreshNeeded.next();

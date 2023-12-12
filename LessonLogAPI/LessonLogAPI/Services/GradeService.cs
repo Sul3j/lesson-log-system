@@ -57,21 +57,17 @@ namespace LessonLogAPI.Services
         {
             var existingGrade = _dbContext.Grades.FirstOrDefault(g => g.Id == grade.Id);
 
-            if (existingGrade != null)
+            if (existingGrade == null)
             {
                 throw new Exception("Grade not found");
             }
 
-            existingGrade = new Grade()
-            {
-                Description = grade.Description,
-                GradeValue = grade.GradeValue,
-                Percent = grade.Percent,
-                GradeWeight = grade.GradeWeight,
-                SubjectId = grade.SubjectId,
-                StudentId = grade.StudentId,
-                GetDate = DateTime.Now,
-            };
+            existingGrade.Description = grade.Description;
+            existingGrade.GradeValue = grade.GradeValue;
+            existingGrade.Percent = grade.Percent;
+            existingGrade.GradeWeight = grade.GradeWeight;
+            existingGrade.GetDate = DateTime.Now;
+            
 
             _dbContext.SaveChanges();
         }

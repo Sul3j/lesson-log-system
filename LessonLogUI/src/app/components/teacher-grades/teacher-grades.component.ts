@@ -9,6 +9,7 @@ import {SubjectsService} from "../../services/subjects.service";
 import {Subject} from "../../models/subject.model";
 import {GradeDto} from "../../models/grade.dto";
 import {ToastrService} from "ngx-toastr";
+import {GradeEditDto} from "../../models/garde-edit.dto";
 
 @Component({
   selector: 'app-teacher-grades',
@@ -23,6 +24,8 @@ export class TeacherGradesComponent implements OnInit {
   public selectedSubject: number = 0;
   public selectedClass: number = 0;
   public gradeAddDto: GradeDto = new GradeDto();
+  public gradeEditDto: GradeEditDto = new GradeEditDto();
+  public gradeId!: number;
 
   public gradesValue = [1,2,3,4,5,6];
   public gradeWeight = [1,2,3,4,5,6,7,8,9,10];
@@ -94,6 +97,24 @@ export class TeacherGradesComponent implements OnInit {
     this.gradeAddDto.gradeWeight = parseInt(e.target.value);
   }
 
+  changeEditGradeValue(e: any) {
+    this.gradeEditDto.gradeValue = parseInt(e.target.value);
+  }
+
+  changeEditGradeWeight(e: any) {
+    this.gradeEditDto.gradeWeight = parseInt(e.target.value);
+  }
+
+  getCurrentGrade(grade: Grade) {
+    this.gradeEditDto.gradeWeight = grade.gradeWeight;
+    console.log("grade weight: ", grade.gradeWeight)
+    this.gradeEditDto.gradeValue = grade.gradeValue;
+    console.log("grade value: ", grade.gradeValue)
+    this.gradeEditDto.description = grade.description;
+    this.gradeEditDto.percent = grade.percent;
+    this.gradeId = grade.id;
+  }
+
   currentStudent(studentId: number) {
     this.gradeAddDto.studentId = studentId;
   }
@@ -121,6 +142,18 @@ export class TeacherGradesComponent implements OnInit {
     this.gradesService.deleteGrade(gradeId).subscribe({
         next: () => {
           this.toastr.success("Grade has been deleted!", "Success");
+        }, error: () => {
+          this.toastr.error("Something went wrong!", "Error");
+        }
+    });
+  }
+
+  editGrade() {
+    console.log(this.gradeId)
+    console.log(this.gradeEditDto)
+    this.gradesService.editGrade(this.gradeId, this.gradeEditDto).subscribe({
+        next: () => {
+          this.toastr.success("Grade has been edit!", "Success");
         }, error: () => {
           this.toastr.error("Something went wrong!", "Error");
         }

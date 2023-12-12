@@ -43,7 +43,10 @@
                 <td>{{ grade.getDate | date:"MMM dd, yyyy 'at' hh:mm a" }}</td>
                 <td>{{ grade.description }}</td>
                 <td class="d-flex justify-content-end">
-                  <button mat-mini-fab color="warn" (click)="deleteGrade(grade.id)">
+                  <button mat-mini-fab color="primary" data-bs-target="#editModal" data-bs-toggle="modal" (click)="getCurrentGrade(grade)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-mini-fab color="warn" (click)="deleteGrade(grade.id)" style="margin-left: 5px;">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </td>
@@ -80,6 +83,37 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary btn-add" [disabled]="isSelectedValues()" (click)="addGrade()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Edit -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Edit grade</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>grade:</label>
+        <select class="form-control mb-2" (change)="changeEditGradeValue($event)">
+          <option *ngFor="let grade of gradesValue" [value]="grade" [selected]="grade == gradeEditDto.gradeValue"> {{ grade }} </option>
+        </select>
+        <label>grade weight:</label>
+        <select class="form-control mb-2" (change)="changeEditGradeWeight($event)">
+          <option *ngFor="let gradew of gradeWeight" [value]="gradew" [selected]="gradew == gradeEditDto.gradeWeight">{{ gradew }}</option>
+        </select>
+        <label>percent:</label>
+        <input type="number" class="form-control mb-2" placeholder="percent" max="100" min="0" [(ngModel)]="gradeEditDto.percent">
+        <label>description:</label>
+        <textarea class="form-control" placeholder="description" [(ngModel)]="gradeEditDto.description"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="editGrade()">Edit</button>
       </div>
     </div>
   </div>
