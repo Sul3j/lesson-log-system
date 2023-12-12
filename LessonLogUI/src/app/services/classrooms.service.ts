@@ -3,7 +3,7 @@ import {Subject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UrlService} from "./url.service";
 import {Pagination} from "../models/pagination.model";
-import {ClassroomDto} from "../models/classroom.dto";
+import {ClassroomDto} from "../models/dtos/classroom.dto";
 
 @Injectable({
   providedIn: 'root'

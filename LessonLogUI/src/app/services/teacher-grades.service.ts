@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {Subject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UrlService} from "./url.service";
-import {GradeDto} from "../models/grade.dto";
-import {GradeEditDto} from "../models/garde-edit.dto";
+import {GradeDto} from "../models/dtos/grade.dto";
+import {GradeEditDto} from "../models/dtos/garde-edit.dto";
 
 @Injectable({
   providedIn: 'root'

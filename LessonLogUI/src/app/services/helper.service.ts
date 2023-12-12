@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ResponseModel} from "../models/response.model";
 import {Pagination} from "../models/pagination.model";
-import {StudentFilterDto} from "../models/student-filter.dto";
+import {StudentFilterDto} from "../models/dtos/student-filter.dto";
 
 @Injectable({
   providedIn: 'root'

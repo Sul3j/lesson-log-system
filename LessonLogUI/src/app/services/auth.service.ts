@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {RegisterDto} from "../models/register.dto";
-import {LoginDto} from "../models/login.dto";
+import {RegisterDto} from "../models/dtos/register.dto";
+import {LoginDto} from "../models/dtos/login.dto";
 import {Router} from "@angular/router";
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {TokenModel} from "../models/token-api.model";

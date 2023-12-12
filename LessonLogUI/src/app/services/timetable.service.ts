@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Subject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UrlService} from "./url.service";
-import {TimetableDto} from "../models/timetable.dto";
+import {TimetableDto} from "../models/dtos/timetable.dto";
 import {SubjectsService} from "./subjects.service";
 
 @Injectable({

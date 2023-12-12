@@ -3,8 +3,8 @@ import {Subject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {UrlService} from "./url.service";
 import {Pagination} from "../models/pagination.model";
-import {AddLessonDto} from "../models/add-lesson.dto";
-import {EditLessonDto} from "../models/edit-lesson.dto";
+import {AddLessonDto} from "../models/dtos/add-lesson.dto";
+import {EditLessonDto} from "../models/dtos/edit-lesson.dto";
 
 @Injectable({
   providedIn: 'root'
