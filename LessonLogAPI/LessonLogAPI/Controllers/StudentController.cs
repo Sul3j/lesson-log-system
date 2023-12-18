@@ -2,6 +2,7 @@
 using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
+using LessonLogAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
@@ -135,6 +136,14 @@ namespace LessonLogAPI.Controllers
             _studentService.UpdateStudent(student);
 
             return Ok(new { Message = "Student updated successfully" });
+        }
+
+        [HttpGet("email/{email}")]
+        public Student GetStudentByEmail([FromRoute] string email)
+        {
+            var student = _studentService.GetStudentByEmail(email);
+
+            return student;
         }
 
     }

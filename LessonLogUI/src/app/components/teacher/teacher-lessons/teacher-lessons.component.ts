@@ -168,6 +168,8 @@ export class TeacherLessonsComponent implements OnInit {
         lessonId,
         studentId: s.id
       }
+
+      console.log("dodano obecność")
       this.attendanceService.addAttendance(this.attendance).subscribe();
     })
   }

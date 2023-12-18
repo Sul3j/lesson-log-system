@@ -17,5 +17,7 @@ namespace LessonLogAPI.Models.Interfaces
         Student DeleteStudent(int id);
 
         IQueryable<Student> GetStudentsByClass(int classId);
+
+        Student GetStudentByEmail(string email);
     }
 }

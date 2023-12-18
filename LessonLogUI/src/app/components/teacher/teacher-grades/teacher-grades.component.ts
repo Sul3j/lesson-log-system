@@ -166,5 +166,11 @@ export class TeacherGradesComponent implements OnInit {
     return filterGrades.filter((grade) => grade.subjectId == this.selectedSubject);
   }
 
+  dataBsTargetGenerator(data: string, num: number) {
+    return `${data}${num}`;
+  }
 
+  ariaControlsGenerator(data: string, num: number) {
+    return `${data}${num}`;
+  }
 }

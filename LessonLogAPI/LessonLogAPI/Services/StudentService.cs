@@ -42,6 +42,13 @@ namespace LessonLogAPI.Services
             return students;
         }
 
+        public Student GetStudentByEmail(string email)
+        {
+            var student = _dbContext.Students.FirstOrDefault(s => s.User.Email == email);
+
+            return student;
+        }
+
         public Student GetStudent(int id)
         {
             var student = _dbContext.Students.FirstOrDefault(s => s.Id == id);

@@ -5,12 +5,12 @@ import {UrlService} from "./url.service";
 @Injectable({
   providedIn: 'root'
 })
-export class TeacherTimetableService {
+export class StudentTimetableService {
 
   constructor(private http: HttpClient,
               private urlService: UrlService) { }
 
-  getTimetable(teacherId: number) {
-    return this.http.get(`${this.urlService.url}/TIMETABLELESSON/teacher/${teacherId}`);
+  getTimetable(classId: number) {
+    return this.http.get(`${this.urlService.url}/TIMETABLELESSON/${classId}`);
   }
 }

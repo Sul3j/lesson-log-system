@@ -39,6 +39,7 @@ import { StudentDashboardComponent } from './components/student/student-dashboar
 import { TutorDashboardComponent } from './components/tutor/tutor-dashboard/tutor-dashboard.component';
 import { TutorMainNavComponent } from './components/tutor/tutor-main-nav/tutor-main-nav.component';
 import { StudentMainNavComponent } from './components/student/student-main-nav/student-main-nav.component';
+import { StudentTimetableComponent } from './components/student/student-timetable/student-timetable.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { StudentMainNavComponent } from './components/student/student-main-nav/s
     TutorDashboardComponent,
     TutorMainNavComponent,
     StudentMainNavComponent,
+    StudentTimetableComponent,
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,7 @@ import {TeacherTimetableComponent} from "./components/teacher/teacher-timetable/
 import {TeacherGradesComponent} from "./components/teacher/teacher-grades/teacher-grades.component";
 import {StudentDashboardComponent} from "./components/student/student-dashboard/student-dashboard.component";
 import {TutorDashboardComponent} from "./components/tutor/tutor-dashboard/tutor-dashboard.component";
+import {StudentTimetableComponent} from "./components/student/student-timetable/student-timetable.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -61,7 +62,8 @@ const routes: Routes = [
     //data: { role: 'STUDENT' },
     children: [
       { path: 'dashboard', component: StudentDashboardComponent },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+      { path: 'timetable', component: StudentTimetableComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
   },
   {

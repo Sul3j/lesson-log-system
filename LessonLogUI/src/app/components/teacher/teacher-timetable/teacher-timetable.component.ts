@@ -25,6 +25,7 @@ export class TeacherTimetableComponent implements OnInit{
     const decodeToken = jwtDecode(token) as any;
     this.lessonsService.getTeacherId(decodeToken.unique_name).subscribe((res: any) => {
       this.timetableService.getTimetable(res.id).subscribe((response) => {
+        console.log(response)
         this.timetable = response as Array<TimetableDto>;
       })
     })
