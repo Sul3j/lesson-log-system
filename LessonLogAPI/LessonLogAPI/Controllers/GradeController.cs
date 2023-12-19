@@ -1,5 +1,6 @@
 ﻿using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
+using LessonLogAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sieve.Services;
@@ -31,6 +32,14 @@ namespace LessonLogAPI.Controllers
         public ActionResult GetAllGrades()
         {
             var grades = _gradeService.GetGrades();
+
+            return Ok(grades);
+        }
+
+        [HttpGet("student/{studentId}")]
+        public ActionResult GetGradesByStudentId([FromRoute] int studentId)
+        {
+            var grades = _gradeService.GetGradeByStudentId(studentId);
 
             return Ok(grades);
         }

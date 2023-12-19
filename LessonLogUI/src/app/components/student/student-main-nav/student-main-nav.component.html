@@ -7,6 +7,7 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/student/timetable']">Timetable</a>
+      <a mat-list-item [routerLink]="['/student/grades']">Grades</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,6 +23,7 @@
       <span [routerLink]="['/student/dashboard']"><img src="../../../../assets/logo.svg" alt="logo" style="width: 175px;"></span>
       <span class="spacer"></span>
       <a [routerLink]="['/student/timetable']">Timetable</a>
+      <a [routerLink]="['/student/grades']">Grades</a>
       <button class="logout-button" mat-raised-button style="background-color: #C96E6E" color="warn" (click)="logout()">Logout</button>
     </mat-toolbar>
     <ng-content></ng-content>

@@ -13,5 +13,7 @@ namespace LessonLogAPI.Models.Interfaces
         Grade GetGrade(int id);
 
         void UpdateGrade(Grade grade);
+
+        IQueryable<Grade> GetGradeByStudentId(int studentId);
     }
 }

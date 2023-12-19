@@ -22,6 +22,7 @@ import {StudentDashboardComponent} from "./components/student/student-dashboard/
 import {TutorDashboardComponent} from "./components/tutor/tutor-dashboard/tutor-dashboard.component";
 import {StudentTimetableComponent} from "./components/student/student-timetable/student-timetable.component";
 import {TutorTimetableComponent} from "./components/tutor/tutor-timetable/tutor-timetable.component";
+import {StudentGradesComponent} from "./components/student/student-grades/student-grades.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -64,6 +65,7 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: StudentDashboardComponent },
       { path: 'timetable', component: StudentTimetableComponent },
+      { path: 'grades', component: StudentGradesComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
   },

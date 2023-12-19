@@ -53,6 +53,16 @@ namespace LessonLogAPI.Services
             return grade;
         }
 
+        public IQueryable<Grade> GetGradeByStudentId(int studentId)
+        {
+            var grades = _dbContext.Grades
+                .Where(g => g.StudentId == studentId)
+                .Include(g => g.Subject)
+                .AsQueryable();
+
+            return grades;
+        }
+
         public void UpdateGrade(Grade grade)
         {
             var existingGrade = _dbContext.Grades.FirstOrDefault(g => g.Id == grade.Id);
