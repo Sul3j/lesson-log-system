@@ -18,9 +18,6 @@ export class StudentGradesComponent implements OnInit{
 
   ngOnInit(): void {
     this.getTimetableByStudent();
-    setTimeout(() => {
-      console.log(this.subjectNames)
-    },2000)
   }
 
   getTimetableByStudent() {

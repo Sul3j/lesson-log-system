@@ -1,0 +1,43 @@
+<app-tutor-main-nav>
+  <div class="container">
+    <nav aria-label="breadcrumb mt-3">
+      <ol class="breadcrumb mt-3">
+        <li class="breadcrumb-item" [routerLink]="['/tutor/dashboard']"><a>Dashboard</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Grades</a></li>
+      </ol>
+    </nav>
+    <div class="accordion mt-3" id="accordionExample">
+      <div class="accordion-item" *ngFor="let subject of subjectNames, index as i">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="dataBsTargetGenerator('#collapse', i)" aria-expanded="true" [attr.aria-controls]="ariaControlsGenerator('collapse', i)">
+            {{ subject }}
+          </button>
+        </h2>
+        <div [id]="ariaControlsGenerator('collapse', i)" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">grade</th>
+                <th scope="col">percent</th>
+                <th scope="col">weight</th>
+                <th scope="col">date</th>
+                <th scope="col">description</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let grade of getGradesBySubjectName(subject)">
+                <td>{{ grade.gradeValue }}</td>
+                <td>{{ grade.percent }}</td>
+                <td>{{ grade.gradeWeight }}</td>
+                <td>{{ grade.getDate | date:"MMM dd, yyyy 'at' hh:mm a" }}</td>
+                <td>{{ grade.description }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-tutor-main-nav>
