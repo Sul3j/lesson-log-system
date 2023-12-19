@@ -6,7 +6,7 @@
                [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['']">example</a>
+      <a mat-list-item [routerLink]="['/tutor/timetable']">Timetable</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -21,6 +21,7 @@
       </button>
       <span [routerLink]="['/tutor/dashboard']"><img src="../../../../assets/logo.svg" alt="logo" style="width: 175px;"></span>
       <span class="spacer"></span>
+      <a [routerLink]="['/tutor/timetable']">Timetable</a>
       <button class="logout-button" mat-raised-button style="background-color: #C96E6E" color="warn" (click)="logout()">Logout</button>
     </mat-toolbar>
     <ng-content></ng-content>

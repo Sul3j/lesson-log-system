@@ -2,6 +2,7 @@
 using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
+using LessonLogAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
@@ -93,6 +94,14 @@ namespace LessonLogAPI.Controllers
             var result = new PagedResult<TutorDto>(dtos, totalCount, query.Page.Value, query.PageSize.Value);
 
             return result;
+        }
+
+        [HttpGet("email/{email}")]
+        public Tutor GetTutorByEmail([FromRoute] string email)
+        {
+            var tutor = _tutorService.GetTutorByEmail(email);
+
+            return tutor;
         }
     }
 }

@@ -19,5 +19,7 @@ namespace LessonLogAPI.Models.Interfaces
         IQueryable<Student> GetStudentsByClass(int classId);
 
         Student GetStudentByEmail(string email);
+
+        Student GetStudentByTutorId(int tutorId);
     }
 }

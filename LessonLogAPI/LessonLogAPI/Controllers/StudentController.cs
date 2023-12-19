@@ -146,5 +146,12 @@ namespace LessonLogAPI.Controllers
             return student;
         }
 
+        [HttpGet("tutor/{tutorId}")]
+        public Student GetStudentByTutorId([FromRoute] int tutorId)
+        {
+            var student = _studentService.GetStudentByTutorId(tutorId);
+
+            return student;
+        }
     }
 }

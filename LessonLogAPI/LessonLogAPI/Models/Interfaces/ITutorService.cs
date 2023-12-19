@@ -11,5 +11,7 @@ namespace LessonLogAPI.Models.Interfaces
         Tutor DeleteTutor(int id);
 
         Tutor GetTutor(int id);
+
+        Tutor GetTutorByEmail(string email);
     }
 }

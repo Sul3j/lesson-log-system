@@ -58,5 +58,12 @@ namespace LessonLogAPI.Services
 
             return tutor;
         }
+
+        public Tutor GetTutorByEmail(string email)
+        {
+            var tutor = _dbContext.Tutors.FirstOrDefault(s => s.User.Email == email);
+
+            return tutor;
+        }
     }
 }

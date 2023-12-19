@@ -89,5 +89,12 @@ namespace LessonLogAPI.Services
 
             return student;
         }
+
+        public Student GetStudentByTutorId(int tutorId)
+        {
+            var student = _dbContext.Students.FirstOrDefault(s => s.TutorId == tutorId);
+
+            return student;
+        }
     }
 }
