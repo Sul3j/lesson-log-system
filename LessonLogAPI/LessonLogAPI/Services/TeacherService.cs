@@ -26,6 +26,7 @@ namespace LessonLogAPI.Services
         {
             var teachers = _dbContext.Teachers
                 .Include(t => t.User)
+                .Include(t => t.Class)
                 .AsQueryable();
 
             return teachers;

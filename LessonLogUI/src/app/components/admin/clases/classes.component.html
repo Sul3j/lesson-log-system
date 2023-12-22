@@ -22,7 +22,6 @@
         <select class="form-control" (change)="itemsPerPage($event)" id="select">
           <option selected value="5">5</option>
           <option value="10">10</option>
-          <option value="25">25</option>
         </select>
         <label class="input-group-text" id="inputGroup" for="select"><i for="select" class="fa-solid fa-angle-down"></i></label>
       </div>
@@ -85,7 +84,7 @@
         <label>Educator:</label>
         <select class="form-control" (change)="changeTeacher($event)">
           <option selected [value]="null">--- select educator ---</option>
-          <option *ngFor="let teacher of teachers" [value]="teacher.id"> {{ teacher.user.firstName}} {{ teacher.user.lastName }} </option>
+          <option *ngFor="let teacher of getFilterTeachers(teachers)" [value]="teacher.id"> {{ teacher.user.firstName}} {{ teacher.user.lastName }} </option>
         </select>
         <label>Class Name:</label>
         <input class="form-control" [(ngModel)]="name">
@@ -114,7 +113,7 @@
       <div class="modal-body">
         <label>Educator:</label>
         <select class="form-control" (change)="changeEditTeacherValue($event)">
-          <option *ngFor="let teacher of teachers" [selected]="teacher.id == currentClass.educatorId" [value]="teacher.id"> {{ teacher.user.firstName}} {{ teacher.user.lastName }} </option>
+          <option *ngFor="let teacher of getFilterTeachers(teachers)" [selected]="teacher.id == currentClass.educatorId" [value]="teacher.id"> {{ teacher.user.firstName}} {{ teacher.user.lastName }} </option>
         </select>
         <label>Class Name:</label>
         <input class="form-control" [(ngModel)]="classEditValue.name">

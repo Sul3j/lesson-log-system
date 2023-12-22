@@ -161,4 +161,8 @@ export class ClassesComponent implements OnInit {
   changeEditYearValue(e: any) {
     this.classEditValue.year = parseInt(e.target.value);
   }
+
+  getFilterTeachers(teachers: any) {
+    return teachers.filter((item: any) => item.class == null);
+  }
 }
