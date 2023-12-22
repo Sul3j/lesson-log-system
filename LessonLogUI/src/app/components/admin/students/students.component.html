@@ -110,7 +110,7 @@
         </select>
         <select class="form-control mt-3" (change)="changeTutor($event)">
           <option selected>--- select tutor ---</option>
-          <option *ngFor="let tutor of tutors" [value]="tutor.id"> {{ tutor.user.firstName }} {{ tutor.user.lastName }}</option>
+          <option *ngFor="let tutor of getFilterTutors(tutors)" [value]="tutor.id"> {{ tutor.user.firstName }} {{ tutor.user.lastName }}</option>
         </select>
       </div>
       <div class="modal-footer">

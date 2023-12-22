@@ -79,6 +79,7 @@ export class StudentsComponent implements OnInit {
   private getAllTutors() {
     this.tutorsService.getAllTutors().subscribe(res => {
       this.tutors = res as Array<Tutor>;
+      console.log(res)
     })
   }
 
@@ -208,5 +209,9 @@ export class StudentsComponent implements OnInit {
 
   createRange(number: number) {
     return this.helperService.createRange(number);
+  }
+
+  getFilterTutors(tutors: any) {
+    return tutors.filter((item: any) => item.students.length === 0);
   }
 }
