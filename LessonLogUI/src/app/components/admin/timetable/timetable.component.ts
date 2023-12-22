@@ -137,7 +137,10 @@ export class TimetableComponent implements OnInit {
         this.toastr.error("Something went wrong!", "Error");
       }
     })
-    this.timetableDto = new TimetableDto();
+    this.timetableDto.subjectId = 0;
+    this.timetableDto.teacherId = 0;
+    this.timetableDto.classroomId = 0;
+    this.timetableDto.lessonHourId = 0;
   }
 
   editTimetable() {
@@ -158,9 +161,13 @@ export class TimetableComponent implements OnInit {
   isAllTimetableValues() {
     if(this.timetableDto.weekDay != undefined &&
     this.timetableDto.subjectId != undefined &&
+      this.timetableDto.subjectId != 0 &&
     this.timetableDto.teacherId != undefined &&
+      this.timetableDto.teacherId != 0 &&
     this.timetableDto.classroomId != undefined &&
+      this.timetableDto.classroomId != 0 &&
     this.timetableDto.lessonHourId != undefined &&
+      this.timetableDto.lessonHourId != 0 &&
     this.timetableDto.classId != undefined) {
       return false;
     } else {
