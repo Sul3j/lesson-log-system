@@ -22,6 +22,10 @@ export class StudentsService {
     return this.http.post<any>(`${this.urlService.url}/Student/pagination`, body);
   }
 
+  getStudentId(email: string) {
+    return this.http.get(`${this.urlService.url}/STUDENT/email/${email}`);
+  }
+
   addStudent(student: AddStudentDto) {
     return this.http
       .post(`${this.urlService.url}/Student/add`, student)

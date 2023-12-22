@@ -3,6 +3,7 @@ import {TimetableDto} from "../../../models/dtos/timetable.dto";
 import {jwtDecode} from "jwt-decode";
 import {StudentTimetableService} from "../../../services/student-timetable.service";
 import {StudentLessonsService} from "../../../services/student-lessons.service";
+import {StudentsService} from "../../../services/students.service";
 
 @Component({
   selector: 'app-student-timetable',
@@ -13,7 +14,7 @@ export class StudentTimetableComponent implements OnInit {
   public timetable: Array<TimetableDto> = new Array<TimetableDto>();
 
   constructor(private timetableService: StudentTimetableService,
-              private lessonsService: StudentLessonsService) {}
+              private studentService: StudentsService) {}
 
   ngOnInit(): void {
     this.getTimetableByStudent();
@@ -24,7 +25,7 @@ export class StudentTimetableComponent implements OnInit {
     const token = localStorage.getItem("token") as string;
     const decodeToken = jwtDecode(token) as any;
     console.log(decodeToken)
-    this.lessonsService.getStudentId(decodeToken.unique_name).subscribe((res: any) => {
+    this.studentService.getStudentId(decodeToken.unique_name).subscribe((res: any) => {
       this.timetableService.getTimetable(res.classId).subscribe((response) => {
         this.timetable = response as Array<TimetableDto>;
       })

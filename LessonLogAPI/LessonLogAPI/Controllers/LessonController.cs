@@ -39,6 +39,14 @@ namespace LessonLogAPI.Controllers
             return Ok(lessons);
         }
 
+        [HttpGet("class/{classId}")]
+        public ActionResult GetLessonsByClassId([FromRoute] int classId) 
+        {
+            var lessons = _lessonService.GetLessonsByClassId(classId);
+
+            return Ok(lessons);
+        }
+
         [HttpPost("pagination/{teacherId}/{classId}/{subjectId}")]
         public async Task<PagedResult<LessonDto>> GetLessons([FromBody] SieveModel query, [FromRoute] int teacherId, [FromRoute] int classId, [FromRoute] int subjectId)
         {

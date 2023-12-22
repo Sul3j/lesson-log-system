@@ -10,7 +10,7 @@ export class StudentLessonsService {
   constructor(private http: HttpClient,
               private urlService: UrlService) {}
 
-  getStudentId(email: string) {
-    return this.http.get(`${this.urlService.url}/STUDENT/email/${email}`);
+  getLessonsByClassId(classId: number) {
+    return this.http.get(`${this.urlService.url}/LESSON/class/${classId}`);
   }
 }

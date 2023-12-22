@@ -3,6 +3,7 @@ import {jwtDecode} from "jwt-decode";
 import {StudentGradesService} from "../../../services/student-grades.service";
 import {Grade} from "../../../models/grade.model";
 import {StudentLessonsService} from "../../../services/student-lessons.service";
+import {StudentsService} from "../../../services/students.service";
 
 @Component({
   selector: 'app-student-grades',
@@ -14,7 +15,7 @@ export class StudentGradesComponent implements OnInit{
   public subjectNames: Set<string> = new Set<string>();
 
   constructor(private gradesService: StudentGradesService,
-              private lessonsService: StudentLessonsService) {}
+              private studentService: StudentsService) {}
 
   ngOnInit(): void {
     this.getTimetableByStudent();
@@ -24,7 +25,7 @@ export class StudentGradesComponent implements OnInit{
     const localStorage = window.localStorage;
     const token = localStorage.getItem("token") as string;
     const decodeToken = jwtDecode(token) as any;
-    this.lessonsService.getStudentId(decodeToken.unique_name).subscribe((res: any) => {
+    this.studentService.getStudentId(decodeToken.unique_name).subscribe((res: any) => {
       this.gradesService.getGradesByStudentId(res.id).subscribe((response: any) => {
         let subjects: Array<string> = new Array<string>();
         this.grades = response as Array<Grade>;

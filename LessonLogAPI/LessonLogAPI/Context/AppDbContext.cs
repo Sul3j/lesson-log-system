@@ -1,4 +1,5 @@
-﻿using LessonLogAPI.Models;
+﻿using LessonLogAPI.Helpers;
+using LessonLogAPI.Models;
 using LessonLogAPI.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
@@ -7,11 +8,7 @@ namespace LessonLogAPI.Context
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-
-
-        }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
         public DbSet<User> Users { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
@@ -50,6 +47,40 @@ namespace LessonLogAPI.Context
                 .WithOne(a => a.User)
                 .HasForeignKey<Admin>(a => a.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+                eb.HasData(
+                    new User() { Id = 1, FirstName = "Carrie", LastName = "Williams", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "susan24@example.org", Role = "USER" },
+                    new User() { Id = 2, FirstName = "Audrey", LastName = "Pineda", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "nealdaniel@example.org", Role = "USER" },
+                    new User() { Id = 3, FirstName = "Grace", LastName = "Wilson", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "paulwise@example.com", Role = "USER" },
+                    new User() { Id = 4, FirstName = "Mary", LastName = "Clark", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "laurasharp@example.org", Role = "USER" },
+                    new User() { Id = 5, FirstName = "Mary", LastName = "Lowe", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "richard38@example.net", Role = "USER" },
+                    new User() { Id = 6, FirstName = "Patricia", LastName = "Garcia", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "garrett04@example.net", Role = "USER" },
+                    new User() { Id = 7, FirstName = "Logan", LastName = "Andrews", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "gscott@example.net", Role = "USER" },
+                    new User() { Id = 8, FirstName = "Krystal", LastName = "West", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "tyler02@example.com", Role = "USER" },
+                    new User() { Id = 9, FirstName = "John", LastName = "Weber", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "bsanchez@example.com", Role = "USER" },
+                    new User() { Id = 10, FirstName = "Michael", LastName = "Diaz", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "nicholashodges@example.com", Role = "USER" },
+                    new User() { Id = 11, FirstName = "Benjamin", LastName = "Kirby", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "krivera@example.org", Role = "USER" },
+                    new User() { Id = 12, FirstName = "Elizabeth", LastName = "Rosario", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "zrivera@example.org", Role = "USER" },
+                    new User() { Id = 13, FirstName = "Kristi", LastName = "Allen", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "othompson@example.com", Role = "USER" },
+                    new User() { Id = 14, FirstName = "Nicholas", LastName = "Holmes", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "daltonalex@example.net", Role = "USER" },
+                    new User() { Id = 15, FirstName = "Benjamin", LastName = "Braun", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "collinsmiguel@example.org", Role = "USER" },
+                    new User() { Id = 16, FirstName = "Tamara", LastName = "Gonzalez", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "mphillips@example.net", Role = "USER" },
+                    new User() { Id = 17, FirstName = "Margaret", LastName = "Smith", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "jasonhamilton@example.net", Role = "USER" },
+                    new User() { Id = 18, FirstName = "Kristina", LastName = "Brown", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "wilsonkayla@example.com", Role = "USER" },
+                    new User() { Id = 19, FirstName = "Allison", LastName = "Wilson", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "shannon76@example.com", Role = "USER" },
+                    new User() { Id = 20, FirstName = "Valerie", LastName = "Klein", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "jonathan75@example.com", Role = "USER" },
+                    new User() { Id = 21, FirstName = "Brian", LastName = "Herrera", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "andreaharris@example.net", Role = "USER" },
+                    new User() { Id = 22, FirstName = "Christina", LastName = "Reeves", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "danielwalker@example.org", Role = "USER" },
+                    new User() { Id = 23, FirstName = "Scott", LastName = "Price", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "leeandrea@example.net", Role = "USER" },
+                    new User() { Id = 24, FirstName = "Anthony", LastName = "Duncan", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "sstevens@example.org", Role = "USER" },
+                    new User() { Id = 25, FirstName = "Adam", LastName = "Parker", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "brownjon@example.com", Role = "USER" },
+                    new User() { Id = 26, FirstName = "Gregory", LastName = "Love", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "keynorma@example.com", Role = "USER" },
+                    new User() { Id = 27, FirstName = "Kyle", LastName = "Jones", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "terrance01@example.org", Role = "USER" },
+                    new User() { Id = 28, FirstName = "Charles", LastName = "Wolf", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "owensraymond@example.org", Role = "USER" },
+                    new User() { Id = 29, FirstName = "Angela", LastName = "Rice", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "william21@example.org", Role = "USER" },
+                    new User() { Id = 30, FirstName = "Raymond", LastName = "Martinez", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "susan2454@example.org", Role = "USER" },
+                    new User() { Id = 31, FirstName = "Szymon", LastName = "Sulejczak", Password = PasswordHasher.HashPassword("Example#Password$23"), Email = "szymon.sul3jczak@gmail.com", Role = "ADMIN" }
+                    );
             });
                 
             modelBuilder.Entity<Teacher>(eb =>
@@ -78,17 +109,17 @@ namespace LessonLogAPI.Context
                 eb.HasMany(s => s.Lessons)
                 .WithOne(l => l.Subject)
                 .HasForeignKey(l => l.SubjectId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
                 eb.HasMany(s => s.Grades)
                 .WithOne(g => g.Subject)
                 .HasForeignKey(g => g.SubjectId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
                 eb.HasMany(s => s.TimetableLessons)
                 .WithOne(t => t.Subject)
                 .HasForeignKey(t => t.SubjectId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Class>(eb =>
@@ -96,7 +127,7 @@ namespace LessonLogAPI.Context
                 eb.HasMany(c => c.Lessons)
                 .WithOne(l => l.Class)
                 .HasForeignKey(l => l.ClassId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
                 eb.HasMany(c => c.Students)
                 .WithOne(s => s.Class)
@@ -106,7 +137,7 @@ namespace LessonLogAPI.Context
                 eb.HasMany(c => c.TimetableLessons)
                 .WithOne(t => t.Class)
                 .HasForeignKey(t => t.ClassId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Lesson>(eb =>
@@ -114,7 +145,7 @@ namespace LessonLogAPI.Context
                 eb.HasMany(l => l.Attendances)
                 .WithOne(a => a.Lesson)
                 .HasForeignKey(a => a.LessonId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Student>(eb =>
@@ -122,12 +153,12 @@ namespace LessonLogAPI.Context
                 eb.HasMany(s => s.Attendances)
                 .WithOne(a => a.Student)
                 .HasForeignKey(a => a.StudentId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
                 eb.HasMany(s => s.Grades)
                 .WithOne(g => g.Student)
                 .HasForeignKey(g => g.StudentId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Tutor>(eb =>
@@ -144,6 +175,11 @@ namespace LessonLogAPI.Context
                 .WithOne(t => t.Classroom)
                 .HasForeignKey(t => t.ClassroomId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<Admin>(eb =>
+            {
+                eb.HasData(new Admin() { Id = 1, CreatedAt = DateTime.Now, UserId = 31 });
             });
 
             modelBuilder.Entity<LessonHour>(eb =>

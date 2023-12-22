@@ -47,16 +47,29 @@ namespace LessonLogAPI.Services
            return lessons;
         }
 
+        public IQueryable<Lesson> GetLessonsByClassId(int classId)
+        {
+            var lessons = _dbContext.Lessons
+                .Where(l => l.ClassId == classId)
+                .Include(l => l.Attendances)
+                .ThenInclude(a => a.Student)
+                .Include(l => l.Subject)
+                .Include(l => l.Teacher)
+                .AsQueryable();
+
+            return lessons;
+        }
+
         public Lesson DeleteLesson(int id)
         {
             var lesson = _dbContext.Lessons.FirstOrDefault(l => l.Id == id);
 
             if (lesson != null)
             {
+                _dbContext.Attendances.RemoveRange(lesson.Attendances);
                 _dbContext.Lessons.Remove(lesson);
+                _dbContext.SaveChanges();
             }
-
-            _dbContext.SaveChanges();
 
             return lesson;
         }

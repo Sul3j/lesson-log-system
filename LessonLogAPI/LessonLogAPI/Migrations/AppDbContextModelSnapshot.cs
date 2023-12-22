@@ -43,6 +43,14 @@ namespace LessonLogAPI.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2023, 12, 21, 14, 55, 48, 98, DateTimeKind.Local).AddTicks(3216),
+                            UserId = 31
+                        });
                 });
 
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Attendance", b =>
@@ -139,7 +147,7 @@ namespace LessonLogAPI.Migrations
                     b.Property<int>("GradeWeight")
                         .HasColumnType("int");
 
-                    b.Property<int>("Percent")
+                    b.Property<int?>("Percent")
                         .HasColumnType("int");
 
                     b.Property<int?>("StudentId")
@@ -469,6 +477,349 @@ namespace LessonLogAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "susan24@example.org",
+                            FirstName = "Carrie",
+                            LastName = "Williams",
+                            Password = "7Wn+VNbcUUW+ag4/liYr+w5CogLFgKXlGZ+AS7TVu3HKlU66",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "nealdaniel@example.org",
+                            FirstName = "Audrey",
+                            LastName = "Pineda",
+                            Password = "d87pvqoogxPUA5LXF/VADWYx1ooEc4hYD4e3YvMPbiLRTlQc",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "paulwise@example.com",
+                            FirstName = "Grace",
+                            LastName = "Wilson",
+                            Password = "M0IDt0sUPUq8EJQ6o2CHni2gNWEFtwENLsMkwloWVSPGKXh9",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Email = "laurasharp@example.org",
+                            FirstName = "Mary",
+                            LastName = "Clark",
+                            Password = "KyNJ3e+1uN6q8uYrLgU0K2m7wLXYvgIIAVVYNFW2LiZvC+SS",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Email = "richard38@example.net",
+                            FirstName = "Mary",
+                            LastName = "Lowe",
+                            Password = "Px9LTEDaCIw42n79kYJTQkT97fmvPgByCj9UJecS2H3tdYOR",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Email = "garrett04@example.net",
+                            FirstName = "Patricia",
+                            LastName = "Garcia",
+                            Password = "WEPHC5/4uJjzff5naZYmqge9axA3phN22jI9PGIoiZ3CbF5a",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Email = "gscott@example.net",
+                            FirstName = "Logan",
+                            LastName = "Andrews",
+                            Password = "vZycm5zAUMf4/ZO8bjF1sLpFQadX79bQLZVI4wf+6PqZUdSW",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Email = "tyler02@example.com",
+                            FirstName = "Krystal",
+                            LastName = "West",
+                            Password = "ut8oiaqBGNPFH/o8jN7Kvbz2BVUCbGbS8sFpCFPbmBbpJGJ3",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Email = "bsanchez@example.com",
+                            FirstName = "John",
+                            LastName = "Weber",
+                            Password = "NAQ4gzFuf4rAwUlOlw2TI4DGYdJxyICzgbx4XErNtBt21Thl",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Email = "nicholashodges@example.com",
+                            FirstName = "Michael",
+                            LastName = "Diaz",
+                            Password = "hj1Y7L58+O7q3p2oTCFL566fKSKe4Z8bd+BpL35KRWk6ya0c",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Email = "krivera@example.org",
+                            FirstName = "Benjamin",
+                            LastName = "Kirby",
+                            Password = "R/SZXCNhoUXMoqBA+YrpEQz2WjodkeD61Q24jj3qoT9AdFEQ",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Email = "zrivera@example.org",
+                            FirstName = "Elizabeth",
+                            LastName = "Rosario",
+                            Password = "cY7FKXoACSHCstYV/8E2gsFERUJ2pEtK46AhJV/CJ8J1PNQZ",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Email = "othompson@example.com",
+                            FirstName = "Kristi",
+                            LastName = "Allen",
+                            Password = "uI9f9dbRue6c2ZgAi2DqUdjuwkVyYAlAjF+8xGbDipV04s3f",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Email = "daltonalex@example.net",
+                            FirstName = "Nicholas",
+                            LastName = "Holmes",
+                            Password = "sXYLGt7602T/0fuplN6x3jEo2ay3C629tSeQd7OSNT5liyjA",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Email = "collinsmiguel@example.org",
+                            FirstName = "Benjamin",
+                            LastName = "Braun",
+                            Password = "4QrGd73v6bEWBqxngcEaTpzk62gkfc3NEGv95DyDB7+2Lt3M",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Email = "mphillips@example.net",
+                            FirstName = "Tamara",
+                            LastName = "Gonzalez",
+                            Password = "GOcuatLMfMdxjKZk4TC879wBBY2t/RTdYV7zL7faMHmHsO8j",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Email = "jasonhamilton@example.net",
+                            FirstName = "Margaret",
+                            LastName = "Smith",
+                            Password = "3eX8hPH9ONgtYFmsUVQSVTOHDj2JNPbMkEYoT7PbCi897Ne/",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Email = "wilsonkayla@example.com",
+                            FirstName = "Kristina",
+                            LastName = "Brown",
+                            Password = "GSnJzGyqzJYxq90Zx+zPBy0j7C6lVJc8EX1uZpHRoAuK8fJQ",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Email = "shannon76@example.com",
+                            FirstName = "Allison",
+                            LastName = "Wilson",
+                            Password = "jZ653fs6SVTyb5PH2ey5tfKgyjhu2d2siPhe6DvIjtAnIBdW",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Email = "jonathan75@example.com",
+                            FirstName = "Valerie",
+                            LastName = "Klein",
+                            Password = "Eh6eGEOiqGgRnq49//5c35va2klci+E2oSRx2L0M4P0YlN//",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Email = "andreaharris@example.net",
+                            FirstName = "Brian",
+                            LastName = "Herrera",
+                            Password = "HvX3LJCzQA2Zy90Sq7yMwrDpycw6wY+o5nimkSBGbLSyKHG8",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Email = "danielwalker@example.org",
+                            FirstName = "Christina",
+                            LastName = "Reeves",
+                            Password = "SLxM7tBh88xRL5UXqL2ht+xnTj+oZGS2n02aJsaxYIXfIxxQ",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Email = "leeandrea@example.net",
+                            FirstName = "Scott",
+                            LastName = "Price",
+                            Password = "t4tQYDV0JzFJCHUzIuuKYRLnTODvFbtQMYU8YqYmnbqaNGH7",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Email = "sstevens@example.org",
+                            FirstName = "Anthony",
+                            LastName = "Duncan",
+                            Password = "MDmZbeLiZMxZLchS6chwzRY9FTTQKxoBs6/V1pUyA7sJgowW",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Email = "brownjon@example.com",
+                            FirstName = "Adam",
+                            LastName = "Parker",
+                            Password = "0XtDPMFDuOfApnU/15gUayowfGMfioJSbCbtAj3SqMXfSdF3",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Email = "keynorma@example.com",
+                            FirstName = "Gregory",
+                            LastName = "Love",
+                            Password = "9hpu6+hrN4IVzYCoZ8t02WO75ZJihtElgW8qoORHviy2JUOx",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Email = "terrance01@example.org",
+                            FirstName = "Kyle",
+                            LastName = "Jones",
+                            Password = "/K3XTFcWNl3UPCdrU4A3gmrGqDDP9HnNQ56uR62+RCBtaCMA",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Email = "owensraymond@example.org",
+                            FirstName = "Charles",
+                            LastName = "Wolf",
+                            Password = "yvnqV8NSokfZ4LlTFGklQWul5SS/LANA2aTLvYp8dCy7MB4N",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Email = "william21@example.org",
+                            FirstName = "Angela",
+                            LastName = "Rice",
+                            Password = "4lpopgdPFJfj3vEiUSbug163DZqbt3S1Zjxy769r2XuhgmLN",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Email = "susan2454@example.org",
+                            FirstName = "Raymond",
+                            LastName = "Martinez",
+                            Password = "guic/VRph5FVLecXrHQD9fBNGUmst2Bzo6xOEagLcLGbYj7N",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "USER"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Email = "szymon.sul3jczak@gmail.com",
+                            FirstName = "Szymon",
+                            LastName = "Sulejczak",
+                            Password = "oOEiMafFcyWrkmlGSKzhdby4VEF3f4l5SysjmN/9o2lVtpXS",
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Role = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("SubjectTeacher", b =>
@@ -499,11 +850,13 @@ namespace LessonLogAPI.Migrations
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Lesson", "Lesson")
                         .WithMany("Attendances")
-                        .HasForeignKey("LessonId");
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LessonLogAPI.Models.Entities.Student", "Student")
                         .WithMany("Attendances")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Lesson");
 
@@ -523,11 +876,13 @@ namespace LessonLogAPI.Migrations
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Student", "Student")
                         .WithMany("Grades")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithMany("Grades")
-                        .HasForeignKey("SubjectId");
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Student");
 
@@ -538,7 +893,8 @@ namespace LessonLogAPI.Migrations
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
                         .WithMany("Lessons")
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LessonLogAPI.Models.Entities.LessonHour", "LessonHour")
                         .WithMany("Lessons")
@@ -546,7 +902,8 @@ namespace LessonLogAPI.Migrations
 
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithMany("Lessons")
-                        .HasForeignKey("SubjectId");
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LessonLogAPI.Models.Entities.Teacher", "Teacher")
                         .WithMany("Lessons")
@@ -596,7 +953,8 @@ namespace LessonLogAPI.Migrations
                 {
                     b.HasOne("LessonLogAPI.Models.Entities.Class", "Class")
                         .WithMany("TimetableLessons")
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LessonLogAPI.Models.Entities.Classroom", "Classroom")
                         .WithMany("TimetableLessons")
@@ -608,7 +966,8 @@ namespace LessonLogAPI.Migrations
 
                     b.HasOne("LessonLogAPI.Models.Entities.Subject", "Subject")
                         .WithMany("TimetableLessons")
-                        .HasForeignKey("SubjectId");
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LessonLogAPI.Models.Entities.Teacher", "Teacher")
                         .WithMany("TimetableLessons")
