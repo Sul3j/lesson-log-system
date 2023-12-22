@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {UrlService} from "./url.service";
 import {Pagination} from "../models/pagination.model";
 import {AddStudentDto} from "../models/dtos/add-student.dto";
+import {EditStudentDto} from "../models/dtos/edit-student.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +37,9 @@ export class StudentsService {
       );
   }
 
-  editStudent(classId: number, studentId: number) {
+  editStudent(editData: EditStudentDto, studentId: number) {
     return this.http
-      .put(`${this.urlService.url}/Student/edit/${studentId}`, classId)
+      .put(`${this.urlService.url}/Student/edit/${studentId}`, editData)
       .pipe(
         tap(() => {
           this._refreshNedeed.next();

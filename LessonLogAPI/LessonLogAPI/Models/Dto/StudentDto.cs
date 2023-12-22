@@ -12,5 +12,6 @@
         public string ClassName { get; set; }
         public string TutorFirstName { get; set; }
         public string TutorLastName { get; set; }
+        public int? ClassId { get; set; }
     }
 }

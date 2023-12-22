@@ -157,12 +157,16 @@
       </div>
       <div class="modal-body">
         <select class="form-control" (change)="changeEditUserValue($event)">
-          <option *ngFor="let class of classes" [value]="class.id">{{ class.year}} {{ class.name }}</option>
+          <option *ngFor="let class of classes" [value]="class.id" [selected]="class.id == currentStudent.classId">{{ class.year}} {{ class.name }}</option>
+        </select>
+        <select class="form-control mt-3" (change)="changeEditTutorValue($event)">
+          <option selected value="0">--- select tutor ---</option>
+          <option *ngFor="let tutor of getFilterTutors(tutors)" [value]="tutor.id"> {{ tutor.user.firstName }} {{ tutor.user.lastName }}</option>
         </select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="editStudent(selectedStudentData.classId, currentStudent.id)" [disabled]="isEditButtonDisabled">Edit</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="editStudent(editStudentData, currentStudent.id)" [disabled]="isEditButtonDisabled">Edit</button>
       </div>
     </div>
   </div>

@@ -19,13 +19,15 @@ namespace LessonLogAPI.Controllers
         private readonly IUserService _userService;
         private readonly ISieveProcessor _sieveProcessor;
         private readonly IClassService _classService;
+        private readonly ITutorService _tutorService;
 
-        public StudentController(IStudentService studentService, IUserService userService, ISieveProcessor sieveProcessor, IClassService classService)
+        public StudentController(IStudentService studentService, IUserService userService, ISieveProcessor sieveProcessor, IClassService classService, ITutorService tutorService)
         {
             _studentService = studentService;
             _userService = userService;
             _sieveProcessor = sieveProcessor;
             _classService = classService;
+            _tutorService = tutorService;
         }
 
         [HttpPost("add")]
@@ -84,6 +86,7 @@ namespace LessonLogAPI.Controllers
                     Email = s.User.Email,
                     ClassName = s.Class.Name,
                     ClassYear = s.Class.Year,
+                    ClassId = s.ClassId,
                     TutorFirstName = s.Tutor.User.FirstName,
                     TutorLastName = s.Tutor.User.LastName
                 })
@@ -116,7 +119,7 @@ namespace LessonLogAPI.Controllers
         }
 
         [HttpPut("edit/{studentId}")]
-        public ActionResult EditStudent([FromRoute] int studentId, [FromBody] int newClassId)
+        public ActionResult EditStudent([FromRoute] int studentId, [FromBody] EditStudentDto dto)
         {
             var student = _studentService.GetStudentById(studentId);
 
@@ -125,14 +128,23 @@ namespace LessonLogAPI.Controllers
                 return NotFound(new { Message = "Student not found" });
             }
 
-            var newClass = _classService.GetClass(newClassId);
+            var newClass = _classService.GetClass(dto.ClassId);
 
             if (newClass == null)
             {
                 return NotFound(new { Message = "Class not found" });
             }
 
-            student.ClassId = newClassId;
+            var newTutor = _tutorService.GetTutor(dto.TutorId);
+
+            if (newTutor == null)
+            {
+                return NotFound(new { Message = "Tutor not found" });
+            }
+
+            student.ClassId = dto.ClassId;
+            student.TutorId = dto.TutorId;
+
             _studentService.UpdateStudent(student);
 
             return Ok(new { Message = "Student updated successfully" });

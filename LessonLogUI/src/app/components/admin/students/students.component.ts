@@ -13,6 +13,7 @@ import {TutorsService} from "../../../services/tutors.service";
 import {ClassesService} from "../../../services/classes.service";
 import {AddStudentDto} from "../../../models/dtos/add-student.dto";
 import {StudentFilterDto} from "../../../models/dtos/student-filter.dto";
+import {EditStudentDto} from "../../../models/dtos/edit-student.dto";
 
 @Component({
   selector: 'app-students',
@@ -28,9 +29,10 @@ export class StudentsComponent implements OnInit {
   public response: ResponseModel<Student> = new ResponseModel<Student>();
   public items: number = 5;
   public selectedStudentData: AddStudentDto = new AddStudentDto();
+  public editStudentData: EditStudentDto = new EditStudentDto();
   public studentFilterDto: StudentFilterDto = new StudentFilterDto();
   public currentStudent: Student = new Student();
-  public isEditButtonDisabled = false;
+  public isEditButtonDisabled = true;
 
   public array = [];
 
@@ -90,6 +92,9 @@ export class StudentsComponent implements OnInit {
 
   getCurrentStudent(student: Student) {
     this.currentStudent.classId = student.classId;
+    this.currentStudent.id = student.id;
+    this.editStudentData.tutorId = 0;
+    this.editStudentData.classId = student.classId;
   }
 
   addStudent() {
@@ -103,8 +108,8 @@ export class StudentsComponent implements OnInit {
     this.clearSlectedStudentData();
   }
 
-  editStudent(classId: number, studentId: number) {
-    this.studentsService.editStudent(classId, studentId).subscribe({
+  editStudent(editData: EditStudentDto, studentId: number) {
+    this.studentsService.editStudent(editData, studentId).subscribe({
       next: () => {
         this.toastr.success("Student has been edit!", "Success");
       }, error: () => {
@@ -170,8 +175,12 @@ export class StudentsComponent implements OnInit {
   }
 
   changeEditUserValue(e: any) {
-    this.selectedStudentData.classId = parseInt(e.target.value);
-    if (e.target.value == 'null') {
+    this.editStudentData.classId = parseInt(e.target.value);
+  }
+
+  changeEditTutorValue(e: any) {
+    this.editStudentData.tutorId = parseInt(e.target.value);
+    if (this.editStudentData.tutorId == 0) {
       this.isEditButtonDisabled = true;
     } else {
       this.isEditButtonDisabled = false;
