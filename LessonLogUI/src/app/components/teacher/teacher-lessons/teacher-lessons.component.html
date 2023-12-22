@@ -146,10 +146,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="card" *ngFor="let attendance of attendances">
+        <div class="card mt-1" *ngFor="let attendance of attendances">
           <div class="form-group d-flex flex-wrap">
             <span class="form-control w-50 name"> {{ attendance.student.user.firstName }} {{ attendance.student.user.lastName }}</span>
-            <select class="form-control w-50 text-center text-white attendance" [style.background-color]="selectColor(attendance.status)" #attendanceSelect (change)="changeAttendance($event, attendance)">
+            <select class="form-control w-50 text-center text-white attendance" [style.background-color]="selectColor(attendance.status)" #attendanceSelect (change)="changeAttendance(attendanceSelect, $event, attendance)">
               <option class="bg-danger text-center text-white" value="absent" [selected]="attendance.status == 'absent'">absent</option>
               <option class="bg-success text-center text-white" value="present" [selected]="attendance.status == 'present'">present</option>
               <option class="bg-warning text-center text-white" value="excused" [selected]="attendance.status == 'excused'">excused</option>

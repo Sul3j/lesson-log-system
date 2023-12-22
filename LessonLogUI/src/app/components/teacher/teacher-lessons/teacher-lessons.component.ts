@@ -126,23 +126,24 @@ export class TeacherLessonsComponent implements OnInit {
     this.selectedLessonData.lessonHourId = parseInt(e.target.value);
   }
 
-  changeAttendance(e: any, attendance: Attendace) {
+  changeAttendance(selected: any, e: any, attendance: Attendace) {
+
     if (e.target.value == "absent") {
-      this.attendanceSelect.nativeElement.classList.add('bg-danger')
-      this.attendanceSelect.nativeElement.classList.remove('bg-success')
-      this.attendanceSelect.nativeElement.classList.remove('bg-warning')
+      selected.classList.add('bg-danger')
+      selected.classList.remove('bg-success')
+      selected.classList.remove('bg-warning')
     }
 
     if (e.target.value == "present") {
-      this.attendanceSelect.nativeElement.classList.add('bg-success')
-      this.attendanceSelect.nativeElement.classList.remove('bg-danger')
-      this.attendanceSelect.nativeElement.classList.remove('bg-warning')
+      selected.classList.add('bg-success')
+      selected.classList.remove('bg-danger')
+      selected.classList.remove('bg-warning')
     }
 
     if (e.target.value == "excused") {
-      this.attendanceSelect.nativeElement.classList.add('bg-warning')
-      this.attendanceSelect.nativeElement.classList.remove('bg-danger')
-      this.attendanceSelect.nativeElement.classList.remove('bg-success')
+      selected.classList.add('bg-warning')
+      selected.classList.remove('bg-danger')
+      selected.classList.remove('bg-success')
     }
 
     this.attendanceService.updateAttendance({ id: attendance.id, status: e.target.value }).subscribe();
