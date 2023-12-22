@@ -49,7 +49,7 @@ export class ClassesComponent implements OnInit {
   }
 
   searchClass(e: any) {
-    this.paginationModel = this.helperService.setPaginationFilter(e);
+    this.paginationModel = this.helperService.setClassPaginationFilter(e.target.value);
     this.getAllClasses();
   }
 
