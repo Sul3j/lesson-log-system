@@ -31,7 +31,6 @@
           <select class="form-control" id="select">
             <option selected value="5">5</option>
             <option value="10">10</option>
-            <option value="25">25</option>
           </select>
           <label class="input-group-text" id="inputGroup" for="select"><i for="select" class="fa-solid fa-angle-down"></i></label>
         </div>
@@ -126,12 +125,12 @@
         <label>topic:</label>
         <input class="form-control" [(ngModel)]="editLessonData.topic">
         <select class="form-control mt-3" (change)="changeEditLessonHour($event)">
-          <option *ngFor="let lessonHour of lessonHours" [value]="lessonHour.id" [selected]="lessonHour.id == currentLessonHourId"> {{ lessonHour.from }} - {{ lessonHour.to }}</option>
+          <option *ngFor="let lessonHour of lessonHours" [value]="lessonHour.id" [selected]="lessonHour.id == editLessonData.lessonHourId"> {{ lessonHour.from }} - {{ lessonHour.to }}</option>
         </select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="editLesson()" [disabled]="isEditSelected()">Edit</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="editLesson()">Edit</button>
       </div>
     </div>
   </div>

@@ -230,6 +230,9 @@ export class TeacherLessonsComponent implements OnInit {
     this.attendanceService.getAttendancesByLessonId(lesson.id).subscribe(res => {
       this.attendances = res as Array<Attendace>;
     })
+
+    this.editLessonData.lessonHourId = lesson.lessonHourId;
+    this.editLessonData.topic = lesson.topic;
   }
 
   clearSelectedLessonData() {
