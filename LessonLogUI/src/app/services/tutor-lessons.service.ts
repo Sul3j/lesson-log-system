@@ -13,4 +13,8 @@ export class TutorLessonsService {
   getTutorId(email: string) {
     return this.http.get(`${this.urlService.url}/TUTOR/email/${email}`);
   }
+
+  getLessonsByClassId(classId: number) {
+    return this.http.get(`${this.urlService.url}/LESSON/class/${classId}`);
+  }
 }

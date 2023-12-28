@@ -25,6 +25,7 @@ import {TutorTimetableComponent} from "./components/tutor/tutor-timetable/tutor-
 import {StudentGradesComponent} from "./components/student/student-grades/student-grades.component";
 import {TutorGradesComponent} from "./components/tutor/tutor-grades/tutor-grades.component";
 import {StudentLessonsComponent} from "./components/student/student-lessons/student-lessons.component";
+import {TutorLessonsComponent} from "./components/tutor/tutor-lessons/tutor-lessons.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -80,6 +81,7 @@ const routes: Routes = [
       { path: 'dashboard', component: TutorDashboardComponent },
       { path: 'timetable', component: TutorTimetableComponent },
       { path: 'grades', component: TutorGradesComponent },
+      { path: 'lessons', component: TutorLessonsComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }

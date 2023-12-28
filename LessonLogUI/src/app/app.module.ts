@@ -44,6 +44,7 @@ import { TutorTimetableComponent } from './components/tutor/tutor-timetable/tuto
 import { StudentGradesComponent } from './components/student/student-grades/student-grades.component';
 import { TutorGradesComponent } from './components/tutor/tutor-grades/tutor-grades.component';
 import { StudentLessonsComponent } from './components/student/student-lessons/student-lessons.component';
+import { TutorLessonsComponent } from './components/tutor/tutor-lessons/tutor-lessons.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { StudentLessonsComponent } from './components/student/student-lessons/st
     StudentGradesComponent,
     TutorGradesComponent,
     StudentLessonsComponent,
+    TutorLessonsComponent,
   ],
   imports: [
     BrowserModule,
