@@ -1,3 +1,7 @@
+import {Subject} from "./subject.model";
+import {Attendace} from "./attendance.model";
+import {LessonHours} from "./lessonhours.model";
+
 export class Lesson {
   id!: number;
   topic!: string;
@@ -8,4 +12,7 @@ export class Lesson {
   from!: string;
   to!: string;
   lessonHourId!: number;
+  lessonHour!: LessonHours;
+  subject!: Subject;
+  attendances!: Attendace[];
 }

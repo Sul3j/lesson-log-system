@@ -1,0 +1,29 @@
+.absent {
+  background-color: #e03444;
+  color: #ffffff;
+  text-align: center;
+}
+
+.excused {
+  background-color: #ffc107;
+  color: #000000;
+  text-align: center;
+}
+
+.present {
+  background-color: #188755;
+  color: #ffffff;
+  text-align: center;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image: var(--bs-accordion-btn-icon);
+  transform: rotate(0deg);
+}
+

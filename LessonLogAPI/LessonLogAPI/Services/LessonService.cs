@@ -30,6 +30,7 @@ namespace LessonLogAPI.Services
                 .Include(l => l.Class)
                 .Include(l => l.Subject)
                 .Include(l => l.Teacher)
+                .Include(l => l.LessonHour)
                 .AsQueryable();
 
             return lessons;
@@ -55,6 +56,7 @@ namespace LessonLogAPI.Services
                 .ThenInclude(a => a.Student)
                 .Include(l => l.Subject)
                 .Include(l => l.Teacher)
+                .Include(l => l.LessonHour)
                 .AsQueryable();
 
             return lessons;

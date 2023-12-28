@@ -27,7 +27,8 @@ export class HelperService {
   }
 
   setLessonPaginationFilter(e: any) {
-    this.paginationModel.filters = `(lessonTopic|lessonSubject)@=*${e.target.value}`;
+    console.log(e.target.value)
+    this.paginationModel.filters = `lessonTopic@=*${e.target.value}`;
     return this.paginationModel;
   }
 

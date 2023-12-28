@@ -63,9 +63,7 @@ export class TeacherLessonsComponent implements OnInit {
       })
     this.getAllClasses();
     this.getAllSubjects();
-    this.getTeacher();
     this.isSelectedData();
-    this.getAllLessonHours();
   }
 
   private getAllLessons() {
@@ -188,6 +186,8 @@ export class TeacherLessonsComponent implements OnInit {
   isSelectedData() {
     if (this.selectedLessonData.subjectId != 0 && this.selectedLessonData.classId != 0) {
       this.getAllLessons();
+      this.getTeacher();
+      this.getAllLessonHours();
       this.selected = true;
     } else {
       this.selected = false;
