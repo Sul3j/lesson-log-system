@@ -27,6 +27,7 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span [routerLink]="['/admin/dashboard']"><img src="../../../../assets/logo.svg" alt="logo" style="width: 175px;"></span>
+      <span class="user"><mat-icon>person</mat-icon> {{ user.firstName }} {{ user.lastName }}</span>
       <span class="spacer"></span>
       <button mat-button style="background-color: #5F9BF5; margin-right: 10px;" [matMenuTriggerFor]="menu">Users</button>
       <mat-menu #menu="matMenu">
