@@ -22,6 +22,7 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span [routerLink]="['/tutor/dashboard']"><img src="../../../../assets/logo.svg" alt="logo" style="width: 175px;"></span>
+      <span class="user"><mat-icon>person</mat-icon> {{ user.firstName }} {{ user.lastName }}</span>
       <span class="spacer"></span>
       <a [routerLink]="['/tutor/timetable']">Timetable</a>
       <a [routerLink]="['/tutor/grades']">Grades</a>
