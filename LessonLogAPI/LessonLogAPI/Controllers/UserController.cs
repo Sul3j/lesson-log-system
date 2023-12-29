@@ -67,18 +67,24 @@ namespace LessonLogAPI.Controllers
             return Ok(_userService.RegisterUser(userObj));
         }
 
-        [Authorize(Roles = "ADMIN")]
         [HttpGet]
         public IActionResult GetUsers()
         {
             return Ok(_userService.GetUsers());
         }
 
-        [Authorize(Roles = "ADMIN")]
         [HttpGet("all")]
         public IActionResult GetAllUsers() 
         {
             return Ok(_userService.GetAllUsers());
+        }
+
+        [HttpGet("{email}")]
+        public IActionResult GetUserByEmail(string email)
+        {
+            var user = _userService.GetUserByEmail(email);
+
+            return Ok(user);
         }
 
         [HttpPost("refresh")]

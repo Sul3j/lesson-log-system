@@ -1,0 +1,70 @@
+.subject {
+  width: 100%;
+}
+
+.hours, .floor, .teachers, .number {
+  width: 50%;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.inside-card {
+  margin-bottom: 15px;
+}
+
+.breadcrumb {
+  margin-bottom: 0;
+}
+
+select {
+  margin-top: 15px;
+}
+
+.menu {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #52afff;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  transform: translateX(-100%);
+  transition: .5s;
+}
+
+.menu-active {
+  transform: translateX(0%);
+}
+
+.mat-elevation-z8 {
+  box-shadow: none;
+  border-radius: 10px;
+}
+
+.container {
+  padding-top: 20px;
+}
+
+mat-icon {
+  font-size: 80px;
+  height: 80px;
+  width: 80px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.card-user {
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+#title {
+  font-size: 28px !important;
+}
+
+#users {
+  background-color: #c96f6f;
+}
+

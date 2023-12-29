@@ -39,6 +39,8 @@ namespace LessonLogAPI.Models.Interfaces
 
         User GetUserById(int id);
 
+        User GetUserByEmail(string email);
+
         bool ChangeRole(int id, string role);
 
         IQueryable<User> GetUsersByRole(Roles role);

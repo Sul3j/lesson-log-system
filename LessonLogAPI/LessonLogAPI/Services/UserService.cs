@@ -225,6 +225,15 @@ namespace LessonLogAPI.Services
             return user;
         }
 
+        public User GetUserByEmail(string email)
+        {
+            var user = _dbContext
+                .Users
+                .FirstOrDefault(u => u.Email == email);
+
+            return user;
+        }
+
         public bool ChangeRole(int id, string role)
         {
             var user = _dbContext.Users.FirstOrDefault(u => u.Id == id);

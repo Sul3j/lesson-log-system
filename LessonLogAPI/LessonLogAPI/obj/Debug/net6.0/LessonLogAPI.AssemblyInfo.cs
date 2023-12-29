@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LessonLogAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82126bae04221096c3ba54ba85c47919f58eca7e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4b054c85ad2abba5ffd6ffa0f8ee4af2fda1e52d")]
 [assembly: System.Reflection.AssemblyProductAttribute("LessonLogAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LessonLogAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

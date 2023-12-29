@@ -16,4 +16,8 @@ export class UsersService {
   getAllExistingUsers() {
     return this.http.get<any>(`${this.urlService.url}/USER`);
   }
+
+  getUserById(id: number) {
+    return this.http.get<any>(`${this.urlService.url}/USER/${id}`);
+  }
 }
