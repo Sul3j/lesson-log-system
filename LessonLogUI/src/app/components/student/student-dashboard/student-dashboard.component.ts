@@ -3,10 +3,9 @@ import {jwtDecode} from "jwt-decode";
 import {TimetableDto} from "../../../models/dtos/timetable.dto";
 import {User} from "../../../models/user.model";
 import {Student} from "../../../models/student.model";
-import {TutorTimetableService} from "../../../services/tutor-timetable.service";
-import {TutorLessonsService} from "../../../services/tutor-lessons.service";
 import {UsersService} from "../../../services/users.service";
 import {StudentsService} from "../../../services/students.service";
+import {StudentTimetableService} from "../../../services/student-timetable.service";
 
 @Component({
   selector: 'app-student-dashboard',
@@ -18,8 +17,7 @@ export class StudentDashboardComponent implements OnInit {
   public user: User = new User();
   public student: Student = new Student();
 
-  constructor(private timetableService: TutorTimetableService,
-              private lessonsService: TutorLessonsService,
+  constructor(private timetableService: StudentTimetableService,
               private studentService: StudentsService,
               private userService: UsersService) {}
 

@@ -44,4 +44,8 @@ export class TeachersService {
         })
       );
   }
+
+  getTeacherId(email: string) {
+    return this.http.get(`${this.urlService.url}/TEACHER/email/${email}`);
+  }
 }
