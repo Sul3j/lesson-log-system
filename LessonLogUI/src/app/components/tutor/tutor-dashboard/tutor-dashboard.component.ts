@@ -35,7 +35,6 @@ export class TutorDashboardComponent implements OnInit{
     this.lessonsService.getTutorId(decodeToken.unique_name).subscribe((res: any) => {
       this.studentsService.getStudentByTutorId(res.id).subscribe((r: any) => {
         this.student = r;
-        console.log(r)
         this.timetableService.getTimetable(r.classId).subscribe((response) => {
           this.timetable = response as Array<TimetableDto>;
         })
