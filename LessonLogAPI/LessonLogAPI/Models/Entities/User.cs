@@ -18,6 +18,7 @@ namespace LessonLogAPI.Models.Entities
         public string ResetPasswordToken { get; set; }
         public DateTime ResetPasswordExpiry { get; set; }
         public string Role { get; set; } = Roles.USER.GetDisplayName();
+        public string ChatConnectionKey { get; set; }
         public Teacher Teacher { get; set; }
         public Student Student { get; set; }
         public Tutor Tutor { get; set; }

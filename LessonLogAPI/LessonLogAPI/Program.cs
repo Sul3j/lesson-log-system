@@ -1,4 +1,5 @@
 using LessonLogAPI.Context;
+using LessonLogAPI.Hubs;
 using LessonLogAPI.Models.Interfaces;
 using LessonLogAPI.Services;
 using LessonLogAPI.Sieve;
@@ -58,6 +59,8 @@ builder.Services.AddScoped<ILessonHourService, LessonHourService>();
 builder.Services.AddScoped<ITimetableLessonService, TimetableLessonService>();
 builder.Services.AddScoped<IAttendanceService, AttendaceService>();
 builder.Services.AddScoped<IGradeService,  GradeService>();
+builder.Services.AddScoped<IChatService, ChatService>();
+builder.Services.AddSignalR();
 
 builder.Services.AddAuthentication(x =>
 {
@@ -95,5 +98,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<ChatHub>("/hubs/chat");
 
 app.Run();
