@@ -20,4 +20,8 @@ export class UsersService {
   getUserById(id: number) {
     return this.http.get<any>(`${this.urlService.url}/USER/${id}`);
   }
+
+  getUserByEmail(email: string) {
+    return this.http.get<any>(`${this.urlService.url}/USER/${email}`);
+  }
 }

@@ -9,6 +9,7 @@
       <a mat-list-item [routerLink]="['/student/timetable']">Timetable</a>
       <a mat-list-item [routerLink]="['/student/grades']">Grades</a>
       <a mat-list-item [routerLink]="['/student/lessons']">Lessons</a>
+      <a mat-list-item [routerLink]="['/student/chat']">Chat</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -27,6 +28,7 @@
       <a [routerLink]="['/student/timetable']">Timetable</a>
       <a [routerLink]="['/student/grades']">Grades</a>
       <a [routerLink]="['/student/lessons']">Lessons</a>
+      <a [routerLink]="['/student/chat']">Chat</a>
       <button class="logout-button" mat-raised-button style="background-color: #C96E6E" color="warn" (click)="logout()">Logout</button>
     </mat-toolbar>
     <ng-content></ng-content>

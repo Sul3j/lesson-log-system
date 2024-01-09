@@ -14,5 +14,21 @@ namespace LessonLogAPI.Controllers
         {
             _chatService = chatService;
         }
+
+        [HttpGet]
+        public ActionResult GetAllMessages()
+        {
+            var messages = _chatService.GetAllMessages();
+
+            return Ok(messages);
+        }
+
+        [HttpGet("private/{from}/{to}")]
+        public ActionResult GetPrivateMessages([FromRoute] int from, [FromRoute] int to)
+        {
+            var messages = _chatService.GetPrivateMessages(from, to);
+
+            return Ok(messages);
+        }
     }
 }

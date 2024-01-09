@@ -36,9 +36,11 @@ namespace LessonLogAPI.Hubs
             return _chatService.GetAllUsers();
         }
 
-        public async Task ReciveMessage(MessageDto message)
+        public async Task ReciveMessage(Message message)
         {
             await Clients.Group("LessonLogChat").SendAsync("NewMessage", message);
+
+            _chatService.AddMessage(message);
         }
     }
 }

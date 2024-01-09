@@ -48,7 +48,7 @@ namespace LessonLogAPI.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 5, 10, 2, 11, 32, DateTimeKind.Local).AddTicks(2846),
+                            CreatedAt = new DateTime(2024, 1, 5, 13, 59, 21, 41, DateTimeKind.Local).AddTicks(1700),
                             UserId = 31
                         });
                 });
@@ -303,6 +303,40 @@ namespace LessonLogAPI.Migrations
                         });
                 });
 
+            modelBuilder.Entity("LessonLogAPI.Models.Entities.Message", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("From")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FromName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Group")
+                        .HasColumnType("int");
+
+                    b.Property<string>("GroupName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("To")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ToName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("LessonLogAPI.Models.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -488,7 +522,7 @@ namespace LessonLogAPI.Migrations
                             Email = "susan24@example.org",
                             FirstName = "Carrie",
                             LastName = "Williams",
-                            Password = "xsxrf+kjy/oOTfOjRJ380TXZ6EreMtIVymVeiXjwR4fzOcI8",
+                            Password = "v8j2wsquOQwmFRn3mXO0F24ktkESAq/NeOSgveeLpXNPxn3K",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -499,7 +533,7 @@ namespace LessonLogAPI.Migrations
                             Email = "nealdaniel@example.org",
                             FirstName = "Audrey",
                             LastName = "Pineda",
-                            Password = "+eNYh2NIXo2ZogUs5qHp3YaB/SiaDozZbipAGlMUQ3oDqW+8",
+                            Password = "90vPcYsdu9t4cDUcg6GBvn5gFNK2takISLoU0W9tAkTaxAJ4",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -510,7 +544,7 @@ namespace LessonLogAPI.Migrations
                             Email = "paulwise@example.com",
                             FirstName = "Grace",
                             LastName = "Wilson",
-                            Password = "XBU3mHRxM1qOHYd8jqlkBdCEYNRXgTwAGVPTCI/tLP8nCTCo",
+                            Password = "Dt3r07HR5ba4GbJ2xfKYXqBl843EJ9yqF1m8/6ReUesUFUW6",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -521,7 +555,7 @@ namespace LessonLogAPI.Migrations
                             Email = "laurasharp@example.org",
                             FirstName = "Mary",
                             LastName = "Clark",
-                            Password = "ygat/BZIHsgaD8QQiWIvqsZcgZCafGwmdI9e/ztv37S6M2IX",
+                            Password = "rozJ7VveYW9jXRJaxN47yWBSQeMFX/fptJ+WW5zVWkFAIOF4",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -532,7 +566,7 @@ namespace LessonLogAPI.Migrations
                             Email = "richard38@example.net",
                             FirstName = "Mary",
                             LastName = "Lowe",
-                            Password = "EyP81kKxscpX5tMj1CAq88mkhqj5bNNUSQ9DWsStYNOsa2yh",
+                            Password = "P1W2P3CAt+1R4yz4pkZ3GgInaky67QB5q8I4/ate8gchGJb1",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -543,7 +577,7 @@ namespace LessonLogAPI.Migrations
                             Email = "garrett04@example.net",
                             FirstName = "Patricia",
                             LastName = "Garcia",
-                            Password = "MPAm66PnfMzi4rxfVAvwP+aBXd7pdF8Z0iERC5y7pdAk991g",
+                            Password = "Fxh9pQ8iTDqRfRa4naO5U9CYZmjHF9Tyavwh+tVeKfg7zRhX",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -554,7 +588,7 @@ namespace LessonLogAPI.Migrations
                             Email = "gscott@example.net",
                             FirstName = "Logan",
                             LastName = "Andrews",
-                            Password = "F3RoURvkXXZk93VCpIi2m5UE+838HSiF0ModuUyRKngmqri1",
+                            Password = "7It2svlzUwe/pCZFbASyF9Ly8F4BuPfSR7oZR/RSoM2ErE55",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -565,7 +599,7 @@ namespace LessonLogAPI.Migrations
                             Email = "tyler02@example.com",
                             FirstName = "Krystal",
                             LastName = "West",
-                            Password = "ulNnONWqjGde6V5rkm6mGBefrpgwi0pSzH0gLG7of+6N1MmY",
+                            Password = "JMOC1qEuTETipzO1n9H4eFgNewrEhZMRONWqW5V1vyZA09xy",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -576,7 +610,7 @@ namespace LessonLogAPI.Migrations
                             Email = "bsanchez@example.com",
                             FirstName = "John",
                             LastName = "Weber",
-                            Password = "ZgTKrgqxEmQDbCeQNIV9kFU3z0j0WAXblRAx6OjKgz+9sEA6",
+                            Password = "3KZ1Ixpees9T4ps3ZK2qjtBp+YbLOD5/tHkO6scWIhYt9otm",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -587,7 +621,7 @@ namespace LessonLogAPI.Migrations
                             Email = "nicholashodges@example.com",
                             FirstName = "Michael",
                             LastName = "Diaz",
-                            Password = "n+tKrdsBRoL2qtcqxp+9EVABSNrNbTGGqL2D6oFyEFZZCV3R",
+                            Password = "DWXpGIesZXNL1OR+uTTPHK3dv2ZluqUbcubwjXnRQznuGzhc",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -598,7 +632,7 @@ namespace LessonLogAPI.Migrations
                             Email = "krivera@example.org",
                             FirstName = "Benjamin",
                             LastName = "Kirby",
-                            Password = "1bzRVh1O9TKUzeDcOquZ/n6bBeWg5GjWumnHGb4BhiUmctPM",
+                            Password = "zKVjQpDgICjdzFfoQuGav9jv2WzKE87wa+Mlg2awc/zh8udw",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -609,7 +643,7 @@ namespace LessonLogAPI.Migrations
                             Email = "zrivera@example.org",
                             FirstName = "Elizabeth",
                             LastName = "Rosario",
-                            Password = "TipMZNQpYxKGxGgxLtgc3JyP5T0MUMYsxMGrarCkc9mYemah",
+                            Password = "hj+L10/gSpNfhxL2EWM8Kf9e6R/T7mTdmicvCo1Pysn+fzx+",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -620,7 +654,7 @@ namespace LessonLogAPI.Migrations
                             Email = "othompson@example.com",
                             FirstName = "Kristi",
                             LastName = "Allen",
-                            Password = "YL9bI++C3t9tzHm1Vc0llDUKRVX/8/y8EIz11mwR7ggmx7My",
+                            Password = "uhl12bidUIXUO8j4WMozQUNKJAr70BuQtK9a97seJ2Pm3l9o",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -631,7 +665,7 @@ namespace LessonLogAPI.Migrations
                             Email = "daltonalex@example.net",
                             FirstName = "Nicholas",
                             LastName = "Holmes",
-                            Password = "HfSBKkXsw7muF7OGTADkOtajpxbAzxnicIaL84OMzWKyfg6u",
+                            Password = "pbMpirOgxwprXZZyvbX7MUwE1tcD3psj43a6Q/4nVhxr53Qt",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -642,7 +676,7 @@ namespace LessonLogAPI.Migrations
                             Email = "collinsmiguel@example.org",
                             FirstName = "Benjamin",
                             LastName = "Braun",
-                            Password = "gsNQ13Bny/bsRDn6FikqUiCBXDCY3eJnrFPSxHafBilEMqTY",
+                            Password = "3TFUJPjvyMQXIJeXnct6cSafGkIm1RvukQ1nQKwNLGXj3pSc",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -653,7 +687,7 @@ namespace LessonLogAPI.Migrations
                             Email = "mphillips@example.net",
                             FirstName = "Tamara",
                             LastName = "Gonzalez",
-                            Password = "3JoJgAfZaQ9fu9OYtNjGnbgciOJ/e2WQXHc+atKXeQYjKqLw",
+                            Password = "5j/rrlUJ/SyVCrRfkhZJeHG95TfgFETeRDI1OZmnuslE59lN",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -664,7 +698,7 @@ namespace LessonLogAPI.Migrations
                             Email = "jasonhamilton@example.net",
                             FirstName = "Margaret",
                             LastName = "Smith",
-                            Password = "gfSDos7iN13vVjInVmRXMhyQrX+v0B9o/dYFu4CHmOeFywV5",
+                            Password = "bM9Ff99PlWB/HDZB4txER7NnbDrL8DhYT/+ph6iTVi29xcLn",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -675,7 +709,7 @@ namespace LessonLogAPI.Migrations
                             Email = "wilsonkayla@example.com",
                             FirstName = "Kristina",
                             LastName = "Brown",
-                            Password = "UA6If50X0j6ykpANdR178/PGtourux+r54dr6jpTLeQjpCSj",
+                            Password = "qQ1+kLzp8I0TsfsIOuHsd8yybvJELUuAKVaH66PBYF3Fjp2H",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -686,7 +720,7 @@ namespace LessonLogAPI.Migrations
                             Email = "shannon76@example.com",
                             FirstName = "Allison",
                             LastName = "Wilson",
-                            Password = "mVA+suV/Sv7PHariemE5PdScG0/FY++SHa5u7kTE/l535IgI",
+                            Password = "cA7JeeeiD4ztERXjqzfIebqpu0dkBIVCVGkCgd7XkH9WhQAw",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -697,7 +731,7 @@ namespace LessonLogAPI.Migrations
                             Email = "jonathan75@example.com",
                             FirstName = "Valerie",
                             LastName = "Klein",
-                            Password = "YeLmVOYLGbWXUOtKP0Qs9hgX2yVjF1AUTfNAG370iQcYzTVL",
+                            Password = "mfQAAXiVojQkZ2IPiSvbFjc4isJh1VdXopdaAZUvhvqOCMP8",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -708,7 +742,7 @@ namespace LessonLogAPI.Migrations
                             Email = "andreaharris@example.net",
                             FirstName = "Brian",
                             LastName = "Herrera",
-                            Password = "GtjplSG0J5QeYQidZszZ0eqf32dZr4hAGu4tos0H053+VIQ4",
+                            Password = "Mw1ngMn/KYhB9LpCgnNFbi8yZxLPWecry0hCbY8TX2gI7Djk",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -719,7 +753,7 @@ namespace LessonLogAPI.Migrations
                             Email = "danielwalker@example.org",
                             FirstName = "Christina",
                             LastName = "Reeves",
-                            Password = "9B7eNKhaQgb5NAfxclWtyOA4b9kAfF2oMxMnFC+ikuvPrySd",
+                            Password = "7vzCYJd/dPeqSzb7Hnw/9E6V5hN1ul4AwI8JhDo/k5BVM3/g",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -730,7 +764,7 @@ namespace LessonLogAPI.Migrations
                             Email = "leeandrea@example.net",
                             FirstName = "Scott",
                             LastName = "Price",
-                            Password = "yABhTcOae4MJN0/r0iCBpidly4j+ieauapCsOeiX7tEwjSHw",
+                            Password = "+DRpDtb2GZG7BXQsm1mG42CQ0rgXRCxqd3750oS4rL8gdR4K",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -741,7 +775,7 @@ namespace LessonLogAPI.Migrations
                             Email = "sstevens@example.org",
                             FirstName = "Anthony",
                             LastName = "Duncan",
-                            Password = "Q4TMmN32P0L4yJezqbRFZDcmnv1jcdy2ZKZS5SGxsHMnEz4K",
+                            Password = "bSIXTdzi2mEJTcyC5ZNe+nyZoH/H3Jg8equER6F0wR7jGzp0",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -752,7 +786,7 @@ namespace LessonLogAPI.Migrations
                             Email = "brownjon@example.com",
                             FirstName = "Adam",
                             LastName = "Parker",
-                            Password = "xopjolFlC1XhHjKDBPWzccYcxt84+FquuSAkWL1zdXcrhTag",
+                            Password = "wGowCUNaYsQg13RML3WIdVmx6XRzw2EqbLytlrtKHJnfrpmu",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -763,7 +797,7 @@ namespace LessonLogAPI.Migrations
                             Email = "keynorma@example.com",
                             FirstName = "Gregory",
                             LastName = "Love",
-                            Password = "dRmUmOUtAuGse52FoB94q6BzY4tBtXvm866eyZzsK+4K0GCD",
+                            Password = "9k6aRy0yeV6YrMxb3IfO8/aTXA3cKrjluMC6HYbWmdZwjrNj",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -774,7 +808,7 @@ namespace LessonLogAPI.Migrations
                             Email = "terrance01@example.org",
                             FirstName = "Kyle",
                             LastName = "Jones",
-                            Password = "d0sOeH/lhIi2UUWRKRbcgexf9vxsEzF3xdl8CtlDtOpUfwht",
+                            Password = "9JQoP4Mg1r2xIF6+APfm2gGN1P3KUgkwfqFDc7iKR5CG9WW9",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -785,7 +819,7 @@ namespace LessonLogAPI.Migrations
                             Email = "owensraymond@example.org",
                             FirstName = "Charles",
                             LastName = "Wolf",
-                            Password = "3MWkCny6fp25HOtofntvmo3hPFpPsce+R2KLtevY6v3ve/iA",
+                            Password = "ffLBtyszMqUlOSASNM7MZUPlou4k8y8iYl/AmJa+x/vlHg/2",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -796,7 +830,7 @@ namespace LessonLogAPI.Migrations
                             Email = "william21@example.org",
                             FirstName = "Angela",
                             LastName = "Rice",
-                            Password = "DlPuSAzgeVefUSfvvw4dMmu4rnLp8THU0yOvxzDOB/zA25rB",
+                            Password = "mZPTCyLyg7OHcSstUg1Kj/AuEL4Hl7EkyLlucwz/qQX8CioN",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -807,7 +841,7 @@ namespace LessonLogAPI.Migrations
                             Email = "susan2454@example.org",
                             FirstName = "Raymond",
                             LastName = "Martinez",
-                            Password = "kW8q5k9vH6pk1hagoVaRRGeX3ZOQkdvOom5du76T471ejVMK",
+                            Password = "eKywDAoigdLNn9K7Nd1ZV5b0gJTEDXyiJJs+rFE9LIQBL4h0",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "USER"
@@ -818,7 +852,7 @@ namespace LessonLogAPI.Migrations
                             Email = "szymon.sul3jczak@gmail.com",
                             FirstName = "Szymon",
                             LastName = "Sulejczak",
-                            Password = "e2h7q7R4sW+x1eCMNI2gc8Bf4DAeUCt4HL+kZNdrm+SD8GZz",
+                            Password = "N34Mx5HIVfMVL9b4UfPO/+KHYI9Vh6SdTkM0R3ybs6lpAte2",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ResetPasswordExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "ADMIN"

@@ -11,5 +11,11 @@ namespace LessonLogAPI.Models.Interfaces
         string GetConnectionIdByUser(int userId);
 
         List<User> GetAllUsers();
+
+        Message AddMessage(Message message);
+
+        List<Message> GetAllMessages();
+
+        List<Message> GetPrivateMessages(int from, int to);
     }
 }

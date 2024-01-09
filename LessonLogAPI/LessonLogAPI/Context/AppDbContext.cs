@@ -23,6 +23,7 @@ namespace LessonLogAPI.Context
         public DbSet<TimetableLesson> TimetableLessons { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<LessonHour> LessonHours { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

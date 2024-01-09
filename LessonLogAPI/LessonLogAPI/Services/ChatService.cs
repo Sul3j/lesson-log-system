@@ -1,4 +1,5 @@
 ﻿using LessonLogAPI.Context;
+using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
 
@@ -53,6 +54,26 @@ namespace LessonLogAPI.Services
         public List<User> GetAllUsers()
         {
             return _dbContext.Users.ToList();
+        }
+
+        public Message AddMessage(Message message)
+        {
+            _dbContext.Messages.Add(message);
+            _dbContext.SaveChanges();
+
+            return message;
+        }
+
+        public List<Message> GetAllMessages()
+        {
+            return _dbContext.Messages.ToList();
+        }
+
+        public List<Message> GetPrivateMessages(int from, int to)
+        {
+            return _dbContext.Messages
+                .Where(m => m.From == from && m.To == to)
+                .ToList();
         }
     }
 }

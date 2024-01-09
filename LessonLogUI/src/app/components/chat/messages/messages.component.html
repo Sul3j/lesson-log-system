@@ -1,0 +1,6 @@
+<div style="overflow-y: auto; height: 525px;">
+  <p class="card-text" *ngFor="let message of concatMessages(this.basicMessages, this.messagesReverse)">
+    <span class="text-primary">{{ message.fromName }}: </span>
+    <span class="ml-1">{{ message.content }}</span>
+  </p>
+</div>

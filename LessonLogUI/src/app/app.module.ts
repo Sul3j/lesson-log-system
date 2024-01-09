@@ -45,6 +45,10 @@ import { StudentGradesComponent } from './components/student/student-grades/stud
 import { TutorGradesComponent } from './components/tutor/tutor-grades/tutor-grades.component';
 import { StudentLessonsComponent } from './components/student/student-lessons/student-lessons.component';
 import { TutorLessonsComponent } from './components/tutor/tutor-lessons/tutor-lessons.component';
+import { StudentChatComponent } from './components/student/student-chat/student-chat.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChatInputComponent } from './components/chat/chat-input/chat-input.component';
+import { MessagesComponent } from './components/chat/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +82,10 @@ import { TutorLessonsComponent } from './components/tutor/tutor-lessons/tutor-le
     TutorGradesComponent,
     StudentLessonsComponent,
     TutorLessonsComponent,
+    StudentChatComponent,
+    ChatComponent,
+    ChatInputComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,

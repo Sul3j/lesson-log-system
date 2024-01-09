@@ -1,0 +1,36 @@
+<div class="row mt-3">
+  <div class="col-lg-3">
+    <div class="card mb-3" style="border: 1px solid #cccccc; height: 100%;">
+      <div class="card-header h5 text-muted text-center">Users</div>
+      <div class="card-body" style="height: 525px; overflow-y: scroll;">
+        <div class="row mt-1">
+          <div class="col mb-2">
+            <div class="d-flex">
+              <input class="form-control" [(ngModel)]="search">
+              <button class="btn btn-success" type="button" style="margin-left: 5px;" (click)="getUsers(search)"><mat-icon style="padding-top: 3px;">search</mat-icon></button>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1" *ngFor="let user of getFilteredUsers(users)">
+          <div class="col">
+            <div class="d-grid">
+              <button type="button" class="btn btn-dark card-text btn-block" (click)="getCurrentUser(user)">{{ user.firstName }} {{ user.lastName }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-9">
+    <div class="card" style="border: 1px solid #cccccc;">
+      <div class="card-header h5 text-muted text-center">{{ to.firstName == null ? "Choose" : to.firstName }} {{ to.lastName == null ? "user" : to.lastName }}</div>
+      <div class="card-body">
+        <app-messages [basicMessages]="chatService.basicMessages" [messagesReverse]="chatService.messagesReverse"  [to]="to" [from]="chatService.myUser"></app-messages>
+      </div>
+      <div class="card-footer">
+        <app-chat-input (contentEmitter)="sendMessage($event)"></app-chat-input>
+      </div>
+    </div>
+  </div>
+</div>
