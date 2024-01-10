@@ -25,10 +25,11 @@ export class ChatComponent implements OnInit {
   }
 
   getUsers(search: string = "") {
+    search = search.toLowerCase();
     this.userService.getAllExistingUsers().subscribe(res => {
       this.users = res;
       if (search != "") {
-        this.users = this.users.filter( user => user.firstName.includes(search) || user.lastName.includes(search));
+        this.users = this.users.filter( user => user.firstName.toLowerCase().includes(search) || user.lastName.toLowerCase().includes(search));
       }
     })
   }
@@ -38,9 +39,6 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(content: string) {
-    // if(!this.to) {
-    //   this.chatService.sendMessage(content);
-    // }
     if (this.to) {
       this.chatService.sendPrivateMessage(content, this.to);
       console.log(this.to.id)
@@ -49,7 +47,6 @@ export class ChatComponent implements OnInit {
   }
 
   getCurrentUser(user: User) {
-    console.log(user.id)
     this.to = user;
     this.chatService.getToUserId(user.id);
     this.messagesComponent?.getPrivateMessages(this.chatService.myUser.id, user.id);

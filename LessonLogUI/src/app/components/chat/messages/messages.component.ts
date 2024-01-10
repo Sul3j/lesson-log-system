@@ -15,13 +15,8 @@ export class MessagesComponent implements OnInit {
   @Input() to: User = new User();
   @Input() from: User = new User();
 
-  constructor(private chatService: ChatService) {}
 
-  getAllMessages() {
-    this.chatService.getAllMessages().subscribe(res => {
-      this.basicMessages = res as Array<Message>;
-    })
-  }
+  constructor(private chatService: ChatService) {}
 
   getPrivateMessages(from: number, to: number) {
     this.chatService.getPrivateMessages(from, to).subscribe(res => {
@@ -40,11 +35,16 @@ export class MessagesComponent implements OnInit {
     return [...arr1, ...arr2].sort((a: Message, b: Message) => { return a.id - b.id });
   }
 
+  userColor(userId: number) {
+    if (this.basicMessages[0]?.from == userId) {
+      return "#c86e6f";
+    } else {
+      return "#3c54b4";
+    }
+  }
+
   ngOnInit(): void {
-    // this.chatService.refreshNeeded
-    //   .subscribe(() => {
-    //     this.getPrivateMessages(this.from.id, this.to.id);
-    //   })
+
   }
 
 }
