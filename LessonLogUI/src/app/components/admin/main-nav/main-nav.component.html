@@ -6,14 +6,15 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/teachers']">Teachers</a>
-      <a mat-list-item [routerLink]="['/admins']">Admins</a>
-      <a mat-list-item [routerLink]="['/students']">Students</a>
-      <a mat-list-item [routerLink]="['/tutors']">Tutors</a>
-      <a mat-list-item [routerLink]="['/classes']">Classes</a>
-      <a mat-list-item [routerLink]="['/classrooms']">Classrooms</a>
-      <a mat-list-item [routerLink]="['/subjects']">Subjects</a>
-      <a mat-list-item [routerLink]="['/timetable']">Timetable</a>
+      <a mat-list-item [routerLink]="['/admin/teachers']">Teachers</a>
+      <a mat-list-item [routerLink]="['/admin/admins']">Admins</a>
+      <a mat-list-item [routerLink]="['/admin/students']">Students</a>
+      <a mat-list-item [routerLink]="['/admin/tutors']">Tutors</a>
+      <a mat-list-item [routerLink]="['/admin/classes']">Classes</a>
+      <a mat-list-item [routerLink]="['/admin/classrooms']">Classrooms</a>
+      <a mat-list-item [routerLink]="['/admin/subjects']">Subjects</a>
+      <a mat-list-item [routerLink]="['/admin/timetable']">Timetable</a>
+      <a mat-list-item [routerLink]="['/admin/chat']"></a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -43,6 +44,7 @@
         <button mat-menu-item [routerLink]="['/admin/subjects']">Subjects</button>
         <button mat-menu-item [routerLink]="['/admin/timetable']">Timetable</button>
       </mat-menu>
+      <a [routerLink]="['/admin/chat']"></a>
       <button class="logout-button" mat-raised-button style="background-color: #C96E6E" color="warn" (click)="logout()">Logout</button>
     </mat-toolbar>
     <ng-content></ng-content>
