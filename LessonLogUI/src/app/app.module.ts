@@ -51,6 +51,7 @@ import { ChatInputComponent } from './components/chat/chat-input/chat-input.comp
 import { MessagesComponent } from './components/chat/messages/messages.component';
 import { TutorChatComponent } from './components/tutor/tutor-chat/tutor-chat.component';
 import { AdminChatComponent } from './components/admin/admin-chat/admin-chat.component';
+import { TeacherChatComponent } from './components/teacher/teacher-chat/teacher-chat.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { AdminChatComponent } from './components/admin/admin-chat/admin-chat.com
     MessagesComponent,
     TutorChatComponent,
     AdminChatComponent,
+    TeacherChatComponent,
   ],
   imports: [
     BrowserModule,
