@@ -49,6 +49,7 @@ import { StudentChatComponent } from './components/student/student-chat/student-
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatInputComponent } from './components/chat/chat-input/chat-input.component';
 import { MessagesComponent } from './components/chat/messages/messages.component';
+import { TutorChatComponent } from './components/tutor/tutor-chat/tutor-chat.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { MessagesComponent } from './components/chat/messages/messages.component
     ChatComponent,
     ChatInputComponent,
     MessagesComponent,
+    TutorChatComponent,
   ],
   imports: [
     BrowserModule,
