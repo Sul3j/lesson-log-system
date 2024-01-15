@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {UrlService} from "./url.service";
 import {User} from "../models/user.model";
 import {HubConnection, HubConnectionBuilder} from "@microsoft/signalr";
-import {UsersService} from "./users.service";
 import {Message} from "../models/message.model";
 import {Subject} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class ChatService {
   private _refreshNeeded = new Subject<void>();
   toUser: number = 0;
 
-  constructor(private http: HttpClient, private urlService: UrlService) { }
+  constructor(private http: HttpClient) { }
 
   get refreshNeeded() {
     return this._refreshNeeded;
@@ -27,7 +26,7 @@ export class ChatService {
 
   createChatConnection() {
     this.chatConnection = new HubConnectionBuilder()
-      .withUrl(`${this.urlService.urlWithoutApi}/hubs/chat`).withAutomaticReconnect().build();
+      .withUrl(`${environment.domainWithoutApi}/hubs/chat`).withAutomaticReconnect().build();
 
     this.chatConnection.start().catch(error => {
       console.log(error);
@@ -52,11 +51,11 @@ export class ChatService {
   }
 
   getAllMessages() {
-    return this.http.get(`${this.urlService.url}/CHAT`);
+    return this.http.get(`${environment.domain}/CHAT`);
   }
 
   getPrivateMessages(from: number, to: number) {
-    return this.http.get(`${this.urlService.url}/CHAT/private/${from}/${to}`);
+    return this.http.get(`${environment.domain}/CHAT/private/${from}/${to}`);
   }
 
   stopChatConnection() {

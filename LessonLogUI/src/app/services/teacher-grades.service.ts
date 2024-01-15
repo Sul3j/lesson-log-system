@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Subject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {UrlService} from "./url.service";
 import {GradeDto} from "../models/dtos/grade.dto";
 import {GradeEditDto} from "../models/dtos/garde-edit.dto";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,20 +12,19 @@ export class TeacherGradesService {
 
   private _refreshNeeded = new Subject<void>();
 
-  constructor(private http: HttpClient,
-              private urlService: UrlService) { }
+  constructor(private http: HttpClient) { }
 
   get refreshNeeded() {
     return this._refreshNeeded;
   }
 
   getGrades() {
-    return this.http.get(`${this.urlService.url}/GRADE/all`);
+    return this.http.get(`${environment.domain}/GRADE/all`);
   }
 
   addGrade(dto: GradeDto) {
     return this.http
-        .post(`${this.urlService.url}/GRADE/add`, dto)
+        .post(`${environment.domain}/GRADE/add`, dto)
         .pipe(
           tap(() => {
             this._refreshNeeded.next();
@@ -35,7 +34,7 @@ export class TeacherGradesService {
 
   deleteGrade(gradeId: number) {
     return this.http
-        .delete(`${this.urlService.url}/GRADE/${gradeId}`)
+        .delete(`${environment.domain}/GRADE/${gradeId}`)
         .pipe(
           tap(() => {
             this._refreshNeeded.next();
@@ -45,7 +44,7 @@ export class TeacherGradesService {
 
   editGrade(gradeId: number, gradeDto: GradeEditDto) {
     return this.http
-        .put(`${this.urlService.url}/GRADE/edit/${gradeId}`, gradeDto)
+        .put(`${environment.domain}/GRADE/edit/${gradeId}`, gradeDto)
         .pipe(
           tap(() => {
             this._refreshNeeded.next();

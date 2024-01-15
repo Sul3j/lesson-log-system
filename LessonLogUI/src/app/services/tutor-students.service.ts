@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {UrlService} from "./url.service";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TutorStudentsService {
 
-  constructor(private http: HttpClient,
-              private urlService: UrlService) {}
+  constructor(private http: HttpClient) {}
 
   getStudentByTutorId(tutorId: number) {
-    return this.http.get(`${this.urlService.url}/STUDENT/tutor/${tutorId}`);
+    return this.http.get(`${environment.domain}/STUDENT/tutor/${tutorId}`);
   }
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Subject, tap} from "rxjs";
-import {UrlService} from "./url.service";
 import {Pagination} from "../models/pagination.model";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +14,19 @@ export class AdminsService {
 
   private _refreshNeeded = new Subject<void>();
 
-  constructor(private http: HttpClient, private urlService: UrlService) { }
+  constructor(private http: HttpClient) { }
 
   get refreshNeeded() {
     return this._refreshNeeded;
   }
 
   getAdmins(body: Pagination) {
-    return this.http.post<any>(`${this.urlService.url}/Admin/pagination`, body);
+    return this.http.post<any>(`${environment.domain}/Admin/pagination`, body);
   }
 
   addAdmin(userId: number) {
     return this.http
-      .post(`${this.urlService.url}/Admin/add`, { "userId": userId })
+      .post(`${environment.domain}/Admin/add`, { "userId": userId })
       .pipe(
         tap(() => {
           this._refreshNeeded.next();
@@ -36,7 +36,7 @@ export class AdminsService {
 
   deleteAdmin(adminId: number) {
     return this.http
-      .delete(`${this.urlService.url}/Admin/${adminId}`)
+      .delete(`${environment.domain}/Admin/${adminId}`)
       .pipe(
         tap(() => {
           this._refreshNeeded.next();

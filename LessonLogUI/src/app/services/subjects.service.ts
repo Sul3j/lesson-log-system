@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Subject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {UrlService} from "./url.service";
 import {Pagination} from "../models/pagination.model";
 import {SubjectDto} from "../models/dtos/subject.dto";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,23 +12,23 @@ export class SubjectsService {
 
   private _refreshNeeded = new Subject<void>();
 
-  constructor(private http: HttpClient, private urlService: UrlService) { }
+  constructor(private http: HttpClient) { }
 
   get refreshNeeded() {
     return this._refreshNeeded;
   }
 
   getSubjects(body: Pagination) {
-    return this.http.post<any>(`${this.urlService.url}/SUBJECT/pagination`, body);
+    return this.http.post<any>(`${environment.domain}/SUBJECT/pagination`, body);
   }
 
   getAllSubjects() {
-    return this.http.get(`${this.urlService.url}/SUBJECT/all`);
+    return this.http.get(`${environment.domain}/SUBJECT/all`);
   }
 
   addSubject(subjectDto: SubjectDto) {
     return this.http
-      .post(`${this.urlService.url}/SUBJECT/add`, subjectDto)
+      .post(`${environment.domain}/SUBJECT/add`, subjectDto)
       .pipe(
         tap(() => {
           this._refreshNeeded.next();
@@ -38,7 +38,7 @@ export class SubjectsService {
 
   deleteSubject(subjectId: number) {
     return this.http
-      .delete(`${this.urlService.url}/SUBJECT/${subjectId}`)
+      .delete(`${environment.domain}/SUBJECT/${subjectId}`)
       .pipe(
         tap(() => {
           this._refreshNeeded.next();

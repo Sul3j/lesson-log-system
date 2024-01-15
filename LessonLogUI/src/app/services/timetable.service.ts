@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Subject, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {UrlService} from "./url.service";
 import {TimetableDto} from "../models/dtos/timetable.dto";
-import {SubjectsService} from "./subjects.service";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +11,18 @@ export class TimetableService {
 
   private _refreshNeeded = new Subject<void>();
 
-  constructor(private http: HttpClient,
-              private urlService: UrlService) { }
+  constructor(private http: HttpClient) { }
 
   get refreshNeeded() {
     return this._refreshNeeded;
   }
 
   getTimetable(classId: number) {
-    return this.http.get(`${this.urlService.url}/TIMETABLELESSON/${classId}`);
+    return this.http.get(`${environment.domain}/TIMETABLELESSON/${classId}`);
   }
 
   addTimetable(timetable: TimetableDto) {
-    return this.http.post(`${this.urlService.url}/TIMETABLELESSON/add`, timetable)
+    return this.http.post(`${environment.domain}/TIMETABLELESSON/add`, timetable)
       .pipe(
         tap(() => {
           this._refreshNeeded.next();
@@ -33,7 +31,7 @@ export class TimetableService {
   }
 
   deleteLesson(id: number) {
-    return this.http.delete(`${this.urlService.url}/TIMETABLELESSON/${id}`)
+    return this.http.delete(`${environment.domain}/TIMETABLELESSON/${id}`)
       .pipe(
         tap(() => {
           this._refreshNeeded.next();
@@ -42,7 +40,7 @@ export class TimetableService {
   }
 
   editLesson(id: number, lesson: TimetableDto) {
-    return this.http.put(`${this.urlService.url}/TIMETABLELESSON/edit/${id}`, lesson)
+    return this.http.put(`${environment.domain}/TIMETABLELESSON/edit/${id}`, lesson)
       .pipe(
         tap(() => {
           this._refreshNeeded.next();

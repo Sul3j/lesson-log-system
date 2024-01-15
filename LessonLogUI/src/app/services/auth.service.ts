@@ -5,26 +5,26 @@ import {LoginDto} from "../models/dtos/login.dto";
 import {Router} from "@angular/router";
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {TokenModel} from "../models/token-api.model";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private readonly _url: string = "https://localhost:7212/api/User/";
-  private _jwtPayload: any;
+  private jwtPayload: any;
   user: any;
 
   constructor(private http: HttpClient, private router: Router) {
-    this._jwtPayload = this.decodeToken();
+    this.jwtPayload = this.decodeToken();
   }
 
   register(dto: RegisterDto) {
-    return this.http.post<any>(`${this._url}register`, dto);
+    return this.http.post<any>(`${environment.domain}/USER/register`, dto);
   }
 
   login(dto: LoginDto) {
-    return this.http.post<any>(`${this._url}authenticate`, dto);
+    return this.http.post<any>(`${environment.domain}/USER/authenticate`, dto);
   }
 
   storeAccessToken(token: string) {
@@ -60,17 +60,17 @@ export class AuthService {
   }
 
   getFullNameFromToken() {
-    if(this._jwtPayload)
-      return this._jwtPayload.fullname;
+    if(this.jwtPayload)
+      return this.jwtPayload.fullname;
   }
 
   getRoleFromToken() {
-    if(this._jwtPayload)
-      return this._jwtPayload.role;
+    if(this.jwtPayload)
+      return this.jwtPayload.role;
   }
 
   renewToken(token: TokenModel) {
-    return this.http.post<any>(`${this._url}refresh`, token);
+    return this.http.post<any>(`${environment.domain}/USER/refresh`, token);
   }
 
   private getUser(token: string) {
