@@ -2,93 +2,21 @@
   <div class="container mt-3">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" [routerLink]="['/student/dashboard']"><a>Dashboard</a></li>
-        <li class="breadcrumb-item breadcrumb-active"><a>Timetable</a></li>
+        <li class="breadcrumb-item" [routerLink]="['/student/dashboard']"><a>Strona główna</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Plan lekcji</a></li>
       </ol>
     </nav>
     <div class="row">
-      <div class="card-wrapper col-12 col-md-6 col-lg-4 mt-3">
+      <div class="card-wrapper col-12 col-md-6 col-lg-4 mt-3" *ngFor="let weekDay of weekDayDictionary">
         <div class="card">
-          <div class="card-header">Monday</div>
+          <div class="card-header">{{ weekDay.name }}</div>
           <div class="card-body">
-            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(1) ">
+            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(weekDay.number) ">
               <div class="card-body">
                 <div class="card-lessons w-100 d-flex flex-wrap">
                   <h6 class="subject"> {{ lesson.subject.name }} </h6>
-                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
-                  <p class="number">Number: {{ lesson.classroom.number }}</p>
-                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
-                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-wrapper col-12 col-md-6 col-lg-4 mt-3">
-        <div class="card">
-          <div class="card-header">Tuesday</div>
-          <div class="card-body">
-            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(2) ">
-              <div class="card-body">
-                <div class="card-lessons w-100 d-flex flex-wrap">
-                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
-                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
-                  <p class="number">Number: {{ lesson.classroom.number }}</p>
-                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
-                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-wrapper col-12 col-md-6 col-lg-4 mt-3">
-        <div class="card">
-          <div class="card-header">Wednesday</div>
-          <div class="card-body">
-            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(3) ">
-              <div class="card-body">
-                <div class="card-lessons w-100 d-flex flex-wrap">
-                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
-                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
-                  <p class="number">Number: {{ lesson.classroom.number }}</p>
-                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
-                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-wrapper col-12 col-md-6 col-lg-4 mt-3">
-        <div class="card">
-          <div class="card-header">Thursday</div>
-          <div class="card-body">
-            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(4) ">
-              <div class="card-body">
-                <div class="card-lessons w-100 d-flex flex-wrap">
-                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
-                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
-                  <p class="number">Number: {{ lesson.classroom.number }}</p>
-                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
-                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-wrapper col-12 col-md-6 col-lg-4 mt-3">
-        <div class="card">
-          <div class="card-header">Friday</div>
-          <div class="card-body">
-            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(5) ">
-              <div class="card-body">
-                <div class="card-lessons w-100 d-flex flex-wrap">
-                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
-                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
-                  <p class="number">Number: {{ lesson.classroom.number }}</p>
+                  <p class="floor">Piętro: {{ lesson.classroom.floor }}</p>
+                  <p class="number">Numer: {{ lesson.classroom.number }}</p>
                   <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
                   <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
                 </div>

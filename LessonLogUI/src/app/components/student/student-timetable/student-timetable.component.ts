@@ -12,6 +12,13 @@ import {StudentsService} from "../../../services/students.service";
 })
 export class StudentTimetableComponent implements OnInit {
   public timetable: Array<TimetableDto> = new Array<TimetableDto>();
+  public weekDayDictionary = [
+    { name: 'Poniedziałek', number: 1 },
+    { name: 'Wtorek', number: 2 },
+    { name: 'Środa', number: 3 },
+    { name: 'Czwartek', number: 4 },
+    { name: 'Piątek', number: 5 }
+  ];
 
   constructor(private timetableService: StudentTimetableService,
               private studentService: StudentsService) {}
