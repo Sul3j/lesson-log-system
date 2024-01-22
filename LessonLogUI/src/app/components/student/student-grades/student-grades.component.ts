@@ -13,6 +13,8 @@ import {StudentsService} from "../../../services/students.service";
 export class StudentGradesComponent implements OnInit{
   public grades: Array<Grade> = new Array<Grade>();
   public subjectNames: Set<string> = new Set<string>();
+  public avgGrades: number = 0;
+  public avgWeights: number = 0;
 
   constructor(private gradesService: StudentGradesService,
               private studentService: StudentsService) {}
@@ -38,7 +40,20 @@ export class StudentGradesComponent implements OnInit{
   }
 
   getGradesBySubjectName(subjectName: string) {
+    this.avgGrades = 0;
+    this.avgWeights = 0;
+
     let filterGrades = this.grades.filter((item) => item.subject.name == subjectName);
+
+    filterGrades.forEach(g => {
+      this.avgWeights = this.avgWeights + g.gradeWeight;
+      console.log(this.avgWeights);
+      this.avgGrades = this.avgGrades + (g.gradeValue * g.gradeWeight);
+    })
+
+    this.avgGrades = this.avgGrades / this.avgWeights;
+    this.avgGrades = Math.ceil(this.avgGrades * 100) / 100;
+
     return filterGrades;
   }
 
