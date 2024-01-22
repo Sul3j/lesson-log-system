@@ -9,8 +9,8 @@
             </div>
             <div class="w-50">
               <h5 class="card-title text-center" id="title" style="font-size: 48px">{{ user.firstName }} {{ user.lastName }}</h5>
-              <p class="card-text text-center">{{ user.role }}</p>
-              <p class="text-center" style="font-weight: bold; margin-bottom: 2px;">pupil</p>
+              <p class="card-text text-center">opiekun</p>
+              <p class="text-center" style="font-weight: bold; margin-bottom: 2px;">wychowawca</p>
               <p class="text-center">{{ student.user.firstName }} {{ student.user.lastName }}</p>
             </div>
           </div>
@@ -18,14 +18,14 @@
       </div>
       <div class="card-wrapper col-12 col-md-6 col-lg-4 mt-3">
         <div class="card">
-          <div class="card-header">Today lessons</div>
+          <div class="card-header">Dzisiejsze lekcje</div>
           <div class="card-body">
             <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay() ">
               <div class="card-body">
                 <div class="card-lessons w-100 d-flex flex-wrap">
                   <h6 class="subject"> {{ lesson.subject.name }} </h6>
-                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
-                  <p class="number">Number: {{ lesson.classroom.number }}</p>
+                  <p class="floor">Piętro: {{ lesson.classroom.floor }}</p>
+                  <p class="number">Numer: {{ lesson.classroom.number }}</p>
                   <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
                   <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
                 </div>

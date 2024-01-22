@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,6 +52,10 @@ import { MessagesComponent } from './components/chat/messages/messages.component
 import { TutorChatComponent } from './components/tutor/tutor-chat/tutor-chat.component';
 import { AdminChatComponent } from './components/admin/admin-chat/admin-chat.component';
 import { TeacherChatComponent } from './components/teacher/teacher-chat/teacher-chat.component';
+import localePl from '@angular/common/locales/pl'
+import {registerLocaleData} from "@angular/common";
+
+registerLocaleData(localePl);
 
 @NgModule({
   declarations: [
@@ -115,7 +119,7 @@ import { TeacherChatComponent } from './components/teacher/teacher-chat/teacher-
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
-  }],
+  }, { provide: LOCALE_ID, useValue: 'pl-PL' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

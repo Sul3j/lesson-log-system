@@ -28,7 +28,7 @@
               <tr *ngFor="let lesson of getLessonsBySubjectName(subject)">
                 <td>{{ lesson.topic }}</td>
                 <td>{{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</td>
-                <td>{{ lesson.date | date:"MMM dd, yyyy 'at' hh:mm a" }}</td>
+                <td>{{ lesson.date | date:"MMM dd, yyyy 'o' hh:mm": '':'pl' }}</td>
                 <td [class]="getAttendance(lesson.attendances)">{{ getAttendance(lesson.attendances) }}</td>
               </tr>
               </tbody>

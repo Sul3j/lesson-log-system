@@ -2,8 +2,8 @@
   <div class="container">
     <nav aria-label="breadcrumb mt-3">
       <ol class="breadcrumb mt-3">
-        <li class="breadcrumb-item" [routerLink]="['/tutor/dashboard']"><a>Dashboard</a></li>
-        <li class="breadcrumb-item breadcrumb-active"><a>Grades</a></li>
+        <li class="breadcrumb-item" [routerLink]="['/tutor/dashboard']"><a>Strona główna</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Oceny</a></li>
       </ol>
     </nav>
     <div class="accordion mt-3" id="accordionExample">
@@ -18,11 +18,11 @@
             <table class="table">
               <thead>
               <tr>
-                <th scope="col">grade</th>
-                <th scope="col">percent</th>
-                <th scope="col">weight</th>
-                <th scope="col">date</th>
-                <th scope="col">description</th>
+                <th scope="col">ocena</th>
+                <th scope="col">procent</th>
+                <th scope="col">waga</th>
+                <th scope="col">data</th>
+                <th scope="col">opis</th>
               </tr>
               </thead>
               <tbody>
@@ -30,11 +30,12 @@
                 <td>{{ grade.gradeValue }}</td>
                 <td>{{ grade.percent }}</td>
                 <td>{{ grade.gradeWeight }}</td>
-                <td>{{ grade.getDate | date:"MMM dd, yyyy 'at' hh:mm a" }}</td>
+                <td>{{ grade.getDate | date:"MMM dd, yyyy 'o' hh:mm": '':'pl' }}</td>
                 <td>{{ grade.description }}</td>
               </tr>
               </tbody>
             </table>
+            <div class="text-danger">średnia: {{ avgGrades }}</div>
           </div>
         </div>
       </div>

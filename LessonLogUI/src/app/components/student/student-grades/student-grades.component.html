@@ -30,7 +30,7 @@
                 <td>{{ grade.gradeValue }}</td>
                 <td>{{ grade.percent }}</td>
                 <td>{{ grade.gradeWeight }}</td>
-                <td>{{ grade.getDate | date:"MMM dd, yyyy 'at' hh:mm a" }}</td>
+                <td>{{ grade.getDate | date:"MMM dd, yyyy 'o' hh:mm": '':'pl' }}</td>
                 <td>{{ grade.description }}</td>
               </tr>
               </tbody>
