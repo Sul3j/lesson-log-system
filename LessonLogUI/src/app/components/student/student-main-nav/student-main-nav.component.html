@@ -6,10 +6,10 @@
                [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/student/timetable']">Timetable</a>
-      <a mat-list-item [routerLink]="['/student/grades']">Grades</a>
-      <a mat-list-item [routerLink]="['/student/lessons']">Lessons</a>
-      <a mat-list-item [routerLink]="['/student/chat']">Chat</a>
+      <a mat-list-item [routerLink]="['/student/timetable']">Plan lekcji</a>
+      <a mat-list-item [routerLink]="['/student/grades']">Oceny</a>
+      <a mat-list-item [routerLink]="['/student/lessons']">Lekcje</a>
+      <a mat-list-item [routerLink]="['/student/chat']">Czat</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -25,11 +25,11 @@
       <span [routerLink]="['/student/dashboard']"><img src="../../../../assets/logo.svg" alt="logo" style="width: 175px;"></span>
       <span class="user"><mat-icon>person</mat-icon> {{ user.firstName }} {{ user.lastName }}</span>
       <span class="spacer"></span>
-      <a [routerLink]="['/student/timetable']">Timetable</a>
-      <a [routerLink]="['/student/grades']">Grades</a>
-      <a [routerLink]="['/student/lessons']">Lessons</a>
-      <a [routerLink]="['/student/chat']">Chat</a>
-      <button class="logout-button" mat-raised-button style="background-color: #C96E6E" color="warn" (click)="logout()">Logout</button>
+      <a [routerLink]="['/student/timetable']">Plan lekcji</a>
+      <a [routerLink]="['/student/grades']">Oceny</a>
+      <a [routerLink]="['/student/lessons']">Lekcje</a>
+      <a [routerLink]="['/student/chat']">Czat</a>
+      <button class="logout-button" mat-raised-button style="background-color: #C96E6E" color="warn" (click)="logout()">Wyloguj</button>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

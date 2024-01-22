@@ -62,6 +62,17 @@ export class StudentLessonsComponent implements OnInit {
 
   getAttendance(attendances: Attendace[]) {
     let attendance = attendances.find(({ studentId }) => studentId == this.studentId);
+
+    if(attendance?.status == 'absent') {
+      return 'nieobecny';
+    }
+    if(attendance?.status == 'present') {
+      return 'obecny';
+    }
+    if(attendance?.status == 'excused') {
+      return 'usprawiedliwiony';
+    }
+
     return attendance?.status;
   }
 }
