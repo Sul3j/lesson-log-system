@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       this.auth.login(this.loginForm.value)
         .subscribe({
           next: (res) => {
-            this.toastr.success("Is logged in", "Success");
+            this.toastr.success("Zalogowano", "Sukces");
             this.loginForm.reset();
             this.auth.storeAccessToken(res.accessToken);
             this.auth.storeRefreshToken(res.refreshToken);
@@ -60,12 +60,12 @@ export class LoginComponent implements OnInit {
             }
           },
           error: (err) => {
-            this.toastr.error("Incorrect login details", "Error");
+            this.toastr.error("Nieprawidłowe dane logowania", "Error");
           }
         })
     } else {
       ValidateForm.validateAllFormFields(this.loginForm)
-      this.toastr.error("Your form is invalid", "Error");
+      this.toastr.error("Rormularz został nieprawidłowo wypełniony", "Error");
     }
   }
 
@@ -81,13 +81,13 @@ export class LoginComponent implements OnInit {
       this.resetPasswordService.sendResetPasswordLink(this.resetPasswordEmail)
         .subscribe({
           next: (res) => {
-            this.toastr.success("Email has been sent!", "Success");
+            this.toastr.success("Email został wysłany!", "Sukces");
             this.resetPasswordEmail = "";
             const button = document.getElementById("close");
             button?.click();
           },
           error: (err) => {
-            this.toastr.error("Incorrect email!", "Error");
+            this.toastr.error("Nieprawidłowy email!", "Error");
           }
         })
     }

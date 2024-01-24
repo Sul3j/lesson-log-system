@@ -1,30 +1,30 @@
 <section class="register">
   <div class="container">
     <form class="register__form" [formGroup]="signupForm">
-      <h2 class="register__form-title">Sign up</h2>
+      <h2 class="register__form-title">Zarejestruj się</h2>
       <hr class="register__form-paginator">
       <div class="form-group register__form-group">
-        <label>First name <span>*</span></label>
+        <label>Imię<span>*</span></label>
         <input [class.error]="signupForm.controls['firstName'].dirty && signupForm.hasError('required', 'firstName')" formControlName="firstName" type="text" class="form-control">
-        <small *ngIf="signupForm.controls['firstName'].dirty && signupForm.hasError('required', 'firstName')" class="form-text text-danger">first name is required</small>
+        <small *ngIf="signupForm.controls['firstName'].dirty && signupForm.hasError('required', 'firstName')" class="form-text text-danger">imię jest wymagane</small>
       </div>
       <div class="form-group register__form-group">
-        <label>Last name <span>*</span></label>
+        <label>Nazwisko<span>*</span></label>
         <input [class.error]="signupForm.controls['lastName'].dirty && signupForm.hasError('required', 'lastName')" formControlName="lastName" type="text" class="form-control">
-        <small *ngIf="signupForm.controls['lastName'].dirty && signupForm.hasError('required', 'lastName')" class="form-text text-danger">last name is required</small>
+        <small *ngIf="signupForm.controls['lastName'].dirty && signupForm.hasError('required', 'lastName')" class="form-text text-danger">nazwisko jest wymagane</small>
       </div>
       <div class="form-group register__form-group">
-        <label>Email <span>*</span></label>
+        <label>Email<span>*</span></label>
         <input [class.error]="signupForm.controls['email'].dirty && signupForm.hasError('required', 'email')" formControlName="email" type="email" class="form-control">
-        <small *ngIf="signupForm.controls['email'].dirty && signupForm.hasError('required', 'email')" class="form-text text-danger">email is required</small>
+        <small *ngIf="signupForm.controls['email'].dirty && signupForm.hasError('required', 'email')" class="form-text text-danger">email jest wymagany</small>
       </div>
       <div class="form-group register__form-group">
-        <label>Password <span>*</span></label>
+        <label>Hasło<span>*</span></label>
         <input [class.error]="signupForm.controls['password'].dirty && signupForm.hasError('required', 'password')" formControlName="password" type="password" class="form-control">
-        <small *ngIf="signupForm.controls['password'].dirty && signupForm.hasError('required', 'password')" class="form-text text-danger">password is required</small>
+        <small *ngIf="signupForm.controls['password'].dirty && signupForm.hasError('required', 'password')" class="form-text text-danger">hasło jest wymagane</small>
       </div>
-      <button type="submit" class="btn btn-primary register__form-button" (click)="register()">Continue</button>
-      <p class="register__form-information">You have an account? <span class="text-primary" routerLink="/login">Sign in</span></p>
+      <button type="submit" class="btn btn-primary register__form-button" (click)="register()">Kontynuuj</button>
+      <p class="register__form-information">Posiadasz konto? <span class="text-primary" routerLink="/login">Zaloguj się</span></p>
     </form>
   </div>
 </section>

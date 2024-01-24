@@ -30,17 +30,17 @@ export class SignupComponent implements OnInit {
       this.auth.register(this.signupForm.value)
         .subscribe({
           next: () => {
-            this.toastr.success("registered user!", "Success");
+            this.toastr.success("zarejestrowano użytkownika!", "Sukces");
             this.signupForm.reset();
             this.router.navigate(['login']);
           },
           error: (err) => {
-            this.toastr.error("The user with this email exists or the password is incorrect!", "Error");
+            this.toastr.error("użytkownik z tym emailem już istnieje lub hasło jest niepoprawne!", "Error");
           }
         })
     } else {
       ValidateForm.validateAllFormFields(this.signupForm);
-      this.toastr.error("Form data is invalid!", "Error");
+      this.toastr.error("formularz jest wypełniony niepoprawnie!", "Error");
     }
   }
 }

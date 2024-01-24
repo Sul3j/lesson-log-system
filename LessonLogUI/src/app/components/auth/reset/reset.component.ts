@@ -50,15 +50,15 @@ export class ResetComponent implements OnInit {
       this.resetService.resetPassword(this.resetPasswordObj)
         .subscribe({
           next: (res) => {
-            this.toastr.success("Password reset successfully!", "Success");
+            this.toastr.success("Zmiana hasła przeszła pomyślnie!", "Sukces");
             this.router.navigate(['/']);
           }, error: (err) => {
-            this.toastr.error("Something went wrong!", "Error");
+            this.toastr.error("Coś poszło nie tak!", "Error");
           }
         })
     } else {
       ValidateForm.validateAllFormFields(this.resetPasswordForm);
-      this.toastr.error("Form data is invalid!", "Error");
+      this.toastr.error("Dane formularza są niepoprawne!", "Error");
     }
   }
 }
