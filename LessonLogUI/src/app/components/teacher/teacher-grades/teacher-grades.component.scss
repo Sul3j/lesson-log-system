@@ -4,3 +4,9 @@
   margin-bottom: 10px;
   font-family: 'Poppins', sans-serif !important;
 }
+
+.accordion-button:not(.collapsed) {
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: none;
+}

@@ -2,23 +2,23 @@
   <div class="container mt-3">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" [routerLink]="['/teacher/dashboard']"><a>Dashboard</a></li>
-        <li class="breadcrumb-item breadcrumb-active"><a>Lessons</a></li>
+        <li class="breadcrumb-item" [routerLink]="['/teacher/dashboard']"><a>Strona główna</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Lekcje</a></li>
       </ol>
     </nav>
     <select class="form-control mb-2" (change)="changeClass($event)">
-      <option selected value=0>--- select class ---</option>
+      <option selected value=0>--- wybierz klasę ---</option>
       <option *ngFor="let class of classes" [value]="class.id">{{ class.year }} {{ class.name }}</option>
     </select>
     <select class="form-control mb-2" (change)="changeSubject($event)">
-      <option selected value=0>--- select subject ---</option>
+      <option selected value=0>--- wybierz przedmiot ---</option>
       <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
     </select>
     <div *ngIf="selected" class="mt-3">
       <div class="d-flex">
         <div class="input-group">
           <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-magnifying-glass"></i></span>
-          <input type="text" placeholder="Search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" #searchInput (keyup)="searchLesson($event)">
+          <input type="text" placeholder="Szukaj" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" #searchInput (keyup)="searchLesson($event)">
         </div>
         <div class="input-group">
           <div>
@@ -39,11 +39,11 @@
         <thead style="border-left: solid 1px #ddd; border-top: solid 1px #ddd; border-right: solid 1px #ddd;">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Topic</th>
-          <th scope="col">Subject</th>
-          <th scope="col">Class</th>
-          <th scope="col">Date</th>
-          <th scope="col">Hours</th>
+          <th scope="col">Temat</th>
+          <th scope="col">Przedmiot</th>
+          <th scope="col">Klasa</th>
+          <th scope="col">Data</th>
+          <th scope="col">Godziny</th>
           <th scope="col"></th>
         </tr>
         </thead>
@@ -73,13 +73,13 @@
         <div aria-label="..." style="height: 38px;" class="input-group">
           <ul class="pagination">
             <li class="page-item">
-              <button class="page-link" (click)="previousPage()" [class.disabled]="paginationModel.page == 1">Previous</button>
+              <button class="page-link" (click)="previousPage()" [class.disabled]="paginationModel.page == 1">Poprzedni</button>
             </li>
             <li class="page-item" *ngFor="let item of createRange(response.totalPages); let i = index">
               <button class="page-link" [value]="i + 1" (click)="changePage($event)" [class.active]="(i + 1) == paginationModel.page">{{ i + 1 }}</button>
             </li>
             <li class="page-item">
-              <button class="page-link" href="#" (click)="nextPage()" [class.disabled]="paginationModel.page == response.totalPages">Next</button>
+              <button class="page-link" href="#" (click)="nextPage()" [class.disabled]="paginationModel.page == response.totalPages">Następny</button>
             </li>
           </ul>
         </div>
@@ -94,20 +94,20 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add lesson</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Dodaj lekcję</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <label>topic:</label>
         <input class="form-control" [(ngModel)]="selectedLessonData.topic">
         <select class="form-control mt-3" (change)="changeLessonHour($event)">
-          <option selected>--- select lesson hours ---</option>
+          <option selected>--- wybierz godziny ---</option>
           <option *ngFor="let lessonHour of lessonHours" [value]="lessonHour.id"> {{ lessonHour.from }} - {{ lessonHour.to }}</option>
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="addLesson()" [disabled]="isSelected()">Add</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="addLesson()" [disabled]="isSelected()">Dodaj</button>
       </div>
     </div>
   </div>
@@ -118,19 +118,19 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabelEdit">Edit lesson</h5>
+        <h5 class="modal-title" id="exampleModalLabelEdit">Edytuj lekcję</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <label>topic:</label>
+        <label>temat:</label>
         <input class="form-control" [(ngModel)]="editLessonData.topic">
         <select class="form-control mt-3" (change)="changeEditLessonHour($event)">
           <option *ngFor="let lessonHour of lessonHours" [value]="lessonHour.id" [selected]="lessonHour.id == editLessonData.lessonHourId"> {{ lessonHour.from }} - {{ lessonHour.to }}</option>
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="editLesson()">Edit</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="editLesson()">Edytuj</button>
       </div>
     </div>
   </div>
@@ -141,7 +141,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabelAttendance">Edit attendance</h5>
+        <h5 class="modal-title" id="exampleModalLabelAttendance">Edytuj obecność</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -149,9 +149,9 @@
           <div class="form-group d-flex flex-wrap">
             <span class="form-control w-50 name"> {{ attendance.student.user.firstName }} {{ attendance.student.user.lastName }}</span>
             <select class="form-control w-50 text-center text-white attendance" [style.background-color]="selectColor(attendance.status)" #attendanceSelect (change)="changeAttendance(attendanceSelect, $event, attendance)">
-              <option class="bg-danger text-center text-white" value="absent" [selected]="attendance.status == 'absent'">absent</option>
-              <option class="bg-success text-center text-white" value="present" [selected]="attendance.status == 'present'">present</option>
-              <option class="bg-warning text-center text-white" value="excused" [selected]="attendance.status == 'excused'">excused</option>
+              <option class="bg-danger text-center text-white" value="absent" [selected]="attendance.status == 'absent'">nieobecny</option>
+              <option class="bg-success text-center text-white" value="present" [selected]="attendance.status == 'present'">obecny</option>
+              <option class="bg-warning text-center text-white" value="excused" [selected]="attendance.status == 'excused'">usprawiedliwiony</option>
             </select>
           </div>
         </div>

@@ -129,9 +129,9 @@ export class TeacherGradesComponent implements OnInit {
   addGrade() {
     this.gradesService.addGrade(this.gradeAddDto).subscribe({
         next: () => {
-          this.toastr.success("Grade has been added!", "Success");
+          this.toastr.success("Dodano ocenę!", "Sukces");
         }, error: () => {
-          this.toastr.error("Something went wrong!", "Error");
+          this.toastr.error("Coś poszło nie tak!", "Error");
         }
     });
     this.gradeAddDto.percent = 0;
@@ -141,9 +141,9 @@ export class TeacherGradesComponent implements OnInit {
   deleteGrade(gradeId: number) {
     this.gradesService.deleteGrade(gradeId).subscribe({
         next: () => {
-          this.toastr.success("Grade has been deleted!", "Success");
+          this.toastr.success("Usunięto ocenę!", "Sukces");
         }, error: () => {
-          this.toastr.error("Something went wrong!", "Error");
+          this.toastr.error("Coś poszło nie tak!", "Error");
         }
     });
   }
@@ -153,9 +153,9 @@ export class TeacherGradesComponent implements OnInit {
     console.log(this.gradeEditDto)
     this.gradesService.editGrade(this.gradeId, this.gradeEditDto).subscribe({
         next: () => {
-          this.toastr.success("Grade has been edit!", "Success");
+          this.toastr.success("Zedytowano ocenę!", "Sukces");
         }, error: () => {
-          this.toastr.error("Something went wrong!", "Error");
+          this.toastr.error("Coś poszło nie tak!", "Error");
         }
     });
   }

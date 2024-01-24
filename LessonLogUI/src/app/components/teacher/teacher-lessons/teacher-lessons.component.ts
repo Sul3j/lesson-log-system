@@ -167,8 +167,6 @@ export class TeacherLessonsComponent implements OnInit {
         lessonId,
         studentId: s.id
       }
-
-      console.log("dodano obecność")
       this.attendanceService.addAttendance(this.attendance).subscribe();
     })
   }
@@ -198,9 +196,9 @@ export class TeacherLessonsComponent implements OnInit {
     this.lessonsService.addLesson(this.selectedLessonData).subscribe({
       next: (e: any) => {
         this.addAttendances(parseInt(e.lessonId));
-        this.toastr.success("Lesson has been added!", "Success");
+        this.toastr.success("Dodano lekcję!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
     this.clearSelectedLessonData();
@@ -209,9 +207,9 @@ export class TeacherLessonsComponent implements OnInit {
   deleteLesson(id: number) {
     this.lessonsService.deleteLesson(id).subscribe({
       next: () => {
-        this.toastr.success("Lesson has been deleted!", "Success");
+        this.toastr.success("Usunięto lekcję!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }
@@ -219,9 +217,9 @@ export class TeacherLessonsComponent implements OnInit {
   editLesson() {
     this.lessonsService.editLesson(this.currentEditLesson, this.editLessonData).subscribe({
       next: () => {
-        this.toastr.success("Lesson has been edited!", "Success");
+        this.toastr.success("Zedytowano lekcję!", "Success");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }

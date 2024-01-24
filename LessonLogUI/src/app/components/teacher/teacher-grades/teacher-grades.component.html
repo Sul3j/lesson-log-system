@@ -2,16 +2,16 @@
   <div class="container mt-3">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" [routerLink]="['/teacher/dashboard']"><a>Dashboard</a></li>
-        <li class="breadcrumb-item breadcrumb-active"><a>Grades</a></li>
+        <li class="breadcrumb-item" [routerLink]="['/teacher/dashboard']"><a>Strona główna</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Oceny</a></li>
       </ol>
     </nav>
     <select class="form-control" (change)="changeClass($event)">
-      <option selected value=0>--- select class ---</option>
+      <option selected value=0>--- wybierz klasę ---</option>
       <option *ngFor="let class of classes" [value]="class.id">{{ class.year }} {{ class.name }}</option>
     </select>
     <select class="form-control mt-3" (change)="changeSubject($event)">
-      <option selected value=0>--- select subject ---</option>
+      <option selected value=0>--- wybierz przedmiot ---</option>
       <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
     </select>
     <div class="accordion mt-3" id="accordionExample" *ngIf="isSelected()">
@@ -23,15 +23,15 @@
         </h2>
         <div [id]="ariaControlsGenerator('collapse', i)" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <button mat-raised-button class="add-grade" data-bs-toggle="modal" data-bs-target="#addModal" (click)="currentStudent(student.id)">+ add grade</button>
+            <button mat-raised-button class="add-grade" data-bs-toggle="modal" data-bs-target="#addModal" (click)="currentStudent(student.id)">+ dodaj ocenę </button>
             <table class="table">
               <thead>
               <tr>
-                <th scope="col">grade</th>
-                <th scope="col">percent</th>
-                <th scope="col">weight</th>
-                <th scope="col">date</th>
-                <th scope="col">description</th>
+                <th scope="col">ocena</th>
+                <th scope="col">procent</th>
+                <th scope="col">waga</th>
+                <th scope="col">data</th>
+                <th scope="col">opis</th>
                 <th></th>
               </tr>
               </thead>
@@ -65,24 +65,24 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add grade</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Dodaj ocenę</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <select class="form-control mb-2" (change)="changeGradeValue($event)">
-          <option selected value=0>--- select grade ---</option>
+          <option selected value=0>--- wybierz ocenę ---</option>
           <option *ngFor="let grade of gradesValue" [value]="grade"> {{ grade }} </option>
         </select>
         <select class="form-control mb-2" (change)="changeGradeWeight($event)">
-          <option selected value=0>--- select grade weight ---</option>
+          <option selected value=0>--- wybierz wagę ---</option>
           <option *ngFor="let gradew of gradeWeight" [value]="gradew">{{ gradew }}</option>
         </select>
-        <input type="number" class="form-control mb-2" placeholder="percent" max="100" min="0" [(ngModel)]="gradeAddDto.percent">
-        <textarea class="form-control" placeholder="description" [(ngModel)]="gradeAddDto.description"></textarea>
+        <input type="number" class="form-control mb-2" placeholder="procent" max="100" min="0" [(ngModel)]="gradeAddDto.percent">
+        <textarea class="form-control" placeholder="opis" [(ngModel)]="gradeAddDto.description"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" [disabled]="isSelectedValues()" (click)="addGrade()">Add</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-primary btn-add" [disabled]="isSelectedValues()" (click)="addGrade()">Dodaj</button>
       </div>
     </div>
   </div>
@@ -94,26 +94,26 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel2">Edit grade</h5>
+        <h5 class="modal-title" id="exampleModalLabel2">Edytuj ocenę</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <label>grade:</label>
+        <label>ocena:</label>
         <select class="form-control mb-2" (change)="changeEditGradeValue($event)">
           <option *ngFor="let grade of gradesValue" [value]="grade" [selected]="grade == gradeEditDto.gradeValue"> {{ grade }} </option>
         </select>
-        <label>grade weight:</label>
+        <label>waga:</label>
         <select class="form-control mb-2" (change)="changeEditGradeWeight($event)">
           <option *ngFor="let gradew of gradeWeight" [value]="gradew" [selected]="gradew == gradeEditDto.gradeWeight">{{ gradew }}</option>
         </select>
-        <label>percent:</label>
-        <input type="number" class="form-control mb-2" placeholder="percent" max="100" min="0" [(ngModel)]="gradeEditDto.percent">
-        <label>description:</label>
-        <textarea class="form-control" placeholder="description" [(ngModel)]="gradeEditDto.description"></textarea>
+        <label>procent:</label>
+        <input type="number" class="form-control mb-2" placeholder="procent" max="100" min="0" [(ngModel)]="gradeEditDto.percent">
+        <label>opis:</label>
+        <textarea class="form-control" placeholder="opis" [(ngModel)]="gradeEditDto.description"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="editGrade()">Edit</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="editGrade()">Edytuj</button>
       </div>
     </div>
   </div>
