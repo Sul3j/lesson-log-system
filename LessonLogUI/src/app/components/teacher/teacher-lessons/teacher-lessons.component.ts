@@ -108,6 +108,7 @@ export class TeacherLessonsComponent implements OnInit {
     this.selectedClass = parseInt(e.target.value);
     this.getStudents(parseInt(e.target.value));
     this.isSelectedData();
+    this.getAllLessons();
   }
 
   changeSubject(e: any) {
@@ -264,14 +265,6 @@ export class TeacherLessonsComponent implements OnInit {
 
   isSelected() {
     if (this.selectedLessonData.topic == "" || this.selectedLessonData.lessonHourId == 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  isEditSelected() {
-    if (this.editLessonData.topic == "" || this.editLessonData.lessonHourId == 0) {
       return true;
     } else {
       return false;

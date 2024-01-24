@@ -112,6 +112,7 @@ namespace LessonLogAPI.Services
                     {
                         Id = l.Class.Id,
                         Name = l.Class.Name,
+                        Year = l.Class.Year
                     },
                     Classroom = new ClassroomModel()
                     {

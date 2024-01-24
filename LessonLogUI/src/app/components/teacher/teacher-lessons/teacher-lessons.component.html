@@ -14,7 +14,7 @@
       <option selected value=0>--- wybierz przedmiot ---</option>
       <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
     </select>
-    <div *ngIf="selected" class="mt-3">
+    <div *ngIf="lessons != []" class="mt-3">
       <div class="d-flex">
         <div class="input-group">
           <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -62,7 +62,7 @@
             <button mat-mini-fab color="warn" style="margin-left: 5px;" (click)="deleteLesson(lesson.id)">
               <mat-icon>delete</mat-icon>
             </button>
-            <button mat-mini-fab color="success" data-bs-target="#attendanceModal" data-bs-toggle="modal" style="margin-left: 5px;" (click)="getCurrentLesson(lesson)">
+            <button mat-mini-fab data-bs-target="#attendanceModal" data-bs-toggle="modal" style="margin-left: 5px;" (click)="getCurrentLesson(lesson)">
               <mat-icon>assignment</mat-icon>
             </button>
           </td>

@@ -59,7 +59,7 @@
         </select>
         <select class="form-control" (change)="changeClassroom($event)">
           <option selected value=0>--- wybierz sale ---</option>
-          <option *ngFor="let classroom of classrooms" [value]="classroom.id"> {{ classroom.floor }} / {{ classroom.number }}</option>
+          <option *ngFor="let classroom of classrooms" [value]="classroom.id"> {{ classroom.floor }} / {{ classroom.number }} / {{ classroom.name }}</option>
         </select>
         <select class="form-control" (change)="changeLessonHour($event)">
           <option selected value=0>--- wybierz godziny  ---</option>

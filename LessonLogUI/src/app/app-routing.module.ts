@@ -30,6 +30,7 @@ import {StudentChatComponent} from "./components/student/student-chat/student-ch
 import {TutorChatComponent} from "./components/tutor/tutor-chat/tutor-chat.component";
 import {AdminChatComponent} from "./components/admin/admin-chat/admin-chat.component";
 import {TeacherChatComponent} from "./components/teacher/teacher-chat/teacher-chat.component";
+import {UserComponent} from "./components/user/user.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -90,6 +91,13 @@ const routes: Routes = [
       { path: 'grades', component: TutorGradesComponent },
       { path: 'lessons', component: TutorLessonsComponent },
       { path: 'chat', component: TutorChatComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+    ]
+  },
+  {
+    path: 'user',
+    children: [
+      { path: 'dashboard', component: UserComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   }

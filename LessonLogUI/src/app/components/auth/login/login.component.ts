@@ -58,6 +58,9 @@ export class LoginComponent implements OnInit {
             if (payload.role == 'TUTOR') {
               this.router.navigate(['tutor']);
             }
+            if (payload.role == 'USER') {
+              this.router.navigate(['user']);
+            }
           },
           error: (err) => {
             this.toastr.error("Nieprawidłowe dane logowania", "Error");

@@ -54,6 +54,7 @@ import { AdminChatComponent } from './components/admin/admin-chat/admin-chat.com
 import { TeacherChatComponent } from './components/teacher/teacher-chat/teacher-chat.component';
 import localePl from '@angular/common/locales/pl'
 import {registerLocaleData} from "@angular/common";
+import { UserComponent } from './components/user/user.component';
 
 registerLocaleData(localePl);
 
@@ -96,6 +97,7 @@ registerLocaleData(localePl);
     TutorChatComponent,
     AdminChatComponent,
     TeacherChatComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
