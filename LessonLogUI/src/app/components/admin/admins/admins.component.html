@@ -2,14 +2,14 @@
   <section class="admins container mt-3">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" [routerLink]="['/admin/dashboard']"><a>Dashboard</a></li>
-        <li class="breadcrumb-item breadcrumb-active"><a>Admins</a></li>
+        <li class="breadcrumb-item" [routerLink]="['/admin/dashboard']"><a>Strona główna</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Admini</a></li>
       </ol>
     </nav>
     <div class="d-flex">
       <div class="input-group">
         <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input type="text" placeholder="Search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" (keyup)="searchAdmin($event)">
+        <input type="text" placeholder="Szukaj" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" (keyup)="searchAdmin($event)">
       </div>
       <div class="input-group">
         <button mat-mini-fab aria-label="Example icon button with a filter list icon" data-bs-toggle="modal" data-bs-target="#addModal" style="margin-left: 10px;" color="primary">
@@ -29,9 +29,9 @@
       <thead style="border-left: solid 1px #ddd; border-top: solid 1px #ddd; border-right: solid 1px #ddd;">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">CreatedAt</th>
+        <th scope="col">Imie</th>
+        <th scope="col">Nazwisko</th>
+        <th scope="col">Dodano</th>
         <th scope="col"></th>
       </tr>
       </thead>
@@ -53,13 +53,13 @@
       <div aria-label="..." style="height: 38px;" class="input-group">
         <ul class="pagination">
           <li class="page-item">
-            <button class="page-link" (click)="previousPage()" [class.disabled]="paginationModel.page == 1">Previous</button>
+            <button class="page-link" (click)="previousPage()" [class.disabled]="paginationModel.page == 1">Poprzednia</button>
           </li>
           <li class="page-item" *ngFor="let item of createRange(response.totalPages); let i = index">
             <button class="page-link" [value]="i + 1" (click)="changePage($event)" [class.active]="(i + 1) == paginationModel.page">{{ i + 1 }}</button>
           </li>
           <li class="page-item">
-            <button class="page-link" href="#" (click)="nextPage()" [class.disabled]="paginationModel.page == response.totalPages">Next</button>
+            <button class="page-link" href="#" (click)="nextPage()" [class.disabled]="paginationModel.page == response.totalPages">Następna</button>
           </li>
         </ul>
       </div>
@@ -73,18 +73,18 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add admin</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Dodaj admina</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <select class="form-control" (change)="changeUser($event)">
-            <option selected>--- select user ---</option>
+            <option selected>--- wybierz użytkownika ---</option>
             <option *ngFor="let user of users" [value]="user.id"> {{ user.firstName}} {{ user.lastName }} </option>
           </select>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary btn-add" (click)="addAdmin()">Add</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+          <button type="button" class="btn btn-primary btn-add" (click)="addAdmin()">Dodaj</button>
         </div>
       </div>
     </div>

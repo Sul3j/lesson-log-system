@@ -87,6 +87,7 @@ export class StudentsComponent implements OnInit {
 
   filterStudents(filterOptions: StudentFilterDto) {
     this.paginationModel = this.helperService.setStudentPaginationFilter(filterOptions);
+    this.toastr.success("Przefiltrowano uczniów!", "Sukces");
     this.getAllStudents();
   }
 
@@ -100,9 +101,9 @@ export class StudentsComponent implements OnInit {
   addStudent() {
     this.studentsService.addStudent(this.selectedStudentData).subscribe({
       next: () => {
-        this.toastr.success("Student has been added!", "Success");
+        this.toastr.success("Dodano ucznia!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
     this.clearSlectedStudentData();
@@ -111,9 +112,9 @@ export class StudentsComponent implements OnInit {
   editStudent(editData: EditStudentDto, studentId: number) {
     this.studentsService.editStudent(editData, studentId).subscribe({
       next: () => {
-        this.toastr.success("Student has been edit!", "Success");
+        this.toastr.success("Zedytowano ucznia!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error")
+        this.toastr.error("Coś poszło nie tak!", "Error")
       }
     })
   }
@@ -121,9 +122,9 @@ export class StudentsComponent implements OnInit {
   deleteStudent(id: number) {
     this.studentsService.deleteStudent(id).subscribe({
       next: () => {
-        this.toastr.success("Student has been deleted!", "Success");
+        this.toastr.success("Usunięto ucznia!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }
@@ -167,7 +168,7 @@ export class StudentsComponent implements OnInit {
     this.helperService.clearFilters();
     this.searchInput.nativeElement.value = '';
     this.getAllStudents();
-    this.toastr.success("Filters has been clear!", "Success")
+    this.toastr.success("Zresetowano filtry!", "Sukces")
   }
 
   changeUser(e: any) {

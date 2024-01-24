@@ -2,20 +2,20 @@
   <section class="timetable container mt-3">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" [routerLink]="['/admin/dashboard']"><a>Dashboard</a></li>
-        <li class="breadcrumb-item breadcrumb-active"><a>Timetable</a></li>
+        <li class="breadcrumb-item" [routerLink]="['/admin/dashboard']"><a>Strona główna</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Plan lekcji</a></li>
       </ol>
     </nav>
     <select class="form-control" (change)="changeClass($event)">
-      <option selected value=0>--- select class ---</option>
+      <option selected value=0>--- wybierz klasę ---</option>
       <option *ngFor="let class of classes" [value]="class.id">{{ class.year }} {{ class.name }}</option>
     </select>
     <div class="row" *ngIf="selectedClass != 0">
-      <div class="card-wrapper col-12 col-md-6 col-lg-4">
+      <div class="card-wrapper col-12 col-md-6 col-lg-4" *ngFor="let weekDay of weekDayDictionary">
         <div class="card">
-          <div class="card-header">Monday</div>
+          <div class="card-header">{{ weekDay.name }}</div>
           <div class="card-body">
-              <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(1) ">
+              <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(weekDay.number) ">
                 <div class="card-body">
                   <div class="card-lessons w-100 d-flex flex-wrap" (mouseover)="showShadow(shadow)" (mouseout)="hideShadow(shadow)">
                     <div class="shadow" #shadow>
@@ -25,114 +25,14 @@
                       </div>
                     </div>
                     <h6 class="subject"> {{ lesson.subject.name }} </h6>
-                    <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
-                    <p class="number">Number: {{ lesson.classroom.number }}</p>
+                    <p class="floor">Piętro: {{ lesson.classroom.floor }}</p>
+                    <p class="number">Numer: {{ lesson.classroom.number }}</p>
                     <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
                     <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
                   </div>
                 </div>
               </div>
-            <button data-bs-toggle="modal" (click)="setWeekDay(1)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="card-wrapper col-12 col-md-6 col-lg-4">
-        <div class="card">
-          <div class="card-header">Tuesday</div>
-          <div class="card-body">
-            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(2) ">
-              <div class="card-body">
-                <div class="card-lessons w-100 d-flex flex-wrap" (mouseover)="showShadow(shadow)" (mouseout)="hideShadow(shadow)">
-                  <div class="shadow" #shadow>
-                    <div class="buttons">
-                      <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" (click)="getCurrentLesson(lesson)"><i class="fa-regular fa-pen-to-square"></i></div>
-                      <div class="btn btn-danger btn-delete" (click)="deleteLesson(lesson.id)"><i class="fa-regular fa-trash-can"></i></div>
-                    </div>
-                  </div>
-                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
-                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
-                  <p class="number">Number: {{ lesson.classroom.number }}</p>
-                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
-                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
-                </div>
-              </div>
-            </div>
-            <button data-bs-toggle="modal" (click)="setWeekDay(2)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="card-wrapper col-12 col-md-6 col-lg-4">
-        <div class="card">
-          <div class="card-header">Wednesday</div>
-          <div class="card-body">
-            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(3) ">
-              <div class="card-body">
-                <div class="card-lessons w-100 d-flex flex-wrap" (mouseover)="showShadow(shadow)" (mouseout)="hideShadow(shadow)">
-                  <div class="shadow" #shadow>
-                    <div class="buttons">
-                      <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" (click)="getCurrentLesson(lesson)" #editModal><i class="fa-regular fa-pen-to-square"></i></div>
-                      <div class="btn btn-danger btn-delete" (click)="deleteLesson(lesson.id)"><i class="fa-regular fa-trash-can"></i></div>
-                    </div>
-                  </div>
-                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
-                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
-                  <p class="number">Number: {{ lesson.classroom.number }}</p>
-                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
-                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
-                </div>
-              </div>
-            </div>
-            <button data-bs-toggle="modal" (click)="setWeekDay(3)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="card-wrapper col-12 col-md-6 col-lg-4">
-        <div class="card">
-          <div class="card-header">Thursday</div>
-          <div class="card-body">
-            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(4) ">
-              <div class="card-body">
-                <div class="card-lessons w-100 d-flex flex-wrap" (mouseover)="showShadow(shadow)" (mouseout)="hideShadow(shadow)">
-                  <div class="shadow" #shadow>
-                    <div class="buttons">
-                      <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" (click)="getCurrentLesson(lesson)"><i class="fa-regular fa-pen-to-square"></i></div>
-                      <div class="btn btn-danger btn-delete" (click)="deleteLesson(lesson.id)"><i class="fa-regular fa-trash-can"></i></div>
-                    </div>
-                  </div>
-                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
-                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
-                  <p class="number">Number: {{ lesson.classroom.number }}</p>
-                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
-                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
-                </div>
-              </div>
-            </div>
-            <button data-bs-toggle="modal" (click)="setWeekDay(4)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="card-wrapper col-12 col-md-6 col-lg-4">
-        <div class="card">
-          <div class="card-header">Friday</div>
-          <div class="card-body">
-            <div class="card w-100 inside-card" *ngFor="let lesson of getItemsByWeekDay(5) ">
-              <div class="card-body">
-                <div class="card-lessons w-100 d-flex flex-wrap" (mouseover)="showShadow(shadow)" (mouseout)="hideShadow(shadow)">
-                  <div class="shadow" #shadow>
-                    <div class="buttons">
-                      <div class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" (click)="getCurrentLesson(lesson)"><i class="fa-regular fa-pen-to-square"></i></div>
-                      <div class="btn btn-danger btn-delete" (click)="deleteLesson(lesson.id)"><i class="fa-regular fa-trash-can"></i></div>
-                    </div>
-                  </div>
-                  <h6 class="subject"> {{ lesson.subject.name }} </h6>
-                  <p class="floor">Floor: {{ lesson.classroom.floor }}</p>
-                  <p class="number">Number: {{ lesson.classroom.number }}</p>
-                  <p class="hours"> {{ lesson.lessonHour.from }} - {{ lesson.lessonHour.to }}</p>
-                  <p class="teachers">{{ lesson.teacher.user.firstName }} {{ lesson.teacher.user.lastName }}</p>
-                </div>
-              </div>
-            </div>
-            <button data-bs-toggle="modal" (click)="setWeekDay(5)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
+            <button data-bs-toggle="modal" (click)="setWeekDay(weekDay.number)" data-bs-target="#addModal" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i></button>
           </div>
         </div>
       </div>
@@ -145,30 +45,30 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add lesson</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Dodaj lekcję</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <select class="form-control" (change)="changeSubject($event)">
-          <option selected value=0>--- select subject ---</option>
+          <option selected value=0>--- wybierz przedmiot ---</option>
           <option *ngFor="let subject of subjects" [value]="subject.id"> {{ subject.name }} </option>
         </select>
         <select class="form-control" (change)="changeTeacher($event)">
-          <option selected value=0>--- select teacher ---</option>
+          <option selected value=0>--- wybierz nauczyciela ---</option>
           <option *ngFor="let teacher of teachers" [value]="teacher.id"> {{ teacher.user.firstName }} {{ teacher.user.lastName }}</option>
         </select>
         <select class="form-control" (change)="changeClassroom($event)">
-          <option selected value=0>--- select  classroom ---</option>
+          <option selected value=0>--- wybierz sale ---</option>
           <option *ngFor="let classroom of classrooms" [value]="classroom.id"> {{ classroom.floor }} / {{ classroom.number }}</option>
         </select>
         <select class="form-control" (change)="changeLessonHour($event)">
-          <option selected value=0>--- select lesson hours ---</option>
+          <option selected value=0>--- wybierz godziny  ---</option>
           <option *ngFor="let lessonHour of lessonHours" [value]="lessonHour.id"> {{ lessonHour.from }} - {{ lessonHour.to }}</option>
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="addTimetable()" [disabled]="isAllTimetableValues()">Add</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="addTimetable()" [disabled]="isAllTimetableValues()">Dodaj</button>
       </div>
     </div>
   </div>
@@ -179,7 +79,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleEditModalLabel">Edit lesson</h5>
+        <h5 class="modal-title" id="exampleEditModalLabel">Edytuj lekcję</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -197,8 +97,8 @@
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="editTimetable()">Edit</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="editTimetable()">Edytuj</button>
       </div>
     </div>
   </div>

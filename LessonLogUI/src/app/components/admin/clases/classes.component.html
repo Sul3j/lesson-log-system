@@ -2,14 +2,14 @@
   <section class="classes container mt-3">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" [routerLink]="['/admin/dashboard']"><a>Dashboard</a></li>
-        <li class="breadcrumb-item breadcrumb-active"><a>Classes</a></li>
+        <li class="breadcrumb-item" [routerLink]="['/admin/dashboard']"><a>Strona główna</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Klasy</a></li>
       </ol>
     </nav>
     <div class="d-flex">
       <div class="input-group">
         <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input type="text" placeholder="Search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" (keyup)="searchClass($event)">
+        <input type="text" placeholder="Szukaj" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" (keyup)="searchClass($event)">
       </div>
       <div class="input-group">
         <div class="example-button-container">
@@ -30,9 +30,9 @@
       <thead style="border-left: solid 1px #ddd; border-top: solid 1px #ddd; border-right: solid 1px #ddd;">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Class Name</th>
-        <th scope="col">Year</th>
-        <th scope="col">Educator Name</th>
+        <th scope="col">Nazwa</th>
+        <th scope="col">Rok</th>
+        <th scope="col">Wychowawca</th>
         <th scope="col"></th>
       </tr>
       </thead>
@@ -77,26 +77,26 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add class</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Dodaj klasę</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <label>Educator:</label>
         <select class="form-control" (change)="changeTeacher($event)">
-          <option selected [value]="null">--- select educator ---</option>
+          <option selected [value]="null">--- wybierz wychowawcę ---</option>
           <option *ngFor="let teacher of getFilterTeachers(teachers)" [value]="teacher.id"> {{ teacher.user.firstName}} {{ teacher.user.lastName }} </option>
         </select>
         <label>Class Name:</label>
         <input class="form-control" [(ngModel)]="name">
         <label>Class Year:</label>
         <select class="form-control" (change)="changeYear($event)">
-          <option selected [value]="null">--- select year ---</option>
+          <option selected [value]="null">--- wybierz rok ---</option>
           <option *ngFor="let year of years" [value]="year">{{ year }}</option>
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="addClass()" [disabled]="isAllClassValue()">Add</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="addClass()" [disabled]="isAllClassValue()">Dodaj</button>
       </div>
     </div>
   </div>
@@ -107,7 +107,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabelEdit">Edit class</h5>
+        <h5 class="modal-title" id="exampleModalLabelEdit">Edytuj klasę</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -123,8 +123,8 @@
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="editClass(currentClass.id)" [disabled]="isAllEditClassValue()">Edit</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="editClass(currentClass.id)" [disabled]="isAllEditClassValue()">Edytuj</button>
       </div>
     </div>
   </div>

@@ -70,9 +70,9 @@ export class SubjectsComponent implements OnInit {
   deleteSubject(id: number) {
     this.subjectService.deleteSubject(id).subscribe({
       next: () => {
-        this.toastr.success("Subject has been deleted!", "Success");
+        this.toastr.success("Usunięto przedmiot!", "Success");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error")
+        this.toastr.error("Coś poszło nie tak!", "Error")
       }
     })
   }
@@ -80,9 +80,9 @@ export class SubjectsComponent implements OnInit {
   addSubject() {
     this.subjectService.addSubject(this.subjectValue).subscribe({
       next: () => {
-        this.toastr.success("Subject has been added!", "Success");
+        this.toastr.success("Dodano przedmiot!", "Success");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
     this.subjectValue.name = "";

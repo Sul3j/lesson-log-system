@@ -40,9 +40,9 @@ export class ClassroomsComponent implements OnInit{
   deleteClassroom(id: number) {
     this.classroomService.deleteClassroom(id).subscribe({
       next: () => {
-        this.toastr.success("Classroom has been deleted!", "Success");
+        this.toastr.success("Usunięto salę lekcyjną!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error")
+        this.toastr.error("Coś poszło nie tak!", "Error")
       }
     })
   }
@@ -50,9 +50,9 @@ export class ClassroomsComponent implements OnInit{
   addClassroom() {
     this.classroomService.addClassroom(this.classroomValue).subscribe({
       next: () => {
-        this.toastr.success("Classroom has been added!", "Success");
+        this.toastr.success("Dodano salę lekcyjną!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
     this.classroomValue.name = "";

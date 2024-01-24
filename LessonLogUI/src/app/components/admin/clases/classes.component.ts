@@ -62,9 +62,9 @@ export class ClassesComponent implements OnInit {
     this.classValue.name = this.name;
     this.classService.addClass(this.classValue).subscribe({
       next: () => {
-        this.toastr.success("Class has been added!", "Success");
+        this.toastr.success("Dodano klasę!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }
@@ -88,9 +88,9 @@ export class ClassesComponent implements OnInit {
   deleteClass(id: number) {
     this.classService.deleteClass(id).subscribe({
       next: () => {
-        this.toastr.success("Class has been deleted!", "Success");
+        this.toastr.success("Usunięto klasę!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }
@@ -98,9 +98,9 @@ export class ClassesComponent implements OnInit {
   editClass(id: number) {
     this.classService.updateClass(id, this.classEditValue).subscribe({
       next: () => {
-        this.toastr.success("Class has been updated!", "Success");
+        this.toastr.success("Zedytowano klasę!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }

@@ -2,14 +2,14 @@
   <section class="teachers container mt-3">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" [routerLink]="['/admin/dashboard']"><a>Dashboard</a></li>
-        <li class="breadcrumb-item breadcrumb-active"><a>Students</a></li>
+        <li class="breadcrumb-item" [routerLink]="['/admin/dashboard']"><a>Strona główna</a></li>
+        <li class="breadcrumb-item breadcrumb-active"><a>Uczniowie</a></li>
       </ol>
     </nav>
     <div class="d-flex">
       <div class="input-group">
         <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-magnifying-glass"></i></span>
-        <input type="text" placeholder="Search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" #searchInput (keyup)="searchStudent($event)">
+        <input type="text" placeholder="Szukaj" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" #searchInput (keyup)="searchStudent($event)">
       </div>
       <div class="input-group">
         <div>
@@ -40,13 +40,11 @@
       <thead style="border-left: solid 1px #ddd; border-top: solid 1px #ddd; border-right: solid 1px #ddd;">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Pesel</th>
-        <th scope="col">Phone</th>
+        <th scope="col">Imię</th>
+        <th scope="col">Nazwisko</th>
         <th scope="col">Email</th>
-        <th scope="col">Class</th>
-        <th scope="col">Tutor</th>
+        <th scope="col">Klasa</th>
+        <th scope="col">Opiekun</th>
         <th scope="col"></th>
       </tr>
       </thead>
@@ -55,8 +53,6 @@
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ student.firstName }}</td>
         <td>{{ student.lastName }}</td>
-        <td>{{ student.pesel }}</td>
-        <td>{{ student.phoneNumber }}</td>
         <td>{{ student.email }}</td>
         <td>{{ student.classYear }} {{ student.className }}</td>
         <td>{{ student.tutorFirstName }} {{ student.tutorLastName }}</td>
@@ -75,13 +71,13 @@
       <div aria-label="..." style="height: 38px;" class="input-group">
         <ul class="pagination">
           <li class="page-item">
-            <button class="page-link" (click)="previousPage()" [class.disabled]="paginationModel.page == 1">Previous</button>
+            <button class="page-link" (click)="previousPage()" [class.disabled]="paginationModel.page == 1">Następna</button>
           </li>
           <li class="page-item" *ngFor="let item of createRange(response.totalPages); let i = index">
             <button class="page-link" [value]="i + 1" (click)="changePage($event)" [class.active]="(i + 1) == paginationModel.page">{{ i + 1 }}</button>
           </li>
           <li class="page-item">
-            <button class="page-link" href="#" (click)="nextPage()" [class.disabled]="paginationModel.page == response.totalPages">Next</button>
+            <button class="page-link" href="#" (click)="nextPage()" [class.disabled]="paginationModel.page == response.totalPages">Poprzednia</button>
           </li>
         </ul>
       </div>
@@ -95,26 +91,26 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add student</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Dodaj ucznia</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <select class="form-control mt-3" (change)="changeUser($event)">
-          <option selected>--- select user ---</option>
+          <option selected>--- wybierz użytkownika ---</option>
           <option *ngFor="let user of users" [value]="user.id"> {{ user.firstName }} {{ user.lastName }} </option>
         </select>
         <select class="form-control mt-3" (change)="changeClass($event)">
-          <option selected>--- select class ---</option>
+          <option selected>--- wybierz klasę ---</option>
           <option *ngFor="let class of classes" [value]="class.id"> {{ class.year}} {{ class.name }}</option>
         </select>
         <select class="form-control mt-3" (change)="changeTutor($event)">
-          <option selected>--- select tutor ---</option>
+          <option selected>--- wybierz opiekuna ---</option>
           <option *ngFor="let tutor of getFilterTutors(tutors)" [value]="tutor.id"> {{ tutor.user.firstName }} {{ tutor.user.lastName }}</option>
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="addStudent()" [disabled]="isSelected()">Add</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="addStudent()" [disabled]="isSelected()">Dodaj</button>
       </div>
     </div>
   </div>
@@ -125,22 +121,22 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabelFilter">Filter students</h5>
+        <h5 class="modal-title" id="exampleModalLabelFilter">Filtruj uczniów</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <select class="form-control mt-3" (change)="classYearFilterOptions($event)">
-          <option selected [value]="0">--- select class year ---</option>
+          <option selected [value]="0">--- wybierz rocznik ---</option>
           <option *ngFor="let class of classes" [value]="class.year"> {{ class.year }} </option>
         </select>
         <select class="form-control mt-3" (change)="classNameFilterOptions($event)">
-          <option selected [value]="null">--- select class name ---</option>
+          <option selected [value]="null">--- wybierz nazwę klasy ---</option>
           <option *ngFor="let class of classes" [value]="class.name"> {{ class.name }}</option>
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="filterStudents(studentFilterDto)" [disabled]="isStudentFilterSelected()">Filter</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="filterStudents(studentFilterDto)" [disabled]="isStudentFilterSelected()">Filtruj</button>
       </div>
     </div>
   </div>
@@ -151,7 +147,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabelEdit">Edit student</h5>
+        <h5 class="modal-title" id="exampleModalLabelEdit">Edytuj ucznia</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -159,13 +155,13 @@
           <option *ngFor="let class of classes" [value]="class.id" [selected]="class.id == currentStudent.classId">{{ class.year}} {{ class.name }}</option>
         </select>
         <select class="form-control mt-3" (change)="changeEditTutorValue($event)">
-          <option selected value="0">--- select tutor ---</option>
+          <option selected value="0">--- wybierz opiekuna ---</option>
           <option *ngFor="let tutor of getFilterTutors(tutors)" [value]="tutor.id"> {{ tutor.user.firstName }} {{ tutor.user.lastName }}</option>
         </select>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-add" (click)="editStudent(editStudentData, currentStudent.id)" [disabled]="isEditButtonDisabled">Edit</button>
+        <button type="button" class="btn btn-primary btn-add" (click)="editStudent(editStudentData, currentStudent.id)" [disabled]="isEditButtonDisabled">Edytuj</button>
       </div>
     </div>
   </div>

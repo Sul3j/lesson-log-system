@@ -27,7 +27,7 @@ export class MainNavComponent implements OnInit {
 
   logout() {
     this.auth.logout();
-    this.toastr.success("Logged out!", "Success");
+    this.toastr.success("Wylogowano!", "Sukces");
   }
 
   ngOnInit(): void {

@@ -21,6 +21,15 @@ import {LessonHours} from "../../../models/lessonhours.model";
 export class TimetableComponent implements OnInit {
 
   public classes: Array<Class> = new Array<Class>();
+
+  public weekDayDictionary = [
+    { name: 'Poniedziałek', number: 1 },
+    { name: 'Wtorek', number: 2 },
+    { name: 'Środa', number: 3 },
+    { name: 'Czwartek', number: 4 },
+    { name: 'Piątek', number: 5 }
+  ];
+
   public selectedClass: number = 0;
   public timetableDto: TimetableDto = new TimetableDto();
   public timetableEditDto: TimetableDto = new TimetableDto();
@@ -78,9 +87,9 @@ export class TimetableComponent implements OnInit {
   deleteLesson(id: number) {
     this.timetableService.deleteLesson(id).subscribe({
       next: () => {
-        this.toastr.success("Lesson has been deleted!", "Success");
+        this.toastr.success("Usunięto lekcję!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }
@@ -132,9 +141,9 @@ export class TimetableComponent implements OnInit {
   addTimetable() {
     this.timetableService.addTimetable(this.timetableDto).subscribe({
       next: (res) => {
-        this.toastr.success("Lesson has been added!", "Success");
+        this.toastr.success("Dodano lekcję!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
     this.timetableDto.subjectId = 0;
@@ -147,9 +156,9 @@ export class TimetableComponent implements OnInit {
     console.log(this.timetableEditDto.id, this.timetableEditDto)
     this.timetableService.editLesson(this.timetableEditDto.id, this.timetableEditDto).subscribe({
       next: (res) => {
-        this.toastr.success("Lesson has been edited!", "Success");
+        this.toastr.success("Zedytowano lekcję!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }

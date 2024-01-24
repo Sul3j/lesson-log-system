@@ -69,9 +69,9 @@ export class AdminsComponent {
   addAdmin() {
     this.adminsService.addAdmin(this.selectedUser).subscribe({
       next: (res) => {
-        this.toastr.success("Admin has been added!", "Success");
+        this.toastr.success("Dodano admina!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     });
   }
@@ -79,9 +79,9 @@ export class AdminsComponent {
   deleteAdmin(id: number) {
     this.adminsService.deleteAdmin(id).subscribe({
       next: (res) => {
-        this.toastr.success("Admin has been deleted!", "Success");
+        this.toastr.success("Usunięto admina!", "Sukces");
       }, error: (err) => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }

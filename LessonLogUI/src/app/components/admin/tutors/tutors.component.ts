@@ -66,9 +66,9 @@ export class TutorsComponent implements OnInit {
   addTutor() {
     this.tutorsService.addTutor(this.selectedUser).subscribe({
       next: () => {
-        this.toastr.success("Tutor has been added!", "Success");
+        this.toastr.success("Dodano opiekuna!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }
@@ -76,9 +76,9 @@ export class TutorsComponent implements OnInit {
   deleteTutor(id: number) {
     this.tutorsService.deleteTutor(id).subscribe({
       next: () => {
-        this.toastr.success("Tutor has been deleted!", "Success");
+        this.toastr.success("Usunięto opiekuna!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error")
+        this.toastr.error("Coś poszło nie tak!", "Error")
       }
     })
   }

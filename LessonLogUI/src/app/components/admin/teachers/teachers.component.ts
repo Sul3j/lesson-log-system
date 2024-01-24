@@ -68,9 +68,9 @@ export class TeachersComponent implements OnInit {
   addTeacher() {
     this.teachersService.addTeacher(this.selectedUser).subscribe({
       next: () => {
-        this.toastr.success("Teacher has been added!", "Success");
+        this.toastr.success("Dodano nauczyciela!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }
@@ -78,9 +78,9 @@ export class TeachersComponent implements OnInit {
   deleteTeacher(id: number) {
     this.teachersService.deleteTeacher(id).subscribe({
       next: () => {
-        this.toastr.success("Teacher has been deleted!", "Success");
+        this.toastr.success("Usunięto nauczyciela!", "Sukces");
       }, error: () => {
-        this.toastr.error("Something went wrong!", "Error");
+        this.toastr.error("Coś poszło nie tak!", "Error");
       }
     })
   }

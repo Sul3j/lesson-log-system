@@ -6,15 +6,15 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/admin/teachers']">Teachers</a>
-      <a mat-list-item [routerLink]="['/admin/admins']">Admins</a>
-      <a mat-list-item [routerLink]="['/admin/students']">Students</a>
-      <a mat-list-item [routerLink]="['/admin/tutors']">Tutors</a>
-      <a mat-list-item [routerLink]="['/admin/classes']">Classes</a>
-      <a mat-list-item [routerLink]="['/admin/classrooms']">Classrooms</a>
-      <a mat-list-item [routerLink]="['/admin/subjects']">Subjects</a>
-      <a mat-list-item [routerLink]="['/admin/timetable']">Timetable</a>
-      <a mat-list-item [routerLink]="['/admin/chat']">Chat</a>
+      <a mat-list-item [routerLink]="['/admin/teachers']">Nauczyciele</a>
+      <a mat-list-item [routerLink]="['/admin/admins']">Admini</a>
+      <a mat-list-item [routerLink]="['/admin/students']">Uczniowie</a>
+      <a mat-list-item [routerLink]="['/admin/tutors']">Opiekunowie</a>
+      <a mat-list-item [routerLink]="['/admin/classes']">Klasy</a>
+      <a mat-list-item [routerLink]="['/admin/classrooms']">Sale lekcyjne</a>
+      <a mat-list-item [routerLink]="['/admin/subjects']">Przedmioty</a>
+      <a mat-list-item [routerLink]="['/admin/timetable']">Plany lekcji</a>
+      <a mat-list-item [routerLink]="['/admin/chat']">Czat</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -30,22 +30,22 @@
       <span [routerLink]="['/admin/dashboard']"><img src="../../../../assets/logo.svg" alt="logo" style="width: 175px;"></span>
       <span class="user"><mat-icon>person</mat-icon> {{ user.firstName }} {{ user.lastName }}</span>
       <span class="spacer"></span>
-      <button mat-button style="background-color: #5F9BF5; margin-right: 10px;" [matMenuTriggerFor]="menu">Users</button>
+      <a [routerLink]="['/admin/chat']">Czat</a>
+      <button mat-button style="background-color: #5F9BF5; margin-right: 10px;" [matMenuTriggerFor]="menu">Użytkownicy</button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item [routerLink]="['/admin/teachers']">Teachers</button>
-        <button mat-menu-item [routerLink]="['/admin/admins']">Admins</button>
-        <button mat-menu-item [routerLink]="['/admin/students']">Students</button>
-        <button mat-menu-item [routerLink]="['/admin/tutors']">Tutors</button>
+        <button mat-menu-item [routerLink]="['/admin/teachers']">Nauczyciele</button>
+        <button mat-menu-item [routerLink]="['/admin/admins']">Admini</button>
+        <button mat-menu-item [routerLink]="['/admin/students']">Uczniowie</button>
+        <button mat-menu-item [routerLink]="['/admin/tutors']">Opiekunowie</button>
       </mat-menu>
-      <button mat-button style="background-color: #5F9BF5; margin-right: 10px;" [matMenuTriggerFor]="menu2">School</button>
+      <button mat-button style="background-color: #5F9BF5; margin-right: 10px;" [matMenuTriggerFor]="menu2">Szkoła</button>
       <mat-menu #menu2="matMenu">
-        <button mat-menu-item [routerLink]="['/admin/classes']">Classes</button>
-        <button mat-menu-item [routerLink]="['/admin/classrooms']">Classrooms</button>
-        <button mat-menu-item [routerLink]="['/admin/subjects']">Subjects</button>
-        <button mat-menu-item [routerLink]="['/admin/timetable']">Timetable</button>
+        <button mat-menu-item [routerLink]="['/admin/classes']">Klasy</button>
+        <button mat-menu-item [routerLink]="['/admin/classrooms']">Sale lekcyjne</button>
+        <button mat-menu-item [routerLink]="['/admin/subjects']">Przedmioty</button>
+        <button mat-menu-item [routerLink]="['/admin/timetable']">Plany lekcji</button>
       </mat-menu>
-      <a [routerLink]="['/admin/chat']">Chat</a>
-      <button class="logout-button" mat-raised-button style="background-color: #C96E6E" color="warn" (click)="logout()">Logout</button>
+      <button class="logout-button" mat-raised-button style="background-color: #C96E6E" color="warn" (click)="logout()">Wyloguj</button>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
