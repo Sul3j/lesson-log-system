@@ -1,21 +1,21 @@
 <section class="login">
   <div class="container">
     <form class="login__form" [formGroup]="loginForm">
-      <h2 class="login__form-title">Sign in</h2>
+      <h2 class="login__form-title">Zaloguj się</h2>
       <hr class="login__form-paginator">
       <div class="form-group login__form-group">
         <label>Email <span>*</span></label>
         <input [class.error]="loginForm.controls['email'].dirty && loginForm.hasError('required', 'email')" formControlName="email" type="email" class="form-control">
-        <small *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required', 'email')" class="form-text text-danger">email is required</small>
+        <small *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required', 'email')" class="form-text text-danger">email jest wymagany</small>
       </div>
       <div class="form-group login__form-group">
-        <label>Password <span>*</span></label>
+        <label>Hasło <span>*</span></label>
         <input [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')" formControlName="password" type="password" class="form-control">
-        <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')" class="form-text text-danger">password is required</small>
+        <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')" class="form-text text-danger">hasło jest wymagane</small>
       </div>
-      <div class="float-end"><a class="text-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgot password?</a></div>
-      <button (click)="onLogin()" type="submit" class="btn btn-primary login__form-button">Continue</button>
-      <p class="login__form-information">Don't have an account? <span class="text-primary" routerLink="/signup">Sign up</span></p>
+      <div class="float-end"><a class="text-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal">Zapomniałeś hasła?</a></div>
+      <button (click)="onLogin()" type="submit" class="btn btn-primary login__form-button">Kontynuuj</button>
+      <p class="login__form-information">Nie masz konta? <span class="text-primary" routerLink="/signup">Zarejestruj się</span></p>
     </form>
   </div>
 </section>
@@ -24,8 +24,8 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <p class="modal-title" id="exampleModalLabel"><span style="font-size: 22px; font-weight: bold;">Forgot your password?</span><br>
-          <small>Enter your email to get a password reset code</small>
+        <p class="modal-title" id="exampleModalLabel"><span style="font-size: 22px; font-weight: bold;">Zapomniałeś hasła?</span><br>
+          <small>Wpisz email żeby dostać link do zmiany hasła</small>
         </p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
       </div>
@@ -33,12 +33,12 @@
         <div class="form-group modal__form-group">
           <label>Email <span>*</span></label>
           <input [(ngModel)]="resetPasswordEmail" (ngModelChange)="checkValidEmail($event)" type="email" class="form-control">
-          <small *ngIf="!resetPasswordEmail" class="form-text text-danger">email is required</small>
-          <small *ngIf="!isValidEmail && resetPasswordEmail" class="form-text text-danger">email is invalid</small>
+          <small *ngIf="!resetPasswordEmail" class="form-text text-danger">email jest wymagany</small>
+          <small *ngIf="!isValidEmail && resetPasswordEmail" class="form-text text-danger">email jest nieprawidłowy</small>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="sendResetCode()">Send</button>
+        <button type="button" class="btn btn-primary" (click)="sendResetCode()">Wyślij</button>
       </div>
     </div>
   </div>
