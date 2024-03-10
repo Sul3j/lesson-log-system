@@ -26,6 +26,8 @@ export class TeacherGradesComponent implements OnInit {
   public gradeAddDto: GradeDto = new GradeDto();
   public gradeEditDto: GradeEditDto = new GradeEditDto();
   public gradeId!: number;
+  public avgGrades: number = 0;
+  public avgWeights: number = 0;
 
   public gradesValue = [1,2,3,4,5,6];
   public gradeWeight = [1,2,3,4,5,6,7,8,9,10];
@@ -162,8 +164,23 @@ export class TeacherGradesComponent implements OnInit {
 
 
   getGradesByStudentId(studentId: number) {
+    this.avgGrades = 0;
+    this.avgWeights = 0;
+
     let filterGrades = this.grades.filter((item) => item.studentId == studentId);
-    return filterGrades.filter((grade) => grade.subjectId == this.selectedSubject);
+
+    filterGrades.filter((grade) => grade.subjectId == this.selectedSubject);
+
+    filterGrades.forEach(g => {
+      this.avgWeights = this.avgWeights + g.gradeWeight;
+      console.log(this.avgWeights);
+      this.avgGrades = this.avgGrades + (g.gradeValue * g.gradeWeight);
+    })
+
+    this.avgGrades = this.avgGrades / this.avgWeights;
+    this.avgGrades = Math.ceil(this.avgGrades * 100) / 100;
+
+    return filterGrades;
   }
 
   dataBsTargetGenerator(data: string, num: number) {

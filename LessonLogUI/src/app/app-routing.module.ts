@@ -83,8 +83,8 @@ const routes: Routes = [
   },
   {
     path: 'tutor',
-    //canActivate: [AuthGuard, HasRoleGuard],
-    //data: { role: 'TUTOR' },
+   //canActivate: [AuthGuard, HasRoleGuard],
+   // data: { role: 'TUTOR' },
     children: [
       { path: 'dashboard', component: TutorDashboardComponent },
       { path: 'timetable', component: TutorTimetableComponent },
@@ -95,6 +95,8 @@ const routes: Routes = [
     ]
   },
   {
+    //canActivate: [AuthGuard, HasRoleGuard],
+    //data: { role: 'USER' },
     path: 'user',
     children: [
       { path: 'dashboard', component: UserComponent },

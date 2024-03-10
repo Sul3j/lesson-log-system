@@ -1,5 +1,4 @@
 ﻿using LessonLogAPI.Context;
-using LessonLogAPI.Models.Dto;
 using LessonLogAPI.Models.Entities;
 using LessonLogAPI.Models.Interfaces;
 

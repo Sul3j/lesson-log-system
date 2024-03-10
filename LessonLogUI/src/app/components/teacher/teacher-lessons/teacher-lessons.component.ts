@@ -64,6 +64,7 @@ export class TeacherLessonsComponent implements OnInit {
     this.getAllClasses();
     this.getAllSubjects();
     this.isSelectedData();
+    this.getAllLessons();
   }
 
   private getAllLessons() {
@@ -115,6 +116,7 @@ export class TeacherLessonsComponent implements OnInit {
     this.selectedLessonData.subjectId = parseInt(e.target.value);
     this.selectedSubject = parseInt(e.target.value);
     this.isSelectedData();
+    this.getAllLessons();
   }
 
   changeEditLessonHour(e: any) {

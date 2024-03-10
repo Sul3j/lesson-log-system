@@ -29,7 +29,8 @@ namespace LessonLogAPI.UtilityService
                 try
                 {
                     client.Connect(_config["EmailSettings:SmtpServer"], 465, true);
-                    client.Authenticate(_config["EmailSettings:From"], _config["EmailSettings:Password"]);
+                    client.Authenticate(_config["EmailSettings:From"], 
+                        _config["EmailSettings:Password"]);
                     client.Send(emailMessage);
                 }
                 catch (Exception ex)

@@ -1,15 +1,16 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ChatService} from "../../services/chat.service";
 import {User} from "../../models/user.model";
 import {UsersService} from "../../services/users.service";
 import {MessagesComponent} from "./messages/messages.component";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
 
   @ViewChild(MessagesComponent) messagesComponent: MessagesComponent | undefined;
 
@@ -17,11 +18,17 @@ export class ChatComponent implements OnInit {
   public search: string = "";
   public to: User = new User();
 
-  constructor(public chatService: ChatService, private userService: UsersService) {}
+  constructor(public chatService: ChatService, private userService: UsersService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.chatService.createChatConnection();
     this.getUsers();
+  }
+
+  ngOnDestroy() {
+    this.chatService.stopChatConnection();
+    this.messagesComponent?.basicMessages.splice(0, this.messagesComponent?.basicMessages.length);
+    this.messagesComponent?.messagesReverse.splice(0, this.messagesComponent?.messagesReverse.length);
   }
 
   getUsers(search: string = "") {
@@ -41,7 +48,6 @@ export class ChatComponent implements OnInit {
   sendMessage(content: string) {
     if (this.to) {
       this.chatService.sendPrivateMessage(content, this.to);
-      console.log(this.to.id)
       this.messagesComponent?.getPrivateMessages(this.chatService.myUser.id, this.to.id);
     }
   }

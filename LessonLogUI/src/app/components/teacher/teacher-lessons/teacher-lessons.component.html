@@ -14,7 +14,7 @@
       <option selected value=0>--- wybierz przedmiot ---</option>
       <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
     </select>
-    <div *ngIf="lessons != []" class="mt-3">
+    <div class="mt-3">
       <div class="d-flex">
         <div class="input-group">
           <span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-magnifying-glass"></i></span>
