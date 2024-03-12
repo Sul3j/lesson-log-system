@@ -17,5 +17,7 @@ namespace LessonLogAPI.Models.Interfaces
         void UpdateLesson(TimetableLesson lesson);
 
         IQueryable GetLessonsByTeacherId(int teacherId);
+
+        IQueryable GetLessonsWithRequirements(int hoursId, int weekDay);
     }
 }

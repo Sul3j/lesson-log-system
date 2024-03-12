@@ -21,6 +21,10 @@ export class TimetableService {
     return this.http.get(`${environment.domain}/TIMETABLELESSON/${classId}`);
   }
 
+  getLessons(hoursId: number, weekDay: number) {
+    return this.http.get(`${environment.domain}/TIMETABLELESSON/LESSONS/${hoursId}/${weekDay}`);
+  }
+
   addTimetable(timetable: TimetableDto) {
     return this.http.post(`${environment.domain}/TIMETABLELESSON/add`, timetable)
       .pipe(

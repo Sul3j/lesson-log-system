@@ -46,28 +46,28 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Dodaj lekcję</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearHours()"></button>
       </div>
       <div class="modal-body">
-        <select class="form-control" (change)="changeSubject($event)">
+        <select #subjectSelect class="form-control" (change)="changeSubject($event)">
           <option selected value=0>--- wybierz przedmiot ---</option>
           <option *ngFor="let subject of subjects" [value]="subject.id"> {{ subject.name }} </option>
         </select>
-        <select class="form-control" (change)="changeTeacher($event)">
-          <option selected value=0>--- wybierz nauczyciela ---</option>
-          <option *ngFor="let teacher of teachers" [value]="teacher.id"> {{ teacher.user.firstName }} {{ teacher.user.lastName }}</option>
-        </select>
-        <select class="form-control" (change)="changeClassroom($event)">
-          <option selected value=0>--- wybierz sale ---</option>
-          <option *ngFor="let classroom of classrooms" [value]="classroom.id"> {{ classroom.floor }} / {{ classroom.number }} / {{ classroom.name }}</option>
-        </select>
-        <select class="form-control" (change)="changeLessonHour($event)">
+        <select #hoursSelect class="form-control" (change)="changeLessonHour($event)">
           <option selected value=0>--- wybierz godziny  ---</option>
-          <option *ngFor="let lessonHour of lessonHours" [value]="lessonHour.id"> {{ lessonHour.from }} - {{ lessonHour.to }}</option>
+          <option *ngFor="let lessonHour of filterHours(lessonHours, timetableDto.weekDay)" [value]="lessonHour.id"> {{ lessonHour.from }} - {{ lessonHour.to }}</option>
+        </select>
+        <select #teacherSelect class="form-control" (change)="changeTeacher($event)" *ngIf="this.timetableDto.lessonHourId">
+          <option selected value=0>--- wybierz nauczyciela ---</option>
+          <option *ngFor="let teacher of filterTeachers(teachers)" [value]="teacher.id"> {{ teacher.user.firstName }} {{ teacher.user.lastName }}</option>
+        </select>
+        <select #classroomSelect class="form-control" (change)="changeClassroom($event)" *ngIf="this.timetableDto.lessonHourId">
+          <option selected value=0>--- wybierz sale ---</option>
+          <option *ngFor="let classroom of filterClassrooms(classrooms)" [value]="classroom.id"> {{ classroom.floor }} / {{ classroom.number }} / {{ classroom.name }}</option>
         </select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearHours()">Zamknij</button>
         <button type="button" class="btn btn-primary btn-add" (click)="addTimetable()" [disabled]="isAllTimetableValues()">Dodaj</button>
       </div>
     </div>

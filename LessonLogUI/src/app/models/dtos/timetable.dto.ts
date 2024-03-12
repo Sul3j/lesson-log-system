@@ -13,7 +13,7 @@ export class TimetableDto {
   teacher!: Teacher;
   classroomId!: number;
   classroom!: Classroom;
-  lessonHourId!: number;
+  lessonHourId!: number | null;
   lessonHour!: LessonHours;
   classId!: number;
   class!: Class;

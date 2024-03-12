@@ -48,6 +48,15 @@ namespace LessonLogAPI.Controllers
             return Ok(teachers);
         }
 
+        [HttpGet("lessons/{hoursId}/{weekDay}")]
+        public ActionResult GetLessonsWithRequirements([FromRoute] int hoursId, [FromRoute] int weekDay)
+        {
+            var lessons = _timetableLessonService.GetLessonsWithRequirements(hoursId, weekDay);
+
+            return Ok(lessons);
+        }
+
+
         [HttpDelete("{id}")]
         public ActionResult DeleteLesson([FromRoute] int id)
         {

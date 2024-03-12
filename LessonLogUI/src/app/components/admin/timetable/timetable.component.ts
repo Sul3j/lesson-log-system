@@ -20,6 +20,11 @@ import {LessonHours} from "../../../models/lessonhours.model";
 })
 export class TimetableComponent implements OnInit {
 
+  @ViewChild('hoursSelect') hoursSelect!: ElementRef;
+  @ViewChild('subjectSelect') subjectSelect!: ElementRef;
+  @ViewChild('teacherSelect') teacherSelect!: ElementRef;
+  @ViewChild('classroomSelect') classroomSelect!: ElementRef;
+
   public classes: Array<Class> = new Array<Class>();
 
   public weekDayDictionary = [
@@ -34,6 +39,7 @@ export class TimetableComponent implements OnInit {
   public timetableDto: TimetableDto = new TimetableDto();
   public timetableEditDto: TimetableDto = new TimetableDto();
   public timetable: Array<TimetableDto> = new Array<TimetableDto>();
+  public existingLessons: Array<TimetableDto> = new Array<TimetableDto>();
   public subjects: Array<Subject> = new Array<Subject>();
   public teachers: Array<Teacher> = new Array<Teacher>();
   public classrooms: Array<Classroom> = new Array<Classroom>();
@@ -80,7 +86,6 @@ export class TimetableComponent implements OnInit {
   getTimetableByClass(classId: number) {
       this.timetableService.getTimetable(classId).subscribe((res) => {
         this.timetable = res as Array<TimetableDto>;
-        console.log(res)
       });
   }
 
@@ -136,6 +141,11 @@ export class TimetableComponent implements OnInit {
 
   changeLessonHour(e: any) {
     this.timetableDto.lessonHourId = parseInt(e.target.value);
+    this.timetableService.getLessons(parseInt(e.target.value), this.timetableDto.weekDay).subscribe(res => {
+      this.existingLessons = res as Array<TimetableDto>;
+      console.log(this.existingLessons);
+    });
+
   }
 
   addTimetable() {
@@ -150,6 +160,40 @@ export class TimetableComponent implements OnInit {
     this.timetableDto.teacherId = 0;
     this.timetableDto.classroomId = 0;
     this.timetableDto.lessonHourId = 0;
+    this.clearHours();
+  }
+
+  filterTeachers(teachers: Array<Teacher>) {
+    const existingLessons = this.existingLessons.map(lesson => lesson.teacher.id);
+    const freeTeachers = teachers.filter(item => !existingLessons.includes(item.id));
+
+    return freeTeachers;
+  }
+
+  filterClassrooms(classrooms: Array<Classroom>) {
+    const existingClassrooms = this.existingLessons.map(lesson => lesson.classroom.id);
+    const freeClassrooms = classrooms.filter(item => !existingClassrooms.includes(item.id));
+
+    return freeClassrooms;
+  }
+
+  filterHours(hours: Array<LessonHours>, weekDay: number) {
+    const lessonHoursByWeekDay =  this.timetable.filter(lesson => lesson.weekDay == weekDay);
+    const existingLessonHours = lessonHoursByWeekDay.map(lesson => lesson.lessonHour.id);
+    const freeLessonHours = hours.filter(item => !existingLessonHours.includes(item.id));
+
+    return freeLessonHours;
+  }
+
+  clearHours() {
+    this.timetableDto.subjectId = 0;
+    this.timetableDto.teacherId = 0;
+    this.timetableDto.classroomId = 0;
+    this.timetableDto.lessonHourId = null;
+    this.hoursSelect.nativeElement.selectedIndex = 0;
+    this.subjectSelect.nativeElement.selectedIndex = 0;
+    this.teacherSelect.nativeElement.selectedIndex = 0;
+    this.classroomSelect.nativeElement.selectedIndex = 0;
   }
 
   editTimetable() {
